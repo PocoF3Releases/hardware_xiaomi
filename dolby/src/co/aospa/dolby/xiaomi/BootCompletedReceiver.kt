@@ -10,6 +10,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import kotlinx.coroutines.*
 
 private const val TAG = "XiaomiDolby-Boot"
 
@@ -17,15 +18,15 @@ class BootCompletedReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         Log.d(TAG, "Received intent: ${intent.action}")
-        when (intent.action) {
-            Intent.ACTION_LOCKED_BOOT_COMPLETED -> {
-                // we perform everything in the initializer
-                DolbyController.getInstance(context)
-            }
-            Intent.ACTION_BOOT_COMPLETED -> {
-                DolbyController.getInstance(context).onBootCompleted()
-            }
-            else -> Log.e(TAG, "unhandled intent action")
+        val pending = goAsync()
+        CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+            try {
+                val controller = DolbyController.getInstance(context)
+                controller.awaitReady()
+                if (intent.action == Intent.ACTION_BOOT_COMPLETED) controller.onBootCompleted()
+            } catch (error: RuntimeException) {
+                Log.e(TAG, "Dolby initialization failed", error)
+            } finally { pending.finish() }
         }
     }
 }

@@ -9,9 +9,10 @@ package co.aospa.dolby.xiaomi
 import android.media.audiofx.AudioEffect
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.dlog
 import co.aospa.dolby.xiaomi.DolbyConstants.DsParam
+import co.aospa.dolby.xiaomi.geq.data.EqualizerGains
 import java.util.UUID
 
-class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
+internal class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
     EFFECT_TYPE_NULL, EFFECT_TYPE_DAP, priority, audioSession
 ) {
 
@@ -19,7 +20,7 @@ class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
         get() = getIntParam(EFFECT_PARAM_ENABLE) == 1
         set(value) {
             setIntParam(EFFECT_PARAM_ENABLE, if (value) 1 else 0)
-            enabled = value
+            checkStatus(setEnabled(value))
         }
 
     var profile: Int
@@ -40,7 +41,9 @@ class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
     private fun getIntParam(param: Int): Int {
         val buf = ByteArray(12)
         int32ToByteArray(param, buf, 0)
-        checkStatus(getParameter(EFFECT_PARAM_CPDP_VALUES + param, buf))
+        val size = getParameter(EFFECT_PARAM_CPDP_VALUES + param, buf)
+        checkStatus(size)
+        check(size >= 4) { "Incomplete Dolby scalar response: $size bytes" }
         return byteArrayToInt32(buf).also {
             dlog(TAG, "getIntParam($param): $it")
         }
@@ -53,6 +56,9 @@ class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
 
     fun setDapParameter(param: DsParam, values: IntArray, profile: Int = this.profile) {
         dlog(TAG, "setDapParameter: profile=$profile param=$param")
+        require(profile in 0..255) { "Profile does not fit the Dolby request" }
+        require(values.size == param.length) { "Invalid payload length for $param" }
+        if (param == DsParam.GEQ_BAND_GAINS) EqualizerGains.validate(values)
         val length = values.size
         val buf = ByteArray((length + 4) * 4)
         int32ToByteArray(EFFECT_PARAM_SET_PROFILE_PARAMETER, buf, 0)
@@ -71,10 +77,13 @@ class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
 
     fun getDapParameter(param: DsParam, profile: Int = this.profile): IntArray {
         dlog(TAG, "getDapParameter: profile=$profile param=$param")
+        require(profile in 0..255) { "Profile does not fit the Dolby request" }
         val length = param.length
         val buf = ByteArray((length + 2) * 4)
         val p = (param.id shl 16) + (profile shl 8) + EFFECT_PARAM_GET_PROFILE_PARAMETER
-        checkStatus(getParameter(p, buf))
+        val size = getParameter(p, buf)
+        checkStatus(size)
+        check(size >= length * 4) { "Incomplete Dolby response for $param: $size bytes" }
         return byteArrayToInt32Array(buf, length)
     }
 

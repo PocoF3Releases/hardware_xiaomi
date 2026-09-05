@@ -1,36 +1,37 @@
-/*
- * Copyright (C) 2023-24 Paranoid Android
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
+/* SPDX-License-Identifier: Apache-2.0 */
 package co.aospa.dolby.xiaomi
 
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
-
-private const val TAG = "DolbyTileService"
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collectLatest
 
 class DolbyTileService : TileService() {
-
-    private val dolbyController by lazy { DolbyController.getInstance(applicationContext) }
-
+    private val controller by lazy { DolbyController.getInstance(applicationContext) }
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+    private var listening: Job? = null
     override fun onStartListening() {
-        qsTile.apply {
-            state = if (dolbyController.dsOn) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
-            subtitle = dolbyController.getProfileName() ?: getString(R.string.dolby_unknown)
-            updateTile()
-        }
         super.onStartListening()
-    }
-
-    override fun onClick() {
-        val isDsOn = dolbyController.dsOn
-        dolbyController.setDsOnAndPersist(!isDsOn) // toggle
-        qsTile.apply {
-            state = if (isDsOn) Tile.STATE_INACTIVE else Tile.STATE_ACTIVE
-            updateTile()
+        listening?.cancel()
+        listening = scope.launch {
+            controller.activeState.collectLatest { configuration ->
+                qsTile?.apply {
+                    state = if (!configuration.loaded) Tile.STATE_UNAVAILABLE
+                        else if (configuration.enabled) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
+                    subtitle = configuration.name
+                    updateTile()
+                }
+            }
         }
-        super.onClick()
+        controller.requestRefresh()
     }
+    override fun onStopListening() { listening?.cancel(); super.onStopListening() }
+    override fun onClick() {
+        super.onClick()
+        scope.launch {
+            try { controller.toggleEnabled() }
+            catch (_: RuntimeException) { controller.requestRefresh() }
+        }
+    }
+    override fun onDestroy() { scope.cancel(); super.onDestroy() }
 }
