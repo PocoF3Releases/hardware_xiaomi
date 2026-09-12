@@ -19,8 +19,11 @@ internal class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
     var dsOn: Boolean
         get() = getIntParam(EFFECT_PARAM_ENABLE) == 1
         set(value) {
+            // Stop processing first when bypassing. A vendor parameter failure must
+            // not leave the Android effect active on a communication output.
+            if (!value) checkStatus(setEnabled(false))
             setIntParam(EFFECT_PARAM_ENABLE, if (value) 1 else 0)
-            checkStatus(setEnabled(value))
+            if (value) checkStatus(setEnabled(true))
         }
 
     var profile: Int

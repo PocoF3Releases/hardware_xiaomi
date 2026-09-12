@@ -82,7 +82,7 @@ internal class DolbyController private constructor(private val context: Context)
     suspend fun createNamedProfile(name: String, base: Int) = transaction { profiles.create(name, base) }
     suspend fun renameNamedProfile(key: String, name: String) = transaction { profiles.rename(key, name) }
     fun requestRefresh() { scope.launch { safely { refreshActiveState() } } }
-    private fun requestRestore() { scope.launch { safely { transaction { selectProfile(activeProfileKey) } } } }
+    private fun requestRestore() { scope.launch { safely { transaction { restoreForAudioState() } } } }
     private suspend fun safely(action: suspend () -> Unit) {
         try { action() }
         catch (cancel: CancellationException) { throw cancel }

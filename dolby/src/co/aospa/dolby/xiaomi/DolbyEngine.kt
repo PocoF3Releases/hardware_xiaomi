@@ -45,6 +45,7 @@ internal class DolbyEngine(
             .getString(DolbyConstants.PREF_PROFILE, "0")
             ?.takeIf { profiles.find(it) != null } ?: "0"
 
+    private var requestedEnabled = false
     private var appliedProfileKey: String? = null
     private var dolbyEffect = DolbyAudioEffect(EFFECT_PRIORITY, audioSession = 0)
     private val audioManager = context.getSystemService(AudioManager::class.java)!!
@@ -77,6 +78,35 @@ internal class DolbyEngine(
         }
     }
 
+    // Mode changes need their own callback: starting VoIP need not add/remove a device.
+    // Native effect access stays on the controller's serialized transaction path.
+    private val modeChangedListener = AudioManager.OnModeChangedListener { mode ->
+        dlog(TAG, "onModeChanged: $mode")
+        requestRestore()
+    }
+
+    private val mediaMode: Boolean
+        get() = when (audioManager.mode) {
+            AudioManager.MODE_NORMAL, AudioManager.MODE_RINGTONE -> true
+            else -> false // Calls, VoIP, call screening and redirected call modes.
+        }
+
+    private fun applyEnabledState() {
+        checkEffect()
+        val enabled = requestedEnabled && mediaMode
+        if (dolbyEffect.dsOn != enabled || dolbyEffect.enabled != enabled) {
+            dlog(TAG, "applyEnabledState: requested=$requestedEnabled mode=${audioManager.mode} enabled=$enabled")
+            dolbyEffect.dsOn = enabled
+            appliedProfileKey = null
+        }
+    }
+
+    fun restoreForAudioState() {
+        applyEnabledState()
+        if (requestedEnabled && mediaMode) setCurrentProfile()
+        refreshActiveState()
+    }
+
     private var registerCallbacks = false
         set(value) {
             if (field == value) return
@@ -85,24 +115,23 @@ internal class DolbyEngine(
             if (value) {
                 audioManager.registerAudioPlaybackCallback(playbackCallback, handler)
                 audioManager.registerAudioDeviceCallback(audioDeviceCallback, handler)
+                audioManager.addOnModeChangedListener(context.mainExecutor, modeChangedListener)
             } else {
                 audioManager.unregisterAudioPlaybackCallback(playbackCallback)
                 audioManager.unregisterAudioDeviceCallback(audioDeviceCallback)
+                audioManager.removeOnModeChangedListener(modeChangedListener)
             }
         }
 
+    // Expose the user's choice, not the temporary call-mode bypass, to UI/persistence.
     var dsOn: Boolean
-        get() =
-            dolbyEffect.dsOn.also {
-                dlog(TAG, "getDsOn: $it")
-            }
+        get() = requestedEnabled
         set(value) {
             dlog(TAG, "setDsOn: $value")
-            checkEffect()
-            dolbyEffect.dsOn = value
+            requestedEnabled = value
+            applyEnabledState()
             registerCallbacks = value
-            if (value)
-                setCurrentProfile()
+            if (value && mediaMode) setCurrentProfile()
         }
 
     var profile: Int
