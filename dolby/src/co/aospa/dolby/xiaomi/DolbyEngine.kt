@@ -211,7 +211,13 @@ internal class DolbyEngine(
             setDialogueEnhancerEnabled(prefs.getBoolean(DolbyConstants.PREF_DIALOGUE, false), profile)
         }
         if (prefs.contains(DolbyConstants.PREF_DIALOGUE_AMOUNT)) {
-            setDialogueEnhancerAmount(prefs.getInt(DolbyConstants.PREF_DIALOGUE_AMOUNT, 4), profile)
+            val amount = prefs.getInt(DolbyConstants.PREF_DIALOGUE_AMOUNT, 4)
+            if (amount in 1..12) {
+                setDialogueEnhancerAmount(amount, profile)
+            } else {
+                Log.w(TAG, "Ignoring invalid saved dialogue amount for profile $profile")
+                prefs.edit().remove(DolbyConstants.PREF_DIALOGUE_AMOUNT).apply()
+            }
         }
     }
 
@@ -425,6 +431,7 @@ internal class DolbyEngine(
     fun setDialogueEnhancerAmount(value: Int, profile: Int = this.profile) {
         dlog(TAG, "setDialogueEnhancerAmount: $value")
         checkEffect()
+        require(value in 1..12) { "Dialogue amount outside the supported app range" }
         dolbyEffect.setDapParameter(DsParam.DIALOGUE_ENHANCER_AMOUNT, value, profile)
     }
 
@@ -436,6 +443,7 @@ internal class DolbyEngine(
     fun setIeqPreset(value: Int, profile: Int = this.profile) {
         dlog(TAG, "setIeqPreset: $value")
         checkEffect()
+        require(value in 0..3) { "Unknown intelligent EQ preset" }
         dolbyEffect.setDapParameter(DsParam.IEQ_PRESET, value, profile)
     }
 
@@ -443,15 +451,16 @@ internal class DolbyEngine(
         if (!initialized) return
         val target = profiles.requireProfile(activeProfileKey)
         try {
-            val prefs = profiles.preferences(target.key)
+            // Preferences are restore requests; only native readback describes the
+            // active endpoint after routing, profile changes or vendor normalization.
             val tuning = mapOf<String, Any>(
-                PREF_BASS to (prefs.all[PREF_BASS] ?: getBassEnhancerEnabled(target.base)),
-                PREF_VOLUME to (volumeLevelerSupported && (prefs.all[PREF_VOLUME] as? Boolean ?: getVolumeLevelerEnabled(target.base))),
-                PREF_HP_VIRTUALIZER to (prefs.all[PREF_HP_VIRTUALIZER] ?: getHeadphoneVirtEnabled(target.base)),
-                PREF_SPK_VIRTUALIZER to (prefs.all[PREF_SPK_VIRTUALIZER] ?: getSpeakerVirtEnabled(target.base)),
-                PREF_DIALOGUE to (prefs.all[PREF_DIALOGUE] ?: getDialogueEnhancerEnabled(target.base)),
-                PREF_DIALOGUE_AMOUNT to (prefs.all[PREF_DIALOGUE_AMOUNT] ?: getDialogueEnhancerAmount(target.base)),
-                PREF_IEQ to (prefs.getString(PREF_IEQ, null)?.toIntOrNull() ?: getIeqPreset(target.base))
+                PREF_BASS to getBassEnhancerEnabled(target.base),
+                PREF_VOLUME to (volumeLevelerSupported && getVolumeLevelerEnabled(target.base)),
+                PREF_HP_VIRTUALIZER to getHeadphoneVirtEnabled(target.base),
+                PREF_SPK_VIRTUALIZER to getSpeakerVirtEnabled(target.base),
+                PREF_DIALOGUE to getDialogueEnhancerEnabled(target.base),
+                PREF_DIALOGUE_AMOUNT to getDialogueEnhancerAmount(target.base),
+                PREF_IEQ to getIeqPreset(target.base)
             )
             _activeState.value = ActiveProfileState(target.key, target.name, target.base,
                 profiles.all, dsOn, EqualizerGains.decode(getSavedPreset(target.key)), tuning, true)
@@ -473,6 +482,10 @@ internal class DolbyEngine(
             PREF_DIALOGUE_AMOUNT -> setDialogueEnhancerAmount(value as Int)
             PREF_IEQ -> setIeqPreset(value as Int)
             else -> error("Unsupported setting")
+        }
+        refreshActiveState()
+        check(activeState.value.loaded && activeState.value.settings[key] == value) {
+            "Dolby did not confirm the requested setting: $key"
         }
         val editor = profiles.preferences(activeProfileKey).edit()
         when (value) {
