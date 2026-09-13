@@ -49,6 +49,73 @@ internal class DolbyEngine(
             .getString(DolbyConstants.PREF_PROFILE, "0")
             ?.takeIf { profiles.find(it) != null } ?: "0"
 
+    private val voiceEffects = mutableMapOf<Int, DolbyVoiceEffect>()
+    private val failedVoiceSessions = mutableSetOf<Int>()
+    private var vqeFailed = false
+    private val vqePrefs = context.getSharedPreferences("vqe_games", Context.MODE_PRIVATE)
+    private var vqeRequested = PreferenceManager.getDefaultSharedPreferences(context)
+        .getBoolean("dolby_vqe", false)
+
+    fun vqeApps(): Set<String> = vqePrefs.getStringSet("apps", null)?.toSet() ?: setOf(
+        "com.tencent.tmgp.pubgmhd", "com.tencent.tmgp.pubgm", "com.tencent.tmgp.sgame",
+        "com.netease.hyxd.mi", "com.tencent.ig", "com.activision.callofduty.shooter",
+        "com.netease.mrzh.mi", "com.netease.mrzh")
+
+    fun setVqeApp(packageName: String, enabled: Boolean) {
+        require(packageName.matches(Regex("[A-Za-z][A-Za-z0-9_]*(\\.[A-Za-z0-9_]+)+")))
+        val apps = vqeApps().toMutableSet()
+        if (enabled) apps.add(packageName) else apps.remove(packageName)
+        vqePrefs.edit().putStringSet("apps", apps).apply()
+        failedVoiceSessions.clear()
+        restoreForAudioState()
+    }
+
+    private fun closeVoiceEffect() {
+        voiceEffects.values.forEach {
+            try { it.close() } catch (error: RuntimeException) {
+                Log.w(TAG, "Cannot close VQE", error)
+            }
+        }
+        voiceEffects.clear()
+    }
+
+    private fun reconcileVoiceEffect(communication: Boolean) {
+        val apps = vqeApps()
+        val sessions = if (requestedEnabled && vqeRequested && communication) {
+            audioManager.activePlaybackConfigurations.filter {
+                it.playerState == AudioPlaybackConfiguration.PLAYER_STATE_STARTED &&
+                    it.sessionId > 0 &&
+                    it.audioAttributes.usage == AudioAttributes.USAGE_VOICE_COMMUNICATION &&
+                    context.packageManager.getPackagesForUid(it.clientUid)?.let { packages ->
+                        packages.isNotEmpty() && packages.all { name -> name in apps }
+                    } == true
+            }.map { it.sessionId }.toSet()
+        } else emptySet()
+        // Session zero would process unrelated media. Unclassified game streams stay bypassed.
+        for (session in voiceEffects.keys.toList()) {
+            if (session !in sessions) {
+                val effect = voiceEffects.remove(session)!!
+                try { effect.close() } catch (error: RuntimeException) {
+                    Log.w(TAG, "Cannot close VQE session", error)
+                }
+            }
+        }
+        failedVoiceSessions.retainAll(sessions)
+        for (session in sessions - voiceEffects.keys - failedVoiceSessions) {
+            var effect: DolbyVoiceEffect? = null
+            try {
+                effect = DolbyVoiceEffect(session)
+                effect.startProcessing()
+                voiceEffects[session] = effect
+            } catch (error: RuntimeException) {
+                try { effect?.close() } catch (cleanup: RuntimeException) { error.addSuppressed(cleanup) }
+                failedVoiceSessions.add(session)
+                Log.w(TAG, "VQE unavailable; retaining communication bypass", error)
+            }
+        }
+        vqeFailed = failedVoiceSessions.isNotEmpty()
+    }
+
     private var requestedEnabled = false
     private var appliedProfileKey: String? = null
     private var dolbyEffect = DolbyAudioEffect(EFFECT_PRIORITY, audioSession = 0)
@@ -107,12 +174,16 @@ internal class DolbyEngine(
 
     private fun applyEnabledState() {
         checkEffect()
-        val enabled = requestedEnabled && mediaMode
+        val communication = !mediaMode
+        // Release voice processing before restoring media DAP.
+        if (!communication || !requestedEnabled || !vqeRequested) closeVoiceEffect()
+        val enabled = requestedEnabled && !communication
         if (dolbyEffect.dsOn != enabled || dolbyEffect.enabled != enabled) {
             dlog(TAG, "applyEnabledState: requested=$requestedEnabled mode=${audioManager.mode} enabled=$enabled")
             dolbyEffect.dsOn = enabled
             appliedProfileKey = null
         }
+        reconcileVoiceEffect(communication)
     }
 
     fun restoreForAudioState() {
@@ -470,6 +541,8 @@ internal class DolbyEngine(
             // Preferences are restore requests; only native readback describes the
             // active endpoint after routing, profile changes or vendor normalization.
             val tuning = mapOf<String, Any>(
+                "dolby_vqe" to vqeRequested,
+                "dolby_vqe_failed" to vqeFailed,
                 PREF_BASS to getBassEnhancerEnabled(target.base),
                 PREF_VOLUME to (volumeLevelerSupported && getVolumeLevelerEnabled(target.base)),
                 PREF_HP_VIRTUALIZER to getHeadphoneVirtEnabled(target.base),
@@ -489,6 +562,16 @@ internal class DolbyEngine(
     }
 
     fun updateSetting(key: String, value: Any) {
+        if (key == "dolby_vqe") {
+            vqeRequested = value as Boolean
+            failedVoiceSessions.clear()
+            vqeFailed = false
+            applyEnabledState()
+            PreferenceManager.getDefaultSharedPreferences(context).edit()
+                .putBoolean(key, vqeRequested).apply()
+            refreshActiveState()
+            return
+        }
         when (key) {
             PREF_BASS -> setBassEnhancerEnabled(value as Boolean)
             PREF_VOLUME -> setVolumeLevelerEnabled(value as Boolean)

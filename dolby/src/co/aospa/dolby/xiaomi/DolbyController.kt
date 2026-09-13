@@ -70,6 +70,8 @@ internal class DolbyController private constructor(private val context: Context)
     }
     suspend fun setDsOnAndPersist(enabled: Boolean) = transaction { setDsOnAndPersist(enabled) }
     suspend fun toggleEnabled() = transaction { setDsOnAndPersist(!dsOn) }
+    suspend fun vqeApps(): Set<String> = transaction { vqeApps() }
+    suspend fun setVqeApp(packageName: String, enabled: Boolean) = transaction { setVqeApp(packageName, enabled) }
     suspend fun updateSetting(key: String, value: Any) = transaction { updateSetting(key, value) }
     suspend fun toggleSetting(key: String) = transaction {
         refreshActiveState()

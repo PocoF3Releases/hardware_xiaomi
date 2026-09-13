@@ -5,6 +5,8 @@ import android.media.AudioAttributes
 import android.media.AudioManager
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -43,6 +45,7 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
     val state by controller.activeState.collectAsState()
     val context = LocalContext.current
     var failure by remember { mutableStateOf(false) }
+    var manageVqe by remember { mutableStateOf(false) }
     var profiles by remember { mutableStateOf(false) }
     var ieq by remember { mutableStateOf(false) }
     var route by remember { mutableStateOf(DolbyOutputRoute.Visibility(false, false)) }
@@ -72,6 +75,7 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
         catch (_: RuntimeException) { failure = true }
     } }
     fun checked(key: String) = state.settings[key] as? Boolean ?: false
+    if (manageVqe) VqeAppsDialog(controller) { manageVqe = false }
     val enabled = state.enabled && state.loaded
     Column(modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)) {
@@ -119,6 +123,12 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
                     colors = ListItemDefaults.colors(containerColor = androidx.compose.ui.graphics.Color.Transparent)
                 )
             }
+        }
+        toggle("dolby_vqe", R.string.dolby_vqe_title,
+            if (checked("dolby_vqe_failed")) R.string.dolby_vqe_failed else R.string.dolby_vqe_summary)
+        rows += {
+            ListItem(headlineContent = { Text(stringResource(R.string.dolby_vqe_manage)) },
+                modifier = Modifier.clickable { manageVqe = true })
         }
         toggle(PREF_BASS, R.string.dolby_bass_enhancer, R.string.dolby_bass_summary)
         if (context.resources.getBoolean(R.bool.dolby_volume_leveler_supported))
@@ -175,4 +185,52 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
             onDismiss = { profiles = false; ieq = false }
         )
     }
+}
+
+@Composable
+internal fun VqeAppsDialog(controller: DolbyController, dismiss: () -> Unit) {
+    var apps by remember { mutableStateOf<List<String>>(emptyList()) }
+    var name by remember { mutableStateOf("") }
+    var failed by remember { mutableStateOf(false) }
+    var busy by remember { mutableStateOf(true) }
+    val scope = rememberCoroutineScope()
+    LaunchedEffect(Unit) {
+        try { apps = controller.vqeApps().sorted() } catch (_: RuntimeException) { failed = true }
+        finally { busy = false }
+    }
+    fun change(app: String, enabled: Boolean) {
+        busy = true
+        scope.launch {
+            try {
+                controller.setVqeApp(app, enabled)
+                apps = controller.vqeApps().sorted()
+                name = ""; failed = false
+            } catch (_: RuntimeException) { failed = true }
+            finally { busy = false }
+        }
+    }
+    AlertDialog(onDismissRequest = { if (!busy) dismiss() },
+        title = { Text(stringResource(R.string.dolby_vqe_manage)) },
+        text = {
+            Column {
+                Text(stringResource(R.string.dolby_vqe_apps_help))
+                LazyColumn(Modifier.heightIn(max = 300.dp)) {
+                    items(apps, key = { it }) { app ->
+                        ListItem(headlineContent = { Text(app) }, trailingContent = {
+                            TextButton(enabled = !busy, onClick = { change(app, false) }) {
+                                Text(stringResource(R.string.dolby_vqe_remove))
+                            }
+                        })
+                    }
+                }
+                OutlinedTextField(value = name, onValueChange = { name = it }, enabled = !busy,
+                    label = { Text(stringResource(R.string.dolby_vqe_package)) }, singleLine = true)
+                TextButton(enabled = !busy && name.isNotBlank(), onClick = { change(name.trim(), true) }) {
+                    Text(stringResource(R.string.dolby_vqe_add))
+                }
+                if (failed) Text(stringResource(R.string.dolby_setting_failed), color = MaterialTheme.colorScheme.error)
+            }
+        }, confirmButton = {
+            TextButton(enabled = !busy, onClick = dismiss) { Text(stringResource(android.R.string.ok)) }
+        })
 }

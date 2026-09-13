@@ -98,4 +98,12 @@
     <string name="dolby_profile_activate">Use profile</string>
     <string name="dolby_profile_active">Active</string>
     <string name="dolby_nav_equalizer">Equalizer</string>
+    <string name="dolby_vqe_title">Use VQE for Games</string>
+    <string name="dolby_vqe_summary">Experimental voice enhancement for listed games with identifiable voice playback. Off by default.</string>
+    <string name="dolby_vqe_failed">VQE could not start. Dolby remains bypassed for communication.</string>
+    <string name="dolby_vqe_manage">Manage app list</string>
+    <string name="dolby_vqe_apps_help">Listed apps are enabled. Remove an app to exclude it, or add its package name. Xiaomi’s initial game list is included.</string>
+    <string name="dolby_vqe_package">Package name</string>
+    <string name="dolby_vqe_add">Add app</string>
+    <string name="dolby_vqe_remove">Remove</string>
 </resources>
