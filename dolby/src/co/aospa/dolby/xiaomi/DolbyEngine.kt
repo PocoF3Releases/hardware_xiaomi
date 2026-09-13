@@ -7,6 +7,10 @@
 package co.aospa.dolby.xiaomi
 
 import android.content.Context
+import android.media.AudioAttributes
+import android.media.MediaRecorder
+import android.media.AudioRecordingConfiguration
+import android.media.AudioManager.AudioRecordingCallback
 import android.media.AudioDeviceCallback
 import android.media.AudioDeviceInfo
 import android.media.AudioManager
@@ -53,15 +57,17 @@ internal class DolbyEngine(
     private val volumeLevelerSupported =
         context.getResources().getBoolean(R.bool.dolby_volume_leveler_supported)
 
-    // Restore current profile on every media session
+    // Both start and stop matter: the last voice track can end without a mode change.
+    // Query fresh state inside the serialized transaction instead of retaining callback lists.
     private val playbackCallback = object : AudioPlaybackCallback() {
         override fun onPlaybackConfigChanged(configs: List<AudioPlaybackConfiguration>?) {
-            val isPlaying = configs.orEmpty().any {
-                it.playerState == AudioPlaybackConfiguration.PLAYER_STATE_STARTED
-            }
-            dlog(TAG, "onPlaybackConfigChanged: isPlaying=$isPlaying")
-            if (isPlaying)
-                requestRestore()
+            requestRestore()
+        }
+    }
+
+    private val recordingCallback = object : AudioRecordingCallback() {
+        override fun onRecordingConfigChanged(configs: List<AudioRecordingConfiguration>?) {
+            requestRestore()
         }
     }
 
@@ -86,9 +92,17 @@ internal class DolbyEngine(
     }
 
     private val mediaMode: Boolean
-        get() = when (audioManager.mode) {
-            AudioManager.MODE_NORMAL, AudioManager.MODE_RINGTONE -> true
-            else -> false // Calls, VoIP, call screening and redirected call modes.
+        get() {
+            if (audioManager.mode != AudioManager.MODE_NORMAL &&
+                audioManager.mode != AudioManager.MODE_RINGTONE) return false
+            if (audioManager.activePlaybackConfigurations.any {
+                    it.playerState == AudioPlaybackConfiguration.PLAYER_STATE_STARTED &&
+                        it.audioAttributes.usage == AudioAttributes.USAGE_VOICE_COMMUNICATION
+                }) return false
+            return audioManager.activeRecordingConfigurations.none {
+                !it.isClientSilenced &&
+                    it.clientAudioSource == MediaRecorder.AudioSource.VOICE_COMMUNICATION
+            }
         }
 
     private fun applyEnabledState() {
@@ -114,10 +128,12 @@ internal class DolbyEngine(
             dlog(TAG, "setRegisterCallbacks($value)")
             if (value) {
                 audioManager.registerAudioPlaybackCallback(playbackCallback, handler)
+                audioManager.registerAudioRecordingCallback(recordingCallback, handler)
                 audioManager.registerAudioDeviceCallback(audioDeviceCallback, handler)
                 audioManager.addOnModeChangedListener(context.mainExecutor, modeChangedListener)
             } else {
                 audioManager.unregisterAudioPlaybackCallback(playbackCallback)
+                audioManager.unregisterAudioRecordingCallback(recordingCallback)
                 audioManager.unregisterAudioDeviceCallback(audioDeviceCallback)
                 audioManager.removeOnModeChangedListener(modeChangedListener)
             }
