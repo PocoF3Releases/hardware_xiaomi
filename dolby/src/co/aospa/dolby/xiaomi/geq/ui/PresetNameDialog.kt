@@ -13,6 +13,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import co.aospa.dolby.xiaomi.ui.BackdropBlur
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,7 +23,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import co.aospa.dolby.xiaomi.R
 
 @Composable
@@ -38,7 +40,9 @@ fun PresetNameDialog(
     var text by remember { mutableStateOf(presetName) }
     var error by remember { mutableStateOf<PresetNameValidationError?>(null) }
 
+    BackdropBlur()
     AlertDialog(
+        shape = RoundedCornerShape(28.dp),
         onDismissRequest = { showDialog = false },
         confirmButton = {
             TextButton(
