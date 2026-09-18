@@ -98,4 +98,24 @@
     <string name="dolby_profile_empty">Пользовательских профилей пока нет.</string>
     <string name="dolby_profile_activate">Использовать профиль</string>
     <string name="dolby_profile_active">Активен</string>
+
+    <!-- HyperOS game audio effect -->
+    <string name="game_effect_title">Игровое улучшение звука</string>
+    <string name="game_effect_summary">Использовать игровую FPS-обработку HyperOS для выбранных игр. Эффект применяется только с поддерживаемыми проводными, USB, Bluetooth или BLE-наушниками.</string>
+    <string name="game_effect_active">Активно для %1$s</string>
+    <string name="game_effect_manage">Управление играми</string>
+    <string name="game_effect_manage_summary">Выберите игры и настройте их аудиопараметры HyperOS.</string>
+    <string name="game_effect_search">Поиск приложений</string>
+    <string name="game_effect_no_apps">Подходящих приложений нет</string>
+    <string name="game_effect_tune">Настроить игровой звук</string>
+    <string name="game_effect_tuning_title">Игровой звук · %1$s</string>
+    <string name="game_effect_low_freq">Усиление низких частот</string>
+    <string name="game_effect_vocal">Усиление голоса</string>
+    <string name="game_effect_footstep">Усиление шагов</string>
+    <string name="game_effect_sound_field">Расширение звукового поля</string>
+    <string name="game_effect_value">%1$d</string>
+    <string name="game_effect_reset_defaults">Настройки устройства</string>
+    <string name="game_effect_help">Используется исходный диапазон HyperOS FPSOP 0–100. Новые игры получают стандартную игровую настройку до изменения пользователем.</string>
+    <string name="game_effect_failed">Не удалось применить игровой звук. Эффект был сброшен, чтобы частичные усиления не оставались активными.</string>
+    <string name="game_effect_not_supported">Функция игрового звука не включена в vendor-настройках этого устройства.</string>
 </resources>

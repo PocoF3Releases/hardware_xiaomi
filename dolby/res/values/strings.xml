@@ -97,5 +97,25 @@
     <string name="dolby_profile_empty">No custom profiles yet.</string>
     <string name="dolby_profile_activate">Use profile</string>
     <string name="dolby_profile_active">Active</string>
+
+    <!-- HyperOS game audio effect -->
+    <string name="game_effect_title">Game audio enhancement</string>
+    <string name="game_effect_summary">Use alioth’s HyperOS FPS audio processing for selected games. Processing is applied only on supported wired, USB, Bluetooth, or BLE headsets.</string>
+    <string name="game_effect_active">Active for %1$s</string>
+    <string name="game_effect_manage">Manage games</string>
+    <string name="game_effect_manage_summary">Choose games and tune their HyperOS audio parameters.</string>
+    <string name="game_effect_search">Search apps</string>
+    <string name="game_effect_no_apps">No matching apps</string>
+    <string name="game_effect_tune">Tune game audio</string>
+    <string name="game_effect_tuning_title">Game audio · %1$s</string>
+    <string name="game_effect_low_freq">Low-frequency boost</string>
+    <string name="game_effect_vocal">Vocal boost</string>
+    <string name="game_effect_footstep">Footstep boost</string>
+    <string name="game_effect_sound_field">Sound-field boost</string>
+    <string name="game_effect_value">%1$d</string>
+    <string name="game_effect_reset_defaults">Device default</string>
+    <string name="game_effect_help">Values use the original HyperOS 0–100 FPSOP range. New games start with the stock shooter tuning until you change them.</string>
+    <string name="game_effect_failed">Game audio could not be applied. The effect was cleared to avoid leaving partial boosts active.</string>
+    <string name="game_effect_not_supported">The vendor game-audio feature is not enabled on this device.</string>
     <string name="dolby_nav_equalizer">Equalizer</string>
 </resources>

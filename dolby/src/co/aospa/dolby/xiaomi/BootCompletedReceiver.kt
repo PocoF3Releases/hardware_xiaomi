@@ -21,6 +21,7 @@ class BootCompletedReceiver : BroadcastReceiver() {
         val pending = goAsync()
         CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
             try {
+                GameEffectController.getInstance(context).start()
                 val controller = DolbyController.getInstance(context)
                 controller.awaitReady()
                 if (intent.action == Intent.ACTION_BOOT_COMPLETED) controller.onBootCompleted()
