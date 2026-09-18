@@ -12,6 +12,8 @@
     <application
         android:icon="@mipmap/ic_launcher"
         android:allowBackup="false"
+        android:enableOnBackInvokedCallback="true"
+        android:resizeableActivity="true"
         android:label="@string/dolby_title"
         android:persistent="true"
         android:directBootAware="true"
@@ -28,12 +30,14 @@
 
         <activity
             android:name=".DolbySettingsActivity"
+            android:windowSoftInputMode="adjustResize"
             android:label="@string/dolby_title"
             android:theme="@style/Theme.SubSettingsBase"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.android.settings.action.IA_SETTINGS" />
                 <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.media.action.DISPLAY_AUDIO_EFFECT_CONTROL_PANEL" />
@@ -61,6 +65,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".profiles.ProfileSettingsActivity"
+            android:label="@string/dolby_nav_settings"
+            android:theme="@style/Theme.SubSettingsBase"
+            android:exported="false" />
+
         <service
             android:name=".DolbyTileService"
             android:icon="@drawable/ic_dolby_qs"
@@ -74,7 +84,8 @@
 
         <provider
             android:name=".SummaryProvider"
-            android:authorities="co.aospa.dolby.xiaomi.summary">
+            android:authorities="co.aospa.dolby.xiaomi.summary"
+            android:exported="false">
         </provider>
 
     </application>

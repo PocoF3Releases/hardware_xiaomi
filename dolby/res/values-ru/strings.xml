@@ -12,25 +12,15 @@
     <string name="dolby_preset">Графический эквалайзер</string>
     <string name="dolby_off">Выкл.</string>
     <string name="dolby_on">Вкл.</string>
-    <string name="dolby_low">Низкий</string>
-    <string name="dolby_medium">Средний</string>
-    <string name="dolby_high">Высокий</string>
-    <string name="dolby_max">Максимум</string>
-    <string name="dolby_unknown">Неизвестно</string>
     <string name="dolby_on_with_profile">Вкл. (%1$s)</string>
-    <string name="dolby_category_settings">Настройки</string>
-    <string name="dolby_category_adv_settings">Дополнительные настройки</string>
-    <string name="dolby_adv_settings_footer">Выберите другой профиль, чтобы показать дополнительные настройки.</string>
-    <string name="dolby_bass_enhancer">Усилитель басов</string>
-    <string name="dolby_dialogue_enhancer">Усилитель диалогов</string>
-    <string name="dolby_spk_virtualizer">Виртуализация объемного звука динамиков</string>
-    <string name="dolby_hp_virtualizer">Виртуализация объемного звука в наушниках</string>
+    <string name="dolby_category_settings">Настройка звука</string>
+    <string name="dolby_bass_enhancer">Усиление басов</string>
+    <string name="dolby_dialogue_enhancer">Усиление диалогов</string>
+    <string name="dolby_spk_virtualizer">Объёмный звук динамиков</string>
+    <string name="dolby_hp_virtualizer">Объёмный звук в наушниках</string>
     <string name="dolby_volume_leveler">Выравнивание громкости</string>
-    <string name="dolby_connect_headphones">Подключите наушники</string>
-    <string name="dolby_reset_all">Сбросить профили</string>
+    <string name="dolby_reset_all">Сбросить все профили</string>
     <string name="dolby_reset_all_message">Это действие сбросит все профили к заводским настройкам.</string>
-    <string name="dolby_reset_all_toast">Все профили успешно сброшены</string>
-    <string name="dolby_strength">Усиление</string>
 
     <!-- Dolby profiles -->
     <string name="dolby_profile_dynamic">Динамический</string>
@@ -48,28 +38,64 @@
     <string name="dolby_preset_hiphop">Хип-хоп</string>
     <string name="dolby_preset_blues">Блюз</string>
     <string name="dolby_preset_electronic">Электронная</string>
-    <string name="dolby_preset_country">Кантри</string>
-    <string name="dolby_preset_dance">Танцевальная</string>
     <string name="dolby_preset_metal">Металл</string>
     <string name="dolby_preset_custom">Пользовательский</string>
 
     <!-- Dolby equalizer UI -->
     <string name="dolby_geq_slider_label_gain">Усиление</string>
     <string name="dolby_geq_preset">Пресет</string>
-    <string name="dolby_geq_preset_name">Имя пресета</string>
+    <string name="dolby_geq_preset_name">Название пресета</string>
     <string name="dolby_geq_new_preset">Новый пресет</string>
     <string name="dolby_geq_rename_preset">Переименовать пресет</string>
     <string name="dolby_geq_delete_preset">Удалить пресет</string>
     <string name="dolby_geq_delete_preset_prompt">Вы хотите удалить этот пресет?</string>
-    <string name="dolby_geq_reset_gains">Сброс усилений</string>
-    <string name="dolby_geq_reset_gains_prompt">Вы хотите сбросить этот пресет к настройкам по умолчанию?</string>
-    <string name="dolby_geq_preset_name_exists">Имя пресета уже существует!</string>
-    <string name="dolby_geq_preset_name_too_long">Имя пресета слишком длинное!</string>
+    <string name="dolby_geq_reset_gains">Сбросить эквалайзер</string>
+    <string name="dolby_geq_reset_gains_prompt">Обнулить усиление всех полос текущего эквалайзера?</string>
+    <string name="dolby_geq_preset_name_exists">Пресет с таким названием уже существует.</string>
+    <string name="dolby_geq_preset_name_too_long">Название пресета слишком длинное.</string>
 
     <!-- Dolby intelligent EQ -->
     <string name="dolby_ieq">Интеллектуальный эквалайзер</string>
     <string name="dolby_balanced">Сбалансированный</string>
-    <string name="dolby_warm">Теплый</string>
+    <string name="dolby_warm">Тёплый</string>
     <string name="dolby_detailed">Детализированный</string>
 
+    <string name="dolby_reset_profile">Сбросить текущий профиль</string>
+    <string name="dolby_reset_profile_message">Восстановить заводские настройки текущего профиля? Сохранённые пресеты эквалайзера останутся.</string>
+    <string name="dolby_setting_failed">Не удалось применить настройку Dolby. Повторите попытку.</string>
+    <string name="dolby_geq_gain_db">%1$+.1f дБ</string>
+    <string name="dolby_bass_summary">Усиление низких частот. Для точной настройки басов используйте графический эквалайзер.</string>
+    <string name="dolby_volume_summary">Уменьшение разницы в громкости между треками, а также тихими и громкими фрагментами.</string>
+    <string name="dolby_speaker_summary">Создание объёмного звучания через встроенные динамики.</string>
+    <string name="dolby_headphone_summary">Создание объёмного звучания при прослушивании в наушниках.</string>
+    <string name="dolby_dialogue_summary">Выделение речи и вокала. После включения интенсивность можно настроить ниже.</string>
+    <string name="dolby_dialogue_strength_title">Интенсивность усиления голоса</string>
+    <string name="dolby_tuning_help">Изменения сохраняются отдельно для каждого профиля. Для прямого управления графическим эквалайзером отключите интеллектуальный эквалайзер. Настройки объёмного звука зависят от текущего устройства вывода. Динамический профиль может подстраивать обработку под воспроизводимый материал.</string>
+    <string name="dolby_geq_profile_heading">Настройка: %1$s</string>
+    <string name="dolby_geq_band_frequency">Полоса %1$d · %2$d Гц</string>
+    <string name="dolby_geq_graph_hint">Выберите полосу и перемещайте её вверх или вниз. Отпустите, чтобы применить изменение.</string>
+    <string name="dolby_geq_graph_description">График 20-полосного эквалайзера. Частота возрастает слева направо, усиление — от −10 до +10 дБ. Для точной настройки используйте элементы управления полосой ниже.</string>
+    <string name="dolby_geq_previous_band">Предыдущая полоса частот</string>
+    <string name="dolby_geq_next_band">Следующая полоса частот</string>
+    <string name="dolby_geq_band_counter">Полоса %1$d из %2$d</string>
+    <string name="dolby_geq_preset_actions">Действия с пресетом</string>
+    <string name="dolby_nav_main">Главная</string>
+    <string name="dolby_nav_settings">Настройки</string>
+    <string name="dolby_nav_equalizer">Эквалайзер</string>
+    <string name="dolby_view_curve">Кривая</string>
+    <string name="dolby_view_sliders">Ползунки</string>
+    <string name="dolby_profiles_title">Пользовательские профили</string>
+    <string name="dolby_profiles_help">Создайте профиль с собственным названием на основе профиля Dolby. Настройки эквалайзера и эффектов сохраняются независимо. Новый профиль наследует сохранённые настройки базового профиля.</string>
+    <string name="dolby_profile_create">Создать профиль</string>
+    <string name="dolby_profile_name">Название профиля</string>
+    <string name="dolby_profile_base">Базовый профиль</string>
+    <string name="dolby_profile_based_on">На основе: %1$s</string>
+    <string name="dolby_profile_name_invalid">Введите название длиной от 1 до 50 символов.</string>
+    <string name="dolby_profile_name_exists">Профиль с таким названием уже существует.</string>
+    <string name="dolby_profile_rename">Переименовать профиль</string>
+    <string name="dolby_profile_delete">Удалить профиль</string>
+    <string name="dolby_profile_delete_message">Удалить «%1$s» и его сохранённые настройки? Если профиль активен, будет выбран его базовый профиль.</string>
+    <string name="dolby_profile_empty">Пользовательских профилей пока нет.</string>
+    <string name="dolby_profile_activate">Использовать профиль</string>
+    <string name="dolby_profile_active">Активен</string>
 </resources>
