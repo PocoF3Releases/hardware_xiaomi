@@ -9,6 +9,7 @@ import co.aospa.dolby.xiaomi.geq.data.EqualizerGains
 import co.aospa.dolby.xiaomi.profiles.ActiveProfileState
 import co.aospa.dolby.xiaomi.profiles.DolbyProfiles
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.sync.Mutex
@@ -17,6 +18,9 @@ import kotlinx.coroutines.sync.withLock
 /** Process-lifetime audio owner. No native transport is reachable outside a transaction. */
 internal class DolbyController private constructor(private val context: Context) {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    // Callbacks carry invalidations, not state snapshots. Keep one pending refresh
+    // while the current transaction runs; never cancel native effect work midway.
+    private val restoreRequests = Channel<Unit>(Channel.CONFLATED)
     private val mutex = Mutex()
     private val selectionMutex = Mutex()
     private val pendingEdits = ConcurrentHashMap.newKeySet<CompletableDeferred<Unit>>()
@@ -33,6 +37,11 @@ internal class DolbyController private constructor(private val context: Context)
                 error = context.getString(R.string.dolby_setting_failed))
         }
         engine.start()
+        scope.launch {
+            for (request in restoreRequests) {
+                safely { transaction { restoreForAudioState() } }
+            }
+        }
     }
 
     // The lock spans reads, mutations, the full native payload, persistence and StateFlow publication.
@@ -82,7 +91,7 @@ internal class DolbyController private constructor(private val context: Context)
     suspend fun createNamedProfile(name: String, base: Int) = transaction { profiles.create(name, base) }
     suspend fun renameNamedProfile(key: String, name: String) = transaction { profiles.rename(key, name) }
     fun requestRefresh() { scope.launch { safely { refreshActiveState() } } }
-    private fun requestRestore() { scope.launch { safely { transaction { selectProfile(activeProfileKey) } } } }
+    private fun requestRestore() { restoreRequests.trySend(Unit) }
     private suspend fun safely(action: suspend () -> Unit) {
         try { action() }
         catch (cancel: CancellationException) { throw cancel }

@@ -14,6 +14,7 @@ android_app {
     platform_apis: true,
     system_ext_specific: true,
     privileged: true,
+    required: ["privapp-permissions-xiaomi-dolby"],
 
     overrides: ["MusicFX", "AudioFX"],
     static_libs: [
@@ -26,4 +27,12 @@ android_app {
         "androidx.preference_preference",
         "org.lineageos.settings.resources",
     ],
+}
+
+prebuilt_etc {
+    name: "privapp-permissions-xiaomi-dolby",
+    src: "privapp-permissions-co.aospa.dolby.xiaomi.xml",
+    filename_from_src: true,
+    sub_dir: "permissions",
+    system_ext_specific: true,
 }

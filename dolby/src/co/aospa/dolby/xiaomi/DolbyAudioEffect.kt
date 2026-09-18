@@ -16,18 +16,69 @@ internal class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
     EFFECT_TYPE_NULL, EFFECT_TYPE_DAP, priority, audioSession
 ) {
 
+    override fun hasControl(): Boolean = try {
+        super.hasControl()
+    } catch (_: IllegalStateException) {
+        false
+    }
+
     var dsOn: Boolean
         get() = getIntParam(EFFECT_PARAM_ENABLE) == 1
         set(value) {
-            setIntParam(EFFECT_PARAM_ENABLE, if (value) 1 else 0)
-            checkStatus(setEnabled(value))
+            if (!value) {
+                disableProcessing()
+            } else {
+                try {
+                    setIntParam(EFFECT_PARAM_ENABLE, 1)
+                    checkStatus(setEnabled(true))
+                    check(enabled) { "Dolby framework gate did not enable" }
+                } catch (failure: RuntimeException) {
+                    try {
+                        disableProcessing()
+                    } catch (cleanup: RuntimeException) {
+                        if (failure !== cleanup) failure.addSuppressed(cleanup)
+                    }
+                    throw failure
+                }
+            }
         }
+
+    private fun disableProcessing() {
+        var failure: RuntimeException? = null
+        // Both gates must be attempted; a failed framework call cannot skip native off.
+        try {
+            checkStatus(setEnabled(false))
+        } catch (error: RuntimeException) {
+            failure = error
+        }
+        try {
+            setIntParam(EFFECT_PARAM_ENABLE, 0)
+        } catch (error: RuntimeException) {
+            val first = failure
+            if (first == null) failure = error else if (first !== error) first.addSuppressed(error)
+        }
+        failure?.let { throw it }
+    }
 
     var profile: Int
         get() = getIntParam(EFFECT_PARAM_PROFILE)
         set(value) {
             setIntParam(EFFECT_PARAM_PROFILE, value)
         }
+
+    /** Stock DolbyEffectController parameter 4: LE port followed by tuning-ID bytes. */
+    fun setSelectedTuningDevice(port: Int, device: String) {
+        require(port in 0..5) { "Invalid Dolby endpoint port" }
+        require(device.isNotEmpty() && device.all { it.code in 0x20..0x7e }) {
+            "Dolby tuning ID must be printable ASCII"
+        }
+        check(hasControl()) { "Dolby effect control unavailable" }
+        val id = device.toByteArray(Charsets.US_ASCII)
+        val payload = ByteArray(4 + id.size)
+        int32ToByteArray(port, payload, 0)
+        id.copyInto(payload, destinationOffset = 4)
+        checkStatus(setParameter(4, payload))
+    }
 
     private fun setIntParam(param: Int, value: Int) {
         dlog(TAG, "setIntParam($param, $value)")
@@ -43,7 +94,7 @@ internal class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
         int32ToByteArray(param, buf, 0)
         val size = getParameter(EFFECT_PARAM_CPDP_VALUES + param, buf)
         checkStatus(size)
-        check(size >= 4) { "Incomplete Dolby scalar response: $size bytes" }
+        check(size in 4..buf.size) { "Invalid Dolby scalar response: $size bytes" }
         return byteArrayToInt32(buf).also {
             dlog(TAG, "getIntParam($param): $it")
         }
@@ -83,7 +134,7 @@ internal class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
         val p = (param.id shl 16) + (profile shl 8) + EFFECT_PARAM_GET_PROFILE_PARAMETER
         val size = getParameter(p, buf)
         checkStatus(size)
-        check(size >= length * 4) { "Incomplete Dolby response for $param: $size bytes" }
+        check(size in length * 4..buf.size) { "Invalid Dolby response for $param: $size bytes" }
         return byteArrayToInt32Array(buf, length)
     }
 
