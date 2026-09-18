@@ -19,9 +19,11 @@ import kotlinx.coroutines.launch
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import co.aospa.dolby.xiaomi.DolbyController
+import co.aospa.dolby.xiaomi.GameEffectController
 import co.aospa.dolby.xiaomi.R
 import co.aospa.dolby.xiaomi.geq.ui.EqualizerPanel
 import co.aospa.dolby.xiaomi.ui.*
@@ -39,6 +41,10 @@ class ProfileSettingsActivity : ComponentActivity() {
 @Composable
 internal fun ProfileManager(controller: DolbyController, modifier: Modifier, onActivate: () -> Unit) {
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
+    val gameEffectController = remember(context) {
+        GameEffectController.getInstance(context).also { it.start() }
+    }
     val active by controller.activeState.collectAsState()
     val profiles by controller.profiles.state.collectAsState()
     var creating by rememberSaveable { mutableStateOf(false) }
@@ -51,6 +57,7 @@ internal fun ProfileManager(controller: DolbyController, modifier: Modifier, onA
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
+        item { GameEffectSettings(gameEffectController) }
         item {
             EqualizerPanel(Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
