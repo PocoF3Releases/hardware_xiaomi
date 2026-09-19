@@ -5,13 +5,11 @@ import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.view.HapticFeedbackConstants
 import android.view.View
-import androidx.compose.animation.core.FiniteAnimationSpec
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -36,7 +34,6 @@ internal fun DolbyTheme(content: @Composable () -> Unit) {
         MaterialExpressiveTheme(
             colorScheme = MaterialTheme.colorScheme,
             motionScheme = MotionScheme.expressive(),
-            shapes = Shapes(extraLarge = RoundedCornerShape(28.dp)),
             content = content
         )
     }
@@ -46,24 +43,37 @@ internal fun DolbyTheme(content: @Composable () -> Unit) {
 @Composable
 internal fun ExpressiveChoice(labels: List<String>, selected: Int, onSelect: (Int) -> Unit) {
     val haptic = LocalHapticFeedback.current
-    BoxWithConstraints(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surfaceContainerHighest, RoundedCornerShape(28.dp))) {
+    BoxWithConstraints(
+        Modifier.fillMaxWidth().background(
+            MaterialTheme.colorScheme.surfaceContainerHighest,
+            RoundedCornerShape(28.dp)
+        )
+    ) {
         val width = maxWidth / labels.size
-        val offset by animateDpAsState(width * selected,
-            animationSpec = MaterialTheme.motionScheme.fastSpatialSpec(), label = "tonal thumb")
-        Box(Modifier.offset(x = offset, y = 4.dp).width(width).height(40.dp)
-            .background(MaterialTheme.colorScheme.secondaryContainer, RoundedCornerShape(24.dp)))
+        val offset by animateDpAsState(
+            width * selected,
+            animationSpec = MaterialTheme.motionScheme.fastSpatialSpec(),
+            label = "tonal thumb"
+        )
+        Box(
+            Modifier.offset(x = offset, y = 4.dp).width(width).height(40.dp)
+                .background(MaterialTheme.colorScheme.secondaryContainer, RoundedCornerShape(24.dp))
+        )
         SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
             labels.forEachIndexed { index, label ->
                 SegmentedButton(
                     selected = selected == index,
                     onClick = {
-                        if (selected != index) haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        if (selected != index) {
+                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        }
                         onSelect(index)
                     },
                     shape = SegmentedButtonDefaults.itemShape(index, labels.size),
                     border = BorderStroke(0.dp, Color.Transparent),
                     colors = SegmentedButtonDefaults.colors(
-                        activeContainerColor = Color.Transparent, inactiveContainerColor = Color.Transparent
+                        activeContainerColor = Color.Transparent,
+                        inactiveContainerColor = Color.Transparent
                     )
                 ) { Text(label) }
             }
@@ -73,23 +83,37 @@ internal fun ExpressiveChoice(labels: List<String>, selected: Int, onSelect: (In
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-internal fun ExpressiveActions(labels: List<String>, enabled: List<Boolean>, actions: List<() -> Unit>) {
+internal fun ExpressiveActions(
+    labels: List<String>,
+    enabled: List<Boolean>,
+    actions: List<() -> Unit>
+) {
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(2.dp)) {
         labels.forEachIndexed { index, text ->
             val source = remember { MutableInteractionSource() }
             val pressed by source.collectIsPressedAsState()
-            val outer by animateDpAsState(if (pressed) 12.dp else 28.dp,
-                MaterialTheme.motionScheme.fastSpatialSpec(), label = "action outer corner")
-            val inner by animateDpAsState(if (pressed) 12.dp else 4.dp,
-                MaterialTheme.motionScheme.fastSpatialSpec(), label = "action inner corner")
+            val outer by animateDpAsState(
+                if (pressed) 12.dp else 28.dp,
+                MaterialTheme.motionScheme.fastSpatialSpec(),
+                label = "action outer corner"
+            )
+            val inner by animateDpAsState(
+                if (pressed) 12.dp else 4.dp,
+                MaterialTheme.motionScheme.fastSpatialSpec(),
+                label = "action inner corner"
+            )
             val start = if (index == 0) outer else inner
             val end = if (index == labels.lastIndex) outer else inner
             FilledTonalButton(
-                onClick = actions[index], enabled = enabled[index], interactionSource = source,
+                onClick = actions[index],
+                enabled = enabled[index],
+                interactionSource = source,
                 modifier = Modifier.weight(1f).heightIn(min = 48.dp),
                 shape = RoundedCornerShape(start, end, end, start),
                 contentPadding = PaddingValues(horizontal = 4.dp, vertical = 8.dp)
-            ) { Text(text, textAlign = androidx.compose.ui.text.style.TextAlign.Center) }
+            ) {
+                Text(text, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
+            }
         }
     }
 }
@@ -110,50 +134,43 @@ internal fun rememberTuningHaptics(min: Int = -100, max: Int = 100): (Int, Int) 
                         delay(48)
                         view.performHapticFeedback(HapticFeedbackConstants.CONFIRM)
                     }
-                } else haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                } else {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                }
                 previous = next
             }
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 internal fun ExpressiveValueSlider(
-    value: Float, onValueChange: (Float) -> Unit, onFinished: () -> Unit,
-    range: ClosedFloatingPointRange<Float>, enabled: Boolean, label: (Float) -> String,
+    value: Float,
+    onValueChange: (Float) -> Unit,
+    onFinished: () -> Unit,
+    range: ClosedFloatingPointRange<Float>,
+    enabled: Boolean,
     modifier: Modifier = Modifier
 ) {
     val source = remember { MutableInteractionSource() }
-    val pressed by source.collectIsPressedAsState()
-    val dragged by source.collectIsDraggedAsState()
-    val height by animateDpAsState(if (pressed || dragged) 12.dp else 20.dp,
-        MaterialTheme.motionScheme.fastSpatialSpec(), label = "pressed track")
     val haptic = rememberTuningHaptics(range.start.toInt(), range.endInclusive.toInt())
+    val minimum = range.start.roundToInt()
+    val maximum = range.endInclusive.roundToInt()
+    val steps = (maximum - minimum - 1).coerceAtLeast(0)
+
     Slider(
-        value = value, enabled = enabled, valueRange = range,
-        steps = (range.endInclusive - range.start).toInt().minus(1).coerceAtLeast(0),
-        interactionSource = source,
+        value = value.coerceIn(range),
         onValueChange = {
-            haptic(0, it.roundToInt())
-            onValueChange(it.roundToInt().toFloat())
+            val rounded = it.roundToInt().coerceIn(minimum, maximum)
+            haptic(0, rounded)
+            onValueChange(rounded.toFloat())
         },
+        modifier = modifier.heightIn(min = 48.dp),
+        enabled = enabled,
+        valueRange = range,
+        steps = steps,
         onValueChangeFinished = onFinished,
-        thumb = {
-            Surface(shape = RoundedCornerShape(16.dp),
-                color = if (enabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceContainerHighest) {
-                Text(label(value), modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp),
-                    style = MaterialTheme.typography.labelMedium)
-            }
-        },
-        track = { state ->
-            SliderDefaults.Track(state, modifier = Modifier.height(height),
-                thumbTrackGapSize = 0.dp, drawStopIndicator = null,
-                colors = SliderDefaults.colors(activeTickColor = Color.Transparent,
-                    inactiveTickColor = Color.Transparent, disabledActiveTickColor = Color.Transparent,
-                    disabledInactiveTickColor = Color.Transparent))
-        },
-        modifier = modifier.heightIn(min = 48.dp)
+        interactionSource = source
     )
 }
 
@@ -168,13 +185,19 @@ internal fun BackdropBlur(active: Boolean = true) {
         val content = host.rootView.findViewById<View>(android.R.id.content) ?: host
         if (active) {
             blurOwners[content] = (blurOwners[content] ?: 0) + 1
-            content.setRenderEffect(RenderEffect.createBlurEffect(16f, 16f, Shader.TileMode.CLAMP))
+            content.setRenderEffect(
+                RenderEffect.createBlurEffect(16f, 16f, Shader.TileMode.CLAMP)
+            )
         }
         onDispose {
             if (active) {
                 val remaining = (blurOwners[content] ?: 1) - 1
-                if (remaining <= 0) { blurOwners.remove(content); content.setRenderEffect(null) }
-                else blurOwners[content] = remaining
+                if (remaining <= 0) {
+                    blurOwners.remove(content)
+                    content.setRenderEffect(null)
+                } else {
+                    blurOwners[content] = remaining
+                }
             }
         }
     }

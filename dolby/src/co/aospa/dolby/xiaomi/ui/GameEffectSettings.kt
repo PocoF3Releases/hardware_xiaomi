@@ -24,6 +24,7 @@ import co.aospa.dolby.xiaomi.GameEffectController
 import co.aospa.dolby.xiaomi.GameEffectTuning
 import co.aospa.dolby.xiaomi.R
 import co.aospa.dolby.xiaomi.geq.ui.EqualizerPanel
+import com.android.settingslib.spa.framework.theme.settingsBackground
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -120,7 +121,7 @@ private fun GameAppsDialog(controller: GameEffectController, dismiss: () -> Unit
         onDismissRequest = dismiss,
         properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
-        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.settingsBackground) {
             Column(
                 Modifier.fillMaxSize().safeDrawingPadding().padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -219,10 +220,18 @@ private fun GameTuningDialog(
     onDismiss: () -> Unit,
     onSave: (GameEffectTuning) -> Unit
 ) {
-    var low by remember(packageName, current) { mutableFloatStateOf(current.lowFrequency.toFloat()) }
-    var vocal by remember(packageName, current) { mutableFloatStateOf(current.vocal.toFloat()) }
-    var footstep by remember(packageName, current) { mutableFloatStateOf(current.footstep.toFloat()) }
-    var soundField by remember(packageName, current) { mutableFloatStateOf(current.soundField.toFloat()) }
+    var low by remember(packageName, current) {
+        mutableFloatStateOf(current.lowFrequency.toFloat())
+    }
+    var vocal by remember(packageName, current) {
+        mutableFloatStateOf(current.vocal.toFloat())
+    }
+    var footstep by remember(packageName, current) {
+        mutableFloatStateOf(current.footstep.toFloat())
+    }
+    var soundField by remember(packageName, current) {
+        mutableFloatStateOf(current.soundField.toFloat())
+    }
 
     fun valueLabel(value: Float) = value.toInt().toString()
 
@@ -232,17 +241,29 @@ private fun GameTuningDialog(
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 TuningSlider(
-                    R.string.game_effect_low_freq, low,
-                    { low = it }, { valueLabel(it) })
+                    R.string.game_effect_low_freq,
+                    low,
+                    { low = it },
+                    { valueLabel(it) }
+                )
                 TuningSlider(
-                    R.string.game_effect_vocal, vocal,
-                    { vocal = it }, { valueLabel(it) })
+                    R.string.game_effect_vocal,
+                    vocal,
+                    { vocal = it },
+                    { valueLabel(it) }
+                )
                 TuningSlider(
-                    R.string.game_effect_footstep, footstep,
-                    { footstep = it }, { valueLabel(it) })
+                    R.string.game_effect_footstep,
+                    footstep,
+                    { footstep = it },
+                    { valueLabel(it) }
+                )
                 TuningSlider(
-                    R.string.game_effect_sound_field, soundField,
-                    { soundField = it }, { valueLabel(it) })
+                    R.string.game_effect_sound_field,
+                    soundField,
+                    { soundField = it },
+                    { valueLabel(it) }
+                )
                 TextButton(onClick = {
                     low = defaults.lowFrequency.toFloat()
                     vocal = defaults.vocal.toFloat()
@@ -255,8 +276,14 @@ private fun GameTuningDialog(
         },
         confirmButton = {
             TextButton(onClick = {
-                onSave(GameEffectTuning(
-                    low.toInt(), vocal.toInt(), footstep.toInt(), soundField.toInt()))
+                onSave(
+                    GameEffectTuning(
+                        low.toInt(),
+                        vocal.toInt(),
+                        footstep.toInt(),
+                        soundField.toInt()
+                    )
+                )
             }) {
                 Text(stringResource(android.R.string.ok))
             }
@@ -276,15 +303,25 @@ private fun TuningSlider(
     onValue: (Float) -> Unit,
     label: (Float) -> String
 ) {
-    Column {
-        Text(stringResource(title), style = MaterialTheme.typography.labelLarge)
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Row(
+            Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(stringResource(title), style = MaterialTheme.typography.labelLarge)
+            Text(
+                label(value),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
         ExpressiveValueSlider(
             value = value,
             onValueChange = onValue,
             onFinished = {},
             range = 0f..100f,
             enabled = true,
-            label = label,
             modifier = Modifier.fillMaxWidth()
         )
     }
