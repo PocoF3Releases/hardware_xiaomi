@@ -33,7 +33,7 @@ fun EqualizerScreen(viewModel: EqualizerViewModel, modifier: Modifier = Modifier
                 Column(editorModifier.verticalScroll(rememberScrollState()),
                     verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     EqualizerBands(viewModel, graphHeight = trackHeight, sliders = sliders,
-                        connectedAbove = !expanded, scrollTracks = expanded)
+                        connectedAbove = !expanded, scrollTracks = true)
                     if (error != null) Text(stringResource(R.string.dolby_setting_failed),
                         color = MaterialTheme.colorScheme.error)
                 }

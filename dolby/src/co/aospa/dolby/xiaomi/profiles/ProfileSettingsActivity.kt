@@ -67,13 +67,13 @@ internal fun ProfileManager(
                         Modifier.padding(20.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Icon(Icons.Default.Add, null, Modifier.size(32.dp))
+                        Icon(Icons.Default.Add, null, Modifier.size(24.dp), tint = MaterialTheme.colorScheme.primary)
                         Text(
                             stringResource(R.string.dolby_profile_empty),
                             style = MaterialTheme.typography.titleMedium
                         )
                         Text(
-                            stringResource(R.string.dolby_profiles_help),
+                            stringResource(R.string.dolby_profiles_help_compact),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -98,7 +98,7 @@ internal fun ProfileManager(
                             style = MaterialTheme.typography.titleMedium
                         )
                         Text(
-                            stringResource(R.string.dolby_profiles_help),
+                            stringResource(R.string.dolby_profiles_help_compact),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
