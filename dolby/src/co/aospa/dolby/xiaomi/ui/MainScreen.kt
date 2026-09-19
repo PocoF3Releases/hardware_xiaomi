@@ -96,6 +96,8 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
             )
         }
 
+        DolbyRuntimePanel(controller, state)
+
         EqualizerPanel(Modifier.fillMaxWidth()) {
             ListItem(
                 headlineContent = { Text(stringResource(R.string.dolby_profile_title)) },

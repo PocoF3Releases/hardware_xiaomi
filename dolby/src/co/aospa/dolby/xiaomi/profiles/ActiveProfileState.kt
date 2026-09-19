@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 package co.aospa.dolby.xiaomi.profiles
 
+import co.aospa.dolby.xiaomi.DolbyRuntimeState
 import co.aospa.dolby.xiaomi.geq.data.BandGain
 
 internal data class ActiveProfileState(
@@ -12,5 +13,6 @@ internal data class ActiveProfileState(
     val gains: List<BandGain> = List(20) { BandGain(it + 1, 0) },
     val settings: Map<String, Any> = emptyMap(),
     val loaded: Boolean = false,
-    val error: String? = null
+    val error: String? = null,
+    val runtime: DolbyRuntimeState = DolbyRuntimeState()
 )
