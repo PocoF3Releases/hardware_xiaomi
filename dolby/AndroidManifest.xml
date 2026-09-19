@@ -22,6 +22,7 @@
 
     <application
         android:icon="@mipmap/ic_launcher"
+        android:theme="@style/Theme.SubSettingsBase.Expressive"
         android:allowBackup="false"
         android:enableOnBackInvokedCallback="true"
         android:resizeableActivity="true"
@@ -43,7 +44,7 @@
             android:name=".DolbySettingsActivity"
             android:windowSoftInputMode="adjustResize"
             android:label="@string/dolby_title"
-            android:theme="@style/Theme.SubSettingsBase"
+            android:theme="@style/Theme.SubSettingsBase.Expressive"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.android.settings.action.IA_SETTINGS" />
@@ -68,7 +69,7 @@
         <activity
             android:name=".geq.EqualizerActivity"
             android:label="@string/dolby_preset"
-            android:theme="@style/Theme.SubSettingsBase"
+            android:theme="@style/Theme.SubSettingsBase.Expressive"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -79,7 +80,7 @@
         <activity
             android:name=".profiles.ProfileSettingsActivity"
             android:label="@string/dolby_nav_settings"
-            android:theme="@style/Theme.SubSettingsBase"
+            android:theme="@style/Theme.SubSettingsBase.Expressive"
             android:exported="false" />
 
         <service

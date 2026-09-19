@@ -104,7 +104,12 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
                 colors = ListItemDefaults.colors(containerColor = androidx.compose.ui.graphics.Color.Transparent)
             )
         }
-        Text(stringResource(R.string.dolby_category_settings), style = MaterialTheme.typography.titleMedium)
+        Text(
+            stringResource(R.string.dolby_category_settings),
+            modifier = Modifier.padding(horizontal = 16.dp),
+            style = MaterialTheme.typography.labelLarge,
+            color = MaterialTheme.colorScheme.primary
+        )
         val rows = mutableListOf<@Composable () -> Unit>()
         fun toggle(key: String, title: Int, summary: Int) {
             rows += {
@@ -140,10 +145,33 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
         if (checked(PREF_DIALOGUE)) rows += {
             val amount = state.settings[PREF_DIALOGUE_AMOUNT] as? Int ?: 1
             var value by remember(state.key, amount) { mutableFloatStateOf(amount.toFloat().coerceIn(1f, 12f)) }
-            Column(Modifier.padding(16.dp)) {
-                Text(stringResource(R.string.dolby_dialogue_strength_title))
-                ExpressiveValueSlider(value, { value = it }, { apply(PREF_DIALOGUE_AMOUNT, value.toInt()) },
-                    1f..12f, enabled, { it.toInt().toString() }, Modifier.fillMaxWidth())
+            Column(
+                Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Row(
+                    Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        stringResource(R.string.dolby_dialogue_strength_title),
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                    Text(
+                        value.toInt().toString(),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                ExpressiveValueSlider(
+                    value = value,
+                    onValueChange = { value = it },
+                    onFinished = { apply(PREF_DIALOGUE_AMOUNT, value.toInt()) },
+                    range = 1f..12f,
+                    enabled = enabled,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
         Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
@@ -153,7 +181,12 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
             }
         }
         if (failure || state.error != null) Text(stringResource(R.string.dolby_setting_failed), color = MaterialTheme.colorScheme.error)
-        Text(stringResource(R.string.dolby_tuning_help), style = MaterialTheme.typography.bodySmall)
+        Text(
+            stringResource(R.string.dolby_tuning_help),
+            modifier = Modifier.padding(horizontal = 16.dp),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
     }
     if (profiles || ieq) {
         val choosingProfiles = profiles
