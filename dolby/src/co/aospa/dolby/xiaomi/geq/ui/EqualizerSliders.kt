@@ -1,7 +1,6 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 package co.aospa.dolby.xiaomi.geq.ui
 
-import android.graphics.Paint
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.awaitEachGesture
@@ -23,13 +22,10 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import co.aospa.dolby.xiaomi.R
 import co.aospa.dolby.xiaomi.geq.data.BandGain
 import co.aospa.dolby.xiaomi.geq.data.EqualizerGains
@@ -51,9 +47,16 @@ internal fun EqualizerSliders(
     val latestCommit by rememberUpdatedState(onCommit)
     val latestPreview by rememberUpdatedState(onPreview)
     val latestSelect by rememberUpdatedState(onSelect)
+    val latestGains by rememberUpdatedState(gains)
     Column(Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
+        if (scrollTracks) Text(
+            stringResource(R.string.dolby_eq_scroll_hint),
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp),
+            style = MaterialTheme.typography.bodySmall,
+            color = colors.onSurfaceVariant
+        )
         BoxWithConstraints(Modifier.fillMaxWidth()) {
-            val trackAreaWidth = if (scrollTracks) maxOf(maxWidth, (count * 36).dp) else maxWidth
+            val trackAreaWidth = if (scrollTracks) maxOf(maxWidth, (count * 48).dp) else maxWidth
             Row(Modifier.horizontalScroll(rememberScrollState(), enabled = scrollTracks)) {
                 Row(Modifier.width(trackAreaWidth).padding(top = 8.dp)
                     .pointerInput(profileKey, count, enabled, sliderHeight) {
@@ -66,7 +69,7 @@ internal fun EqualizerSliders(
                             val band = (down.position.x / size.width * count).toInt().coerceIn(0, count - 1)
                             fun gain(y: Float) = (100f - (y - halfThumb) * 200f /
                                 (height - 2 * halfThumb)).roundToInt().coerceIn(-100, 100)
-                            var value = gain(down.position.y)
+                            var value = latestGains[band].gain
                             var vertical = false
                             down.consume()
                             latestSelect(band)
@@ -82,12 +85,12 @@ internal fun EqualizerSliders(
                                     // A horizontal gesture remains available to the wide-layout scroller.
                                     if (!vertical && dx > viewConfiguration.touchSlop && dx > dy) break
                                     if (dy > viewConfiguration.touchSlop) vertical = true
-                                    value = gain(change.position.y)
+                                    if (vertical) value = gain(change.position.y)
                                     touch = band to value
                                     latestPreview(touch)
                                     if (vertical || !change.pressed) change.consume()
                                     if (!change.pressed) {
-                                        if (latestProfile == profileKey) latestCommit(band, value)
+                                        if (vertical && latestProfile == profileKey) latestCommit(band, value)
                                         break
                                     }
                                 }
@@ -123,7 +126,7 @@ internal fun EqualizerSliders(
                                 }
                             }
                             DisposableEffect(state) { onDispose { latestPreview(null) } }
-                            val trackWidth by animateDpAsState(if (interacting) 8.dp else 12.dp,
+                            val trackWidth by animateDpAsState(if (interacting) 6.dp else 4.dp,
                                 MaterialTheme.motionScheme.fastSpatialSpec(), label = "vertical track")
                             val handleFraction by androidx.compose.animation.core.animateFloatAsState(
                                 if (interacting) .75f else 1f, MaterialTheme.motionScheme.fastSpatialSpec(), label = "vertical handle")
@@ -143,20 +146,7 @@ internal fun EqualizerSliders(
                                                 val handleWidth = minOf(18.dp.toPx(), size.width - 4.dp.toPx()) * handleFraction.coerceIn(.5f, 1f)
                                                 drawRoundRect(fill, topLeft = Offset((size.width - handleWidth) / 2, 0f),
                                                     size = Size(handleWidth, size.height), cornerRadius = CornerRadius(8.dp.toPx()))
-                                                val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-                                                    color = if (enabled) colors.onPrimary.toArgb() else colors.onSurfaceVariant.toArgb()
-                                                    textSize = 9.sp.toPx()
-                                                    textAlign = Paint.Align.CENTER
-                                                }
-                                                val text = String.format(java.util.Locale.getDefault(), "%+.1f", state.value / 10f)
-                                                val available = size.height - 4.dp.toPx()
-                                                if (paint.measureText(text) > available) paint.textSize *= available / paint.measureText(text)
-                                                val canvas = drawContext.canvas.nativeCanvas
-                                                val x = size.width / 2; val y = size.height / 2
-                                                canvas.save()
-                                                canvas.rotate(-90f, x, y)
-                                                canvas.drawText(text, x, y - (paint.ascent() + paint.descent()) / 2, paint)
-                                                canvas.restore()
+
                                             }
                                         },
                                         track = { slider ->
@@ -169,13 +159,23 @@ internal fun EqualizerSliders(
                                                 val radius = CornerRadius(width / 2)
                                                 drawRoundRect(colors.surfaceContainerHighest, Offset(x, 0f),
                                                     Size(width, size.height), radius)
+                                                val center = size.height / 2
+                                                drawLine(colors.outlineVariant,
+                                                    Offset(size.width / 2 - 10.dp.toPx(), center),
+                                                    Offset(size.width / 2 + 10.dp.toPx(), center), 1.dp.toPx())
                                                 drawRoundRect(if (enabled) colors.primary else colors.onSurface.copy(alpha = .38f),
-                                                    Offset(x, y), Size(width, size.height - y), radius)
+                                                    Offset(x, minOf(y, center)), Size(width, abs(center - y)), radius)
                                             }
                                         })
                                 }
                                 val frequency = if (frequencies[band] < 1000) frequencies[band].toString()
                                     else String.format(java.util.Locale.getDefault(), "%.1fk", frequencies[band] / 1000f)
+                                Text(
+                                    String.format(java.util.Locale.getDefault(), "%+.1f", state.value / 10f),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = if (interacting) colors.primary else colors.onSurfaceVariant,
+                                    modifier = Modifier.padding(bottom = 8.dp)
+                                )
                                 SliderLabel(frequency)
                             }
                         }
@@ -188,36 +188,10 @@ internal fun EqualizerSliders(
 
 @Composable
 private fun SliderLabel(text: String) {
-    val color = MaterialTheme.colorScheme.onSurfaceVariant
-    val density = androidx.compose.ui.platform.LocalDensity.current
-    val paint = remember(density, color) {
-        Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            this.color = color.toArgb()
-            textSize = with(density) { 10.sp.toPx() }
-            textAlign = Paint.Align.CENTER
-        }
-    }
-    val vertical = true
-    val labelHeight = with(density) {
-        if (vertical) (paint.measureText("19.7k") + 12.dp.toPx()).toDp()
-        else (paint.descent() - paint.ascent() + 8.dp.toPx()).toDp()
-    }
-    // Every cell reserves the same height; rotation happens around the track center,
-    // never around an oversized Text layout that extends into neighboring bands.
-    Canvas(Modifier.fillMaxWidth().height(if (vertical) maxOf(52.dp, labelHeight) else labelHeight)) {
-        val x = size.width / 2
-        val y = size.height / 2
-        val canvas = drawContext.canvas.nativeCanvas
-        val labelPaint = Paint(paint)
-        val availableCross = if (vertical) size.width - 2.dp.toPx() else size.height
-        val fontHeight = labelPaint.descent() - labelPaint.ascent()
-        if (fontHeight > availableCross) labelPaint.textSize *= availableCross / fontHeight
-        if (!vertical && labelPaint.measureText(text) > size.width - 2.dp.toPx()) {
-            labelPaint.textSize *= (size.width - 2.dp.toPx()) / labelPaint.measureText(text)
-        }
-        canvas.save()
-        if (vertical) canvas.rotate(-90f, x, y)
-        canvas.drawText(text, x, y - (labelPaint.ascent() + labelPaint.descent()) / 2, labelPaint)
-        canvas.restore()
-    }
+    Text(
+        text = text,
+        style = MaterialTheme.typography.labelSmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        modifier = Modifier.padding(bottom = 12.dp)
+    )
 }

@@ -40,6 +40,7 @@ internal fun GameEffectSettings(controller: GameEffectController) {
     EqualizerPanel {
         Column {
             ListItem(
+                colors = ListItemDefaults.colors(containerColor = androidx.compose.ui.graphics.Color.Transparent),
                 headlineContent = { Text(stringResource(R.string.game_effect_title)) },
                 supportingContent = {
                     Text(
@@ -48,7 +49,7 @@ internal fun GameEffectSettings(controller: GameEffectController) {
                             state.error -> stringResource(R.string.game_effect_failed)
                             state.activePackage != null ->
                                 stringResource(R.string.game_effect_active, state.activePackage!!)
-                            else -> stringResource(R.string.game_effect_summary)
+                            else -> stringResource(R.string.dolby_game_summary_compact)
                         }
                     )
                 },
@@ -66,6 +67,7 @@ internal fun GameEffectSettings(controller: GameEffectController) {
                 ) { controller.setEnabled(it) }
             )
             ListItem(
+                colors = ListItemDefaults.colors(containerColor = androidx.compose.ui.graphics.Color.Transparent),
                 headlineContent = { Text(stringResource(R.string.game_effect_manage)) },
                 supportingContent = {
                     Text(stringResource(R.string.game_effect_manage_summary))

@@ -101,7 +101,9 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
         EqualizerPanel(Modifier.fillMaxWidth()) {
             ListItem(
                 headlineContent = { Text(stringResource(R.string.dolby_profile_title)) },
-                supportingContent = { Text(state.name) },
+                supportingContent = { Text(state.name, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary) },
+                leadingContent = { Icon(Icons.Default.Equalizer, null, tint = MaterialTheme.colorScheme.primary) },
+                trailingContent = { Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null) },
                 modifier = Modifier.clickable { profiles = true },
                 colors = ListItemDefaults.colors(containerColor = androidx.compose.ui.graphics.Color.Transparent)
             )
@@ -127,9 +129,9 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
                 )
             }
         }
-        toggle(PREF_BASS, R.string.dolby_bass_enhancer, R.string.dolby_bass_summary)
+        toggle(PREF_BASS, R.string.dolby_bass_enhancer, R.string.dolby_bass_summary_compact)
         if (context.resources.getBoolean(R.bool.dolby_volume_leveler_supported))
-            toggle(PREF_VOLUME, R.string.dolby_volume_leveler, R.string.dolby_volume_summary)
+            toggle(PREF_VOLUME, R.string.dolby_volume_leveler, R.string.dolby_volume_summary_compact)
         rows += {
             ListItem(headlineContent = { Text(stringResource(R.string.dolby_ieq)) },
                 leadingContent = { Icon(Icons.Default.Tune, null, tint = MaterialTheme.colorScheme.primary) },

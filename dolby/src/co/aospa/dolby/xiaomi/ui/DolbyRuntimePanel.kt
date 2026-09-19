@@ -3,6 +3,12 @@ package co.aospa.dolby.xiaomi.ui
 
 import android.media.AudioDeviceInfo
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.graphics.Color
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Tune
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -39,22 +45,33 @@ internal fun DolbyRuntimePanel(controller: DolbyController, state: ActiveProfile
             ListItem(
                 headlineContent = { Text(stringResource(R.string.dolby_status_title)) },
                 supportingContent = { Text(stringResource(status)) },
-                trailingContent = { Text(stringResource(if (details)
-                    R.string.dolby_status_hide_details else R.string.dolby_status_details)) },
+                leadingContent = { Icon(Icons.Default.Info, null, tint = MaterialTheme.colorScheme.primary) },
+                trailingContent = { Text(stringResource(R.string.dolby_status_details), style = MaterialTheme.typography.labelMedium) },
+                colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                 modifier = Modifier.clickable { details = !details }
             )
             if (runtime.speakerTuningSupported) {
                 val tuning = DolbyEndpointPolicy.SpeakerTuning.fromKey(runtime.speakerTuning)
                 ListItem(
                     headlineContent = { Text(stringResource(R.string.dolby_speaker_tuning_title)) },
+                    leadingContent = { Icon(Icons.Default.Tune, null, tint = MaterialTheme.colorScheme.primary) },
+                    colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                     supportingContent = { Text(stringResource(speakerTuningLabel(tuning))) },
                     modifier = Modifier.clickable(enabled = state.loaded && runtime.hasControl) {
                         choosingSpeaker = true
                     }
                 )
             }
-            if (details) {
-                Column(Modifier.padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            if (failed) Text(stringResource(R.string.dolby_setting_failed),
+                modifier = Modifier.padding(16.dp), color = MaterialTheme.colorScheme.error)
+        }
+    }
+    if (details) {
+        AlertDialog(
+            onDismissRequest = { details = false },
+            title = { Text(stringResource(R.string.dolby_status_title)) },
+            text = {
+                Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(stringResource(R.string.dolby_output_route, stringResource(routeLabel(runtime.routedDeviceType))),
                         style = MaterialTheme.typography.bodyMedium)
                     Text(stringResource(R.string.dolby_tuning_ack,
@@ -71,13 +88,17 @@ internal fun DolbyRuntimePanel(controller: DolbyController, state: ActiveProfile
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
+
+            },
+            confirmButton = {
+                TextButton(onClick = { details = false }) { Text(stringResource(android.R.string.ok)) }
+            },
+            dismissButton = {
+                TextButton(onClick = { controller.requestRefresh() }) {
+                    Text(stringResource(R.string.dolby_status_refresh))
+                }
             }
-            TextButton(onClick = { controller.requestRefresh() }, modifier = Modifier.padding(horizontal = 8.dp)) {
-                Text(stringResource(R.string.dolby_status_refresh))
-            }
-            if (failed) Text(stringResource(R.string.dolby_setting_failed),
-                modifier = Modifier.padding(16.dp), color = MaterialTheme.colorScheme.error)
-        }
+        )
     }
     if (choosingSpeaker) {
         val choices = DolbyEndpointPolicy.SpeakerTuning.entries
