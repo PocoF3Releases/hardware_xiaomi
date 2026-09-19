@@ -1,2 +1,5 @@
 # XiaomiDolby gates HyperOS game audio on ro.vendor.audio.game.effect.
 get_prop(system_app, vendor_audio_prop)
+
+# Read product capabilities; do not allow the settings app to change them.
+get_prop(system_app, vendor_dolby_config_prop)

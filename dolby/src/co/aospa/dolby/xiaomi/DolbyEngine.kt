@@ -7,8 +7,14 @@
 package co.aospa.dolby.xiaomi
 
 import android.content.Context
+import android.content.BroadcastReceiver
+import android.content.Intent
+import android.content.IntentFilter
+import android.media.Spatializer
+import android.media.audiofx.AudioEffect
+import android.os.SystemProperties
+import java.util.concurrent.atomic.AtomicLong
 import android.media.AudioAttributes
-import android.media.MediaRecorder
 import android.media.AudioRecordingConfiguration
 import android.media.AudioManager.AudioRecordingCallback
 import android.media.AudioDeviceCallback
@@ -17,6 +23,7 @@ import android.media.AudioManager
 import android.media.AudioManager.AudioPlaybackCallback
 import android.media.AudioPlaybackConfiguration
 import android.os.Handler
+import android.os.SystemClock
 import android.util.Log
 import androidx.preference.PreferenceManager
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.dlog
@@ -41,6 +48,12 @@ internal class DolbyEngine(
     private val _activeState: MutableStateFlow<ActiveProfileState>,
     private val requestRestore: () -> Unit
 ) {
+    private enum class ProcessingState {
+        MEDIA,
+        COMMUNICATION,
+        MEDIA_RESTORE
+    }
+
     val activeState = _activeState.asStateFlow()
     private var initialized = false
 
@@ -49,12 +62,34 @@ internal class DolbyEngine(
             .getString(DolbyConstants.PREF_PROFILE, "0")
             ?.takeIf { profiles.find(it) != null } ?: "0"
 
-    private var requestedEnabled = false
-    private var appliedTuning: Pair<Int, String>? = null
+    private var requestedEnabled = PreferenceManager.getDefaultSharedPreferences(context)
+        .getBoolean(DolbyConstants.PREF_ENABLE, true)
+    private var requestedSpeakerTuning = DolbyEndpointPolicy.SpeakerTuning.fromKey(
+        PreferenceManager.getDefaultSharedPreferences(context).getString(PREF_SPEAKER_TUNING, null))
+        .takeIf { DolbyCapabilities.speakerTuningSupported }
+        ?: DolbyEndpointPolicy.SpeakerTuning.AUTOMATIC
+    private var appliedTuning: DolbyEndpointPolicy.Tuning? = null
+    private val rejectedTunings = mutableSetOf<DolbyEndpointPolicy.Tuning>()
+    private var tuningCommandSupported: Boolean? = null
+    private val endpointRevision = AtomicLong()
+    private var appliedEndpointRevision = -1L
+    private var appliedRoute: Pair<Int, Int>? = null
+    private val controlRevision = AtomicLong()
+    private var appliedControlRevision = -1L
+    private val serverRevision = AtomicLong()
+    private var appliedServerRevision = -1L
+    @Volatile private var audioServerAvailable = true
+    private var needsBootstrap = true
     private var appliedProfileKey: String? = null
-    private var dolbyEffect = DolbyAudioEffect(EFFECT_PRIORITY, audioSession = 0)
+    private var nativeEffect: DolbyAudioEffect? = null
+    private val dolbyEffect: DolbyAudioEffect
+        get() = checkNotNull(nativeEffect) { "Dolby effect has not been connected" }
     private val audioManager = context.getSystemService(AudioManager::class.java)!!
     private val handler = Handler(context.mainLooper)
+    private val serverMonitor = DolbyAudioServerMonitor.get(context)
+    @Volatile
+    private var lastAudioStateInvalidationMs = SystemClock.elapsedRealtime()
+    private var processingState = ProcessingState.MEDIA
     private val volumeLevelerSupported =
         context.getResources().getBoolean(R.bool.dolby_volume_leveler_supported)
 
@@ -62,13 +97,13 @@ internal class DolbyEngine(
     // Query fresh state inside the serialized transaction instead of retaining callback lists.
     private val playbackCallback = object : AudioPlaybackCallback() {
         override fun onPlaybackConfigChanged(configs: List<AudioPlaybackConfiguration>?) {
-            requestRestore()
+            invalidateAudioState("playback")
         }
     }
 
     private val recordingCallback = object : AudioRecordingCallback() {
         override fun onRecordingConfigChanged(configs: List<AudioRecordingConfiguration>?) {
-            requestRestore()
+            invalidateAudioState("recording")
         }
     }
 
@@ -76,58 +111,190 @@ internal class DolbyEngine(
     private val audioDeviceCallback = object : AudioDeviceCallback() {
         override fun onAudioDevicesAdded(addedDevices: Array<AudioDeviceInfo>) {
             dlog(TAG, "onAudioDevicesAdded")
-            requestRestore()
+            endpointRevision.incrementAndGet()
+            invalidateAudioState("device-added")
         }
 
         override fun onAudioDevicesRemoved(removedDevices: Array<AudioDeviceInfo>) {
             dlog(TAG, "onAudioDevicesRemoved")
-            requestRestore()
+            endpointRevision.incrementAndGet()
+            invalidateAudioState("device-removed")
         }
     }
 
     private val mediaAttributes = AudioAttributes.Builder()
         .setUsage(AudioAttributes.USAGE_MEDIA).build()
     private val mediaRouteListener = AudioManager.OnDevicesForAttributesChangedListener { _, _ ->
-        requestRestore()
+        endpointRevision.incrementAndGet()
+        invalidateAudioState("media-route")
     }
 
     // Mode changes need their own callback: starting VoIP need not add/remove a device.
     // Native effect access stays on the controller's serialized transaction path.
     private val modeChangedListener = AudioManager.OnModeChangedListener { mode ->
         dlog(TAG, "onModeChanged: $mode")
+        invalidateAudioState("mode")
+    }
+
+    private val volumeReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action == AudioManager.VOLUME_CHANGED_ACTION &&
+                intent.getIntExtra(AudioManager.EXTRA_VOLUME_STREAM_TYPE, -1) == AudioManager.STREAM_MUSIC &&
+                SystemProperties.getBoolean(DolbyEndpointPolicy.VOLUME_TUNING_PROPERTY, false)) {
+                // Only crossing the stock LOW/HIGH boundary changes the selected ID.
+                // A volume step is not a route transition and must not extend the quiet window.
+                // Products without these IDs use native pregain; they need no app
+                // profile readback on each volume-key repeat.
+                requestRestore()
+            }
+        }
+    }
+
+    private val spatializerListener = object : Spatializer.OnSpatializerStateChangedListener {
+        override fun onSpatializerEnabledChanged(spatializer: Spatializer, enabled: Boolean) {
+            endpointRevision.incrementAndGet()
+            invalidateAudioState("spatializer-enabled")
+        }
+        override fun onSpatializerAvailableChanged(spatializer: Spatializer, available: Boolean) {
+            endpointRevision.incrementAndGet()
+            invalidateAudioState("spatializer-available")
+        }
+    }
+
+    private val serverCallback = object : AudioManager.AudioServerStateCallback() {
+        override fun onAudioServerDown() {
+            audioServerAvailable = false
+            serverRevision.incrementAndGet()
+            invalidateAudioState("audioserver-down")
+        }
+        override fun onAudioServerUp() {
+            audioServerAvailable = true
+            endpointRevision.incrementAndGet()
+            invalidateAudioState("audioserver-up")
+        }
+    }
+
+    private fun invalidateAudioState(reason: String) {
+        lastAudioStateInvalidationMs = SystemClock.elapsedRealtime()
+        dlog(TAG, "invalidateAudioState: $reason")
         requestRestore()
     }
 
     private val mediaMode: Boolean
-        get() {
-            val mode = audioManager.mode
-            if (mode != AudioManager.MODE_NORMAL && mode != AudioManager.MODE_RINGTONE) return false
-            if (audioManager.activePlaybackConfigurations.any {
-                    it.playerState == AudioPlaybackConfiguration.PLAYER_STATE_STARTED &&
-                        it.audioAttributes.usage == AudioAttributes.USAGE_VOICE_COMMUNICATION
-                }) return false
-            return audioManager.activeRecordingConfigurations.none {
-                !it.isClientSilenced &&
-                    it.clientAudioSource == MediaRecorder.AudioSource.VOICE_COMMUNICATION
+        get() = !audioManager.isDolbyCommunicationActive()
+
+    private fun applyEnabledState(force: Boolean = false): Boolean {
+        checkEffect()
+        val enabled = requestedEnabled && mediaMode && processingState == ProcessingState.MEDIA
+        if (enabled) {
+            // Endpoint/profile setup must precede activation. A failed restore stays bypassed.
+            try {
+                setCurrentProfile()
+            } catch (failure: RuntimeException) {
+                runCatching { dolbyEffect.dsOn = false }.exceptionOrNull()?.let {
+                    if (it !== failure) failure.addSuppressed(it)
+                }
+                throw failure
+            }
+            // AudioService may change while the synchronous native transaction runs.
+            if (!mediaMode) {
+                processingState = ProcessingState.COMMUNICATION
+                dolbyEffect.dsOn = false
+                requestRestore()
+                return false
             }
         }
-
-    private fun applyEnabledState(): Boolean {
-        checkEffect()
-        val enabled = requestedEnabled && mediaMode
-        if (dolbyEffect.dsOn != enabled || dolbyEffect.enabled != enabled) {
-            dlog(TAG, "applyEnabledState: requested=$requestedEnabled mode=${audioManager.mode} enabled=$enabled")
+        if (force || dolbyEffect.dsOn != enabled || dolbyEffect.enabled != enabled) {
+            dlog(TAG, "DAP requested=$requestedEnabled state=$processingState applied=$enabled")
             dolbyEffect.dsOn = enabled
-            appliedTuning = null
-            appliedProfileKey = null
+            if (!enabled) {
+                appliedTuning = null
+                appliedProfileKey = null
+            }
+        }
+        if (enabled) {
+            // A call can begin during SET/readback, not only during profile
+            // restoration. Do not publish media-active after that transition.
+            val stillMedia = try {
+                mediaMode
+            } catch (failure: RuntimeException) {
+                try {
+                    dolbyEffect.dsOn = false
+                } catch (cleanup: RuntimeException) {
+                    if (cleanup !== failure) failure.addSuppressed(cleanup)
+                } finally {
+                    appliedTuning = null
+                    appliedProfileKey = null
+                    requestRestore()
+                }
+                throw failure
+            }
+            if (!stillMedia) {
+                processingState = ProcessingState.COMMUNICATION
+                try {
+                    dolbyEffect.dsOn = false
+                } finally {
+                    appliedTuning = null
+                    appliedProfileKey = null
+                    requestRestore()
+                }
+                return false
+            }
         }
         return enabled
     }
 
-    fun restoreForAudioState() {
-        val enabled = applyEnabledState()
-        if (enabled) setCurrentProfile()
+    /**
+     * Reconcile DAP with the live AudioService state.
+     *
+     * Communication entry is fail-closed and immediate. On exit, keep DAP off until
+     * mode/playback/recording/device callbacks have been quiet long enough for the
+     * legacy HAL to finish rebuilding its media route. The controller schedules the
+     * returned delay without cancelling any native transaction already in progress.
+     */
+    fun restoreForAudioState(): Long? {
+        val now = SystemClock.elapsedRealtime()
+        if (!mediaMode) {
+            val enteringCommunication = processingState != ProcessingState.COMMUNICATION
+            if (enteringCommunication) {
+                Log.i(TAG, "Entering communication bypass: mode=${audioManager.mode}, " +
+                    "requested=$requestedEnabled")
+            }
+            processingState = ProcessingState.COMMUNICATION
+            applyEnabledState(force = enteringCommunication)
+            refreshActiveState()
+            return null
+        }
+
+        if (processingState != ProcessingState.MEDIA) {
+            val startingRestore = processingState != ProcessingState.MEDIA_RESTORE
+            processingState = ProcessingState.MEDIA_RESTORE
+            if (startingRestore) {
+                Log.i(TAG, "Communication ended; waiting for the media route: " +
+                    "mode=${audioManager.mode}, requested=$requestedEnabled")
+                // Reassert both effect gates off after communication. This also repairs a
+                // partially failed disable once the route has started returning to media.
+                applyEnabledState(force = true)
+            }
+
+            val quietFor = (now - lastAudioStateInvalidationMs).coerceAtLeast(0L)
+            if (quietFor < MEDIA_RESTORE_SETTLE_MS) {
+                val retryAfter = MEDIA_RESTORE_SETTLE_MS - quietFor
+                dlog(TAG, "Waiting ${retryAfter}ms for media route to settle")
+                refreshActiveState()
+                return retryAfter
+            }
+
+            Log.i(TAG, "Media route settled: requested=$requestedEnabled")
+            processingState = ProcessingState.MEDIA
+            applyEnabledState(force = true)
+            refreshActiveState()
+            return null
+        }
+
+        applyEnabledState()
         refreshActiveState()
+        return null
     }
 
     private var callbacksRegistered = false
@@ -140,6 +307,9 @@ internal class DolbyEngine(
             var recording = false
             var devices = false
             var mode = false
+            var volume = false
+            var spatializer = false
+            var server = false
             try {
                 audioManager.addOnDevicesForAttributesChangedListener(
                     mediaAttributes, context.mainExecutor, mediaRouteListener)
@@ -152,8 +322,23 @@ internal class DolbyEngine(
                 devices = true
                 audioManager.addOnModeChangedListener(context.mainExecutor, modeChangedListener)
                 mode = true
+                context.registerReceiver(volumeReceiver,
+                    IntentFilter(AudioManager.VOLUME_CHANGED_ACTION), Context.RECEIVER_NOT_EXPORTED)
+                volume = true
+                if (DolbyCapabilities.spatializerSupported) {
+                    audioManager.spatializer.addOnSpatializerStateChangedListener(
+                        context.mainExecutor, spatializerListener)
+                    spatializer = true
+                }
+                serverMonitor.subscribe(serverCallback)
+                server = true
                 callbacksRegistered = true
             } catch (failure: RuntimeException) {
+                if (server) runCatching { serverMonitor.unsubscribe(serverCallback) }
+                if (spatializer) runCatching {
+                    audioManager.spatializer.removeOnSpatializerStateChangedListener(spatializerListener)
+                }
+                if (volume) runCatching { context.unregisterReceiver(volumeReceiver) }
                 if (mode) runCatching { audioManager.removeOnModeChangedListener(modeChangedListener) }
                 if (devices) runCatching { audioManager.unregisterAudioDeviceCallback(audioDeviceCallback) }
                 if (recording) runCatching { audioManager.unregisterAudioRecordingCallback(recordingCallback) }
@@ -175,6 +360,11 @@ internal class DolbyEngine(
                 if (first == null) failure = error else if (first !== error) first.addSuppressed(error)
             }
         }
+        attempt { serverMonitor.unsubscribe(serverCallback) }
+        if (DolbyCapabilities.spatializerSupported) {
+            attempt { audioManager.spatializer.removeOnSpatializerStateChangedListener(spatializerListener) }
+        }
+        attempt { context.unregisterReceiver(volumeReceiver) }
         attempt { audioManager.removeOnModeChangedListener(modeChangedListener) }
         attempt { audioManager.unregisterAudioDeviceCallback(audioDeviceCallback) }
         attempt { audioManager.unregisterAudioRecordingCallback(recordingCallback) }
@@ -188,41 +378,20 @@ internal class DolbyEngine(
     var dsOn: Boolean
         get() = requestedEnabled
         set(value) {
-            dlog(TAG, "setDsOn: $value")
-            if (requestedEnabled == value) {
-                if (value) restoreForAudioState()
-                return
-            }
-
-            if (value) {
-                setCallbacksRegistered(true)
-                requestedEnabled = true
-                try {
-                    if (applyEnabledState()) setCurrentProfile()
-                } catch (failure: RuntimeException) {
-                    requestedEnabled = false
-                    runCatching { applyEnabledState() }.exceptionOrNull()?.let(failure::addSuppressed)
-                    runCatching { setCallbacksRegistered(false) }.exceptionOrNull()
-                        ?.let(failure::addSuppressed)
-                    throw failure
-                }
-                return
-            }
-
-            requestedEnabled = false
-            var failure: RuntimeException? = null
+            val previous = requestedEnabled
+            requestedEnabled = value
             try {
-                applyEnabledState()
-            } catch (error: RuntimeException) {
-                failure = error
+                // Equality is not evidence that the retained vendor engine is disabled.
+                if (!value) applyEnabledState(force = true) else restoreForAudioState()
+            } catch (failure: RuntimeException) {
+                // An unsuccessful enable can roll back; an Off request must not
+                // resurrect the previous On state during recovery.
+                if (value) requestedEnabled = previous
+                requestRestore()
+                throw failure
             }
-            try {
-                setCallbacksRegistered(false)
-            } catch (error: RuntimeException) {
-                val first = failure
-                if (first == null) failure = error else if (first !== error) first.addSuppressed(error)
-            }
-            failure?.let { throw it }
+            // The returned quiet-window delay must be scheduled even for a UI-triggered enable.
+            requestRestore()
         }
 
     var profile: Int
@@ -237,27 +406,23 @@ internal class DolbyEngine(
         }
 
     init {
-        // Restore our main settings
-        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        dsOn = prefs.getBoolean(DolbyConstants.PREF_ENABLE, true)
-
-        context.resources.getStringArray(R.array.dolby_profile_values)
-                .map { it.toInt() }
-                .forEach { profile ->
-                    // Reset dolby first to prevent it from loading bad settings
-                    dolbyEffect.resetProfileSpecificSettings(profile)
-                    // Now restore our profile-specific settings
-                    restoreSettings(profile)
-                }
-
-        // Base-slot initialization may have replaced a selected variant.
-        appliedProfileKey = null
-        setCurrentProfile()
-
-        initialized = true
+        // Constructing the owner performs no native I/O. A temporarily unavailable
+        // audioserver must not permanently fail DolbyController's Deferred.
         profiles.onChanged = { refreshActiveState() }
-        refreshActiveState()
-        dlog(TAG, "initialized")
+    }
+
+    fun ensureInitialized() {
+        // Keep lifecycle observers while disabled too: the policy-owned effect may
+        // be recreated by audioserver independently of the UI's saved enable flag.
+        setCallbacksRegistered(true)
+        checkEffect()
+        // Bootstrap establishes bypass only. Automatic profile/tuning writes
+        // belong to applyEnabledState after the media restore window, never to
+        // a read, a saved Off request, or repeated communication callbacks.
+        if (!initialized) {
+            initialized = true
+            requestRestore()
+        }
     }
 
     fun onBootCompleted () {
@@ -331,77 +496,172 @@ internal class DolbyEngine(
         }
     }
 
-    private fun updateEndpointTuning() {
-        if (!requestedEnabled || !mediaMode) return
-        // Query the routed media output, not every connected device. Do not guess
-        // a single endpoint for duplicated routes or unsupported output types.
-        val outputs = audioManager.getAudioDevicesForAttributes(
-            AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build())
+    private fun updateEndpointTuning(): Boolean {
+        if (!requestedEnabled || !mediaMode || processingState != ProcessingState.MEDIA) return false
+        val outputs = audioManager.getAudioDevicesForAttributes(mediaAttributes)
         val device = outputs.singleOrNull()
-        val tuning = when (device?.type) {
+        val route = when (device?.type) {
             AudioDeviceInfo.TYPE_BUILTIN_SPEAKER,
-            AudioDeviceInfo.TYPE_BUILTIN_SPEAKER_SAFE -> 0 to "default_internal_speaker"
+            AudioDeviceInfo.TYPE_BUILTIN_SPEAKER_SAFE -> DolbyEndpointPolicy.Route.SPEAKER
             AudioDeviceInfo.TYPE_WIRED_HEADSET,
-            AudioDeviceInfo.TYPE_WIRED_HEADPHONES -> 3 to "default_headphone"
-            AudioDeviceInfo.TYPE_BLUETOOTH_A2DP -> 4 to "default_bluetooth"
+            AudioDeviceInfo.TYPE_WIRED_HEADPHONES -> DolbyEndpointPolicy.Route.WIRED
+            AudioDeviceInfo.TYPE_BLUETOOTH_A2DP -> DolbyEndpointPolicy.Route.BLUETOOTH_A2DP
             AudioDeviceInfo.TYPE_USB_DEVICE,
-            AudioDeviceInfo.TYPE_USB_HEADSET -> 5 to "default_usb"
-            else -> null
+            AudioDeviceInfo.TYPE_USB_ACCESSORY,
+            AudioDeviceInfo.TYPE_USB_HEADSET -> DolbyEndpointPolicy.Route.USB
+            else -> DolbyEndpointPolicy.Route.NATIVE
         }
-        if (tuning == null) {
+        val spatializerActive = DolbyCapabilities.spatializerSupported &&
+            audioManager.spatializer.let { it.isEnabled && it.isAvailable }
+        val selected = DolbyEndpointPolicy.select(route, spatializerActive,
+            SystemProperties.getBoolean(DolbyEndpointPolicy.VOLUME_TUNING_PROPERTY, false),
+            audioManager.getStreamVolume(AudioManager.STREAM_MUSIC),
+            audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), requestedSpeakerTuning)
+        val routeIdentity = device?.let { it.id to it.type }
+        val revision = endpointRevision.get()
+        if (selected == null || tuningCommandSupported == false) {
+            val changed = appliedRoute != routeIdentity || appliedEndpointRevision != revision
             appliedTuning = null
-            return
+            appliedRoute = routeIdentity
+            appliedEndpointRevision = revision
+            return changed
         }
-        if (tuning == appliedTuning) return
+        val tuning = if (selected in rejectedTunings) DolbyEndpointPolicy.fallback(selected) else selected
+        if (tuning == null || tuning in rejectedTunings) return false
+        if (tuning == appliedTuning && appliedRoute == routeIdentity && appliedEndpointRevision == revision) {
+            return false
+        }
         try {
-            dolbyEffect.setSelectedTuningDevice(tuning.first, tuning.second)
+            dolbyEffect.setSelectedTuningDevice(tuning.port, tuning.id)
+            tuningCommandSupported = true
             appliedTuning = tuning
-            dlog(TAG, "Selected Dolby endpoint tuning: $tuning")
-        } catch (error: RuntimeException) {
-            // Older DAP implementations may not expose this stock command.
-            // Preserve native routing and user-profile restoration on failure.
+            appliedRoute = routeIdentity
+            appliedEndpointRevision = revision
+            dlog(TAG, "DAP endpoint acknowledged: $tuning")
+            return true
+        } catch (error: DolbyHalException) {
+            // A dead engine or control handoff is never a capability verdict.
+            if (error.status != AudioEffect.ERROR_BAD_VALUE &&
+                error.status != AudioEffect.ERROR_INVALID_OPERATION) throw error
+            dolbyEffect.requireControl()
+            if (error.status == AudioEffect.ERROR_INVALID_OPERATION) {
+                tuningCommandSupported = false
+            } else {
+                rejectedTunings += tuning
+                if (DolbyEndpointPolicy.fallback(tuning) != null) return updateEndpointTuning()
+            }
             appliedTuning = null
-            Log.w(TAG, "Cannot select Dolby endpoint tuning: $tuning", error)
+            Log.w(TAG, "DAP rejected optional endpoint $tuning; keeping native routing", error)
+            return false
+        }
+    }
+
+    /** A saved speaker choice applies only to the speaker, never a headset/voice route. */
+    fun setSpeakerTuning(tuning: DolbyEndpointPolicy.SpeakerTuning) {
+        require(DolbyCapabilities.speakerTuningSupported ||
+            tuning == DolbyEndpointPolicy.SpeakerTuning.AUTOMATIC) {
+            "Speaker tuning selection is not supported by this product"
+        }
+        val previous = requestedSpeakerTuning
+        requestedSpeakerTuning = tuning
+        appliedEndpointRevision = -1
+        try {
+            if (requestedEnabled && mediaMode && processingState == ProcessingState.MEDIA) {
+                setCurrentProfile()
+                // A rejected active-speaker request must not be saved as successful.
+                val outputType = audioManager.getAudioDevicesForAttributes(mediaAttributes)
+                    .singleOrNull()?.type
+                if (outputType in setOf(AudioDeviceInfo.TYPE_BUILTIN_SPEAKER,
+                        AudioDeviceInfo.TYPE_BUILTIN_SPEAKER_SAFE)) {
+                    val validIds = tuning.tuningId?.let { setOf(it) } ?: setOf(
+                        "default_internal_speaker", "speaker_volume_low", "speaker_volume_high")
+                    check(appliedTuning?.id in validIds) { "Speaker tuning was not acknowledged" }
+                }
+            }
+            refreshActiveState()
+            PreferenceManager.getDefaultSharedPreferences(context).edit()
+                .putString(PREF_SPEAKER_TUNING, tuning.key).apply()
+        } catch (failure: RuntimeException) {
+            requestedSpeakerTuning = previous
+            appliedEndpointRevision = -1
+            requestRestore()
+            throw failure
         }
     }
 
     private fun checkEffect() {
-        if (dolbyEffect.hasControl()) return
-        Log.w(TAG, "lost control, recreating effect")
-        runCatching { dolbyEffect.release() }
-        dolbyEffect = DolbyAudioEffect(EFFECT_PRIORITY, audioSession = 0)
-        appliedTuning = null
-        appliedProfileKey = null
-
-        // A recreated session-0 handle starts with no app-owned state. Restore the
-        // processing gate and endpoint before any profile-setting write can proceed.
-        val enabled = requestedEnabled && mediaMode
-        dolbyEffect.dsOn = enabled
-        if (enabled) updateEndpointTuning()
-    }
-
-    private fun setCurrentProfile() {
-        try {
-            selectProfile(activeProfileKey)
-        } catch (error: RuntimeException) {
-            Log.w(TAG, "Cannot restore profile after audio callback", error)
-            refreshActiveState()
+        if (!audioServerAvailable) throw DolbyHalException(AudioEffect.ERROR_DEAD_OBJECT, "audioserver")
+        val server = serverRevision.get()
+        val old = nativeEffect
+        if (old == null || old.isDead || appliedServerRevision != server) {
+            runCatching { old?.close() }
+            nativeEffect = null
+            val effect = DolbyAudioEffect(EFFECT_PRIORITY, audioSession = 0)
+            try {
+                effect.setControlStatusListener { _, granted ->
+                    if (granted) controlRevision.incrementAndGet()
+                    requestRestore()
+                }
+                effect.setEnableStatusListener { _, _ -> requestRestore() }
+            } catch (failure: RuntimeException) {
+                runCatching { effect.close() }
+                throw failure
+            }
+            nativeEffect = effect
+            appliedServerRevision = server
+            needsBootstrap = true
+            tuningCommandSupported = null
+            rejectedTunings.clear()
+        }
+        dolbyEffect.requireControl()
+        val control = controlRevision.get()
+        if (appliedControlRevision != control) {
+            appliedControlRevision = control
+            needsBootstrap = true
+        }
+        if (needsBootstrap) {
+            // Restore intent after server death/control return, without resetting every
+            // DMS profile slot just because the app has acquired a new Java handle.
+            dolbyEffect.dsOn = false
+            appliedTuning = null
+            appliedProfileKey = null
+            appliedRoute = null
+            appliedEndpointRevision = -1
+            needsBootstrap = false
+            processingState = if (mediaMode) ProcessingState.MEDIA_RESTORE else ProcessingState.COMMUNICATION
+            lastAudioStateInvalidationMs = SystemClock.elapsedRealtime()
+            requestRestore()
         }
     }
 
+    private fun setCurrentProfile() {
+        // Failures propagate to the retry scheduler. A failed restore is not success.
+        // The enclosing reconciliation publishes one final readback after all
+        // route/profile/gate work; do not expose an intermediate snapshot here.
+        selectProfile(activeProfileKey, publishState = false)
+    }
+
     /** Reset the reused native slot before restoring a variant, so siblings never leak tuning. */
-    fun selectProfile(key: String) {
+    fun selectProfile(key: String, publishState: Boolean = true) {
         val target = profiles.requireProfile(key)
         val previous = profiles.requireProfile(activeProfileKey)
         checkEffect()
-        updateEndpointTuning()
+        val endpointChanged = updateEndpointTuning()
         if (appliedProfileKey == key) {
+            if (!endpointChanged && dolbyEffect.profile == target.base) {
+                if (publishState) refreshActiveState()
+                return
+            }
             // Routine playback and routing notifications must not repeatedly reset the DSP.
+            // A failed write may leave the native slot partially restored. Retire
+            // its cache before any mutation so recovery cannot take the fast path.
+            appliedProfileKey = null
             profile = target.base
             // Selecting a native base can reload OEM tuning, even for the same ID.
             // Reapply the app-owned variant after playback/route callbacks too.
             restoreSettings(target.base, target.key)
-            refreshActiveState()
+            appliedProfileKey = key
+            if (publishState) refreshActiveState()
             return
         }
         try {
@@ -423,7 +683,7 @@ internal class DolbyEngine(
         }
         PreferenceManager.getDefaultSharedPreferences(context).edit()
             .putString(DolbyConstants.PREF_PROFILE, key).apply()
-        refreshActiveState()
+        if (publishState) refreshActiveState()
     }
 
     fun deleteNamedProfile(key: String) {
@@ -443,10 +703,20 @@ internal class DolbyEngine(
     }
 
     fun setDsOnAndPersist(dsOn: Boolean) {
+        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+        if (!dsOn) {
+            // Save shutdown intent before observer registration, HAL connection,
+            // or any readback can fail. This is requested state, not a claim
+            // that either processing gate has already acknowledged shutdown.
+            requestedEnabled = false
+            preferences.edit().putBoolean(DolbyConstants.PREF_ENABLE, false).apply()
+            _activeState.value = _activeState.value.copy(enabled = false)
+        }
+        ensureInitialized()
         this.dsOn = dsOn
-        PreferenceManager.getDefaultSharedPreferences(context).edit()
-            .putBoolean(DolbyConstants.PREF_ENABLE, dsOn)
-            .apply()
+        if (dsOn) {
+            preferences.edit().putBoolean(DolbyConstants.PREF_ENABLE, true).apply()
+        }
         refreshActiveState()
     }
 
@@ -455,6 +725,9 @@ internal class DolbyEngine(
     fun resetProfileSpecificSettings(profile: Int = profiles.requireProfile(activeProfileKey).base) {
         checkEffect()
         val key = if (profile == this.profile) activeProfileKey else profile.toString()
+        // RESET may reach the vendor before a failed reply. Recovery must not
+        // trust the old profile ACK and skip replaying the persisted overrides.
+        appliedProfileKey = null
         dolbyEffect.resetProfileSpecificSettings(profile)
         profiles.preferences(key).edit().clear().apply()
         refreshActiveState()
@@ -462,6 +735,9 @@ internal class DolbyEngine(
 
     fun resetAllProfiles() {
         checkEffect()
+        // Retire the active-slot ACK before clearing preferences or resetting
+        // any native slot, including when a later RESET fails partway through.
+        appliedProfileKey = null
         // Keep variant names and named EQ presets; reset all independently saved tuning.
         for (entry in profiles.all) profiles.preferences(entry.key).edit().clear().apply()
         for (entry in profiles.builtIn) dolbyEffect.resetProfileSpecificSettings(entry.base)
@@ -594,13 +870,31 @@ internal class DolbyEngine(
                 PREF_DIALOGUE_AMOUNT to getDialogueEnhancerAmount(target.base),
                 PREF_IEQ to getIeqPreset(target.base)
             )
+            val runtime = DolbyRuntimeState(processingState.name, dolbyEffect.dsOn,
+                dolbyEffect.enabled, dolbyEffect.hasControl(), appliedTuning?.id,
+                tuningCommandSupported, appliedServerRevision,
+                routedDeviceType = appliedRoute?.second,
+                speakerTuning = requestedSpeakerTuning.key,
+                speakerTuningSupported = DolbyCapabilities.speakerTuningSupported)
+            val previous = _activeState.value.runtime
+            if (runtime.phase != previous.phase || runtime.nativeEnabled != previous.nativeEnabled ||
+                runtime.frameworkEnabled != previous.frameworkEnabled ||
+                runtime.hasControl != previous.hasControl) {
+                // One record per observed transition, not per playback callback.
+                // No package/phone details and no claim about measured DSP output.
+                Log.i(TAG, "DAP control state: phase=${runtime.phase}, requested=$dsOn, " +
+                    "native=${runtime.nativeEnabled}, framework=${runtime.frameworkEnabled}, " +
+                    "control=${runtime.hasControl}, mode=${audioManager.mode}")
+            }
             _activeState.value = ActiveProfileState(target.key, target.name, target.base,
-                profiles.all, dsOn, EqualizerGains.decode(getSavedPreset(target.key)), tuning, true)
+                profiles.all, dsOn, EqualizerGains.decode(getSavedPreset(target.key)), tuning, true,
+                runtime = runtime)
         } catch (error: RuntimeException) {
             Log.w(TAG, "Cannot read active configuration", error)
             _activeState.value = _activeState.value.copy(key = target.key, name = target.name,
                 base = target.base, profiles = profiles.all, loaded = false,
                 error = context.getString(R.string.dolby_setting_failed))
+            throw error
         }
     }
 
@@ -624,13 +918,16 @@ internal class DolbyEngine(
             is Boolean -> editor.putBoolean(key, value)
             is Int -> if (key == PREF_IEQ) editor.putString(key, value.toString()) else editor.putInt(key, value)
         }
+        // Persistence does not change the acknowledged native values. Keep the
+        // checked snapshot rather than repeating the same full HAL query.
         editor.apply()
-        refreshActiveState()
     }
 
     companion object {
         private const val TAG = "DolbyController"
         private const val EFFECT_PRIORITY = 100
+        private const val MEDIA_RESTORE_SETTLE_MS = 500L
+        private const val PREF_SPEAKER_TUNING = "speaker_tuning"
         private const val PREF_PRESETS = "presets"
         private const val PREF_KEY_PRESETS_MIGRATED = "presets_migrated"
 

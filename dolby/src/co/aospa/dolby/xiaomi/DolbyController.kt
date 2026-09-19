@@ -4,6 +4,7 @@ package co.aospa.dolby.xiaomi
 import android.content.Context
 import android.util.Log
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicLong
 import co.aospa.dolby.xiaomi.geq.data.BandGain
 import co.aospa.dolby.xiaomi.geq.data.EqualizerGains
 import co.aospa.dolby.xiaomi.profiles.ActiveProfileState
@@ -21,6 +22,8 @@ internal class DolbyController private constructor(private val context: Context)
     // Callbacks carry invalidations, not state snapshots. Keep one pending refresh
     // while the current transaction runs; never cancel native effect work midway.
     private val restoreRequests = Channel<Unit>(Channel.CONFLATED)
+    private var delayedRestoreJob: Job? = null
+    private val restoreRevision = AtomicLong()
     private val mutex = Mutex()
     private val selectionMutex = Mutex()
     private val pendingEdits = ConcurrentHashMap.newKeySet<CompletableDeferred<Unit>>()
@@ -37,22 +40,61 @@ internal class DolbyController private constructor(private val context: Context)
                 error = context.getString(R.string.dolby_setting_failed))
         }
         engine.start()
+        requestRestore()
         scope.launch {
+            val retry = DolbyRetryPolicy()
+            var handledRevision = -1L
             for (request in restoreRequests) {
-                safely { transaction { restoreForAudioState() } }
+                val revision = restoreRevision.get()
+                if (revision != handledRevision) {
+                    retry.reset()
+                    handledRevision = revision
+                }
+                // Audio callbacks are invalidations, not stable-state notifications.
+                // Cancel only a pending delay; never cancel native effect work in flight.
+                delayedRestoreJob?.cancel()
+                delayedRestoreJob = null
+                val delayMs = try {
+                    val quietWindow = transaction(recoverOnFailure = false) { restoreForAudioState() }
+                    retry.reset()
+                    quietWindow
+                } catch (cancel: CancellationException) {
+                    throw cancel
+                } catch (error: RuntimeException) {
+                    publishFailure(error)
+                    retry.nextDelay()
+                }
+                delayMs?.let { retryAfter ->
+                    delayedRestoreJob = scope.launch {
+                        delay(retryAfter)
+                        restoreRequests.trySend(Unit) // Timer does not renew the retry budget.
+                    }
+                }
             }
         }
     }
 
     // The lock spans reads, mutations, the full native payload, persistence and StateFlow publication.
-    private suspend fun <T> transaction(action: DolbyEngine.() -> T): T = withContext(Dispatchers.IO) {
+    private suspend fun <T> transaction(
+        recoverOnFailure: Boolean = true,
+        initialize: Boolean = true,
+        action: DolbyEngine.() -> T
+    ): T = withContext(Dispatchers.IO) {
         val target = engine.await()
-        mutex.withLock { target.action() }
+        mutex.withLock {
+            try {
+                if (initialize) target.ensureInitialized()
+                target.action()
+            } catch (error: RuntimeException) {
+                if (recoverOnFailure && error !is CancellationException) requestRestore()
+                throw error
+            }
+        }
     }
     val dsOn: Boolean get() = activeState.value.enabled
     val activeProfileKey: String get() = activeState.value.key
     fun getProfileName(): String = activeState.value.name
-    suspend fun awaitReady() { engine.await() }
+    suspend fun awaitReady() { transaction { refreshActiveState() } }
     suspend fun onBootCompleted() = transaction { onBootCompleted() }
     /** Register completed gestures before enqueueing them, so navigation can drain their writes. */
     fun beginEqualizerEdit(): CompletableDeferred<Unit> = CompletableDeferred<Unit>().also { completion ->
@@ -77,28 +119,40 @@ internal class DolbyController private constructor(private val context: Context)
         saveEqualizer(key, payload)
         before to after
     }
-    suspend fun setDsOnAndPersist(enabled: Boolean) = transaction { setDsOnAndPersist(enabled) }
-    suspend fun toggleEnabled() = transaction { setDsOnAndPersist(!dsOn) }
+    // The engine records Off before initialization/native work. Keeping these
+    // actions inside the same mutex preserves gesture order and error reporting.
+    suspend fun setDsOnAndPersist(enabled: Boolean) = transaction(initialize = false) {
+        setDsOnAndPersist(enabled)
+    }
+    suspend fun toggleEnabled() = transaction(initialize = false) { setDsOnAndPersist(!dsOn) }
     suspend fun updateSetting(key: String, value: Any) = transaction { updateSetting(key, value) }
     suspend fun toggleSetting(key: String) = transaction {
         refreshActiveState()
         updateSetting(key, !(activeState.value.settings[key] as? Boolean ?: false))
     }
+    suspend fun setSpeakerTuning(tuning: DolbyEndpointPolicy.SpeakerTuning) =
+        scope.async(start = CoroutineStart.UNDISPATCHED) {
+            selectionMutex.withLock { transaction { setSpeakerTuning(tuning) } }
+        }.await()
     suspend fun resetProfileSpecificSettings() = transaction { resetProfileSpecificSettings() }
     suspend fun resetAllProfiles() = transaction { resetAllProfiles() }
     suspend fun refreshActiveState() = transaction { refreshActiveState() }
     suspend fun deleteNamedProfile(key: String) = transaction { deleteNamedProfile(key) }
     suspend fun createNamedProfile(name: String, base: Int) = transaction { profiles.create(name, base) }
     suspend fun renameNamedProfile(key: String, name: String) = transaction { profiles.rename(key, name) }
-    fun requestRefresh() { scope.launch { safely { refreshActiveState() } } }
-    private fun requestRestore() { restoreRequests.trySend(Unit) }
-    private suspend fun safely(action: suspend () -> Unit) {
-        try { action() }
-        catch (cancel: CancellationException) { throw cancel }
-        catch (error: RuntimeException) {
-            Log.w("DolbyController", "Audio transaction failed", error)
-            state.value = state.value.copy(loaded = false, error = context.getString(R.string.dolby_setting_failed))
-        }
+    fun requestRefresh() { requestRestore() }
+    private fun requestRestore() {
+        restoreRevision.incrementAndGet()
+        restoreRequests.trySend(Unit)
+    }
+    private fun publishFailure(error: RuntimeException) {
+        Log.w("DolbyController", "Audio transaction failed", error)
+        state.value = state.value.copy(
+            loaded = false,
+            error = context.getString(R.string.dolby_setting_failed),
+            runtime = state.value.runtime.copy(nativeEnabled = null,
+                frameworkEnabled = null, hasControl = false, acknowledgedTuning = null)
+        )
     }
     companion object {
         @Volatile private var instance: DolbyController? = null
