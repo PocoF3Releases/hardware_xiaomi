@@ -41,7 +41,7 @@ internal fun GameEffectSettings(controller: GameEffectController) {
         Column {
             ListItem(
                 colors = ListItemDefaults.colors(containerColor = androidx.compose.ui.graphics.Color.Transparent),
-                headlineContent = { Text(stringResource(R.string.game_effect_title)) },
+                headlineContent = { DolbyHeadline(stringResource(R.string.game_effect_title)) },
                 supportingContent = {
                     Text(
                         when {
@@ -68,7 +68,7 @@ internal fun GameEffectSettings(controller: GameEffectController) {
             )
             ListItem(
                 colors = ListItemDefaults.colors(containerColor = androidx.compose.ui.graphics.Color.Transparent),
-                headlineContent = { Text(stringResource(R.string.game_effect_manage)) },
+                headlineContent = { DolbyHeadline(stringResource(R.string.game_effect_manage)) },
                 supportingContent = {
                     Text(stringResource(R.string.game_effect_manage_summary))
                 },
@@ -123,7 +123,7 @@ private fun GameAppsDialog(controller: GameEffectController, dismiss: () -> Unit
         onDismissRequest = dismiss,
         properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
-        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.settingsBackground) {
+        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
             Column(
                 Modifier.fillMaxSize().safeDrawingPadding().padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -179,7 +179,7 @@ private fun GameAppsDialog(controller: GameEffectController, dismiss: () -> Unit
                             connectedBelow = app != visible.last()
                         ) {
                             ListItem(
-                                headlineContent = { Text(app.label) },
+                                headlineContent = { DolbyHeadline(app.label) },
                                 supportingContent = { Text(app.packageName) },
                                 trailingContent = {
                                     Row(verticalAlignment = Alignment.CenterVertically) {

@@ -43,8 +43,7 @@ fun EqualizerBands(
     wide: Boolean = false,
     modifier: Modifier = Modifier,
     sliders: Boolean = false,
-    connectedAbove: Boolean = true,
-    scrollTracks: Boolean = false
+    connectedAbove: Boolean = true
 ) {
     val preset by viewModel.preset.collectAsState()
     val profileKey by viewModel.profileKey.collectAsState()
@@ -78,6 +77,7 @@ fun EqualizerBands(
         ).value.coerceIn(-100f, 100f)
     }
     val colors = MaterialTheme.colorScheme
+    val dossier = co.aospa.dolby.xiaomi.ui.LocalDossierTheme.current
     val density = LocalDensity.current
     val textSize = with(density) { 10.sp.toPx() }
     val axisPaint = remember(textSize, colors.onSurfaceVariant) {
@@ -98,7 +98,7 @@ fun EqualizerBands(
         EqualizerPanel(modifier, connectedAbove = connectedAbove, connectedBelow = !wide && !sliders) {
             if (sliders) {
                 EqualizerSliders(displayedPreview ?: gains, frequencies, ready, profileKey, graphHeight,
-                    scrollTracks, { selected = it }, { preview = it; it?.let { value -> haptic(value.first, value.second) } }, ::applyGain)
+                    { selected = it }, { preview = it; it?.let { value -> haptic(value.first, value.second) } }, ::applyGain)
             } else Column {
                 Text(
                     stringResource(R.string.dolby_geq_graph_hint),
@@ -185,10 +185,21 @@ fun EqualizerBands(
                         if (index == selected) drawLine(colors.primary.copy(alpha = .4f),
                             Offset(point.x, top), Offset(point.x, top + height), 1.dp.toPx())
                     }
-                    drawPath(line, colors.primary, style = Stroke(width = 2.dp.toPx()))
+                    if (dossier) {
+                        drawPath(line, Brush.verticalGradient(
+                            0f to androidx.compose.ui.graphics.Color(0xFFEF443B),
+                            .5f to androidx.compose.ui.graphics.Color(0xFFEF443B),
+                            .5f to colors.onSurfaceVariant,
+                            1f to colors.onSurfaceVariant,
+                            startY = top, endY = top + height
+                        ), style = Stroke(width = 2.dp.toPx()))
+                    } else drawPath(line, colors.primary, style = Stroke(width = 2.dp.toPx()))
                     points.forEachIndexed { index, point ->
                         if (index == selected) drawCircle(colors.primary.copy(alpha = .2f), 12.dp.toPx(), point)
-                        drawCircle(if (index == selected) colors.primary else colors.onSurfaceVariant,
+                        drawCircle(if (dossier) {
+                                if (animatedGains[index] > 0f) androidx.compose.ui.graphics.Color(0xFFEF443B)
+                                else colors.onSurfaceVariant
+                            } else if (index == selected) colors.primary else colors.onSurfaceVariant,
                             if (index == selected) 5.dp.toPx() else 2.5.dp.toPx(), point)
                     }
                     for (index in listOf(0, 6, 12, frequencies.lastIndex)) {
@@ -223,6 +234,7 @@ fun EqualizerBands(
     Column(modifier, verticalArrangement = Arrangement.spacedBy(2.dp)) {
         if (sliders) {
             graph(Modifier.fillMaxWidth())
+            controls(Modifier.fillMaxWidth())
         } else if (wide) {
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp), verticalAlignment = Alignment.CenterVertically) {
                 graph(Modifier.weight(1f))

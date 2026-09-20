@@ -25,7 +25,7 @@ fun EqualizerScreen(viewModel: EqualizerViewModel, modifier: Modifier = Modifier
         preferences.edit().putBoolean("sliders", it).apply()
     }
     val error by viewModel.error.collectAsState()
-    Surface(modifier.fillMaxSize(), color = MaterialTheme.colorScheme.settingsBackground) {
+    Surface(modifier.fillMaxSize(), color = if (co.aospa.dolby.xiaomi.ui.LocalDossierTheme.current) androidx.compose.ui.graphics.Color.Transparent else MaterialTheme.colorScheme.background) {
         BoxWithConstraints(Modifier.fillMaxSize().padding(16.dp)) {
             val selectorWidth = if (maxWidth >= 840.dp) 300.dp else 240.dp
             val trackHeight = (maxHeight * .45f).coerceIn(120.dp, 240.dp)
@@ -33,7 +33,7 @@ fun EqualizerScreen(viewModel: EqualizerViewModel, modifier: Modifier = Modifier
                 Column(editorModifier.verticalScroll(rememberScrollState()),
                     verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     EqualizerBands(viewModel, graphHeight = trackHeight, sliders = sliders,
-                        connectedAbove = !expanded, scrollTracks = true)
+                        connectedAbove = !expanded)
                     if (error != null) Text(stringResource(R.string.dolby_setting_failed),
                         color = MaterialTheme.colorScheme.error)
                 }
