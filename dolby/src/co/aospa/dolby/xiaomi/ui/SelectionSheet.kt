@@ -25,7 +25,7 @@ internal fun SelectionSheet(title: String, labels: List<String>, selected: Int,
     BackdropBlur()
     ModalBottomSheet(onDismissRequest = onDismiss, sheetState = sheet,
         containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
-        shape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)) {
+        shape = if (LocalDossierTheme.current) MaterialTheme.shapes.extraLarge else RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)) {
         Text(title, style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.padding(start = 24.dp, end = 24.dp, bottom = 16.dp))
         LazyColumn(Modifier.fillMaxWidth().selectableGroup(),
@@ -33,14 +33,14 @@ internal fun SelectionSheet(title: String, labels: List<String>, selected: Int,
             verticalArrangement = Arrangement.spacedBy(2.dp)) {
             itemsIndexed(labels) { index, label ->
                 val chosen = index == selected
-                Surface(shape = RoundedCornerShape(
+                Surface(shape = if (LocalDossierTheme.current) MaterialTheme.shapes.medium else RoundedCornerShape(
                     topStart = if (index == 0) 20.dp else 4.dp,
                     topEnd = if (index == 0) 20.dp else 4.dp,
                     bottomStart = if (index == labels.lastIndex) 20.dp else 4.dp,
                     bottomEnd = if (index == labels.lastIndex) 20.dp else 4.dp),
                     color = if (chosen) MaterialTheme.colorScheme.secondaryContainer
                         else MaterialTheme.colorScheme.surfaceContainer) {
-                    ListItem(headlineContent = { Text(label) },
+                    ListItem(headlineContent = { DolbyHeadline(label) },
                         trailingContent = { RadioButton(chosen, onClick = null) },
                         colors = ListItemDefaults.colors(containerColor = androidx.compose.ui.graphics.Color.Transparent),
                         modifier = Modifier.selectable(chosen, enabled = !closing, role = Role.RadioButton) {

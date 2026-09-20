@@ -75,9 +75,10 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
     val enabled = state.enabled && state.loaded
     Column(modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Surface(color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(28.dp)) {
+        DossierHeader()
+        Surface(color = MaterialTheme.colorScheme.primaryContainer, shape = if (LocalDossierTheme.current) MaterialTheme.shapes.large else RoundedCornerShape(28.dp)) {
             ListItem(
-                headlineContent = { Text(stringResource(R.string.dolby_enable)) },
+                headlineContent = { DolbyHeadline(stringResource(R.string.dolby_enable)) },
                 modifier = Modifier.toggleable(state.enabled, role = Role.Switch) {
                     scope.launch {
                         try { controller.toggleEnabled(); failure = false }
@@ -98,9 +99,10 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
 
         DolbyRuntimePanel(controller, state)
 
+        if (LocalDossierTheme.current) DossierSection("01", stringResource(R.string.dolby_profile_title))
         EqualizerPanel(Modifier.fillMaxWidth()) {
             ListItem(
-                headlineContent = { Text(stringResource(R.string.dolby_profile_title)) },
+                headlineContent = { DolbyHeadline(stringResource(R.string.dolby_profile_title)) },
                 supportingContent = { Text(state.name, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary) },
                 leadingContent = { Icon(Icons.Default.Equalizer, null, tint = MaterialTheme.colorScheme.primary) },
                 trailingContent = { Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null) },
@@ -108,17 +110,12 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
                 colors = ListItemDefaults.colors(containerColor = androidx.compose.ui.graphics.Color.Transparent)
             )
         }
-        Text(
-            stringResource(R.string.dolby_category_settings),
-            modifier = Modifier.padding(horizontal = 16.dp),
-            style = MaterialTheme.typography.labelLarge,
-            color = MaterialTheme.colorScheme.primary
-        )
+        DossierSection("02", stringResource(R.string.dolby_category_settings))
         val rows = mutableListOf<@Composable () -> Unit>()
         fun toggle(key: String, title: Int, summary: Int) {
             rows += {
                 ListItem(
-                    headlineContent = { Text(stringResource(title)) },
+                    headlineContent = { DolbyHeadline(stringResource(title)) },
                     supportingContent = { Text(stringResource(summary)) },
                     modifier = Modifier.toggleable(checked(key), enabled = enabled, role = Role.Switch) { toggle(key) },
                     trailingContent = {
@@ -133,7 +130,7 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
         if (context.resources.getBoolean(R.bool.dolby_volume_leveler_supported))
             toggle(PREF_VOLUME, R.string.dolby_volume_leveler, R.string.dolby_volume_summary_compact)
         rows += {
-            ListItem(headlineContent = { Text(stringResource(R.string.dolby_ieq)) },
+            ListItem(headlineContent = { DolbyHeadline(stringResource(R.string.dolby_ieq)) },
                 leadingContent = { Icon(Icons.Default.Tune, null, tint = MaterialTheme.colorScheme.primary) },
                 trailingContent = { Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null) },
                 supportingContent = {

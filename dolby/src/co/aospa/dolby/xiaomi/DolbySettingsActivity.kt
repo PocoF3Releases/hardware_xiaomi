@@ -1,6 +1,8 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 package co.aospa.dolby.xiaomi
 
+import androidx.activity.compose.BackHandler
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import android.os.Bundle
 import android.content.Intent
 import androidx.activity.viewModels
@@ -54,8 +56,9 @@ class DolbySettingsActivity : ComponentActivity() {
                 var reset by remember { mutableStateOf<Boolean?>(null) }
                 var resetMenu by remember { mutableStateOf(false) }
                 var failure by remember { mutableStateOf(false) }
+                BackHandler(enabled = page != DolbyPage.MAIN) { page = DolbyPage.MAIN }
                 Scaffold(
-                    containerColor = MaterialTheme.colorScheme.settingsBackground,
+                    containerColor = MaterialTheme.colorScheme.background,
                     contentWindowInsets = WindowInsets.safeDrawing,
                     topBar = {
                         TopAppBar(title = { Text(stringResource(when (page) {
@@ -63,6 +66,12 @@ class DolbySettingsActivity : ComponentActivity() {
                             DolbyPage.EQUALIZER -> R.string.dolby_preset
                             DolbyPage.SETTINGS -> R.string.dolby_nav_settings
                         })) },
+                            navigationIcon = {
+                                IconButton(onClick = {
+                                    if (page == DolbyPage.MAIN) finish() else page = DolbyPage.MAIN
+                                }) { Icon(Icons.AutoMirrored.Filled.ArrowBack,
+                                    stringResource(R.string.dolby_navigate_back)) }
+                            },
                             actions = {
                                 if (page == DolbyPage.MAIN) {
                                 Box {
@@ -82,12 +91,14 @@ class DolbySettingsActivity : ComponentActivity() {
                                 }
                                 }
                             },
-                            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.settingsBackground))
+                            colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background))
                     },
                     bottomBar = { if (!expanded) DolbyNavigation(this@DolbySettingsActivity, page) }
                 ) { padding ->
                     val motion = MaterialTheme.motionScheme.fastEffectsSpec<Float>()
-                    Row(Modifier.fillMaxSize().padding(padding).consumeWindowInsets(padding)) {
+                    Box(Modifier.fillMaxSize().padding(padding).consumeWindowInsets(padding)) {
+                    DossierBackdrop(Modifier.matchParentSize())
+                    Row(Modifier.fillMaxSize()) {
                     if (expanded) DolbyRail(this@DolbySettingsActivity, page)
                     AnimatedContent(page, modifier = Modifier.weight(1f).fillMaxHeight(),
                         transitionSpec = { fadeIn(motion) togetherWith fadeOut(motion) }, label = "page") { destination ->
@@ -97,6 +108,7 @@ class DolbySettingsActivity : ComponentActivity() {
                             DolbyPage.SETTINGS -> ProfileManager(controller, Modifier) { page = DolbyPage.MAIN }
                         }
                     }
+                }
                 }
                 }
                 reset?.let { all ->

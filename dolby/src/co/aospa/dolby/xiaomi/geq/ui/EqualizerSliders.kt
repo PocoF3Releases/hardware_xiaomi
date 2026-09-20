@@ -8,8 +8,6 @@ import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
 import kotlin.math.abs
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -25,6 +23,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.unit.dp
 import co.aospa.dolby.xiaomi.R
 import co.aospa.dolby.xiaomi.geq.data.BandGain
@@ -36,12 +37,12 @@ import kotlin.math.roundToInt
 internal fun EqualizerSliders(
     gains: List<BandGain>, frequencies: IntArray, enabled: Boolean,
     profileKey: String, sliderHeight: Dp,
-    scrollTracks: Boolean,
     onSelect: (Int) -> Unit, onPreview: (Pair<Int, Int>?) -> Unit,
     onCommit: (Int, Int) -> Unit
 ) {
     val count = EqualizerGains.BAND_COUNT
     val colors = MaterialTheme.colorScheme
+    val dossier = co.aospa.dolby.xiaomi.ui.LocalDossierTheme.current
     var touch by remember(profileKey) { mutableStateOf<Pair<Int, Int>?>(null) }
     val latestProfile by rememberUpdatedState(profileKey)
     val latestCommit by rememberUpdatedState(onCommit)
@@ -49,15 +50,9 @@ internal fun EqualizerSliders(
     val latestSelect by rememberUpdatedState(onSelect)
     val latestGains by rememberUpdatedState(gains)
     Column(Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
-        if (scrollTracks) Text(
-            stringResource(R.string.dolby_eq_scroll_hint),
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp),
-            style = MaterialTheme.typography.bodySmall,
-            color = colors.onSurfaceVariant
-        )
         BoxWithConstraints(Modifier.fillMaxWidth()) {
-            val trackAreaWidth = if (scrollTracks) maxOf(maxWidth, (count * 48).dp) else maxWidth
-            Row(Modifier.horizontalScroll(rememberScrollState(), enabled = scrollTracks)) {
+            val trackAreaWidth = maxWidth
+            Row(Modifier.fillMaxWidth()) {
                 Row(Modifier.width(trackAreaWidth).padding(top = 8.dp)
                     .pointerInput(profileKey, count, enabled, sliderHeight) {
                         if (!enabled) return@pointerInput
@@ -82,7 +77,7 @@ internal fun EqualizerSliders(
                                     if (change.isConsumed) break
                                     val dx = abs(change.position.x - down.position.x)
                                     val dy = abs(change.position.y - down.position.y)
-                                    // A horizontal gesture remains available to the wide-layout scroller.
+                                    // Ignore lateral movement rather than editing an adjacent band.
                                     if (!vertical && dx > viewConfiguration.touchSlop && dx > dy) break
                                     if (dy > viewConfiguration.touchSlop) vertical = true
                                     if (vertical) value = gain(change.position.y)
@@ -142,7 +137,10 @@ internal fun EqualizerSliders(
                                             .semantics { contentDescription = label },
                                         thumb = {
                                             Canvas(Modifier.width(cellWidth).height(40.dp)) {
-                                                val fill = if (enabled) colors.primary else colors.surfaceContainerHighest
+                                                val fill = if (!enabled) colors.surfaceContainerHighest
+                                                    else if (!dossier) colors.primary
+                                                    else if (state.value > 0f) Color(0xFFEF443B)
+                                                    else colors.onSurfaceVariant
                                                 val handleWidth = minOf(18.dp.toPx(), size.width - 4.dp.toPx()) * handleFraction.coerceIn(.5f, 1f)
                                                 drawRoundRect(fill, topLeft = Offset((size.width - handleWidth) / 2, 0f),
                                                     size = Size(handleWidth, size.height), cornerRadius = CornerRadius(8.dp.toPx()))
@@ -163,20 +161,18 @@ internal fun EqualizerSliders(
                                                 drawLine(colors.outlineVariant,
                                                     Offset(size.width / 2 - 10.dp.toPx(), center),
                                                     Offset(size.width / 2 + 10.dp.toPx(), center), 1.dp.toPx())
-                                                drawRoundRect(if (enabled) colors.primary else colors.onSurface.copy(alpha = .38f),
+                                                drawRoundRect(if (!enabled) colors.onSurface.copy(alpha = .38f)
+                                                    else if (!dossier) colors.primary
+                                                    else if (slider.value > 0f) Color(0xFFEF443B)
+                                                    else colors.onSurfaceVariant,
                                                     Offset(x, minOf(y, center)), Size(width, abs(center - y)), radius)
                                             }
                                         })
                                 }
                                 val frequency = if (frequencies[band] < 1000) frequencies[band].toString()
                                     else String.format(java.util.Locale.getDefault(), "%.1fk", frequencies[band] / 1000f)
-                                Text(
-                                    String.format(java.util.Locale.getDefault(), "%+.1f", state.value / 10f),
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = if (interacting) colors.primary else colors.onSurfaceVariant,
-                                    modifier = Modifier.padding(bottom = 8.dp)
-                                )
-                                SliderLabel(frequency)
+                                SliderLabel(frequency, cellWidth)
+
                             }
                         }
                     }
@@ -187,11 +183,24 @@ internal fun EqualizerSliders(
 }
 
 @Composable
-private fun SliderLabel(text: String) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.labelSmall,
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
-        modifier = Modifier.padding(bottom = 12.dp)
-    )
+private fun SliderLabel(text: String, width: Dp) {
+    val density = androidx.compose.ui.platform.LocalDensity.current
+    val color = MaterialTheme.colorScheme.onSurfaceVariant
+    val fontSize = with(density) { 11.sp.toPx() }
+    val paint = remember(fontSize, color) {
+        android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
+            this.textSize = fontSize
+            this.color = color.toArgb()
+            textAlign = android.graphics.Paint.Align.CENTER
+        }
+    }
+    val labelHeight = with(density) { (paint.measureText(text) + 16.dp.toPx()).toDp() }
+    Canvas(Modifier.width(width).height(maxOf(52.dp, labelHeight))) {
+        drawContext.canvas.nativeCanvas.apply {
+            save()
+            rotate(-90f, size.width / 2, size.height / 2)
+            drawText(text, size.width / 2, size.height / 2 - (paint.ascent() + paint.descent()) / 2, paint)
+            restore()
+        }
+    }
 }

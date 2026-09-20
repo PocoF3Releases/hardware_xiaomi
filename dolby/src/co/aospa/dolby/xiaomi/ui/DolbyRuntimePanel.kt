@@ -43,7 +43,7 @@ internal fun DolbyRuntimePanel(controller: DolbyController, state: ActiveProfile
     EqualizerPanel(Modifier.fillMaxWidth()) {
         Column {
             ListItem(
-                headlineContent = { Text(stringResource(R.string.dolby_status_title)) },
+                headlineContent = { DolbyHeadline(stringResource(R.string.dolby_status_title)) },
                 supportingContent = { Text(stringResource(status)) },
                 leadingContent = { Icon(Icons.Default.Info, null, tint = MaterialTheme.colorScheme.primary) },
                 trailingContent = { Text(stringResource(R.string.dolby_status_details), style = MaterialTheme.typography.labelMedium) },
@@ -53,7 +53,7 @@ internal fun DolbyRuntimePanel(controller: DolbyController, state: ActiveProfile
             if (runtime.speakerTuningSupported) {
                 val tuning = DolbyEndpointPolicy.SpeakerTuning.fromKey(runtime.speakerTuning)
                 ListItem(
-                    headlineContent = { Text(stringResource(R.string.dolby_speaker_tuning_title)) },
+                    headlineContent = { DolbyHeadline(stringResource(R.string.dolby_speaker_tuning_title)) },
                     leadingContent = { Icon(Icons.Default.Tune, null, tint = MaterialTheme.colorScheme.primary) },
                     colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                     supportingContent = { Text(stringResource(speakerTuningLabel(tuning))) },

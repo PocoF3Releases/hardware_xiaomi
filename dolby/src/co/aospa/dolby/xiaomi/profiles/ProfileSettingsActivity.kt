@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 package co.aospa.dolby.xiaomi.profiles
 
+import androidx.compose.foundation.selection.toggleable
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.*
@@ -58,7 +59,31 @@ internal fun ProfileManager(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+        item { DossierSection("01", stringResource(R.string.dolby_appearance)) }
+        item {
+            EqualizerPanel(Modifier.fillMaxWidth()) {
+                Column {
+                    Text(stringResource(R.string.dolby_appearance),
+                        modifier = Modifier.padding(start = 16.dp, top = 16.dp),
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.primary)
+                    val dossier = LocalDossierTheme.current
+                    ListItem(
+                        headlineContent = { DolbyHeadline(stringResource(R.string.dolby_theme_dossier)) },
+                        supportingContent = { Text(stringResource(R.string.dolby_theme_description)) },
+                        trailingContent = { Switch(checked = dossier, onCheckedChange = null) },
+                        colors = ListItemDefaults.colors(containerColor = androidx.compose.ui.graphics.Color.Transparent),
+                        modifier = Modifier.toggleable(value = dossier, role = androidx.compose.ui.semantics.Role.Switch) {
+                            context.getSharedPreferences("dolby_appearance", android.content.Context.MODE_PRIVATE)
+                                .edit().putBoolean(THEME_KEY, it).apply()
+                        }
+                    )
+                }
+            }
+        }
+        item { DossierSection("02", stringResource(R.string.game_effect_title)) }
         item { GameEffectSettings(gameEffectController) }
+        item { DossierSection("03", stringResource(R.string.dolby_profiles_title)) }
 
         if (customProfiles.isEmpty()) {
             item {

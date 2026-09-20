@@ -47,7 +47,7 @@ internal fun navigate(activity: Activity, page: DolbyPage) {
 @Composable
 internal fun DolbyNavigation(activity: Activity, selected: DolbyPage, includeInsets: Boolean = true) {
     BoxWithConstraints(Modifier.fillMaxWidth()
-        .background(MaterialTheme.colorScheme.settingsBackground).windowInsetsPadding(
+        .background(MaterialTheme.colorScheme.background).windowInsetsPadding(
         if (includeInsets) WindowInsets.navigationBars else WindowInsets(0, 0, 0, 0))) {
         val cell = maxWidth / 3
         val position by animateDpAsState(cell * selected.ordinal,
@@ -91,7 +91,7 @@ internal fun DolbyNavigation(activity: Activity, selected: DolbyPage, includeIns
 
 @Composable
 internal fun DolbyRail(activity: Activity, selected: DolbyPage) {
-    NavigationRail(Modifier.fillMaxHeight(), containerColor = MaterialTheme.colorScheme.settingsBackground, windowInsets = WindowInsets(0, 0, 0, 0)) {
+    NavigationRail(Modifier.fillMaxHeight(), containerColor = MaterialTheme.colorScheme.background, windowInsets = WindowInsets(0, 0, 0, 0)) {
         for (page in DolbyPage.entries) {
             val label = stringResource(when (page) {
                 DolbyPage.MAIN -> R.string.dolby_nav_main
