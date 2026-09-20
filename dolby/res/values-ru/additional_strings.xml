@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_status_title">Состояние аудио Dolby</string>
+    <string name="dolby_status_unavailable">Аудиодвижок не готов — обновите состояние, чтобы повторить попытку</string>
+    <string name="dolby_status_off">Выключено</string>
+    <string name="dolby_status_communication">Приостановлено на время звонка или голосового чата</string>
+    <string name="dolby_status_restoring">Восстановление звука мультимедиа</string>
+    <string name="dolby_status_control">Ожидание управления звуком</string>
+    <string name="dolby_status_media">Включено для мультимедиа</string>
+    <string name="dolby_status_bypassed">Обработка звука обойдена</string>
+    <string name="dolby_status_details">Подробности</string>
+    <string name="dolby_status_hide_details">Скрыть подробности</string>
+    <string name="dolby_speaker_tuning_help">Выбор настройки динамиков сохраняется только для воспроизведения через динамики. Настройка наушников и USB остаётся автоматической.</string>
+    <string name="dolby_status_refresh">Обновить состояние аудио</string>
+    <string name="dolby_status_help">Профиль автоматически восстанавливается после звонков и голосового чата. Нажмите строку состояния, чтобы увидеть подробности.</string>
+    <string name="dolby_status_readback_help">Здесь показано состояние, считанное из управления звуком, а не измерение звука или выходного сигнала DSP.</string>
+    <string name="dolby_speaker_tuning_title">Настройка динамиков</string>
+    <string name="dolby_speaker_tuning_auto">Автоматически — заводская настройка</string>
+    <string name="dolby_speaker_tuning_portrait">Портрет — штатная настройка динамиков</string>
+    <string name="dolby_speaker_tuning_landscape">Альбомная ориентация — штатная настройка динамиков</string>
+    <string name="dolby_output_route">Вывод мультимедиа: %1$s</string>
+    <string name="dolby_tuning_ack">Подтверждённая настройка: %1$s</string>
+    <string name="dolby_tuning_native">Настройка приложения не подтверждена</string>
+    <string name="dolby_control_gates">Нативный шлюз: %1$s · Шлюз фреймворка: %2$s</string>
+    <string name="dolby_gate_on">Вкл.</string>
+    <string name="dolby_gate_off">Выкл.</string>
+    <string name="dolby_gate_unknown">Неизвестно</string>
+    <string name="dolby_route_speaker">Динамик</string>
+    <string name="dolby_route_wired">Проводные наушники</string>
+    <string name="dolby_route_bluetooth">Bluetooth</string>
+    <string name="dolby_route_usb">USB-аудио</string>
+    <string name="dolby_route_native">Не наблюдается / управляется системой</string>
+
+    <string name="dolby_game_summary_compact">Улучшайте звук выбранных игр на поддерживаемых наушниках.</string>
+    <string name="dolby_profiles_help_compact">Сохраняйте собственные настройки эквалайзера и звука в именованном профиле.</string>
+    <string name="dolby_bass_summary_compact">Подчеркните низкие частоты.</string>
+    <string name="dolby_volume_summary_compact">Сбалансируйте тихие и громкие фрагменты.</string>
+    <string name="dolby_reset_options">Параметры сброса</string>
+    <string name="dolby_eq_scroll_hint">Проведите в сторону, чтобы открыть все 20 полос.</string>
+</resources>
