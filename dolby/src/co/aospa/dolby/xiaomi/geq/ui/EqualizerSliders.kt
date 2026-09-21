@@ -137,7 +137,7 @@ internal fun EqualizerSliders(
                                             .semantics { contentDescription = label },
                                         thumb = {
                                             Canvas(Modifier.width(cellWidth).height(40.dp)) {
-                                                val fill = if (!enabled) colors.surfaceContainerHighest
+                                                val fill = if (!enabled) colors.onSurface.copy(alpha = .38f)
                                                     else if (!dossier) colors.primary
                                                     else if (state.value > 0f) Color(0xFFEF443B)
                                                     else colors.onSurfaceVariant
@@ -155,7 +155,7 @@ internal fun EqualizerSliders(
                                                 val x = (size.width - width) / 2
                                                 val y = size.height * (100f - slider.value) / 200f
                                                 val radius = CornerRadius(width / 2)
-                                                drawRoundRect(colors.surfaceContainerHighest, Offset(x, 0f),
+                                                drawRoundRect(if (dossier) colors.surfaceContainerHighest else colors.outlineVariant, Offset(x, 0f),
                                                     Size(width, size.height), radius)
                                                 val center = size.height / 2
                                                 drawLine(colors.outlineVariant,

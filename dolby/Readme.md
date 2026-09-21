@@ -8,6 +8,14 @@ settings app, effect control/recovery, endpoint selection and shared DMS SELinux
 policy. The proprietary Dolby DSP/effect binaries remain external dependencies;
 this project does not implement or replace their signal processing.
 
+## Current environment
+
+Maintained on `PocoF3Releases/hardware_xiaomi`, branch `cnb`, for the Android 17
+Evolution X tree. The primary device is POCO F3 (alioth), using the QDSP Dolby
+contract with matching vendor binaries. Other Xiaomi products must provide and
+verify their own effect contracts and tuning. MiSound in XiaomiParts and the
+system-wide System UI Styles app are separate integrations.
+
 ## Implementation status
 
 “Implemented” describes source behavior, not proof that every vendor binary,
@@ -22,7 +30,7 @@ route or installed ROM has passed listening and lifecycle tests.
 | Output tuning | Speaker, wired, A2DP and USB endpoint selection; product-gated portrait/landscape speaker choices | Unknown/native routes are left to native policy; supported IDs must exist in vendor tuning |
 | Spatializer integration | Capability-gated endpoint handling | Alioth does not enable Android spatializer support; Dolby virtualization is a different feature |
 | Game audio | Capability-gated HyperOS game-effect controller, editable app selection and tuning in Dolby settings | Not proof of a working standalone Dolby VQE effect on alioth |
-| UI | Main controls, equalizer, profile settings, runtime status and Quick Settings tile | Displayed status reflects observed/control state, not objective audio quality |
+| UI | Main/Equalizer/Settings tabs, all 20 EQ bands visible, precise band editor, custom profiles, status dialog, Quick Settings tile and persisted AOSP/Dossier appearance | Normal-size device screenshots reviewed; large fonts, landscape and accessibility still need broader coverage |
 | SELinux | Shared DMS domain/service labels, audio and codec binder rules, capability-property readers and boot initializer | Must be integrated once; device trees must remove duplicate DMS declarations |
 
 ## Architecture and source map
@@ -75,23 +83,65 @@ registration, audio-effects configuration and vendor tuning separately.
 Do not infer private-command compatibility from the DAX version string alone or
 copy capability settings to another device without checking its binaries.
 
+## Appearance and usability
+
+The default appearance follows system Settings colors and filled preference surfaces.
+The **Settings tab > Dossier theme** switch selects an app-local alternative with
+condensed headings, numbered sections, angular panels, decorative rules, static
+texture and diagonal accents. Both appearances support light/dark mode. This switch
+is independent of the separate system-wide customization engine.
+
+The main page uses a transparent Dolby Atmos logo in the default theme and the
+approved illustrated banner in Dossier. Images preserve their aspect ratio and fit
+the available width. The duplicate activity title bar was removed; app navigation
+and system-bar icon contrast follow the active appearance.
+
+The graphic equalizer displays all 20 bands without horizontal scrolling, with a
+curve view and a selected-band editor for precise adjustment. Dossier uses red for
+positive gains and gray at or below zero. Stock-theme slider tracks and panel/text
+contrast were refined. Custom profiles and game controls live in the Settings tab;
+the redundant Appearance heading was removed.
+
+See [appearance documentation](docs/UI-THEMES.md) and [translation guidance](TRANSLATING.md).
+
 ## Validation snapshot — 2026-09-20
 
-The installed app reported **Enabled for media**, and AudioFlinger listed
-DAP_offload and MiSound. However, boot SELinux denials prevented vendor_init from
-initializing all four properties labeled vendor_dolby_config_prop. AudioFlinger
-therefore reported **control=none**, with no captured DAP in its new controller.
-Zero retry errors in that state do not validate the synchronization path.
+The earlier boot-property blocker is **resolved in the recorded rebuilt-device
+checks**. The old `control=none, captured=0` snapshot describes the pre-fix build,
+not the current validation result. The paired policy changes are `3709043` here
+and sm8250-common `69d847e`; retain both when integrating the repositories.
 
-Commit `3709043` adds the missing narrow initializer permission and consolidates
-DMS policy here. Pair it with sm8250-common `69d847e`, which removes the old
-copies. Relocation was checked for exact preservation of existing rules/labels,
-and whitespace checks passed. The fixed policy has not been built and installed
-as part of this validation. **Rebuild both repositories together and reboot before
-claiming the new framework path works end to end.**
+Recorded successful checks on alioth:
 
-Captured ACDB lookup/inactive-stream errors remain under investigation; they do
-not independently justify changing mixer routes or calibration IDs.
+- All four dedicated properties initialized with the expected QDSP/capability
+  values; no matching vendor_init property-set denial appeared in the captured log.
+- AudioFlinger captured DAP and acknowledged attachment during playback. Pregain
+  desired and acknowledged values matched, with zero reported attachment/pregain
+  failures in the observed test window.
+- Native and framework processing gates switched Off and back On with the master
+  toggle. Automatic speaker tuning restored the factory endpoint.
+- Portrait and Landscape choices acknowledged their respective speaker tuning IDs.
+- Movie/Video -> Music -> Movie/Video switching succeeded during continuous playback.
+- Reset current profile and reset all profiles cleared saved overrides as intended;
+  master enable and unrelated game preferences were preserved. Empty profile maps
+  correctly represent use of native factory defaults.
+- The redesigned app was installed for UI iteration. Supplied device screenshots
+  show both appearances, the complete EQ band table, banners and corrected title bar.
+  Subsequent stock-surface refinements are present in `ca2c95c`.
+- Later user testing reported smooth operation. The supplied 07:48 device
+  screenshots show the Dossier UI reporting "Enabled for media" outside a call
+  and "Paused for a call or voice chat" during a call, while preserving the
+  enabled preference and Movie/Video selection. This confirms the displayed
+  call-bypass state; post-call restoration and DSP behavior need separate
+  observation.
+- Targeted AAPT2 and Kotlin/Compose checks passed during UI development. The real
+  Dossier PNG also passed AAPT2 compilation after a stray Windows metadata sidecar
+  was removed from the resource directory.
+
+These results establish the tested control/UI paths. They are not measurements of
+DSP output or certification of every route. Local detailed evidence is indexed in
+`out/dolby-validation-20260920/RESULTS.md` in the development tree; raw device logs
+and user preferences are not distributed in this repository.
 
 ## Not implemented or not established
 
@@ -103,7 +153,7 @@ not independently justify changing mixer routes or calibration IDs.
   speaker spatializer behavior from incomplete stock code.
 - Full AC-4 playback validation: plugin/library presence alone is insufficient.
 - Exhaustive call, Bluetooth/USB, offload, audio-server restart and listening tests
-  on the rebuilt property-policy fix; objective DSP readback is also not provided.
+  across all supported outputs and lifecycle transitions; objective DSP readback is also not provided.
 
 ## Installed-build checklist
 
@@ -118,5 +168,6 @@ not independently justify changing mixer routes or calibration IDs.
 5. Test AC-4 with a verified stream containing an actual AC-4 audio track and
    inspect decoder selection/errors independently of Dolby enhancement settings.
 
-No build is necessary for README or artwork changes. Functional/policy changes
-require a matching installed build before release conclusions can be drawn.
+Documentation-only edits do not require a build. Packaged artwork, resources, code
+and policy changes require rebuilding the affected components. Use a matching installed
+build for release validation; the checks above do not certify later ROM changes.

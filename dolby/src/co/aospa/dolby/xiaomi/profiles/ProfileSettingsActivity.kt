@@ -63,10 +63,6 @@ internal fun ProfileManager(
         item {
             EqualizerPanel(Modifier.fillMaxWidth()) {
                 Column {
-                    Text(stringResource(R.string.dolby_appearance),
-                        modifier = Modifier.padding(start = 16.dp, top = 16.dp),
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.primary)
                     val dossier = LocalDossierTheme.current
                     ListItem(
                         headlineContent = { DolbyHeadline(stringResource(R.string.dolby_theme_dossier)) },

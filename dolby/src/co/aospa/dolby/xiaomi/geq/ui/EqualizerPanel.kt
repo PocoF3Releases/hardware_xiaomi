@@ -42,8 +42,10 @@ internal fun EqualizerPanel(
         }.animateContentSize(
             animationSpec = MaterialTheme.motionScheme.defaultSpatialSpec()
         ),
-        color = MaterialTheme.colorScheme.surfaceContainerHigh,
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.45f)),
+        color = if (dossier) MaterialTheme.colorScheme.surfaceContainerHigh
+            else MaterialTheme.colorScheme.surfaceContainerHighest,
+        contentColor = MaterialTheme.colorScheme.onSurface,
+        border = if (dossier) BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.45f)) else null,
         shape = if (LocalDossierTheme.current) CutCornerShape(12.dp) else RoundedCornerShape(
             topStart = top,
             topEnd = top,

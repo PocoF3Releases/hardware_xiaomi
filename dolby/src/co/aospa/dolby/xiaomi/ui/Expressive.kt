@@ -32,6 +32,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
+import com.android.settingslib.spa.framework.theme.settingsBackground
 import com.android.settingslib.spa.framework.theme.SettingsTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -58,7 +59,9 @@ internal fun DolbyTheme(content: @Composable () -> Unit) {
     }
     SettingsTheme {
         val dark = isSystemInDarkTheme()
-        val colors = if (!dossier) MaterialTheme.colorScheme else if (dark) {
+        val colors = if (!dossier) MaterialTheme.colorScheme.copy(
+            background = MaterialTheme.colorScheme.settingsBackground
+        ) else if (dark) {
             darkColorScheme(
                 primary = Color(0xFFFFB4A8), onPrimary = Color(0xFF520C05),
                 primaryContainer = Color(0xFF8B241C), onPrimaryContainer = Color(0xFFFFDAD3),
@@ -114,7 +117,8 @@ internal fun ExpressiveChoice(labels: List<String>, selected: Int, onSelect: (In
     val haptic = LocalHapticFeedback.current
     BoxWithConstraints(
         Modifier.fillMaxWidth().background(
-            MaterialTheme.colorScheme.surfaceContainerHighest,
+            if (LocalDossierTheme.current) MaterialTheme.colorScheme.surfaceContainerHighest
+            else MaterialTheme.colorScheme.surfaceContainerLow,
             RoundedCornerShape(28.dp)
         )
     ) {
@@ -283,7 +287,7 @@ internal fun DossierHeader() {
     BoxWithConstraints(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
         val ratio = artwork.intrinsicSize.width / artwork.intrinsicSize.height
         // Bound height on tablets/landscape; narrow windows retain the complete image.
-        val heightLimit = if (dossier) 220.dp else 88.dp
+        val heightLimit = if (dossier) 220.dp else 68.dp
         val width = minOf(maxWidth, heightLimit * ratio)
         androidx.compose.foundation.Image(
             painter = artwork,
