@@ -2,5 +2,6 @@
 <permissions>
     <privapp-permissions package="co.aospa.dolby.xiaomi">
         <permission name="android.permission.MODIFY_AUDIO_ROUTING"/>
+        <permission name="android.permission.REAL_GET_TASKS"/>
     </privapp-permissions>
 </permissions>
