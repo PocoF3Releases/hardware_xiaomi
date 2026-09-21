@@ -13,8 +13,10 @@ leaving AudioFlinger on control=none even when build.prop requests qdsp.
 Legacy commented exported_system_prop mappings were removed from the device tree;
 this change does not relabel the existing DAX support/version properties.
 
-Validation: rule-preserving relocation, single-definition/include checks and
- git diff --check. No ROM/policy build or live policy injection performed.
-After rebuilding both repositories together, reboot and verify the four capability
-properties, absence of vendor_init set denials, DMS registration and DAP attachment
-under playback. Bookkeeping acknowledgments are not DSP measurements.
+Validation: rule-preserving relocation and single-definition/include checks passed.
+Later rebuilt-device checks on alioth confirmed all four capability properties,
+no matching vendor_init property-set denials in the captured log, and acknowledged
+DAP attachment/pregain during playback. The earlier control=none blocker is resolved
+in that recorded build. Retain the paired sm8250-common policy removal when porting.
+These control acknowledgments are not DSP measurements; recheck boot and playback
+after changing policy or vendor binaries. See ../Readme.md for the validation scope.

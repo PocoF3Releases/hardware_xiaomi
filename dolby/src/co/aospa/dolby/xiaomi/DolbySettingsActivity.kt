@@ -27,7 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import co.aospa.dolby.xiaomi.ui.*
-import com.android.settingslib.spa.framework.theme.settingsBackground
+import androidx.compose.ui.graphics.luminance
+import androidx.core.view.WindowCompat
 
 class DolbySettingsActivity : ComponentActivity() {
     private val equalizer: EqualizerViewModel by viewModels { EqualizerViewModel.Factory }
@@ -45,11 +46,19 @@ class DolbySettingsActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class, ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        actionBar?.hide()
         enableEdgeToEdge()
         window.isNavigationBarContrastEnforced = false
         page = DolbyPage.entries.firstOrNull { it.name == (savedInstanceState?.getString("page") ?: intent.getStringExtra("page")) } ?: DolbyPage.MAIN
         setContent {
             DolbyTheme {
+                val lightBars = MaterialTheme.colorScheme.background.luminance() > 0.5f
+                SideEffect {
+                    WindowCompat.getInsetsController(window, window.decorView).apply {
+                        isAppearanceLightStatusBars = lightBars
+                        isAppearanceLightNavigationBars = lightBars
+                    }
+                }
                 val windowSize = calculateWindowSizeClass(this@DolbySettingsActivity)
                 val expanded = windowSize.widthSizeClass != WindowWidthSizeClass.Compact
                 val scope = rememberCoroutineScope()
@@ -61,11 +70,13 @@ class DolbySettingsActivity : ComponentActivity() {
                     containerColor = MaterialTheme.colorScheme.background,
                     contentWindowInsets = WindowInsets.safeDrawing,
                     topBar = {
-                        TopAppBar(title = { Text(stringResource(when (page) {
-                            DolbyPage.MAIN -> R.string.dolby_title
-                            DolbyPage.EQUALIZER -> R.string.dolby_preset
-                            DolbyPage.SETTINGS -> R.string.dolby_nav_settings
-                        })) },
+                        TopAppBar(title = {
+                            when (page) {
+                                DolbyPage.MAIN -> Unit
+                                DolbyPage.EQUALIZER -> Text(stringResource(R.string.dolby_preset))
+                                DolbyPage.SETTINGS -> Text(stringResource(R.string.dolby_nav_settings))
+                            }
+                        },
                             navigationIcon = {
                                 IconButton(onClick = {
                                     if (page == DolbyPage.MAIN) finish() else page = DolbyPage.MAIN
