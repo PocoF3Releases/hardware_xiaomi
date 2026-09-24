@@ -13,8 +13,9 @@ this project does not implement or replace their signal processing.
 Maintained on `PocoF3Releases/hardware_xiaomi`, branch `cnb`, for the Android 17
 Evolution X tree. The primary device is POCO F3 (alioth), using the QDSP Dolby
 contract with matching vendor binaries. Other Xiaomi products must provide and
-verify their own effect contracts and tuning. MiSound in XiaomiParts and the
-system-wide System UI Styles app are separate integrations.
+verify their own effect contracts and tuning. MiSound in XiaomiParts is a separate effect integration. This directory remains
+part of standalone `hardware/xiaomi`; device properties and codec packaging
+belong in the applicable device/vendor trees.
 
 ## Implementation status
 
@@ -29,6 +30,7 @@ route or installed ROM has passed listening and lifecycle tests.
 | Communication handling | Playback/recording and audio-mode monitoring; bypass media processing during communication and restore saved media state afterward | Calls, game voice chat and recovery still need coverage on the fixed installed build |
 | Output tuning | Speaker, wired, A2DP and USB endpoint selection; product-gated portrait/landscape speaker choices | Unknown/native routes are left to native policy; supported IDs must exist in vendor tuning |
 | Spatializer integration | Capability-gated endpoint handling | Alioth does not enable Android spatializer support; Dolby virtualization is a different feature |
+| AC-4 playback (external codec integration) | Product-selected OMX decoder compatibility and helper-library path in frameworks/device sources | Official stereo/48 kHz sample decoded successfully and audible playback was confirmed; not a test of all AC-4 streams or offload routes |
 | Game audio | Capability-gated HyperOS game-effect controller, editable app selection and tuning in Dolby settings | Not proof of a working standalone Dolby VQE effect on alioth |
 | UI | Main/Equalizer/Settings tabs, all 20 EQ bands visible, precise band editor, custom profiles, status dialog, Quick Settings tile and persisted AOSP/Dossier appearance | Normal-size device screenshots reviewed; large fonts, landscape and accessibility still need broader coverage |
 | SELinux | Shared DMS domain/service labels, audio and codec binder rules, capability-property readers and boot initializer | Must be integrated once; device trees must remove duplicate DMS declarations |
@@ -57,18 +59,29 @@ Related code lives outside this repository:
 - `device/xiaomi/sm8250-common`: product properties, audio configuration and
   vendor prebuilt integration. MiSound/XiaomiParts is a separate effect stack.
 
-Reference material used in development: alioth stock native sources under
-`~/references_code/miui_proprietary_cpp` and decompiled HyperOS Java under
-`~/miui/decompiled/jadx-frameworks`. These are local references, not build inputs
-or portable dependencies supplied by this repository.
+Stock Alioth native and decompiled HyperOS sources were used as behavioral
+references, not build inputs. Maintainer-only dump paths are not prerequisites
+for using this integration. See the [project evidence record](https://github.com/PocoF3Releases/Agents.md/blob/main/today/2026-09-24-ac4-validation-and-thermal-dialog.md)
+for AC-4 failure signatures, implementation details and recorded test results.
 
 ## Product integration
 
 Ship `XiaomiDolby` and its required permissions through the product configuration.
 The app is platform-signed, privileged and installed in system_ext; it is not a
-standalone APK intended for arbitrary phones. Include `hardware/xiaomi/dolby/dolby.mk`
-to add its vendor policy directory. Supply matching DMS/effect binaries, service
-registration, audio-effects configuration and vendor tuning separately.
+standalone APK intended for arbitrary phones. Explicitly add `XiaomiDolby` to
+`PRODUCT_PACKAGES`; its `required` dependency installs the privileged permission
+allowlist. `dolby.mk` adds the vendor SELinux policy directory only—it does not
+add the app or proprietary components:
+
+```make
+include hardware/xiaomi/dolby/dolby.mk
+PRODUCT_PACKAGES += XiaomiDolby
+```
+
+The Alioth common product also selects `DSPVolumeSynchronizer`. Supply matching
+DMS/effect binaries, service registration, audio-effects configuration and vendor
+tuning separately. Integrate the shared DMS policy once and remove duplicate
+device declarations. See [policy ownership](sepolicy/README.md).
 
 | Property | Purpose / alioth selection |
 |---|---|
@@ -82,6 +95,64 @@ registration, audio-effects configuration and vendor tuning separately.
 
 Do not infer private-command compatibility from the DAX version string alone or
 copy capability settings to another device without checking its binaries.
+
+## Independent framework opt-ins
+
+The matching [frameworks/av fork](https://github.com/PocoF3Releases/frameworks_av)
+provides two independent, default-off Soong options. They are selected in the
+[SM8250 common board configuration](https://github.com/PocoF3Releases/device_xiaomi_sm8250-common/blob/aosp-17/BoardConfigCommon.mk):
+
+```make
+$(call soong_config_set_bool,audio,legacy_dap_integration,true)
+$(call soong_config_set_bool,media,dolby_ac4_21_entry_tables,true)
+```
+
+- **`audio.legacy_dap_integration`** compiles the private DAP framework
+  integration. Its name describes the integration ABI, not a requirement to use
+  the software effect backend. Alioth still selects `dap.control=qdsp` at runtime.
+  Product properties alone do not enable the compiled integration.
+- **`media.dolby_ac4_21_entry_tables`** selects the Alioth-compatible OMX AC-4
+  request: 21-entry B/C tables, a 452-byte structure and private table index
+  `0x6f400009`. The shared OMX enum is not changed; the default request/index path
+  remains unchanged for products that do not opt in.
+
+These flags are not interchangeable. A device shipping Dolby effects need not
+ship this AC-4 decoder, and a newer Dolby Codec2 component does not establish
+compatibility with the legacy OMX request. Verify each binary contract rather
+than enabling both options based on the Dolby brand or version string.
+
+## AC-4 codec dependencies and validation
+
+AC-4 decoding is separate from the XiaomiDolby controls and DAP enhancement.
+Alioth's 32-bit `OMX.dolby.ac4.decoder` dynamically loads
+`/vendor/lib/vndk/libstagefright_omx.so` and resolves `function_a`, `function_b`
+and `function_c`. The common device tree packages `libstagefright_omx.vendor`
+and `dolby_ac4_omx_legacy_path`, which links that legacy path to the current
+`/vendor/lib/libstagefright_omx.so`. Keep codec registration and matching vendor
+binaries alongside this dependency; installing XiaomiDolby alone does not supply
+a decoder.
+
+The recorded failures were an unsupported table index, followed by
+`Error 4 in dlb_ac4dec_input_stage_open` after the index was corrected. The latter
+was resolved by restoring the OMX helper lookup path. The audit did not justify
+additional VNDK foundation/xlog symlinks or replacing the current helper with an
+entire stock VNDK stack.
+
+On the rebuilt Alioth Android 17 `user` installation, a diagnostic explicitly
+selected `OMX.dolby.ac4.decoder` and decoded an official 32-second Dolby stereo
+sample at 48 kHz:
+
+```text
+RESULT input=800 outputBuffers=800 pcmBytes=6144000 nonzeroBytes=5970795 eos=true
+PASS
+```
+
+The maintainer separately played the original video and confirmed audible sound.
+This establishes the tested stereo playback path, not every multichannel
+presentation, application, passthrough or offload configuration. The
+[diagnostic and output](https://github.com/PocoF3Releases/Agents.md/tree/main/evidence/ac4)
+and [detailed checkpoint](https://github.com/PocoF3Releases/Agents.md/blob/main/today/2026-09-24-ac4-validation-and-thermal-dialog.md)
+are available without access to the development workstation.
 
 ## Appearance and usability
 
@@ -104,12 +175,13 @@ the redundant Appearance heading was removed.
 
 See [appearance documentation](docs/UI-THEMES.md) and [translation guidance](TRANSLATING.md).
 
-## Validation snapshot — 2026-09-20
+## Recorded DAP control and UI validation
 
 The earlier boot-property blocker is **resolved in the recorded rebuilt-device
 checks**. The old `control=none, captured=0` snapshot describes the pre-fix build,
-not the current validation result. The paired policy changes are `3709043` here
-and sm8250-common `69d847e`; retain both when integrating the repositories.
+not the current validation result. The policy requires both the shared `vendor_init` setter permission here
+and removal of duplicate device policy. Use the current trees rather than
+cherry-picking historical intermediate hashes blindly.
 
 Recorded successful checks on alioth:
 
@@ -127,7 +199,7 @@ Recorded successful checks on alioth:
   correctly represent use of native factory defaults.
 - The redesigned app was installed for UI iteration. Supplied device screenshots
   show both appearances, the complete EQ band table, banners and corrected title bar.
-  Subsequent stock-surface refinements are present in `ca2c95c`.
+  Subsequent stock-surface refinements are included in the maintained UI.
 - Later user testing reported smooth operation. The supplied 07:48 device
   screenshots show the Dossier UI reporting "Enabled for media" outside a call
   and "Paused for a call or voice chat" during a call, while preserving the
@@ -139,9 +211,9 @@ Recorded successful checks on alioth:
   was removed from the resource directory.
 
 These results establish the tested control/UI paths. They are not measurements of
-DSP output or certification of every route. Local detailed evidence is indexed in
-`out/dolby-validation-20260920/RESULTS.md` in the development tree; raw device logs
-and user preferences are not distributed in this repository.
+DSP output or certification of every route. The [reconciled control-path evidence](https://github.com/PocoF3Releases/Agents.md/blob/main/today/2026-09-24-rework-memory-reconciliation.md)
+preserves the important findings remotely; raw device logs and user preferences
+are not distributed in this repository.
 
 ## Not implemented or not established
 
@@ -151,7 +223,8 @@ and user preferences are not distributed in this repository.
   and communication bypass must not be described as proof of VQE processing.
 - Android spatial audio/head tracking on alioth or reconstructed rotation-specific
   speaker spatializer behavior from incomplete stock code.
-- Full AC-4 playback validation: plugin/library presence alone is insufficient.
+- Exhaustive AC-4 format, multichannel and offload coverage beyond the validated
+  stereo sample above. Plugin/library presence alone is not decoding proof.
 - Exhaustive call, Bluetooth/USB, offload, audio-server restart and listening tests
   across all supported outputs and lifecycle transitions; objective DSP readback is also not provided.
 
@@ -165,8 +238,9 @@ and user preferences are not distributed in this repository.
    at a comfortable volume; save and restore the original settings.
 4. Exercise communication entry/exit and media recovery, then restart recovery
    in a controlled test. Confirm no stuck bypass or repeated native failures.
-5. Test AC-4 with a verified stream containing an actual AC-4 audio track and
+5. When changing codec binaries or packaging, repeat the AC-4 sample test and
    inspect decoder selection/errors independently of Dolby enhancement settings.
+   The recorded success does not validate a different decoder ABI.
 
 Documentation-only edits do not require a build. Packaged artwork, resources, code
 and policy changes require rebuilding the affected components. Use a matching installed
