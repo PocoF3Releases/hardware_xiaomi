@@ -1,6 +1,8 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 package co.aospa.dolby.xiaomi.profiles
 
+import co.aospa.dolby.xiaomi.ui.profileLabel
+
 import androidx.compose.foundation.selection.toggleable
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -143,9 +145,7 @@ internal fun ProfileManager(
                         Text(
                             stringResource(
                                 R.string.dolby_profile_based_on,
-                                profiles.first {
-                                    !it.custom && it.base == profile.base
-                                }.name
+                                profileLabel(profile.base.toString(), "")
                             ),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -315,7 +315,7 @@ private fun ProfileEditor(
                         onExpandedChange = { expanded = it }
                     ) {
                         OutlinedTextField(
-                            value = bases.first { it.base == base }.name,
+                            value = profileLabel(base.toString(), ""),
                             onValueChange = {},
                             readOnly = true,
                             label = {
@@ -334,7 +334,7 @@ private fun ProfileEditor(
                         ) {
                             bases.forEach { entry ->
                                 DropdownMenuItem(
-                                    text = { Text(entry.name) },
+                                    text = { Text(profileLabel(entry.key, entry.name)) },
                                     onClick = {
                                         base = entry.base
                                         expanded = false

@@ -21,7 +21,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -63,7 +62,6 @@ class DolbySettingsActivity : ComponentActivity() {
                 val expanded = windowSize.widthSizeClass != WindowWidthSizeClass.Compact
                 val scope = rememberCoroutineScope()
                 var reset by remember { mutableStateOf<Boolean?>(null) }
-                var resetMenu by remember { mutableStateOf(false) }
                 var failure by remember { mutableStateOf(false) }
                 BackHandler(enabled = page != DolbyPage.MAIN) { page = DolbyPage.MAIN }
                 Scaffold(
@@ -85,21 +83,14 @@ class DolbySettingsActivity : ComponentActivity() {
                             },
                             actions = {
                                 if (page == DolbyPage.MAIN) {
-                                Box {
-                                    IconButton(onClick = { resetMenu = true }) {
-                                        Icon(Icons.Default.MoreVert, stringResource(R.string.dolby_reset_options))
+                                    IconButton(onClick = { reset = false }) {
+                                        Icon(painterResource(R.drawable.reset_settings_24px),
+                                            stringResource(R.string.dolby_reset_profile))
                                     }
-                                    DropdownMenu(expanded = resetMenu, onDismissRequest = { resetMenu = false }) {
-                                        DropdownMenuItem(
-                                            text = { Text(stringResource(R.string.dolby_reset_profile)) },
-                                            onClick = { resetMenu = false; reset = false }
-                                        )
-                                        DropdownMenuItem(
-                                            text = { Text(stringResource(R.string.dolby_reset_all)) },
-                                            onClick = { resetMenu = false; reset = true }
-                                        )
+                                    IconButton(onClick = { reset = true }) {
+                                        Icon(painterResource(R.drawable.reset_wrench_24px),
+                                            stringResource(R.string.dolby_reset_all))
                                     }
-                                }
                                 }
                             },
                             colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background))

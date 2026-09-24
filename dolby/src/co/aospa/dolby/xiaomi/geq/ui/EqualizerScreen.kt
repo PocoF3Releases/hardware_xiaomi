@@ -1,6 +1,8 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 package co.aospa.dolby.xiaomi.geq.ui
 
+import co.aospa.dolby.xiaomi.ui.profileLabel
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -62,10 +64,11 @@ fun EqualizerScreen(viewModel: EqualizerViewModel, modifier: Modifier = Modifier
 @Composable
 private fun EqualizerProfile(viewModel: EqualizerViewModel, sliders: Boolean, onView: (Boolean) -> Unit, connectedBelow: Boolean = false) {
     val profileName by viewModel.profileName.collectAsState()
+    val profileKey by viewModel.profileKey.collectAsState()
     EqualizerPanel(Modifier.fillMaxWidth(), connectedBelow = connectedBelow) {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(
-                stringResource(R.string.dolby_geq_profile_heading, profileName),
+                stringResource(R.string.dolby_geq_profile_heading, profileLabel(profileKey, profileName)),
                 style = MaterialTheme.typography.titleSmall
             )
             PresetSelector(viewModel)
