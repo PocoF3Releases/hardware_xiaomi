@@ -103,7 +103,7 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
         EqualizerPanel(Modifier.fillMaxWidth()) {
             ListItem(
                 headlineContent = { DolbyHeadline(stringResource(R.string.dolby_profile_title)) },
-                supportingContent = { Text(state.name, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary) },
+                supportingContent = { Text(profileLabel(state.key, state.name), style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary) },
                 leadingContent = { Icon(Icons.Default.Equalizer, null, tint = MaterialTheme.colorScheme.primary) },
                 trailingContent = { Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null) },
                 modifier = Modifier.clickable { profiles = true },
@@ -194,7 +194,7 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
         val entries = state.profiles
         SelectionSheet(
             title = stringResource(if (choosingProfiles) R.string.dolby_profile_title else R.string.dolby_ieq),
-            labels = if (choosingProfiles) entries.map { it.name }
+            labels = if (choosingProfiles) entries.map { profileLabel(it.key, it.name) }
                 else context.resources.getStringArray(R.array.dolby_ieq_entries).toList(),
             selected = if (choosingProfiles) entries.indexOfFirst { it.key == state.key }
                 else state.settings[PREF_IEQ] as? Int ?: 0,
