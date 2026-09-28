@@ -146,7 +146,7 @@ fingerprint_device_t* Fingerprint::openFingerprintHal(const char* class_name,
     }
 
     auto module = reinterpret_cast<const fingerprint_module_t*>(hw_mdl);
-    if (!module->common.methods->open) {
+    if (!module->common.methods || !module->common.methods->open) {
         ALOGE("No valid open method");
         return nullptr;
     }
@@ -158,8 +158,14 @@ fingerprint_device_t* Fingerprint::openFingerprintHal(const char* class_name,
     }
 
     auto fp_device = reinterpret_cast<fingerprint_device_t*>(device);
-    if (fp_device->set_notify(fp_device, Fingerprint::notify) != 0) {
+    if (!fp_device) {
+        ALOGE("Fingerprint open returned no device");
+        return nullptr;
+    }
+    if (!fp_device->set_notify ||
+        fp_device->set_notify(fp_device, Fingerprint::notify) != 0) {
         ALOGE("Can't register fingerprint module callback");
+        if (device->close) device->close(device);
         return nullptr;
     }
 
@@ -242,6 +248,9 @@ ndk::ScopedAStatus Fingerprint::getSensorProps(std::vector<SensorProps>* out) {
 ndk::ScopedAStatus Fingerprint::createSession(int32_t /*sensorId*/, int32_t userId,
                                               const std::shared_ptr<ISessionCallback>& cb,
                                               std::shared_ptr<ISession>* out) {
+    if (!mDevice) {
+        return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_STATE);
+    }
     CHECK(mSession == nullptr || mSession->isClosed()) << "Open session already exists!";
 
     mSession = SharedRefBase::make<Session>(mDevice, mUdfpsHandler, userId, cb, mLockoutTracker);
