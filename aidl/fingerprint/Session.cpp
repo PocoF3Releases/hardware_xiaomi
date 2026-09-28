@@ -79,7 +79,8 @@ ndk::ScopedAStatus Session::enroll(const HardwareAuthToken& hat,
 
 ndk::ScopedAStatus Session::authenticate(int64_t operationId,
                                          std::shared_ptr<ICancellationSignal>* out) {
-    checkSensorLockout();
+    *out = SharedRefBase::make<CancellationSignal>(ref<Session>());
+    if (checkSensorLockout()) return ndk::ScopedAStatus::ok();
 #ifndef IMPL_V2
     int error = mDevice->authenticate(mDevice, operationId, mUserId);
 #else
@@ -90,7 +91,6 @@ ndk::ScopedAStatus Session::authenticate(int64_t operationId,
         mCb->onError(Error::UNABLE_TO_PROCESS, error);
     }
 
-    *out = SharedRefBase::make<CancellationSignal>(ref<Session>());
     return ndk::ScopedAStatus::ok();
 }
 
