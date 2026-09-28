@@ -73,7 +73,7 @@ ndk::ScopedAStatus Session::enroll(const HardwareAuthToken& hat,
         mCb->onError(Error::UNABLE_TO_PROCESS, error);
     }
 
-    *out = SharedRefBase::make<CancellationSignal>(this);
+    *out = SharedRefBase::make<CancellationSignal>(ref<Session>());
     return ndk::ScopedAStatus::ok();
 }
 
@@ -90,7 +90,7 @@ ndk::ScopedAStatus Session::authenticate(int64_t operationId,
         mCb->onError(Error::UNABLE_TO_PROCESS, error);
     }
 
-    *out = SharedRefBase::make<CancellationSignal>(this);
+    *out = SharedRefBase::make<CancellationSignal>(ref<Session>());
     return ndk::ScopedAStatus::ok();
 }
 
@@ -98,7 +98,7 @@ ndk::ScopedAStatus Session::detectInteraction(std::shared_ptr<ICancellationSigna
     ALOGD("Detect interaction is not supported");
     mCb->onError(Error::UNABLE_TO_PROCESS, 0 /* vendorCode */);
 
-    *out = SharedRefBase::make<CancellationSignal>(this);
+    *out = SharedRefBase::make<CancellationSignal>(ref<Session>());
     return ndk::ScopedAStatus::ok();
 }
 
@@ -244,7 +244,7 @@ ndk::ScopedAStatus Session::cancel() {
 }
 
 ndk::ScopedAStatus Session::close() {
-    mClosed = true;
+    if (mClosed.exchange(true)) return ndk::ScopedAStatus::ok();
     mCb->onSessionClosed();
     AIBinder_DeathRecipient_delete(mDeathRecipient);
     return ndk::ScopedAStatus::ok();
@@ -344,13 +344,14 @@ void Session::clearLockout(bool clearAttemptCounter) {
 }
 
 void Session::startLockoutTimer(int64_t timeout) {
-    std::function<void()> action = std::bind(&Session::lockoutTimerExpired, this);
-    std::thread([timeout, action]() {
-        std::this_thread::sleep_for(std::chrono::milliseconds(timeout));
-        action();
-    }).detach();
-
+    std::weak_ptr<Session> session = ref<Session>();
     mIsLockoutTimerStarted = true;
+    std::thread([timeout, session]() {
+        std::this_thread::sleep_for(std::chrono::milliseconds(timeout));
+        if (auto current = session.lock(); current && !current->isClosed()) {
+            current->lockoutTimerExpired();
+        }
+    }).detach();
 }
 
 void Session::lockoutTimerExpired() {

@@ -10,6 +10,7 @@
 #include <aidl/android/hardware/biometrics/fingerprint/BnSession.h>
 #include <aidl/android/hardware/biometrics/fingerprint/ISessionCallback.h>
 #include <android/log.h>
+#include <atomic>
 #include <hardware/hardware.h>
 #include <log/log.h>
 #ifndef IMPL_V2
@@ -72,7 +73,7 @@ class Session : public BnSession {
   private:
     fingerprint_device_t* mDevice;
     LockoutTracker mLockoutTracker;
-    bool mClosed = false;
+    std::atomic<bool> mClosed{false};
 
     // static ndk::ScopedAStatus ErrorFilter(int32_t error);
     static Error VendorErrorFilter(int32_t error, int32_t* vendorCode);
@@ -84,8 +85,8 @@ class Session : public BnSession {
     void lockoutTimerExpired();
 
     // lockout timer
-    bool mIsLockoutTimerStarted = false;
-    bool mIsLockoutTimerAborted = false;
+    std::atomic<bool> mIsLockoutTimerStarted{false};
+    std::atomic<bool> mIsLockoutTimerAborted{false};
 
     // The user ID for which this session was created.
     int32_t mUserId;
