@@ -296,7 +296,7 @@ ndk::ScopedAStatus Vibrator::perform(Effect e, EffectStrength strength,
             scale = 1;
             break;
         default:
-            return invalid();
+            return unsupported();
     }
     // Alioth's driver effect 1 is a single waveform, not a timed pair.
     // Compose two stock clicks so DOUBLE_CLICK has two distinct onsets.
