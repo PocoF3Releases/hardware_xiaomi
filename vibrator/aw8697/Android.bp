@@ -1,0 +1,10 @@
+cc_binary {
+    name: "android.hardware.vibrator-service.xiaomi_aw8697",
+    vendor: true,
+    relative_install_path: "hw",
+    srcs: ["Vibrator.cpp", "service.cpp"],
+    shared_libs: ["libbinder_ndk", "liblog", "android.hardware.vibrator-V2-ndk"],
+    cflags: ["-Wall", "-Wextra", "-Werror"],
+    init_rc: ["vibrator.rc"],
+    vintf_fragments: ["vibrator.xml"],
+}
