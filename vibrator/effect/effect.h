@@ -31,6 +31,7 @@
 #ifndef QTI_VIBRATOR_EFFECT_STREAM_H
 #define QTI_VIBRATOR_EFFECT_STREAM_H
 #include <sys/types.h>
+#include <cstdint>
 
 struct effect_stream {
     uint32_t effect_id;
@@ -43,5 +44,7 @@ struct effect_stream {
 };
 
 const struct effect_stream* get_effect_stream(uint32_t effect_id);
+// No CLICK fallback or synthesized DOUBLE_CLICK; returned data has process lifetime.
+const struct effect_stream* get_effect_stream_exact(uint32_t effect_id);
 
 #endif

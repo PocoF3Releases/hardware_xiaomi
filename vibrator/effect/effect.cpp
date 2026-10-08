@@ -41,6 +41,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <vector>
+#include <mutex>
 
 #include "effect.h"
 
@@ -51,8 +52,11 @@ namespace {
 const uint32_t kDefaultPlayRateHz = 24000;
 const uint16_t kPrimitiveMask = (1 << 15);
 
+std::recursive_mutex sEffectMutex;
 std::unordered_map<uint32_t, effect_stream> sEffectStreams;
+std::unordered_map<uint32_t, effect_stream> sExactStreams;
 std::unordered_map<uint32_t, std::vector<int8_t>> sEffectFifoData;
+std::unordered_map<uint32_t, std::vector<int8_t>> sExactFifoData;
 
 std::unique_ptr<effect_stream> readEffectStreamFromFile(uint32_t uniqueEffectId) {
     std::filesystem::path filePath;
@@ -73,19 +77,23 @@ std::unique_ptr<effect_stream> readEffectStreamFromFile(uint32_t uniqueEffectId)
         return nullptr;
     }
 
-    std::uint32_t fileSize = std::filesystem::file_size(filePath);
+    std::error_code error;
+    const auto fileSize = std::filesystem::file_size(filePath, error);
+    // Bound allocations and reject empty/truncated files before caching them.
+    if (error || fileSize == 0 || fileSize > 240000) return nullptr;
 
     std::vector<int8_t> fifoData(fileSize);
-    data.read(reinterpret_cast<char*>(fifoData.data()), fileSize);
+    if (!data.read(reinterpret_cast<char*>(fifoData.data()), fileSize)) return nullptr;
 
-    auto result = sEffectFifoData.emplace(uniqueEffectId, std::move(fifoData));
+    auto result = sExactFifoData.emplace(uniqueEffectId, std::move(fifoData));
 
-    return std::make_unique<effect_stream>(effectId, fileSize, kDefaultPlayRateHz,
+    return std::make_unique<effect_stream>(effectId, result.first->second.size(), kDefaultPlayRateHz,
                                            result.first->second.data());
 }
 
 std::unique_ptr<effect_stream> duplicateEffect(const effect_stream* effectStream,
                                                uint32_t newEffectId) {
+    if (!effectStream || effectStream->length > 60000) return nullptr;
     const std::uint32_t newEffectLength = effectStream->length * 4;
     std::vector<int8_t> fifoData(newEffectLength);
 
@@ -101,7 +109,19 @@ std::unique_ptr<effect_stream> duplicateEffect(const effect_stream* effectStream
 
 }  // namespace
 
+// Exact lookup is used for capability discovery. Never turn a missing primitive
+// into CLICK while claiming that the requested primitive exists.
+const struct effect_stream* get_effect_stream_exact(uint32_t effectId) {
+    std::lock_guard lock(sEffectMutex);
+    auto it = sExactStreams.find(effectId);
+    if (it != sExactStreams.end()) return &it->second;
+    auto stream = readEffectStreamFromFile(effectId);
+    if (!stream) return nullptr;
+    return &sExactStreams.emplace(effectId, *stream).first->second;
+}
+
 const struct effect_stream* get_effect_stream(uint32_t effectId) {
+    std::lock_guard lock(sEffectMutex);
     auto it = sEffectStreams.find(effectId);
     if (it == sEffectStreams.end()) {
         std::unique_ptr<effect_stream> newEffectStream = readEffectStreamFromFile(effectId);
