@@ -6,15 +6,13 @@
  */
 
 #include "LockoutTracker.h"
-#include <fingerprint.sysprop.h>
-#include "Fingerprint.h"
 #include "util/Util.h"
-
-using namespace ::android::fingerprint::xiaomi;
 
 namespace aidl::android::hardware::biometrics::fingerprint {
 
 void LockoutTracker::reset(bool clearAttemptCounter) {
+    std::lock_guard lock(mMutex);
+    ++mGeneration;
     if (clearAttemptCounter) {
         mFailedCount = 0;
     }
@@ -23,40 +21,55 @@ void LockoutTracker::reset(bool clearAttemptCounter) {
 }
 
 void LockoutTracker::addFailedAttempt() {
-    mFailedCount++;
+    std::lock_guard lock(mMutex);
+    if (mCurrentMode != LockoutMode::kNone) return;
+    if (mFailedCount < LOCKOUT_PERMANENT_THRESHOLD) ++mFailedCount;
     if (mFailedCount >= LOCKOUT_PERMANENT_THRESHOLD) {
         mCurrentMode = LockoutMode::kPermanent;
     } else if (mFailedCount >= LOCKOUT_TIMED_THRESHOLD) {
         if (mCurrentMode == LockoutMode::kNone) {
+            ++mGeneration;
             mCurrentMode = LockoutMode::kTimed;
             mLockoutTimedStart = Util::getSystemNanoTime();
         }
     }
 }
 
-LockoutTracker::LockoutMode LockoutTracker::getMode() {
+LockoutTracker::State LockoutTracker::getState() {
+    std::lock_guard lock(mMutex);
+    int64_t remaining = 0;
     if (mCurrentMode == LockoutMode::kTimed) {
-        if (Util::hasElapsed(mLockoutTimedStart, LOCKOUT_TIMED_DURATION)) {
+        // Round up so the timer cannot wake before the actual deadline.
+        const auto elapsed = (Util::getSystemNanoTime() - mLockoutTimedStart) / 1000000LL;
+        remaining = LOCKOUT_TIMED_DURATION - elapsed;
+        if (remaining <= 0) {
             mCurrentMode = LockoutMode::kNone;
             mLockoutTimedStart = 0;
+            remaining = 0;
         }
     }
+    return {mCurrentMode, remaining, mGeneration};
+}
 
-    return mCurrentMode;
+LockoutTracker::LockoutMode LockoutTracker::getMode() {
+    return getState().mode;
 }
 
 int64_t LockoutTracker::getLockoutTimeLeft() {
-    int64_t res = 0;
+    return getState().timeLeft;
+}
 
-    if (mLockoutTimedStart > 0) {
-        auto now = Util::getSystemNanoTime();
-        auto elapsed = (now - mLockoutTimedStart) / 1000000LL;
-        res = LOCKOUT_TIMED_DURATION - elapsed;
-        LOG(INFO) << "elapsed=" << elapsed << " now = " << now
-                  << " mLockoutTimedStart=" << mLockoutTimedStart << " res=" << res;
-    }
-
-    return res;
+bool LockoutTracker::expireTimedLockout(uint64_t generation) {
+    std::lock_guard lock(mMutex);
+    // Reset, success, or a subsequent timed lockout invalidates older timers.
+    // getState may already have observed expiry; still deliver this generation's callback.
+    if (generation != mGeneration || mCurrentMode == LockoutMode::kPermanent) return false;
+    if (mCurrentMode == LockoutMode::kTimed &&
+        Util::getSystemNanoTime() - mLockoutTimedStart <
+                LOCKOUT_TIMED_DURATION * 1000000LL) return false;
+    mCurrentMode = LockoutMode::kNone;
+    mLockoutTimedStart = 0;
+    return true;
 }
 
 }  // namespace aidl::android::hardware::biometrics::fingerprint
