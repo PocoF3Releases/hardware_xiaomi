@@ -15,11 +15,11 @@ namespace aidl::android::hardware::biometrics::fingerprint {
 class CancellationSignal
     : public ::aidl::android::hardware::biometrics::common::BnCancellationSignal {
   public:
-    CancellationSignal(Session* session);
+    CancellationSignal(const std::shared_ptr<Session>& session);
     ndk::ScopedAStatus cancel() override;
 
   private:
-    Session* mSession;
+    std::weak_ptr<Session> mSession;
 };
 
 }  // namespace aidl::android::hardware::biometrics::fingerprint
