@@ -21,6 +21,7 @@
 #include <android-base/logging.h>
 
 #include <sys/stat.h>
+#include <algorithm>
 
 namespace android {
 namespace hardware {
@@ -137,6 +138,7 @@ Return<void> Sensors::poll(int32_t maxCount, poll_cb _hidl_cb) {
 
     std::unique_ptr<sensors_event_t[]> data;
     int err = android::NO_ERROR;
+    const int bufferSize = std::min(maxCount, kPollMaxBufferSize);
 
     {  // scope of reentry lock
 
@@ -159,13 +161,16 @@ Return<void> Sensors::poll(int32_t maxCount, poll_cb _hidl_cb) {
         if (maxCount <= 0) {
             err = android::BAD_VALUE;
         } else {
-            int bufferSize = maxCount <= kPollMaxBufferSize ? maxCount : kPollMaxBufferSize;
             data.reset(new sensors_event_t[bufferSize]);
             err = mSensorDevice->poll(reinterpret_cast<sensors_poll_device_t*>(mSensorDevice),
                                       data.get(), bufferSize);
         }
     }
 
+    if (err > bufferSize) {
+        LOG(ERROR) << "Sensor HAL returned more events than requested";
+        err = android::BAD_VALUE;
+    }
     if (err < 0) {
         _hidl_cb(ResultFromStatus(err), out, dynamicSensorsAdded);
         return Void();
@@ -259,9 +264,8 @@ Return<Result> Sensors::unregisterDirectChannel(int32_t channelHandle) {
         return Result::INVALID_OPERATION;
     }
 
-    mSensorDevice->register_direct_channel(mSensorDevice, nullptr, channelHandle);
-
-    return Result::OK;
+    return ResultFromStatus(
+            mSensorDevice->register_direct_channel(mSensorDevice, nullptr, channelHandle));
 }
 
 Return<void> Sensors::configDirectReport(int32_t sensorHandle, int32_t channelHandle,
@@ -292,10 +296,15 @@ Return<void> Sensors::configDirectReport(int32_t sensorHandle, int32_t channelHa
 std::vector<SensorInfo> Sensors::getFixedUpSensorList() {
     std::vector<SensorInfo> sensors;
 
-    sensor_t const* list;
-    size_t count = mSensorModule->get_sensors_list(mSensorModule, &list);
+    sensor_t const* list = nullptr;
+    const int count = mSensorModule->get_sensors_list(mSensorModule, &list);
+    if (count < 0 || (count > 0 && list == nullptr)) {
+        LOG(ERROR) << "Invalid sensor list returned by HAL: " << count;
+        return sensors;
+    }
+    sensors.reserve(count);
 
-    for (size_t i = 0; i < count; ++i) {
+    for (int i = 0; i < count; ++i) {
         const sensor_t* src = &list[i];
         SensorInfo sensor;
 
@@ -313,14 +322,15 @@ std::vector<SensorInfo> Sensors::getFixedUpSensorList() {
 // static
 void Sensors::convertFromSensorEvents(size_t count, const sensors_event_t* srcArray,
                                       std::vector<Event>& dstVec,
-                                      std::vector<SensorInfo> sensorsList) {
+                                      const std::vector<SensorInfo>& sensorsList) {
+    dstVec.reserve(dstVec.size() + count);
     for (size_t i = 0; i < count; ++i) {
         const sensors_event_t& src = srcArray[i];
         Event event;
 
         convertFromSensorEvent(src, &event);
 
-        SensorInfo* sensor = nullptr;
+        const SensorInfo* sensor = nullptr;
         for (auto& s : sensorsList) {
             if (s.sensorHandle == event.sensorHandle) {
                 sensor = &s;

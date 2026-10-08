@@ -68,7 +68,7 @@ struct Sensors : public ::android::hardware::sensors::V1_0::ISensors {
 
     static void convertFromSensorEvents(size_t count, const sensors_event_t* src,
                                         std::vector<Event>& dst,
-                                        std::vector<SensorInfo> sensorsList);
+                                        const std::vector<SensorInfo>& sensorsList);
 
     DISALLOW_COPY_AND_ASSIGN(Sensors);
 };
