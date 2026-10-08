@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dolby_game_summary_compact">Enhance selected games on supported headsets.</string>
+    <string name="dolby_profiles_help_compact">Save your own equalizer and sound settings in a named profile.</string>
+    <string name="dolby_bass_summary_compact">Add emphasis to low frequencies.</string>
+    <string name="dolby_volume_summary_compact">Balance quiet and loud passages.</string>
+    <string name="dolby_reset_options">Reset options</string>
+    <string name="dolby_eq_scroll_hint">Swipe sideways to reach all 20 bands.</string>
+</resources>

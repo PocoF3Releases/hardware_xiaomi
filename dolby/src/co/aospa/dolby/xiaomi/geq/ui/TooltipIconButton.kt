@@ -13,12 +13,15 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TooltipBox
 import androidx.compose.material3.TooltipDefaults
+import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 
+// Android 16 Material 3 lacks TooltipAnchorPosition; retain the shared above-first API.
+@Suppress("DEPRECATION")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TooltipIconButton(
@@ -29,7 +32,7 @@ fun TooltipIconButton(
     TooltipBox(
         positionProvider = TooltipDefaults.rememberTooltipPositionProvider(),
         tooltip = {
-            Text(text)
+            PlainTooltip { Text(text) }
         },
         state = rememberTooltipState()
     ) {

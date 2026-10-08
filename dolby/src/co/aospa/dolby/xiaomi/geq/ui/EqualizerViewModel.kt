@@ -1,9 +1,4 @@
-/*
- * Copyright (C) 2024 Paranoid Android
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
+/* SPDX-License-Identifier: Apache-2.0 */
 package co.aospa.dolby.xiaomi.geq.ui
 
 import androidx.lifecycle.ViewModel
@@ -11,163 +6,160 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import co.aospa.dolby.xiaomi.geq.data.EqualizerRepository
-import co.aospa.dolby.xiaomi.geq.data.Preset
-import co.aospa.dolby.xiaomi.DolbyConstants.Companion.dlog
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.drop
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import co.aospa.dolby.xiaomi.geq.data.*
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-const val TAG = "EqViewModel"
-
-class EqualizerViewModel(
-    private val repository: EqualizerRepository
-) : ViewModel() {
-
-    private val _presets = MutableStateFlow<List<Preset>>(repository.builtInPresets)
+class EqualizerViewModel(private val repository: EqualizerRepository) : ViewModel() {
+    private val _presets = MutableStateFlow(repository.builtInPresets)
     val presets = _presets.asStateFlow()
-
-    private val _preset = MutableStateFlow<Preset>(repository.defaultPreset)
+    private val _preset = MutableStateFlow(repository.defaultPreset)
     val preset = _preset.asStateFlow()
-
-    private var presetRestored = false
+    private val _undoPreset = MutableStateFlow<Preset?>(null)
+    val undoPreset = _undoPreset.asStateFlow()
+    private val _error = MutableStateFlow<String?>(null)
+    val error = _error.asStateFlow()
+    val profileName = repository.activeState.map { it.name }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, repository.activeState.value.name)
+    val profileKey = repository.activeState.map { it.key }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, repository.activeState.value.key)
+    val ready = repository.activeState.map { it.loaded && it.enabled }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+    private var key = repository.activeState.value.key
+    private data class Edit(val key: String, val transform: (Preset) -> Preset,
+        val rememberUndo: Boolean, val completion: CompletableDeferred<Unit>)
+    private val edits = Channel<Edit>(Channel.UNLIMITED, onUndeliveredElement = { it.completion.complete(Unit) })
 
     init {
-        // Update the list of presets: combined list of user defined presets if any,
-        // and then the built in presets.
-        repository.userPresets
-            .onEach { presets ->
-                dlog(TAG, "updated userPresets: $presets")
-                _presets.value = mutableListOf<Preset>().apply {
-                    addAll(presets)
-                    addAll(repository.builtInPresets)
-                }.toList()
-
-                // We can restore the active preset only after the presets list is populated,
-                // since we do not save the preset name but only its gains.
-                if (!presetRestored) {
-                    val bandGains = repository.getBandGains()
-                    _preset.value = _presets.value.find {
-                        bandGains == it.bandGains
-                    } ?: Preset(bandGains = bandGains)
-                    dlog(TAG, "restored preset: ${_preset.value}")
-                    presetRestored = true
+        viewModelScope.launch {
+            repository.userPresets.collect { userPresets ->
+                _presets.value = userPresets + repository.builtInPresets
+                val state = repository.activeState.value
+                val current = _preset.value
+                if (state.loaded && current.bandGains == state.gains && !current.isMutated) {
+                    _preset.value = _presets.value.firstOrNull { it.bandGains == state.gains }
+                        ?: Preset(bandGains = state.gains)
                 }
             }
-            .launchIn(viewModelScope)
-
-        // Update the preset in repository everytime we set it here
-        _preset
-            .drop(1) // skip the initial value
-            .onEach {
-                // wait till the active preset is restored
-                if (!presetRestored) {
-                    return@onEach
+        }
+        viewModelScope.launch {
+            repository.activeState.collect { state ->
+                val changedProfile = key != state.key
+                if (changedProfile) { key = state.key; _undoPreset.value = null }
+                if (state.loaded && (changedProfile || _preset.value.bandGains != state.gains)) {
+                    _preset.value = _presets.value.firstOrNull { it.bandGains == state.gains }
+                        ?: Preset(bandGains = state.gains)
                 }
-                dlog(TAG, "updated preset: $it")
-                repository.setBandGains(it.bandGains)
-                if (it.isUserDefined) {
-                    repository.addPreset(it)
-                }
+                _error.value = state.error
             }
-            .launchIn(viewModelScope)
-    }
-
-    fun reset() {
-        dlog(TAG, "reset()")
-        if (_preset.value.isUserDefined) {
-            // Reset gains to 0
-            _preset.value = _preset.value.copy(
-                bandGains = repository.defaultPreset.bandGains
-            )
-        } else {
-            // Switch to flat preset
-            _preset.value = repository.defaultPreset
+        }
+        viewModelScope.launch {
+            for (edit in edits) {
+                try {
+                    if (edit.key != repository.activeState.value.key) continue
+                    val previous = _preset.value
+                    var next = previous
+                    val result = repository.editBandGains(edit.key) { currentGains ->
+                        next = edit.transform(previous.copy(bandGains = currentGains))
+                        next.bandGains
+                    } ?: continue
+                    if (edit.key != repository.activeState.value.key) continue
+                    if (next.isUserDefined) {
+                        next = next.copy(isMutated = false)
+                        repository.addPreset(next)
+                        // Make the saved revision available to the next queued selection,
+                        // without waiting for the preference listener to deliver it.
+                        _presets.value = listOf(next) + _presets.value.filterNot {
+                            it.isUserDefined && it.name == next.name
+                        }
+                    }
+                    // Preset persistence suspends; recheck ownership before publishing UI state.
+                    if (edit.key != repository.activeState.value.key) continue
+                    if (edit.rememberUndo) _undoPreset.value = previous.copy(bandGains = result.first)
+                    _preset.value = next
+                    _error.value = null
+                } catch (cancel: CancellationException) { throw cancel }
+                  catch (_: RuntimeException) {
+                    // Keep the last accepted configuration; never crash a gesture coroutine.
+                    _error.value = "apply"
+                } finally { edit.completion.complete(Unit) }
+            }
         }
     }
 
-    fun setPreset(preset: Preset) {
-        dlog(TAG, "setPreset($preset)")
-        _preset.value = preset
+    private fun edit(rememberUndo: Boolean = true, transform: (Preset) -> Preset) {
+        val state = repository.activeState.value
+        if (ready.value && state.key == key) {
+            val completion = repository.beginEdit()
+            if (edits.trySend(Edit(state.key, transform, rememberUndo, completion)).isFailure) completion.complete(Unit)
+        }
     }
+    override fun onCleared() { edits.cancel(); super.onCleared() }
+
+    private fun Preset.withGains(gains: List<BandGain>) =
+        copy(name = if (isUserDefined) name else null, bandGains = gains, isMutated = true)
 
     fun setGain(index: Int, gain: Int) {
-        dlog(TAG, "setGain($index, $gain)")
-        _preset.value = _preset.value.run {
-            copy(
-                // if we're modifying predefined preset, set name to null so UI shows "Custom"
-                name = if (!isUserDefined) null else name,
-                bandGains = bandGains
-                    .toMutableList()
-                    // create a new object to ensure the flow emits an update.
-                    .apply { this[index] = this[index].copy(gain = gain) }
-                    .toList(),
-                isMutated = true
-            )
+        if (index !in 0 until EqualizerGains.BAND_COUNT || gain !in -100..100) return
+        edit { current -> current.withGains(current.bandGains.mapIndexed { i, band ->
+            if (i == index) band.copy(gain = gain) else band
+        }) }
+    }
+    fun shiftGains(amount: Int) = edit { current ->
+        if (EqualizerGains.canShift(current.bandGains, amount))
+            current.withGains(EqualizerGains.shift(current.bandGains, amount)) else current
+    }
+    fun undoGainEdit() {
+        val undo = _undoPreset.value ?: return
+        edit(false) { undo }
+        _undoPreset.value = null
+    }
+    fun reset() = edit { current -> current.withGains(repository.defaultPreset.bandGains) }
+    fun setPreset(preset: Preset) = edit {
+        // A menu may have opened before the preceding edit finished saving.
+        if (preset.isUserDefined) _presets.value.firstOrNull { it.isUserDefined && it.name == preset.name } ?: preset
+        else preset
+    }
+
+    private fun validate(name: String, excluding: String? = null): PresetNameValidationError? =
+        when {
+            name.isBlank() || name.trim().length > 50 -> PresetNameValidationError.NAME_TOO_LONG
+            _presets.value.any { it.name != excluding && it.name.equals(name.trim(), true) } ->
+                PresetNameValidationError.NAME_EXISTS
+            else -> null
         }
-    }
-
-    // Returns string containing the error message if it failed, otherwise null
-    private fun validatePresetName(name: String): PresetNameValidationError? {
-        // Ensure we don't have another preset with the same name
-        return if (
-            _presets.value
-            .any { it.name!!.equals(name.trim(), ignoreCase = true) }
-        ) {
-            PresetNameValidationError.NAME_EXISTS
-        } else if (name.length > 50) {
-            PresetNameValidationError.NAME_TOO_LONG
-        } else null
-    }
-
     fun createNewPreset(name: String): PresetNameValidationError? {
-        dlog(TAG, "createNewPreset($name)")
-        validatePresetName(name)?.let {
-            dlog(TAG, "createNewPreset failed: $it")
-            return it
-        }
-        _preset.value = _preset.value.copy(
-            name = name.trim(),
-            isUserDefined = true,
-            isMutated = false
-        )
+        validate(name)?.let { return it }
+        edit { it.copy(name = name.trim(), isUserDefined = true, isMutated = false) }
         return null
     }
-
     fun renamePreset(preset: Preset, name: String): PresetNameValidationError? {
-        dlog(TAG, "renamePreset($preset, $name)")
-        // create a preset with the new name and same gains
-        createNewPreset(name = name)?.let {
-            dlog(TAG, "renamePreset failed")
-            return it
+        validate(name, preset.name)?.let { return it }
+        viewModelScope.launch {
+            try {
+                val updated = preset.copy(name = name.trim())
+                repository.addPreset(updated)
+                if (updated.name != preset.name) repository.removePreset(preset)
+                if (_preset.value.name == preset.name) _preset.value = _preset.value.copy(name = updated.name)
+            } catch (_: RuntimeException) { _error.value = "apply" }
         }
-        // and delete the old one.
-        deletePreset(preset, shouldReset = false)
         return null
     }
-
     fun deletePreset(preset: Preset, shouldReset: Boolean = true) {
-        dlog(TAG, "deletePreset($preset)")
         viewModelScope.launch {
-            repository.removePreset(preset)
+            try { repository.removePreset(preset) }
+            catch (_: RuntimeException) { _error.value = "apply" }
         }
-        if (shouldReset) {
-            _preset.value = repository.defaultPreset
-        }
+        if (shouldReset) setPreset(repository.defaultPreset)
     }
-
     companion object {
         val Factory = viewModelFactory {
-            initializer {
-                EqualizerViewModel(
-                    repository = EqualizerRepository(
-                        this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY]!!
-                    )
-                )
-            }
+            initializer { EqualizerViewModel(EqualizerRepository(
+                this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY]!!
+            )) }
         }
     }
 }

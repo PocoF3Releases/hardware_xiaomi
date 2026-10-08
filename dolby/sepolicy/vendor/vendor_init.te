@@ -1,0 +1,3 @@
+# SPDX-License-Identifier: Apache-2.0
+# Initialize product-selected Dolby capabilities and the DAP contract at boot.
+set_prop(vendor_init, vendor_dolby_config_prop)
