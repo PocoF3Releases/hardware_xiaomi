@@ -1,0 +1,4 @@
+service vendor.aw8697.vibrator /vendor/bin/hw/android.hardware.vibrator-service.xiaomi_aw8697
+    class hal
+    user system
+    group system input
