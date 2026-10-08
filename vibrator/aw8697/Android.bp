@@ -9,3 +9,12 @@ cc_binary {
     vintf_fragments: ["vibrator.xml"],
 }
 
+// Explicit developer target; not installed by the product or linked into the HAL.
+cc_binary {
+    name: "xiaomi-alioth-richtap-render",
+    vendor: true,
+    compile_multilib: "64",
+    srcs: ["richtap-render.cpp"],
+    shared_libs: ["libdl"],
+    cflags: ["-Wall", "-Wextra", "-Werror"],
+}
