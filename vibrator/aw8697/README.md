@@ -132,7 +132,12 @@ predefined effects; actual `primitive_effect_<Android-ID>.bin` files can extend
 the supported primitive list. Firmware must be selected for this actuator and
 its intended effect, not merely renamed to make capability queries succeed.
 
-Alioth has no verified stock Android SPIN, rise/fall or LOW_TICK mappings. They
+LOW_TICK uses the stock LIGHT_TICK samples (or RAM selector 2) as a compatibility
+fallback, retaining Android scale/delay and completion behavior. An exact LOW_TICK
+file takes precedence. This is a light-tick approximation, not a verified stock
+low-frequency primitive.
+
+Alioth has no verified stock Android SPIN or rise/fall mappings. They
 remain unsupported unless corresponding real primitive files are supplied.
 This is partial composition support, not full Android 17 haptic feature coverage.
 
