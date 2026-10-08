@@ -431,13 +431,14 @@ ndk::ScopedAStatus Vibrator::setAmplitude(float amplitude) {
     mAmplitude = amplitude;
     return ndk::ScopedAStatus::ok();
 }
-// Only the matching stock CLICK/TICK/THUD selectors have RAM fallbacks.
-// Chirps, spin and low-frequency tick require real primitive waveform files.
+// LOW_TICK uses the stock light tick as a compatibility fallback.
+// An exact LOW_TICK file takes precedence; this does not synthesize a new frequency.
 namespace {
 int primitiveRam(CompositePrimitive primitive) {
     switch (primitive) {
         case CompositePrimitive::CLICK: return 0;
-        case CompositePrimitive::LIGHT_TICK: return 2;
+        case CompositePrimitive::LIGHT_TICK:
+        case CompositePrimitive::LOW_TICK: return 2;
         case CompositePrimitive::THUD: return 3;
         default: return -1;
     }
@@ -465,7 +466,10 @@ ndk::ScopedAStatus Vibrator::getPrimitiveDuration(CompositePrimitive primitive, 
     const int id = static_cast<int>(primitive);
     if (id < 0 || id >= static_cast<int>(mPrimitiveStreams.size())) return unsupported();
     if (primitive == CompositePrimitive::NOOP) return ndk::ScopedAStatus::ok();
-    if (mPrimitiveStreams[id]) *out = streamDuration(mPrimitiveStreams[id]);
+    const auto* stream = mPrimitiveStreams[id];
+    if (!stream && primitive == CompositePrimitive::LOW_TICK)
+        stream = mPrimitiveStreams[static_cast<int>(CompositePrimitive::LIGHT_TICK)];
+    if (stream) *out = streamDuration(stream);
     else if (const int ram = primitiveRam(primitive); ram >= 0) *out = mDurations[ram];
     else return unsupported();
     return ndk::ScopedAStatus::ok();
@@ -481,6 +485,8 @@ ndk::ScopedAStatus Vibrator::compose(const std::vector<CompositeEffect>& composi
         auto status = getPrimitiveDuration(effect.primitive, &duration);
         if (!status.isOk()) return status;
         const auto* stream = mPrimitiveStreams[static_cast<int>(effect.primitive)];
+        if (!stream && effect.primitive == CompositePrimitive::LOW_TICK)
+            stream = mPrimitiveStreams[static_cast<int>(CompositePrimitive::LIGHT_TICK)];
         steps.push_back({stream ? 193 : primitiveRam(effect.primitive), duration,
                          effect.scale, effect.delayMs, stream});
     }
