@@ -8,10 +8,12 @@
 
 namespace aidl::android::hardware::biometrics::fingerprint {
 
-CancellationSignal::CancellationSignal(Session* session) : mSession(session) {}
+CancellationSignal::CancellationSignal(const std::shared_ptr<Session>& session) : mSession(session) {}
 
 ndk::ScopedAStatus CancellationSignal::cancel() {
-    return mSession->cancel();
+    auto session = mSession.lock();
+    if (!session || session->isClosed()) return ndk::ScopedAStatus::ok();
+    return session->cancel();
 }
 
 }  // namespace aidl::android::hardware::biometrics::fingerprint

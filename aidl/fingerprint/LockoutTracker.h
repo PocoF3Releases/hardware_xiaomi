@@ -7,7 +7,8 @@
 
 #pragma once
 
-#include <android/binder_to_string.h>
+#include <mutex>
+#include <sstream>
 #include <stdint.h>
 #include <string>
 
@@ -19,7 +20,7 @@ namespace aidl::android::hardware::biometrics::fingerprint {
 
 class LockoutTracker {
   public:
-    LockoutTracker() : mFailedCount(0) {}
+    LockoutTracker() : mFailedCount(0), mLockoutTimedStart(0), mCurrentMode(LockoutMode::kNone) {}
     ~LockoutTracker() {}
 
     enum class LockoutMode : int8_t { kNone = 0, kTimed, kPermanent };
@@ -28,7 +29,11 @@ class LockoutTracker {
     LockoutMode getMode();
     void addFailedAttempt();
     int64_t getLockoutTimeLeft();
+    struct State { LockoutMode mode; int64_t timeLeft; uint64_t generation; };
+    State getState();
+    bool expireTimedLockout(uint64_t generation);
     inline std::string toString() const {
+        std::lock_guard lock(mMutex);
         std::ostringstream os;
         os << "----- LockoutTracker:: -----" << std::endl;
         os << "LockoutTracker::mFailedCount:" << mFailedCount;
@@ -38,6 +43,8 @@ class LockoutTracker {
     }
 
   private:
+    mutable std::mutex mMutex;
+    uint64_t mGeneration = 1;
     int32_t mFailedCount;
     int64_t mLockoutTimedStart;
     LockoutMode mCurrentMode;
