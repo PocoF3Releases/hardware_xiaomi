@@ -22,7 +22,7 @@ void onClientDeath(void* cookie) {
 }
 
 Session::Session(fingerprint_device_t* device, UdfpsHandler* udfpsHandler, int userId,
-                 std::shared_ptr<ISessionCallback> cb, LockoutTracker lockoutTracker)
+                 std::shared_ptr<ISessionCallback> cb, std::shared_ptr<LockoutTracker> lockoutTracker)
     : mDevice(device),
       mLockoutTracker(lockoutTracker),
       mUserId(userId),
@@ -73,13 +73,14 @@ ndk::ScopedAStatus Session::enroll(const HardwareAuthToken& hat,
         mCb->onError(Error::UNABLE_TO_PROCESS, error);
     }
 
-    *out = SharedRefBase::make<CancellationSignal>(this);
+    *out = SharedRefBase::make<CancellationSignal>(ref<Session>());
     return ndk::ScopedAStatus::ok();
 }
 
 ndk::ScopedAStatus Session::authenticate(int64_t operationId,
                                          std::shared_ptr<ICancellationSignal>* out) {
-    checkSensorLockout();
+    *out = SharedRefBase::make<CancellationSignal>(ref<Session>());
+    if (checkSensorLockout()) return ndk::ScopedAStatus::ok();
 #ifndef IMPL_V2
     int error = mDevice->authenticate(mDevice, operationId, mUserId);
 #else
@@ -90,7 +91,6 @@ ndk::ScopedAStatus Session::authenticate(int64_t operationId,
         mCb->onError(Error::UNABLE_TO_PROCESS, error);
     }
 
-    *out = SharedRefBase::make<CancellationSignal>(this);
     return ndk::ScopedAStatus::ok();
 }
 
@@ -98,7 +98,7 @@ ndk::ScopedAStatus Session::detectInteraction(std::shared_ptr<ICancellationSigna
     ALOGD("Detect interaction is not supported");
     mCb->onError(Error::UNABLE_TO_PROCESS, 0 /* vendorCode */);
 
-    *out = SharedRefBase::make<CancellationSignal>(this);
+    *out = SharedRefBase::make<CancellationSignal>(ref<Session>());
     return ndk::ScopedAStatus::ok();
 }
 
@@ -163,7 +163,6 @@ ndk::ScopedAStatus Session::resetLockout(const HardwareAuthToken& hat) {
 #endif
 
     clearLockout(true);
-    if (mIsLockoutTimerStarted) mIsLockoutTimerAborted = true;
 
     return ndk::ScopedAStatus::ok();
 }
@@ -244,7 +243,7 @@ ndk::ScopedAStatus Session::cancel() {
 }
 
 ndk::ScopedAStatus Session::close() {
-    mClosed = true;
+    if (mClosed.exchange(true)) return ndk::ScopedAStatus::ok();
     mCb->onSessionClosed();
     AIBinder_DeathRecipient_delete(mDeathRecipient);
     return ndk::ScopedAStatus::ok();
@@ -321,43 +320,46 @@ AcquiredInfo Session::VendorAcquiredFilter(int32_t info, int32_t* vendorCode) {
 }
 
 bool Session::checkSensorLockout() {
-    LockoutTracker::LockoutMode lockoutMode = mLockoutTracker.getMode();
+    const auto state = mLockoutTracker->getState();
+    const auto lockoutMode = state.mode;
     if (lockoutMode == LockoutTracker::LockoutMode::kPermanent) {
         ALOGE("Fail: lockout permanent");
         mCb->onLockoutPermanent();
-        mIsLockoutTimerAborted = true;
         return true;
     }
     if (lockoutMode == LockoutTracker::LockoutMode::kTimed) {
-        int64_t timeLeft = mLockoutTracker.getLockoutTimeLeft();
+        int64_t timeLeft = state.timeLeft;
         ALOGE("Fail: lockout timed: %ld", timeLeft);
         mCb->onLockoutTimed(timeLeft);
-        if (!mIsLockoutTimerStarted) startLockoutTimer(timeLeft);
+        startLockoutTimer(timeLeft, state.generation);
         return true;
     }
     return false;
 }
 
 void Session::clearLockout(bool clearAttemptCounter) {
-    mLockoutTracker.reset(clearAttemptCounter);
+    mLockoutTracker->reset(clearAttemptCounter);
     mCb->onLockoutCleared();
 }
 
-void Session::startLockoutTimer(int64_t timeout) {
-    std::function<void()> action = std::bind(&Session::lockoutTimerExpired, this);
-    std::thread([timeout, action]() {
+void Session::startLockoutTimer(int64_t timeout, uint64_t generation) {
+    auto previous = mLockoutTimerGeneration.load();
+    do {
+        if (previous >= generation) return;
+    } while (!mLockoutTimerGeneration.compare_exchange_weak(previous, generation));
+    std::weak_ptr<Session> session = ref<Session>();
+    std::thread([timeout, generation, session]() {
         std::this_thread::sleep_for(std::chrono::milliseconds(timeout));
-        action();
+        if (auto current = session.lock(); current && !current->isClosed()) {
+            current->lockoutTimerExpired(generation);
+        }
     }).detach();
-
-    mIsLockoutTimerStarted = true;
 }
 
-void Session::lockoutTimerExpired() {
-    if (!mIsLockoutTimerAborted) clearLockout(false);
-
-    mIsLockoutTimerStarted = false;
-    mIsLockoutTimerAborted = false;
+void Session::lockoutTimerExpired(uint64_t generation) {
+    if (mLockoutTracker->expireTimedLockout(generation) && !isClosed()) {
+        mCb->onLockoutCleared();
+    }
 }
 
 void Session::notify(const fingerprint_msg_t* msg) {
@@ -431,13 +433,13 @@ void Session::notify(const fingerprint_msg_t* msg) {
                     mUdfpsHandler->onAuthenticationSucceeded();
                 }
                 mCb->onAuthenticationSucceeded(msg->data.authenticated.finger.fid, authToken);
-                mLockoutTracker.reset(true);
+                mLockoutTracker->reset(true);
             } else {
                 if (mUdfpsHandler) {
                     mUdfpsHandler->onAuthenticationFailed();
                 }
                 mCb->onAuthenticationFailed();
-                mLockoutTracker.addFailedAttempt();
+                mLockoutTracker->addFailedAttempt();
                 checkSensorLockout();
             }
         } break;

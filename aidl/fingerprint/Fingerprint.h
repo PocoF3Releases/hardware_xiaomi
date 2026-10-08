@@ -9,6 +9,9 @@
 
 #include <aidl/android/hardware/biometrics/fingerprint/BnFingerprint.h>
 
+#include <mutex>
+#include <unordered_map>
+
 #include "FingerprintConfig.h"
 #include "LockoutTracker.h"
 #include "Session.h"
@@ -38,12 +41,13 @@ class Fingerprint : public BnFingerprint {
 
     std::shared_ptr<FingerprintConfig> mConfig;
     std::shared_ptr<Session> mSession;
-    LockoutTracker mLockoutTracker;
+    std::mutex mLockoutTrackersMutex;
+    std::unordered_map<int32_t, std::shared_ptr<LockoutTracker>> mLockoutTrackers;
     FingerprintSensorType mSensorType;
 
-    fingerprint_device_t* mDevice;
-    UdfpsHandlerFactory* mUdfpsHandlerFactory;
-    UdfpsHandler* mUdfpsHandler;
+    fingerprint_device_t* mDevice = nullptr;
+    UdfpsHandlerFactory* mUdfpsHandlerFactory = nullptr;
+    UdfpsHandler* mUdfpsHandler = nullptr;
 };
 
 }  // namespace aidl::android::hardware::biometrics::fingerprint

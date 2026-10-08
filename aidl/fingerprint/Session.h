@@ -10,6 +10,7 @@
 #include <aidl/android/hardware/biometrics/fingerprint/BnSession.h>
 #include <aidl/android/hardware/biometrics/fingerprint/ISessionCallback.h>
 #include <android/log.h>
+#include <atomic>
 #include <hardware/hardware.h>
 #include <log/log.h>
 #ifndef IMPL_V2
@@ -33,7 +34,7 @@ void onClientDeath(void* cookie);
 class Session : public BnSession {
   public:
     Session(fingerprint_device_t* device, UdfpsHandler* udfpsHandler, int userId,
-            std::shared_ptr<ISessionCallback> cb, LockoutTracker lockoutTracker);
+            std::shared_ptr<ISessionCallback> cb, std::shared_ptr<LockoutTracker> lockoutTracker);
     ndk::ScopedAStatus generateChallenge() override;
     ndk::ScopedAStatus revokeChallenge(int64_t challenge) override;
     ndk::ScopedAStatus enroll(const HardwareAuthToken& hat,
@@ -71,8 +72,8 @@ class Session : public BnSession {
 
   private:
     fingerprint_device_t* mDevice;
-    LockoutTracker mLockoutTracker;
-    bool mClosed = false;
+    std::shared_ptr<LockoutTracker> mLockoutTracker;
+    std::atomic<bool> mClosed{false};
 
     // static ndk::ScopedAStatus ErrorFilter(int32_t error);
     static Error VendorErrorFilter(int32_t error, int32_t* vendorCode);
@@ -80,12 +81,11 @@ class Session : public BnSession {
 
     bool checkSensorLockout();
     void clearLockout(bool clearAttemptCounter);
-    void startLockoutTimer(int64_t timeout);
-    void lockoutTimerExpired();
+    void startLockoutTimer(int64_t timeout, uint64_t generation);
+    void lockoutTimerExpired(uint64_t generation);
 
     // lockout timer
-    bool mIsLockoutTimerStarted = false;
-    bool mIsLockoutTimerAborted = false;
+    std::atomic<uint64_t> mLockoutTimerGeneration{0};
 
     // The user ID for which this session was created.
     int32_t mUserId;
