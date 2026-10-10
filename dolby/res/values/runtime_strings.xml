@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_status_title">Dolby audio status</string>
+    <string name="dolby_status_unavailable">Audio engine not ready — refresh to retry</string>
+    <string name="dolby_status_off">Turned off</string>
+    <string name="dolby_status_communication">Paused for a call or voice chat</string>
+    <string name="dolby_status_restoring">Restoring your media sound</string>
+    <string name="dolby_status_control">Waiting for audio control</string>
+    <string name="dolby_status_media">Enabled for media</string>
+    <string name="dolby_status_bypassed">Audio processing is bypassed</string>
+    <string name="dolby_status_details">Details</string>
+    <string name="dolby_status_hide_details">Hide details</string>
+    <string name="dolby_speaker_tuning_help">Speaker choices are saved for speaker playback only. Headphone and USB tuning stay automatic.</string>
+    <string name="dolby_status_refresh">Refresh audio status</string>
+    <string name="dolby_status_help">Your profile is restored automatically after calls and voice chat. Tap the status row for details.</string>
+    <string name="dolby_status_readback_help">This shows audio-control readback, not a measurement of the sound or DSP output.</string>
+    <string name="dolby_speaker_tuning_title">Speaker tuning</string>
+    <string name="dolby_speaker_tuning_auto">Automatic — factory tuning</string>
+    <string name="dolby_speaker_tuning_portrait">Portrait — stock speaker tuning</string>
+    <string name="dolby_speaker_tuning_landscape">Landscape — stock speaker tuning</string>
+    <string name="dolby_output_route">Media output: %1$s</string>
+    <string name="dolby_tuning_ack">Acknowledged tuning: %1$s</string>
+    <string name="dolby_tuning_native">No app tuning acknowledged</string>
+    <string name="dolby_control_gates">Native gate: %1$s · Framework gate: %2$s</string>
+    <string name="dolby_gate_on">On</string>
+    <string name="dolby_gate_off">Off</string>
+    <string name="dolby_gate_unknown">Unknown</string>
+    <string name="dolby_route_speaker">Speaker</string>
+    <string name="dolby_route_wired">Wired headphones</string>
+    <string name="dolby_route_bluetooth">Bluetooth</string>
+    <string name="dolby_route_usb">USB audio</string>
+    <string name="dolby_route_native">Not observed / system-managed</string>
+</resources>

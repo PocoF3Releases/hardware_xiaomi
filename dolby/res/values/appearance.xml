@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dolby_appearance">Appearance</string>
+    <string name="dolby_theme_dossier">Dossier theme</string>
+    <string name="dolby_theme_description">Use angular panels and red accents. Turn off for the system Settings style.</string>
+    <string name="dolby_sound_console">Sound controls</string>
+    <string name="dolby_navigate_back">Back</string>
+</resources>
