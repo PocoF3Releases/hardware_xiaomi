@@ -13,8 +13,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Equalizer
-import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -138,8 +136,6 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
 
         DolbyRuntimePanel(controller, state)
 
-        if (LocalDossierTheme.current)
-            DossierSection("01", stringResource(R.string.dolby_profile_title))
         EqualizerPanel(Modifier.fillMaxWidth()) {
             ListItem(
                 headlineContent = { DolbyHeadline(stringResource(R.string.dolby_profile_title)) },
@@ -150,9 +146,7 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
                         color = MaterialTheme.colorScheme.primary,
                     )
                 },
-                leadingContent = {
-                    Icon(Icons.Default.Equalizer, null, tint = MaterialTheme.colorScheme.primary)
-                },
+                leadingContent = { SelectionIcon(profileIcon(state.base), true) },
                 trailingContent = { Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null) },
                 modifier = Modifier.clickable { profiles = true },
                 colors =
@@ -161,7 +155,7 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
                     ),
             )
         }
-        DossierSection("02", stringResource(R.string.dolby_category_settings))
+        DossierSection("01", stringResource(R.string.dolby_category_settings))
         val rows = mutableListOf<@Composable () -> Unit>()
         fun toggle(key: String, title: Int, summary: Int) {
             rows += {
@@ -204,7 +198,7 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
             ListItem(
                 headlineContent = { DolbyHeadline(stringResource(R.string.dolby_ieq)) },
                 leadingContent = {
-                    Icon(Icons.Default.Tune, null, tint = MaterialTheme.colorScheme.primary)
+                    SelectionIcon(ieqIcon(state.settings[PREF_IEQ] as? Int ?: 0), true, enabled)
                 },
                 trailingContent = { Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null) },
                 supportingContent = {
@@ -246,6 +240,7 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
                     ) {
                         Text(
                             stringResource(R.string.dolby_dialogue_strength_title),
+                            modifier = Modifier.weight(1f).padding(end = 8.dp),
                             style = MaterialTheme.typography.labelLarge,
                         )
                         Text(
@@ -301,14 +296,7 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
                 if (choosingProfiles) entries.indexOfFirst { it.key == state.key }
                 else state.settings[PREF_IEQ] as? Int ?: 0,
             icon = { index ->
-                if (choosingProfiles) profileIcon(entries[index].base)
-                else
-                    listOf(
-                        SpeakerIcons.off,
-                        MusicIcons.audio_lines,
-                        MusicIcons.sliders_vertical,
-                        SpeakerIcons.warm,
-                    )[index]
+                if (choosingProfiles) profileIcon(entries[index].base) else ieqIcon(index)
             },
             onSelect = { index ->
                 if (choosingProfiles) {

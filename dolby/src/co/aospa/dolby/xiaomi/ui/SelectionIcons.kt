@@ -15,6 +15,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -95,9 +96,9 @@ internal object DialogSymbols {
 }
 
 @Composable
-internal fun SelectionIcon(image: ImageVector, selected: Boolean) {
+internal fun SelectionIcon(image: ImageVector, selected: Boolean, enabled: Boolean = true) {
     Surface(
-        modifier = Modifier.size(40.dp),
+        modifier = Modifier.size(40.dp).alpha(if (enabled) 1f else 0.5f),
         shape = CircleShape,
         color = if (selected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent,
     ) {
@@ -121,4 +122,12 @@ internal fun profileIcon(base: Int): ImageVector =
         2 -> DialogSymbols.music_note
         8 -> DialogSymbols.mic
         else -> DialogSymbols.tune
+    }
+
+internal fun ieqIcon(index: Int): ImageVector =
+    when (index) {
+        1 -> MusicIcons.audio_lines
+        2 -> MusicIcons.sliders_vertical
+        3 -> SpeakerIcons.warm
+        else -> SpeakerIcons.off
     }

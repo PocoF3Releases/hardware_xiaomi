@@ -8,7 +8,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -66,7 +65,11 @@ internal fun DolbyRuntimePanel(controller: DolbyController, state: ActiveProfile
                         DolbyHeadline(stringResource(R.string.dolby_speaker_tuning_title))
                     },
                     leadingContent = {
-                        Icon(Icons.Default.Tune, null, tint = MaterialTheme.colorScheme.primary)
+                        SelectionIcon(
+                            speakerTuningIcon(tuning),
+                            true,
+                            state.loaded && runtime.hasControl,
+                        )
                     },
                     colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                     supportingContent = { Text(stringResource(speakerTuningLabel(tuning))) },

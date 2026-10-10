@@ -29,6 +29,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.android.settingslib.spa.framework.theme.SettingsTheme
 import java.util.WeakHashMap
 import kotlin.math.roundToInt
@@ -71,6 +72,7 @@ internal fun DolbyTheme(content: @Composable () -> Unit) {
                     background = token("surface_container", base.surfaceContainer),
                     surface = token("surface_container", base.surfaceContainer),
                     surfaceBright = token("surface_bright", base.surfaceBright),
+                    surfaceContainerLow = token("surface_container_low", base.surfaceContainerLow),
                     surfaceContainerHigh =
                         token("surface_container_high", base.surfaceContainerHigh),
                     onSurface = token("on_surface", base.onSurface),
@@ -130,9 +132,25 @@ internal fun DolbyTheme(content: @Composable () -> Unit) {
             else
                 defaults.copy(
                     titleLarge = defaults.titleLarge.copy(fontFamily = family("title-large")),
-                    titleMedium = defaults.titleMedium.copy(fontFamily = family("title-medium")),
-                    bodyLarge = defaults.bodyLarge.copy(fontFamily = family("body-large")),
-                    bodyMedium = defaults.bodyMedium.copy(fontFamily = family("body-medium")),
+                    titleMedium =
+                        defaults.titleMedium.copy(
+                            fontFamily = family("title-medium"),
+                            fontSize = 16.sp,
+                            lineHeight = 24.sp,
+                        ),
+                    bodyLarge =
+                        defaults.bodyLarge.copy(
+                            fontFamily = family("body-large"),
+                            fontSize = 16.sp,
+                            lineHeight = 24.sp,
+                        ),
+                    bodyMedium =
+                        defaults.bodyMedium.copy(
+                            fontFamily = family("body-medium"),
+                            fontSize = 14.sp,
+                            lineHeight = 20.sp,
+                        ),
+                    labelLarge = defaults.labelLarge.copy(fontSize = 14.sp, lineHeight = 20.sp),
                     headlineSmall =
                         defaults.headlineSmall.copy(fontFamily = family("headline-small")),
                 )
@@ -210,12 +228,17 @@ internal fun ExpressiveChoice(labels: List<String>, selected: Int, onSelect: (In
                 animationSpec = MaterialTheme.motionScheme.fastSpatialSpec(),
                 label = "tonal thumb",
             )
-        Box(
-            Modifier.offset(x = offset, y = 4.dp)
-                .width(width)
-                .height(40.dp)
-                .background(MaterialTheme.colorScheme.secondaryContainer, RoundedCornerShape(24.dp))
-        )
+        Box(Modifier.matchParentSize().padding(vertical = 4.dp)) {
+            Box(
+                Modifier.offset(x = offset)
+                    .width(width)
+                    .fillMaxHeight()
+                    .background(
+                        MaterialTheme.colorScheme.secondaryContainer,
+                        RoundedCornerShape(24.dp),
+                    )
+            )
+        }
         SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
             labels.forEachIndexed { index, label ->
                 SegmentedButton(
@@ -484,5 +507,35 @@ internal fun DolbyHeadline(text: String) {
         style =
             if (LocalDossierTheme.current) MaterialTheme.typography.titleMedium
             else MaterialTheme.typography.bodyLarge,
+    )
+}
+
+/** Consistent Settings-sized headings and bounded widths for all edit/reset dialogs. */
+@Composable
+internal fun DolbyDialog(
+    onDismissRequest: () -> Unit,
+    confirmButton: @Composable () -> Unit,
+    dismissButton: @Composable () -> Unit = {},
+    title: (@Composable () -> Unit)? = null,
+    text: (@Composable () -> Unit)? = null,
+    shape: androidx.compose.ui.graphics.Shape = MaterialTheme.shapes.extraLarge,
+    containerColor: Color = MaterialTheme.colorScheme.surfaceContainerLow,
+) {
+    AlertDialog(
+        onDismissRequest = onDismissRequest,
+        confirmButton = confirmButton,
+        dismissButton = dismissButton,
+        title =
+            title?.let { content ->
+                { ProvideTextStyle(MaterialTheme.typography.titleLarge) { content() } }
+            },
+        text =
+            text?.let { content ->
+                { ProvideTextStyle(MaterialTheme.typography.bodyMedium) { content() } }
+            },
+        shape = shape,
+        containerColor = containerColor,
+        modifier = Modifier.widthIn(max = 560.dp).fillMaxWidth().padding(horizontal = 24.dp),
+        properties = androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false),
     )
 }

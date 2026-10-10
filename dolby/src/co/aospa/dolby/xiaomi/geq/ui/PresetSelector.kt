@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import co.aospa.dolby.xiaomi.R
 import co.aospa.dolby.xiaomi.ui.BackdropBlur
 import co.aospa.dolby.xiaomi.ui.MusicIcons
+import co.aospa.dolby.xiaomi.ui.SelectionIcon
 import co.aospa.dolby.xiaomi.ui.SelectionSheet
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,6 +40,26 @@ fun PresetSelector(viewModel: EqualizerViewModel) {
     var showDeleteConfirmDialog by remember { mutableStateOf(false) }
     var showResetConfirmDialog by remember { mutableStateOf(false) }
 
+    val names =
+        androidx.compose.ui.platform.LocalContext.current.resources
+            .getStringArray(R.array.dolby_preset_entries)
+            .toList()
+    val symbols =
+        listOf(
+            MusicIcons.sliders_vertical,
+            MusicIcons.electric_guitar,
+            MusicIcons.saxophone,
+            MusicIcons.disc_3,
+            MusicIcons.piano,
+            MusicIcons.mic_vocal,
+            MusicIcons.harmonica,
+            MusicIcons.audio_lines,
+            MusicIcons.hand_metal,
+        )
+    fun presetIcon(name: String?, userDefined: Boolean) =
+        symbols.getOrNull(if (userDefined) -1 else names.indexOf(name))
+            ?: MusicIcons.sliders_vertical
+
     BackdropBlur(actionsExpanded)
     Row(
         modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp),
@@ -52,6 +73,8 @@ fun PresetSelector(viewModel: EqualizerViewModel) {
             modifier = Modifier.weight(1f).padding(end = 8.dp).heightIn(min = 48.dp),
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
         ) {
+            SelectionIcon(presetIcon(currentPreset.name, currentPreset.isUserDefined), true, ready)
+            Spacer(Modifier.width(16.dp))
             Column(Modifier.weight(1f)) {
                 Text(
                     stringResource(R.string.dolby_geq_preset),
@@ -110,22 +133,6 @@ fun PresetSelector(viewModel: EqualizerViewModel) {
     }
 
     if (expanded) {
-        val names =
-            androidx.compose.ui.platform.LocalContext.current.resources
-                .getStringArray(R.array.dolby_preset_entries)
-                .toList()
-        val symbols =
-            listOf(
-                MusicIcons.sliders_vertical,
-                MusicIcons.electric_guitar,
-                MusicIcons.saxophone,
-                MusicIcons.disc_3,
-                MusicIcons.piano,
-                MusicIcons.mic_vocal,
-                MusicIcons.harmonica,
-                MusicIcons.audio_lines,
-                MusicIcons.hand_metal,
-            )
         SelectionSheet(
             stringResource(R.string.dolby_geq_preset),
             presets.map { it.name.orEmpty() },
@@ -136,8 +143,7 @@ fun PresetSelector(viewModel: EqualizerViewModel) {
             onDismiss = { expanded = false },
             icon = { index ->
                 val preset = presets[index]
-                val builtIn = if (preset.isUserDefined) -1 else names.indexOf(preset.name)
-                symbols.getOrNull(builtIn) ?: MusicIcons.sliders_vertical
+                presetIcon(preset.name, preset.isUserDefined)
             },
         )
     }

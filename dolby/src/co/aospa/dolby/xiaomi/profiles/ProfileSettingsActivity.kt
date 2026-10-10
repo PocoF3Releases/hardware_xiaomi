@@ -6,7 +6,9 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
@@ -93,23 +95,16 @@ internal fun ProfileManager(
                 }
             }
         }
-        item { DossierSection("02", stringResource(R.string.game_effect_title)) }
         item { GameEffectSettings(gameEffectController) }
-        item { DossierSection("03", stringResource(R.string.dolby_profiles_title)) }
+        item { DossierSection("02", stringResource(R.string.dolby_profiles_title)) }
 
         if (customProfiles.isEmpty()) {
             item {
                 EqualizerPanel(Modifier.fillMaxWidth()) {
                     Column(
-                        Modifier.padding(20.dp),
+                        Modifier.padding(16.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
-                        Icon(
-                            Icons.Default.Add,
-                            null,
-                            Modifier.size(24.dp),
-                            tint = MaterialTheme.colorScheme.primary,
-                        )
                         Text(
                             stringResource(R.string.dolby_profile_empty),
                             style = MaterialTheme.typography.titleMedium,
@@ -135,10 +130,6 @@ internal fun ProfileManager(
                         Modifier.padding(16.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
-                        Text(
-                            stringResource(R.string.dolby_profiles_title),
-                            style = MaterialTheme.typography.titleMedium,
-                        )
                         Text(
                             stringResource(R.string.dolby_profiles_help_compact),
                             style = MaterialTheme.typography.bodyMedium,
@@ -249,7 +240,7 @@ internal fun ProfileManager(
     profiles
         .firstOrNull { it.key == deleting }
         ?.let { profile ->
-            AlertDialog(
+            DolbyDialog(
                 shape = MaterialTheme.shapes.extraLarge,
                 onDismissRequest = { deleting = null },
                 title = { Text(stringResource(R.string.dolby_profile_delete)) },
@@ -298,7 +289,7 @@ private fun ProfileEditor(
     var expanded by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf<String?>(null) }
 
-    AlertDialog(
+    DolbyDialog(
         shape = MaterialTheme.shapes.extraLarge,
         onDismissRequest = onDismiss,
         title = {
@@ -313,7 +304,10 @@ private fun ProfileEditor(
             )
         },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Column(
+                Modifier.verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
                 OutlinedTextField(
                     value = name,
                     onValueChange = {
@@ -322,6 +316,7 @@ private fun ProfileEditor(
                     },
                     label = { Text(stringResource(R.string.dolby_profile_name)) },
                     singleLine = true,
+                    shape = androidx.compose.foundation.shape.RoundedCornerShape(20.dp),
                     isError = error != null,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -335,7 +330,13 @@ private fun ProfileEditor(
                             value = profileLabel(base.toString(), ""),
                             onValueChange = {},
                             readOnly = true,
+                            shape = androidx.compose.foundation.shape.RoundedCornerShape(20.dp),
                             label = { Text(stringResource(R.string.dolby_profile_base)) },
+                            leadingIcon = {
+                                Box(Modifier.padding(start = 8.dp)) {
+                                    SelectionIcon(profileIcon(base), true)
+                                }
+                            },
                             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded) },
                             modifier =
                                 Modifier.fillMaxWidth()

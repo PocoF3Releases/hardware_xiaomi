@@ -59,7 +59,7 @@ internal fun SelectionSheet(
                                 bottomStart = if (index == labels.lastIndex) 20.dp else 4.dp,
                                 bottomEnd = if (index == labels.lastIndex) 20.dp else 4.dp,
                             ),
-                    color = MaterialTheme.colorScheme.surfaceContainerHigh,
+                    color = MaterialTheme.colorScheme.surfaceBright,
                 ) {
                     ListItem(
                         headlineContent = { DolbyHeadline(label) },

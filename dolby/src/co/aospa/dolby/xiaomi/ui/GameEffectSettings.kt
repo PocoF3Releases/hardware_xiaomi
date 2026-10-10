@@ -289,7 +289,7 @@ private fun GameTuningDialog(
 
     fun valueLabel(value: Float) = value.toInt().toString()
 
-    AlertDialog(
+    DolbyDialog(
         onDismissRequest = onDismiss,
         containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
         title = {
