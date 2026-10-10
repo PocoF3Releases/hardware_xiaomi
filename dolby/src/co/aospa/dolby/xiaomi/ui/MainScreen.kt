@@ -6,36 +6,35 @@ import android.media.AudioManager
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Equalizer
-import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Equalizer
+import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import kotlinx.coroutines.launch
-import androidx.compose.foundation.selection.toggleable
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import co.aospa.dolby.xiaomi.*
-import co.aospa.dolby.xiaomi.R
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_BASS
-import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_VOLUME
-import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_HP_VIRTUALIZER
-import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_SPK_VIRTUALIZER
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_DIALOGUE
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_DIALOGUE_AMOUNT
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_HP_VIRTUALIZER
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_IEQ
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_SPK_VIRTUALIZER
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_VOLUME
+import co.aospa.dolby.xiaomi.R
 import co.aospa.dolby.xiaomi.geq.ui.EqualizerPanel
 import co.aospa.dolby.xiaomi.preference.DolbyOutputRoute
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,65 +48,117 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
     DisposableEffect(context) {
         val audio = context.getSystemService(AudioManager::class.java)
         val media = AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build()
-        val listener = AudioManager.OnDevicesForAttributesChangedListener { _, devices ->
-            route = DolbyOutputRoute.visibility(devices.orEmpty().map { it.type })
-        }
+        val listener =
+            AudioManager.OnDevicesForAttributesChangedListener { _, devices ->
+                route = DolbyOutputRoute.visibility(devices.orEmpty().map { it.type })
+            }
         var registered = false
         try {
-            route = DolbyOutputRoute.visibility(audio.getDevicesForAttributes(media).map { it.type })
+            route =
+                DolbyOutputRoute.visibility(audio.getDevicesForAttributes(media).map { it.type })
             audio.addOnDevicesForAttributesChangedListener(media, context.mainExecutor, listener)
             registered = true
-        } catch (_: RuntimeException) { route = DolbyOutputRoute.Visibility(false, false) }
+        } catch (_: RuntimeException) {
+            route = DolbyOutputRoute.Visibility(false, false)
+        }
         onDispose {
-            if (registered) try { audio.removeOnDevicesForAttributesChangedListener(listener) } catch (_: RuntimeException) {}
+            if (registered)
+                try {
+                    audio.removeOnDevicesForAttributesChangedListener(listener)
+                } catch (_: RuntimeException) {}
         }
     }
     val scope = rememberCoroutineScope()
-    fun apply(key: String, value: Any) { scope.launch {
-        try { controller.updateSetting(key, value); failure = false }
-        catch (_: RuntimeException) { failure = true }
-    } }
-    fun toggle(key: String) { scope.launch {
-        try { controller.toggleSetting(key); failure = false }
-        catch (_: RuntimeException) { failure = true }
-    } }
+    fun apply(key: String, value: Any) {
+        scope.launch {
+            try {
+                controller.updateSetting(key, value)
+                failure = false
+            } catch (_: RuntimeException) {
+                failure = true
+            }
+        }
+    }
+    fun toggle(key: String) {
+        scope.launch {
+            try {
+                controller.toggleSetting(key)
+                failure = false
+            } catch (_: RuntimeException) {
+                failure = true
+            }
+        }
+    }
     fun checked(key: String) = state.settings[key] as? Boolean ?: false
     val enabled = state.enabled && state.loaded
-    Column(modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)) {
+    Column(
+        modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
         DossierHeader()
-        Surface(color = MaterialTheme.colorScheme.primaryContainer, shape = if (LocalDossierTheme.current) MaterialTheme.shapes.large else RoundedCornerShape(28.dp)) {
+        Surface(
+            color = MaterialTheme.colorScheme.primaryContainer,
+            shape =
+                if (LocalDossierTheme.current) MaterialTheme.shapes.large
+                else RoundedCornerShape(28.dp),
+        ) {
             ListItem(
                 headlineContent = { DolbyHeadline(stringResource(R.string.dolby_enable)) },
-                modifier = Modifier.toggleable(state.enabled, role = Role.Switch) {
-                    scope.launch {
-                        try { controller.toggleEnabled(); failure = false }
-                        catch (_: RuntimeException) { failure = true }
-                    }
-                },
+                modifier =
+                    Modifier.toggleable(state.enabled, role = Role.Switch) {
+                        scope.launch {
+                            try {
+                                controller.toggleEnabled()
+                                failure = false
+                            } catch (_: RuntimeException) {
+                                failure = true
+                            }
+                        }
+                    },
                 trailingContent = {
-                    Switch(checked = state.enabled, onCheckedChange = null, thumbContent = {
-                        Icon(if (state.enabled) Icons.Default.Check else Icons.Default.Close,
-                            null, Modifier.size(16.dp))
-                    })
+                    Switch(
+                        checked = state.enabled,
+                        onCheckedChange = null,
+                        thumbContent = {
+                            Icon(
+                                if (state.enabled) Icons.Default.Check else Icons.Default.Close,
+                                null,
+                                Modifier.size(16.dp),
+                            )
+                        },
+                    )
                 },
-                colors = ListItemDefaults.colors(
-                    containerColor = androidx.compose.ui.graphics.Color.Transparent,
-                    headlineColor = MaterialTheme.colorScheme.onPrimaryContainer)
+                colors =
+                    ListItemDefaults.colors(
+                        containerColor = androidx.compose.ui.graphics.Color.Transparent,
+                        headlineColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    ),
             )
         }
 
         DolbyRuntimePanel(controller, state)
 
-        if (LocalDossierTheme.current) DossierSection("01", stringResource(R.string.dolby_profile_title))
+        if (LocalDossierTheme.current)
+            DossierSection("01", stringResource(R.string.dolby_profile_title))
         EqualizerPanel(Modifier.fillMaxWidth()) {
             ListItem(
                 headlineContent = { DolbyHeadline(stringResource(R.string.dolby_profile_title)) },
-                supportingContent = { Text(profileLabel(state.key, state.name), style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary) },
-                leadingContent = { Icon(Icons.Default.Equalizer, null, tint = MaterialTheme.colorScheme.primary) },
+                supportingContent = {
+                    Text(
+                        profileLabel(state.key, state.name),
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                },
+                leadingContent = {
+                    Icon(Icons.Default.Equalizer, null, tint = MaterialTheme.colorScheme.primary)
+                },
                 trailingContent = { Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null) },
                 modifier = Modifier.clickable { profiles = true },
-                colors = ListItemDefaults.colors(containerColor = androidx.compose.ui.graphics.Color.Transparent)
+                colors =
+                    ListItemDefaults.colors(
+                        containerColor = androidx.compose.ui.graphics.Color.Transparent
+                    ),
             )
         }
         DossierSection("02", stringResource(R.string.dolby_category_settings))
@@ -117,96 +168,164 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
                 ListItem(
                     headlineContent = { DolbyHeadline(stringResource(title)) },
                     supportingContent = { Text(stringResource(summary)) },
-                    modifier = Modifier.toggleable(checked(key), enabled = enabled, role = Role.Switch) { toggle(key) },
+                    modifier =
+                        Modifier.toggleable(checked(key), enabled = enabled, role = Role.Switch) {
+                            toggle(key)
+                        },
                     trailingContent = {
-                        Switch(checked(key), onCheckedChange = null, enabled = enabled,
-                            thumbContent = { Icon(if (checked(key)) Icons.Default.Check else Icons.Default.Close, null, Modifier.size(16.dp)) })
+                        Switch(
+                            checked(key),
+                            onCheckedChange = null,
+                            enabled = enabled,
+                            thumbContent = {
+                                Icon(
+                                    if (checked(key)) Icons.Default.Check else Icons.Default.Close,
+                                    null,
+                                    Modifier.size(16.dp),
+                                )
+                            },
+                        )
                     },
-                    colors = ListItemDefaults.colors(containerColor = androidx.compose.ui.graphics.Color.Transparent)
+                    colors =
+                        ListItemDefaults.colors(
+                            containerColor = androidx.compose.ui.graphics.Color.Transparent
+                        ),
                 )
             }
         }
         toggle(PREF_BASS, R.string.dolby_bass_enhancer, R.string.dolby_bass_summary_compact)
         if (context.resources.getBoolean(R.bool.dolby_volume_leveler_supported))
-            toggle(PREF_VOLUME, R.string.dolby_volume_leveler, R.string.dolby_volume_summary_compact)
+            toggle(
+                PREF_VOLUME,
+                R.string.dolby_volume_leveler,
+                R.string.dolby_volume_summary_compact,
+            )
         rows += {
-            ListItem(headlineContent = { DolbyHeadline(stringResource(R.string.dolby_ieq)) },
-                leadingContent = { Icon(Icons.Default.Tune, null, tint = MaterialTheme.colorScheme.primary) },
+            ListItem(
+                headlineContent = { DolbyHeadline(stringResource(R.string.dolby_ieq)) },
+                leadingContent = {
+                    Icon(Icons.Default.Tune, null, tint = MaterialTheme.colorScheme.primary)
+                },
                 trailingContent = { Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, null) },
                 supportingContent = {
                     val index = (state.settings[PREF_IEQ] as? Int ?: 0).coerceIn(0, 3)
                     Text(context.resources.getStringArray(R.array.dolby_ieq_entries)[index])
                 },
                 modifier = Modifier.clickable(enabled = enabled) { ieq = true },
-                colors = ListItemDefaults.colors(containerColor = androidx.compose.ui.graphics.Color.Transparent))
+                colors =
+                    ListItemDefaults.colors(
+                        containerColor = androidx.compose.ui.graphics.Color.Transparent
+                    ),
+            )
         }
-        if (route.speaker) toggle(PREF_SPK_VIRTUALIZER, R.string.dolby_spk_virtualizer, R.string.dolby_speaker_summary)
-        if (route.headphones) toggle(PREF_HP_VIRTUALIZER, R.string.dolby_hp_virtualizer, R.string.dolby_headphone_summary)
+        if (route.speaker)
+            toggle(
+                PREF_SPK_VIRTUALIZER,
+                R.string.dolby_spk_virtualizer,
+                R.string.dolby_speaker_summary,
+            )
+        if (route.headphones)
+            toggle(
+                PREF_HP_VIRTUALIZER,
+                R.string.dolby_hp_virtualizer,
+                R.string.dolby_headphone_summary,
+            )
         toggle(PREF_DIALOGUE, R.string.dolby_dialogue_enhancer, R.string.dolby_dialogue_summary)
-        if (checked(PREF_DIALOGUE)) rows += {
-            val amount = state.settings[PREF_DIALOGUE_AMOUNT] as? Int ?: 1
-            var value by remember(state.key, amount) { mutableFloatStateOf(amount.toFloat().coerceIn(1f, 12f)) }
-            Column(
-                Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                Row(
-                    Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        stringResource(R.string.dolby_dialogue_strength_title),
-                        style = MaterialTheme.typography.labelLarge
-                    )
-                    Text(
-                        value.toInt().toString(),
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+        if (checked(PREF_DIALOGUE))
+            rows += {
+                val amount = state.settings[PREF_DIALOGUE_AMOUNT] as? Int ?: 1
+                var value by
+                    remember(state.key, amount) {
+                        mutableFloatStateOf(amount.toFloat().coerceIn(1f, 12f))
+                    }
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Row(
+                        Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            stringResource(R.string.dolby_dialogue_strength_title),
+                            style = MaterialTheme.typography.labelLarge,
+                        )
+                        Text(
+                            value.toInt().toString(),
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                    ExpressiveValueSlider(
+                        value = value,
+                        onValueChange = { value = it },
+                        onFinished = { apply(PREF_DIALOGUE_AMOUNT, value.toInt()) },
+                        range = 1f..12f,
+                        enabled = enabled,
+                        modifier = Modifier.fillMaxWidth(),
                     )
                 }
-                ExpressiveValueSlider(
-                    value = value,
-                    onValueChange = { value = it },
-                    onFinished = { apply(PREF_DIALOGUE_AMOUNT, value.toInt()) },
-                    range = 1f..12f,
-                    enabled = enabled,
-                    modifier = Modifier.fillMaxWidth()
+            }
+        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            rows.forEachIndexed { index, row ->
+                EqualizerPanel(
+                    Modifier.fillMaxWidth(),
+                    connectedAbove = index > 0,
+                    connectedBelow = index < rows.lastIndex,
+                    content = row,
                 )
             }
         }
-        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            rows.forEachIndexed { index, row ->
-                EqualizerPanel(Modifier.fillMaxWidth(), connectedAbove = index > 0,
-                    connectedBelow = index < rows.lastIndex, content = row)
-            }
-        }
-        if (failure || state.error != null) Text(stringResource(R.string.dolby_setting_failed), color = MaterialTheme.colorScheme.error)
+        if (failure || state.error != null)
+            Text(
+                stringResource(R.string.dolby_setting_failed),
+                color = MaterialTheme.colorScheme.error,
+            )
         Text(
             stringResource(R.string.dolby_tuning_help),
             modifier = Modifier.padding(horizontal = 16.dp),
             style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
     }
     if (profiles || ieq) {
         val choosingProfiles = profiles
         val entries = state.profiles
         SelectionSheet(
-            title = stringResource(if (choosingProfiles) R.string.dolby_profile_title else R.string.dolby_ieq),
-            labels = if (choosingProfiles) entries.map { profileLabel(it.key, it.name) }
+            title =
+                stringResource(
+                    if (choosingProfiles) R.string.dolby_profile_title else R.string.dolby_ieq
+                ),
+            labels =
+                if (choosingProfiles) entries.map { profileLabel(it.key, it.name) }
                 else context.resources.getStringArray(R.array.dolby_ieq_entries).toList(),
-            selected = if (choosingProfiles) entries.indexOfFirst { it.key == state.key }
+            selected =
+                if (choosingProfiles) entries.indexOfFirst { it.key == state.key }
                 else state.settings[PREF_IEQ] as? Int ?: 0,
+            icon = { index ->
+                if (choosingProfiles) profileIcon(entries[index].base)
+                else
+                    listOf(
+                        SpeakerIcons.off,
+                        MusicIcons.audio_lines,
+                        MusicIcons.sliders_vertical,
+                        SpeakerIcons.warm,
+                    )[index]
+            },
             onSelect = { index ->
                 if (choosingProfiles) {
                     scope.launch {
-                        try { controller.selectProfile(entries[index].key); failure = false }
-                        catch (_: RuntimeException) { failure = true }
+                        try {
+                            controller.selectProfile(entries[index].key)
+                            failure = false
+                        } catch (_: RuntimeException) {
+                            failure = true
+                        }
                     }
                 } else apply(PREF_IEQ, index)
             },
-            onDismiss = { profiles = false; ieq = false }
+            onDismiss = {
+                profiles = false
+                ieq = false
+            },
         )
     }
 }

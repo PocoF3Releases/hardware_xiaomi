@@ -6,29 +6,11 @@
 
 package co.aospa.dolby.xiaomi.geq.ui
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.Icon
-import androidx.compose.material3.FilledTonalIconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuAnchorType
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import co.aospa.dolby.xiaomi.ui.BackdropBlur
-import co.aospa.dolby.xiaomi.ui.SelectionSheet
-import androidx.compose.material3.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -40,6 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import co.aospa.dolby.xiaomi.R
+import co.aospa.dolby.xiaomi.ui.BackdropBlur
+import co.aospa.dolby.xiaomi.ui.MusicIcons
+import co.aospa.dolby.xiaomi.ui.SelectionSheet
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,20 +41,26 @@ fun PresetSelector(viewModel: EqualizerViewModel) {
 
     BackdropBlur(actionsExpanded)
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 4.dp),
+        modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp),
         horizontalArrangement = Arrangement.Start,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        OutlinedButton(onClick = { expanded = true }, enabled = ready,
+        OutlinedButton(
+            onClick = { expanded = true },
+            enabled = ready,
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier.weight(1f).padding(end = 8.dp).heightIn(min = 48.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+        ) {
             Column(Modifier.weight(1f)) {
-                Text(stringResource(R.string.dolby_geq_preset), style = MaterialTheme.typography.labelSmall)
-                Text(currentPreset.name ?: stringResource(R.string.dolby_preset_custom),
-                    style = MaterialTheme.typography.bodyLarge)
+                Text(
+                    stringResource(R.string.dolby_geq_preset),
+                    style = MaterialTheme.typography.labelSmall,
+                )
+                Text(
+                    currentPreset.name ?: stringResource(R.string.dolby_preset_custom),
+                    style = MaterialTheme.typography.bodyLarge,
+                )
             }
             ExposedDropdownMenuDefaults.TrailingIcon(expanded)
         }
@@ -78,34 +69,77 @@ fun PresetSelector(viewModel: EqualizerViewModel) {
             FilledTonalIconButton(onClick = { actionsExpanded = true }, enabled = ready) {
                 Icon(Icons.Default.MoreVert, stringResource(R.string.dolby_geq_preset_actions))
             }
-            DropdownMenu(expanded = actionsExpanded, onDismissRequest = { actionsExpanded = false },
-                shape = RoundedCornerShape(20.dp), containerColor = MaterialTheme.colorScheme.surfaceContainerHigh) {
+            DropdownMenu(
+                expanded = actionsExpanded,
+                onDismissRequest = { actionsExpanded = false },
+                shape = RoundedCornerShape(20.dp),
+                containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+            ) {
                 DropdownMenuItem(
                     text = { Text(stringResource(R.string.dolby_geq_new_preset)) },
-                    onClick = { actionsExpanded = false; showNewPresetDialog = true }
+                    onClick = {
+                        actionsExpanded = false
+                        showNewPresetDialog = true
+                    },
                 )
                 if (currentPreset.isUserDefined) {
                     DropdownMenuItem(
                         text = { Text(stringResource(R.string.dolby_geq_rename_preset)) },
-                        onClick = { actionsExpanded = false; showRenamePresetDialog = true }
+                        onClick = {
+                            actionsExpanded = false
+                            showRenamePresetDialog = true
+                        },
                     )
                     DropdownMenuItem(
                         text = { Text(stringResource(R.string.dolby_geq_delete_preset)) },
-                        onClick = { actionsExpanded = false; showDeleteConfirmDialog = true }
+                        onClick = {
+                            actionsExpanded = false
+                            showDeleteConfirmDialog = true
+                        },
                     )
                 }
                 DropdownMenuItem(
                     text = { Text(stringResource(R.string.dolby_geq_reset_gains)) },
-                    onClick = { actionsExpanded = false; showResetConfirmDialog = true }
+                    onClick = {
+                        actionsExpanded = false
+                        showResetConfirmDialog = true
+                    },
                 )
             }
         }
     }
 
     if (expanded) {
-        SelectionSheet(stringResource(R.string.dolby_geq_preset),
-            presets.map { it.name.orEmpty() }, presets.indexOfFirst { it.name == currentPreset.name },
-            onSelect = { viewModel.setPreset(presets[it]) }, onDismiss = { expanded = false })
+        val names =
+            androidx.compose.ui.platform.LocalContext.current.resources
+                .getStringArray(R.array.dolby_preset_entries)
+                .toList()
+        val symbols =
+            listOf(
+                MusicIcons.sliders_vertical,
+                MusicIcons.electric_guitar,
+                MusicIcons.saxophone,
+                MusicIcons.disc_3,
+                MusicIcons.piano,
+                MusicIcons.mic_vocal,
+                MusicIcons.harmonica,
+                MusicIcons.audio_lines,
+                MusicIcons.hand_metal,
+            )
+        SelectionSheet(
+            stringResource(R.string.dolby_geq_preset),
+            presets.map { it.name.orEmpty() },
+            presets.indexOfFirst {
+                it.name == currentPreset.name && it.isUserDefined == currentPreset.isUserDefined
+            },
+            onSelect = { viewModel.setPreset(presets[it]) },
+            onDismiss = { expanded = false },
+            icon = { index ->
+                val preset = presets[index]
+                val builtIn = if (preset.isUserDefined) -1 else names.indexOf(preset.name)
+                symbols.getOrNull(builtIn) ?: MusicIcons.sliders_vertical
+            },
+        )
     }
 
     // Dialogs
@@ -116,7 +150,7 @@ fun PresetSelector(viewModel: EqualizerViewModel) {
             onPresetNameSet = {
                 return@PresetNameDialog viewModel.createNewPreset(name = it)
             },
-            onDismissDialog = { showNewPresetDialog = false }
+            onDismissDialog = { showNewPresetDialog = false },
         )
     }
 
@@ -125,12 +159,9 @@ fun PresetSelector(viewModel: EqualizerViewModel) {
             title = stringResource(id = R.string.dolby_geq_rename_preset),
             presetName = currentPreset.name!!,
             onPresetNameSet = {
-                return@PresetNameDialog viewModel.renamePreset(
-                    preset = currentPreset,
-                    name = it
-                )
+                return@PresetNameDialog viewModel.renamePreset(preset = currentPreset, name = it)
             },
-            onDismissDialog = { showRenamePresetDialog = false }
+            onDismissDialog = { showRenamePresetDialog = false },
         )
     }
 
@@ -138,7 +169,7 @@ fun PresetSelector(viewModel: EqualizerViewModel) {
         ConfirmationDialog(
             text = stringResource(id = R.string.dolby_geq_delete_preset_prompt),
             onConfirm = { viewModel.deletePreset(currentPreset) },
-            onDismiss = { showDeleteConfirmDialog = false }
+            onDismiss = { showDeleteConfirmDialog = false },
         )
     }
 
@@ -146,7 +177,7 @@ fun PresetSelector(viewModel: EqualizerViewModel) {
         ConfirmationDialog(
             text = stringResource(id = R.string.dolby_geq_reset_gains_prompt),
             onConfirm = { viewModel.reset() },
-            onDismiss = { showResetConfirmDialog = false }
+            onDismiss = { showResetConfirmDialog = false },
         )
     }
 }

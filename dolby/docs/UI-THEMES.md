@@ -25,3 +25,7 @@ uses available width and intrinsic aspect ratio, capped at 220 dp high for the
 illustrated banner and 68 dp for the standard logo. ContentScale.Fit prevents
 cropping. Standard logo tint follows onSurface for light/dark contrast. PNG
 alpha was verified; Kotlin/Compose and AAPT2 checks passed after integration.
+
+## XiaomiParts alignment
+
+The system appearance uses the same platform surface tokens and variable title/body fonts as XiaomiParts. Dossier remains an independent optional appearance. Profile, intelligent EQ, speaker tuning, graphic preset and new-profile base choices use relevant leading 24 dp icons in a 40 dp slot. A primary-container circle indicates the selected option; unselected symbols remain unfilled. Rows preserve radio selection semantics and immediate choice/dismiss behavior. Native base IDs determine profile icons, and user-created EQ presets use a neutral tuning icon. Icon provenance and complete licenses are in `licenses/`.
