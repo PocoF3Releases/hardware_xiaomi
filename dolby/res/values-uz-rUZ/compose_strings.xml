@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Tashqi ko\'rinish</string>
+    <string name="dolby_navigate_back">Orqaga</string>
+    <string name="dolby_sound_console">Ovoz boshqaruvlari</string>
+    <string name="dolby_theme_description">Qizil aksanlar bilan burchakli panellarni ko\'rsatish. Tizim sozlamalari ko\'rinishidan foydalanish uchun ushbu parametrni o\'chiring.</string>
+    <string name="dolby_theme_dossier">Dosye mavzusi</string>
+</resources>

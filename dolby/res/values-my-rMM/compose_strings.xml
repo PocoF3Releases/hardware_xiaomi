@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">အသွင်အပြင်</string>
+    <string name="dolby_navigate_back">ကျော</string>
+    <string name="dolby_sound_console">အသံထိန်းချုပ်မှုများ</string>
+    <string name="dolby_theme_description">အနီရောင် accent များဖြင့် ထောင့်ကွက်များကို ပြသပါ။ စနစ်ဆက်တင်များ အသွင်အပြင်ကို အသုံးပြုရန် ဤရွေးချယ်မှုကို ပိတ်ပါ။</string>
+    <string name="dolby_theme_dossier">Dossier ဆောင်ပုဒ်</string>
+</resources>

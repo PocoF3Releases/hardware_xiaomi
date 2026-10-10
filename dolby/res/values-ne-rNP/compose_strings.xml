@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">उपस्थिति</string>
+    <string name="dolby_navigate_back">पछाडि</string>
+    <string name="dolby_sound_console">ध्वनि नियन्त्रणहरू</string>
+    <string name="dolby_theme_description">रातो एक्सेन्टहरूसँग कोणीय प्यानलहरू प्रदर्शन गर्नुहोस्। प्रणाली सेटिङ उपस्थिति प्रयोग गर्न यो विकल्प असक्षम गर्नुहोस्।</string>
+    <string name="dolby_theme_dossier">डोजियर विषयवस्तु</string>
+</resources>

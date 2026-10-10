@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">চেহারা</string>
+    <string name="dolby_navigate_back">ব্যাক</string>
+    <string name="dolby_sound_console">শব্দ নিয়ন্ত্রণ</string>
+    <string name="dolby_theme_description">লাল উচ্চারণ সহ কৌণিক প্যানেলগুলি প্রদর্শন করুন। সিস্টেম সেটিংস উপস্থিতি ব্যবহার করতে এই বিকল্পটি নিষ্ক্রিয় করুন৷</string>
+    <string name="dolby_theme_dossier">ডসিয়ার থিম</string>
+</resources>

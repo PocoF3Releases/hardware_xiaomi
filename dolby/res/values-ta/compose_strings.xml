@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">தோற்றம்</string>
+    <string name="dolby_navigate_back">மீண்டும்</string>
+    <string name="dolby_sound_console">ஒலி கட்டுப்பாடுகள்</string>
+    <string name="dolby_theme_description">சிவப்பு உச்சரிப்புகளுடன் கோண பேனல்களைக் காண்பி. கணினி அமைப்புகளின் தோற்றத்தைப் பயன்படுத்த இந்த விருப்பத்தை முடக்கவும்.</string>
+    <string name="dolby_theme_dossier">ஆவண தீம்</string>
+</resources>

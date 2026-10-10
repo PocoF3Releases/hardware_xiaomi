@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Знешні выгляд</string>
+    <string name="dolby_navigate_back">Назад</string>
+    <string name="dolby_sound_console">Элементы кіравання гукам</string>
+    <string name="dolby_theme_description">Адлюструйце вуглаватыя панэлі з чырвонымі акцэнтамі. Адключыце гэту опцыю, каб выкарыстоўваць знешні выгляд сістэмных налад.</string>
+    <string name="dolby_theme_dossier">Тэма дасье</string>
+</resources>

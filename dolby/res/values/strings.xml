@@ -6,7 +6,7 @@
 <resources>
 
     <!-- Dolby Atmos -->
-    <string name="dolby_title">Dolby Atmos</string>
+    <string name="dolby_title" translatable="false">Dolby Atmos</string>
     <string name="dolby_enable">Use Dolby Atmos</string>
     <string name="dolby_profile_title">Choose a profile</string>
     <string name="dolby_preset">Graphic equalizer</string>
