@@ -27,13 +27,7 @@ class EqualizerRepository(
 
     // Preset is saved as a string of comma separated gains in SharedPreferences
     // and is unique to each profile ID
-    private val profile = dolbyController.profile
-    private val profileSharedPrefs by lazy {
-        context.getSharedPreferences(
-            "profile_$profile",
-            Context.MODE_PRIVATE
-        )
-    }
+    internal val activeState = dolbyController.activeState
 
     private val presetsSharedPrefs by lazy {
         context.getSharedPreferences(
@@ -87,24 +81,13 @@ class EqualizerRepository(
         }
     }
 
-    suspend fun getBandGains(): List<BandGain> = withContext(Dispatchers.IO) {
-        val gains = profileSharedPrefs.getString(PREF_PRESET, dolbyController.getPreset())
-        return@withContext if (gains.isNullOrEmpty()) {
-            defaultPreset.bandGains
-        } else {
-            deserializeGains(gains)
-        }.also {
-            dlog(TAG, "getBandGains: $it")
-        }
-    }
+    fun beginEdit() = dolbyController.beginEqualizerEdit()
 
-    suspend fun setBandGains(bandGains: List<BandGain>) = withContext(Dispatchers.IO) {
-        dlog(TAG, "setBandGains($bandGains)")
-        val gains = serializeGains(bandGains)
-        dolbyController.setPreset(gains)
-        profileSharedPrefs.edit()
-            .putString(PREF_PRESET, gains)
-            .apply()
+    suspend fun editBandGains(key: String, transform: (List<BandGain>) -> List<BandGain>) =
+        dolbyController.editEqualizer(key, transform)
+
+    suspend fun setBandGains(key: String, bandGains: List<BandGain>) = withContext(Dispatchers.IO) {
+        dolbyController.saveEqualizer(key, serializeGains(bandGains))
     }
 
     suspend fun addPreset(preset: Preset) = withContext(Dispatchers.IO) {
@@ -124,60 +107,15 @@ class EqualizerRepository(
     private companion object {
         const val TAG = "EqRepository"
 
-        val tenBandFreqs = intArrayOf(
-            32,
-            64,
-            125,
-            250,
-            500,
-            1000,
-            2000,
-            4000,
-            8000,
-            16000
-        )
-
-        fun deserializeGains(bandGains: String): List<BandGain> {
-            val gains: List<Int> =
-                bandGains.split(",").runCatching {
-                    require(size == 20) {
-                        "Preset must have 20 elements, has only $size!"
-                    }
-                    map { it.toInt() }
-                        .twentyToTenBandGains()
-                }.onFailure { exception ->
-                    Log.e(TAG, "Failed to parse preset", exception)
-                }.getOrDefault(
-                    // fallback to flat
-                    List<Int>(10) { 0 }
-                )
-            return List(10) { index ->
-                BandGain(
-                    band = tenBandFreqs[index],
-                    gain = gains[index]
-                )
-            }
-        }
-
-        fun serializeGains(bandGains: List<BandGain>): String {
-            return bandGains.map { it.gain }
-                .tenToTwentyBandGains()
-                .joinToString(",")
-        }
-
-        // we show only 10 bands in UI however backend requires 20 bands
-        fun List<Int>.tenToTwentyBandGains() =
-            List<Int>(20) { index ->
-                if (index % 2 == 1 && index < 19) {
-                    // every odd element is the average of its surrounding elements
-                    (this[(index - 1) / 2] + this[(index + 1) / 2]) / 2
-                } else {
-                    this[index / 2]
-                }
+        fun deserializeGains(bandGains: String): List<BandGain> =
+            try {
+                EqualizerGains.decode(bandGains)
+            } catch (exception: IllegalArgumentException) {
+                Log.e(TAG, "Failed to parse preset", exception)
+                List(EqualizerGains.BAND_COUNT) { BandGain(it + 1, 0) }
             }
 
-        fun List<Int>.twentyToTenBandGains() =
-            // skip every odd element
-            filterIndexed { index, _ -> index % 2 == 0 }
+        fun serializeGains(bandGains: List<BandGain>): String =
+            EqualizerGains.encode(bandGains)
     }
 }

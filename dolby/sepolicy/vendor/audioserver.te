@@ -1,0 +1,2 @@
+# SPDX-License-Identifier: Apache-2.0
+get_prop(audioserver, vendor_dolby_config_prop)
