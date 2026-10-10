@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Udseende</string>
+    <string name="dolby_navigate_back">Tilbage</string>
+    <string name="dolby_sound_console">Lydkontrol</string>
+    <string name="dolby_theme_description">Vis kantede paneler med røde accenter. Deaktiver denne mulighed for at bruge systemindstillingernes udseende.</string>
+    <string name="dolby_theme_dossier">Dossier tema</string>
+</resources>

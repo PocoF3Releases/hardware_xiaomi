@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Välimus</string>
+    <string name="dolby_navigate_back">Tagasi</string>
+    <string name="dolby_sound_console">Heli juhtnupud</string>
+    <string name="dolby_theme_description">Kuva nurkpaneelid punaste aktsentidega. Süsteemi seadete välimuse kasutamiseks keelake see suvand.</string>
+    <string name="dolby_theme_dossier">Toimiku teema</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">ຮູບລັກສະນະ</string>
+    <string name="dolby_navigate_back">ກັບຄືນໄປບ່ອນ</string>
+    <string name="dolby_sound_console">ການຄວບຄຸມສຽງ</string>
+    <string name="dolby_theme_description">ຈໍສະແດງຜົນເປັນສີ່ຫຼ່ຽມດ້ວຍສີແດງ. ປິດການໃຊ້ງານທາງເລືອກນີ້ເພື່ອໃຊ້ລັກສະນະການຕັ້ງຄ່າລະບົບ.</string>
+    <string name="dolby_theme_dossier">ຫົວຂໍ້ Dossier</string>
+</resources>

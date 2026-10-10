@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">ਦਿੱਖ</string>
+    <string name="dolby_navigate_back">ਪਿੱਛੇ</string>
+    <string name="dolby_sound_console">ਧੁਨੀ ਨਿਯੰਤਰਣ</string>
+    <string name="dolby_theme_description">ਲਾਲ ਲਹਿਜ਼ੇ ਦੇ ਨਾਲ ਕੋਣੀ ਪੈਨਲ ਪ੍ਰਦਰਸ਼ਿਤ ਕਰੋ। ਸਿਸਟਮ ਸੈਟਿੰਗਾਂ ਦੀ ਦਿੱਖ ਦੀ ਵਰਤੋਂ ਕਰਨ ਲਈ ਇਸ ਵਿਕਲਪ ਨੂੰ ਅਯੋਗ ਕਰੋ।</string>
+    <string name="dolby_theme_dossier">ਡੋਜ਼ੀਅਰ ਥੀਮ</string>
+</resources>

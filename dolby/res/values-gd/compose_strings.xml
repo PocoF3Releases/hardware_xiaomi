@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Coltas</string>
+    <string name="dolby_navigate_back">Air ais</string>
+    <string name="dolby_sound_console">Smachdan fuaim</string>
+    <string name="dolby_theme_description">Seall pannalan ceàrnach le sràcan dearga. Cuir dheth an roghainn seo gus coltas Settings an t-siostaim a chleachdadh.</string>
+    <string name="dolby_theme_dossier">Cuspair dossier</string>
+</resources>

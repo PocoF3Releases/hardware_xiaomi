@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Aspetto</string>
+    <string name="dolby_navigate_back">Indietro</string>
+    <string name="dolby_sound_console">Controlli del suono</string>
+    <string name="dolby_theme_description">Visualizza pannelli angolari con accenti rossi. Disabilita questa opzione per utilizzare l\'aspetto delle Impostazioni di sistema.</string>
+    <string name="dolby_theme_dossier">Tema del fascicolo</string>
+</resources>

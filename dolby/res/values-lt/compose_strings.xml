@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Išvaizda</string>
+    <string name="dolby_navigate_back">Atgal</string>
+    <string name="dolby_sound_console">Garso valdikliai</string>
+    <string name="dolby_theme_description">Rodyti kampines plokštes su raudonais akcentais. Išjunkite šią parinktį, kad galėtumėte naudoti sistemos nustatymų išvaizdą.</string>
+    <string name="dolby_theme_dossier">Dokumentacijos tema</string>
+</resources>

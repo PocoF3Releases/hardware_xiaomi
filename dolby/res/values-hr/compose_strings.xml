@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Izgled</string>
+    <string name="dolby_navigate_back">natrag</string>
+    <string name="dolby_sound_console">Kontrole zvuka</string>
+    <string name="dolby_theme_description">Prikažite kutne ploče s crvenim naglascima. Onemogućite ovu opciju da biste koristili izgled postavki sustava.</string>
+    <string name="dolby_theme_dossier">Tema dosjea</string>
+</resources>

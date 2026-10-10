@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">స్వరూపం</string>
+    <string name="dolby_navigate_back">వెనుకకు</string>
+    <string name="dolby_sound_console">ధ్వని నియంత్రణలు</string>
+    <string name="dolby_theme_description">ఎరుపు స్వరాలు కలిగిన కోణీయ ప్యానెల్‌లను ప్రదర్శించండి. సిస్టమ్ సెట్టింగ్‌ల రూపాన్ని ఉపయోగించడానికి ఈ ఎంపికను నిలిపివేయండి.</string>
+    <string name="dolby_theme_dossier">డాసియర్ థీమ్</string>
+</resources>

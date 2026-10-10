@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">രൂപഭാവം</string>
+    <string name="dolby_navigate_back">തിരികെ</string>
+    <string name="dolby_sound_console">ശബ്ദ നിയന്ത്രണങ്ങൾ</string>
+    <string name="dolby_theme_description">ചുവന്ന ആക്സൻ്റുകളുള്ള കോണീയ പാനലുകൾ പ്രദർശിപ്പിക്കുക. സിസ്‌റ്റം ക്രമീകരണ രൂപഭാവം ഉപയോഗിക്കുന്നതിന് ഈ ഓപ്‌ഷൻ പ്രവർത്തനരഹിതമാക്കുക.</string>
+    <string name="dolby_theme_dossier">ഡോസിയർ തീം</string>
+</resources>

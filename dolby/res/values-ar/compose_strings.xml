@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">المظهر</string>
+    <string name="dolby_navigate_back">العودة</string>
+    <string name="dolby_sound_console">ضوابط الصوت</string>
+    <string name="dolby_theme_description">استخدم لوحات ذات زوايا ولمسات باللون الأحمر. عطّل هذا الخيار لاستخدام مظهر إعدادات النظام.</string>
+    <string name="dolby_theme_dossier">موضوع الملف</string>
+</resources>

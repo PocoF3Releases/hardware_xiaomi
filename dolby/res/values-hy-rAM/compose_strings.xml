@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Արտաքին տեսք</string>
+    <string name="dolby_navigate_back">Ետ</string>
+    <string name="dolby_sound_console">Ձայնային կառավարում</string>
+    <string name="dolby_theme_description">Ցուցադրել անկյունային վահանակներ կարմիր շեշտադրումներով: Անջատեք այս տարբերակը՝ համակարգի Կարգավորումների տեսքն օգտագործելու համար:</string>
+    <string name="dolby_theme_dossier">Գործի թեմա</string>
+</resources>

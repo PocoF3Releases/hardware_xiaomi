@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Ymddangosiad</string>
+    <string name="dolby_navigate_back">Yn ol</string>
+    <string name="dolby_sound_console">Rheolaethau sain</string>
+    <string name="dolby_theme_description">Arddangos paneli onglog gydag acenion coch. Analluoga\'r opsiwn hwn i ddefnyddio gwedd Gosodiadau\'r system.</string>
+    <string name="dolby_theme_dossier">Thema ffeil</string>
+</resources>
