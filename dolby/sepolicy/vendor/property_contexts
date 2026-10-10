@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+ro.vendor.audio.dolby.dap.control                         u:object_r:vendor_dolby_config_prop:s0 exact enum none qdsp legacy
+ro.vendor.audio.dolby.spatializer.support                 u:object_r:vendor_dolby_config_prop:s0 exact bool
+ro.vendor.audio.dolby.speaker_tuning.support               u:object_r:vendor_dolby_config_prop:s0 exact bool
+vendor.audio.dolby.control.tunning.by.volume.support      u:object_r:vendor_dolby_config_prop:s0 exact bool
