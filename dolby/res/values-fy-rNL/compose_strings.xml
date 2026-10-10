@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Uterlik</string>
+    <string name="dolby_navigate_back">Werom</string>
+    <string name="dolby_sound_console">Sound kontrôles</string>
+    <string name="dolby_theme_description">Werjaan hoekige panielen mei reade aksinten. Skeakelje dizze opsje út om it uterlik fan systeemynstellingen te brûken.</string>
+    <string name="dolby_theme_dossier">Dossier tema</string>
+</resources>

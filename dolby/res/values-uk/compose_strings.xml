@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Оформлення</string>
+    <string name="dolby_navigate_back">Назад</string>
+    <string name="dolby_sound_console">Керування звуком</string>
+    <string name="dolby_theme_description">Використовувати кутасті панелі й червоні акценти. Вимкніть, щоб застосувати системний стиль налаштувань.</string>
+    <string name="dolby_theme_dossier">Тема «Досьє»</string>
+</resources>

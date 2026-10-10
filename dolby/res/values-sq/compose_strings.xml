@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Pamja e jashtme</string>
+    <string name="dolby_navigate_back">Mbrapa</string>
+    <string name="dolby_sound_console">Kontrollet e zërit</string>
+    <string name="dolby_theme_description">Shfaq panele këndore me thekse të kuqe. Çaktivizoni këtë opsion për të përdorur pamjen e cilësimeve të sistemit.</string>
+    <string name="dolby_theme_dossier">Tema e dosjes</string>
+</resources>

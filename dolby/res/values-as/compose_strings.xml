@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">চেহেৰা</string>
+    <string name="dolby_navigate_back">পিছলৈ ঘূৰি আহিল</string>
+    <string name="dolby_sound_console">শব্দ নিয়ন্ত্ৰণ</string>
+    <string name="dolby_theme_description">ৰঙা উচ্চাৰণৰ সৈতে কৌণিক পেনেল প্ৰদৰ্শন কৰক। ব্যৱস্থাপ্ৰণালীৰ সংহতিসমূহৰ ৰূপ ব্যৱহাৰ কৰিবলে এই বিকল্প নিষ্ক্ৰিয় কৰক ।</string>
+    <string name="dolby_theme_dossier">ডছিয়াৰ থিম</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Utsjånad</string>
+    <string name="dolby_navigate_back">Tilbake</string>
+    <string name="dolby_sound_console">Lydkontrollar</string>
+    <string name="dolby_theme_description">Vis kantete panel med raude aksentar. Slå av dette valet for å bruke utsjånaden til systeminnstillingane.</string>
+    <string name="dolby_theme_dossier">Dossier-tema</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Оформление</string>
+    <string name="dolby_navigate_back">Назад</string>
+    <string name="dolby_sound_console">Управление звуком</string>
+    <string name="dolby_theme_description">Использовать угловатые панели и красные акценты. Отключите для системного стиля настроек.</string>
+    <string name="dolby_theme_dossier">Тема «Досье»</string>
+</resources>

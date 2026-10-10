@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">ลักษณะที่ปรากฏ</string>
+    <string name="dolby_navigate_back">กลับ</string>
+    <string name="dolby_sound_console">การควบคุมเสียง</string>
+    <string name="dolby_theme_description">แสดงแผงเชิงมุมโดยเน้นสีแดง ปิดการใช้งานตัวเลือกนี้เพื่อใช้ลักษณะการตั้งค่าระบบ</string>
+    <string name="dolby_theme_dossier">ธีมเอกสาร</string>
+</resources>

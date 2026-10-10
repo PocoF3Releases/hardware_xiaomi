@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Ausgesinn</string>
+    <string name="dolby_navigate_back">Zréck</string>
+    <string name="dolby_sound_console">Sound Kontrollen</string>
+    <string name="dolby_theme_description">Weist eckeg Panelen mat roude Akzenter. Dës Optioun auszeschalten fir d\'Erscheinung vum System Settings ze benotzen.</string>
+    <string name="dolby_theme_dossier">Dossier Thema</string>
+</resources>

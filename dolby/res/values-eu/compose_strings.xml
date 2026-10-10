@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Itxura</string>
+    <string name="dolby_navigate_back">Itzuli</string>
+    <string name="dolby_sound_console">Soinu kontrolak</string>
+    <string name="dolby_theme_description">Bistaratu azentu gorridun panel angeluarrak. Desgaitu aukera hau sistemaren ezarpenen itxura erabiltzeko.</string>
+    <string name="dolby_theme_dossier">Dosierren gaia</string>
+</resources>

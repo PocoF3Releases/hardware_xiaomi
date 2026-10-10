@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Útlit</string>
+    <string name="dolby_navigate_back">Til baka</string>
+    <string name="dolby_sound_console">Hljóðstýringar</string>
+    <string name="dolby_theme_description">Sýndu hyrndar spjöld með rauðum kommur. Slökktu á þessum valkosti til að nota útlit kerfisstillinga.</string>
+    <string name="dolby_theme_dossier">Málsskjölsþema</string>
+</resources>

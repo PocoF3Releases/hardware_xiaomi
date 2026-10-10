@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Aspectul</string>
+    <string name="dolby_navigate_back">Înapoi</string>
+    <string name="dolby_sound_console">Comenzi de sunet</string>
+    <string name="dolby_theme_description">Afișați panouri unghiulare cu accente roșii. Dezactivați această opțiune pentru a utiliza aspectul Setări sistemului.</string>
+    <string name="dolby_theme_dossier">Tema dosarului</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">ଦୃଶ୍ୟ</string>
+    <string name="dolby_navigate_back">ପଛକୁ</string>
+    <string name="dolby_sound_console">ଶବ୍ଦ ନିୟନ୍ତ୍ରଣ |</string>
+    <string name="dolby_theme_description">ଲାଲ୍ ଉଚ୍ଚାରଣ ସହିତ କୋଣାର୍କ ପ୍ୟାନେଲ୍ ପ୍ରଦର୍ଶନ କରନ୍ତୁ | ସିଷ୍ଟମ୍ ସେଟିଂସମୂହ ଦୃଶ୍ୟ ବ୍ୟବହାର କରିବାକୁ ଏହି ବିକଳ୍ପକୁ ଅକ୍ଷମ କରନ୍ତୁ |</string>
+    <string name="dolby_theme_dossier">ଡୋସିଅର୍ ଥିମ୍ |</string>
+</resources>

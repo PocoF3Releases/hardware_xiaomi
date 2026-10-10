@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">દેખાવ</string>
+    <string name="dolby_navigate_back">પાછળ</string>
+    <string name="dolby_sound_console">ધ્વનિ નિયંત્રણો</string>
+    <string name="dolby_theme_description">લાલ ઉચ્ચારો સાથે કોણીય પેનલ્સ દર્શાવો. સિસ્ટમ સેટિંગ્સ દેખાવનો ઉપયોગ કરવા માટે આ વિકલ્પને અક્ષમ કરો.</string>
+    <string name="dolby_theme_dossier">ડોઝિયર થીમ</string>
+</resources>

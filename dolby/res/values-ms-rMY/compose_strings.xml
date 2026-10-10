@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Penampilan</string>
+    <string name="dolby_navigate_back">belakang</string>
+    <string name="dolby_sound_console">Kawalan bunyi</string>
+    <string name="dolby_theme_description">Paparkan panel sudut dengan aksen merah. Lumpuhkan pilihan ini untuk menggunakan penampilan Tetapan sistem.</string>
+    <string name="dolby_theme_dossier">Tema dokumen</string>
+</resources>

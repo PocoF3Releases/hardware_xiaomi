@@ -28,7 +28,7 @@
     <string name="dolby_gate_unknown">Unknown</string>
     <string name="dolby_route_speaker">Speaker</string>
     <string name="dolby_route_wired">Wired headphones</string>
-    <string name="dolby_route_bluetooth">Bluetooth</string>
+    <string name="dolby_route_bluetooth" translatable="false">Bluetooth</string>
     <string name="dolby_route_usb">USB audio</string>
     <string name="dolby_route_native">Not observed / system-managed</string>
 </resources>

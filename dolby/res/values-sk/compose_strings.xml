@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Vzhľad</string>
+    <string name="dolby_navigate_back">Späť</string>
+    <string name="dolby_sound_console">Ovládanie zvuku</string>
+    <string name="dolby_theme_description">Zobraziť hranaté panely s červenými akcentmi. Ak chcete použiť vzhľad nastavení systému, vypnite túto možnosť.</string>
+    <string name="dolby_theme_dossier">Téma spisu</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Aparença</string>
+    <string name="dolby_navigate_back">Enrere</string>
+    <string name="dolby_sound_console">Controls de so</string>
+    <string name="dolby_theme_description">Mostra panells angulars amb accents vermells. Desactiveu aquesta opció per utilitzar l\'aspecte de la configuració del sistema.</string>
+    <string name="dolby_theme_dossier">Temàtica del dossier</string>
+</resources>
