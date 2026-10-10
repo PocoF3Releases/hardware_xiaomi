@@ -318,7 +318,8 @@ internal fun ExpressiveValueSlider(
     val haptic = rememberTuningHaptics(range.start.toInt(), range.endInclusive.toInt())
     val minimum = range.start.roundToInt()
     val maximum = range.endInclusive.roundToInt()
-    val steps = (maximum - minimum - 1).coerceAtLeast(0)
+    // Dense integer ranges still round to native values without drawing a dot for every value.
+    val steps = if (maximum - minimum <= 20) (maximum - minimum - 1).coerceAtLeast(0) else 0
 
     Slider(
         value = value.coerceIn(range),
