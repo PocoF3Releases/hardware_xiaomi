@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">外观</string>
+    <string name="dolby_navigate_back">返回</string>
+    <string name="dolby_sound_console">声音控制</string>
+    <string name="dolby_theme_description">显示带有红色点缀的角面板。禁用此选项以使用系统设置外观。</string>
+    <string name="dolby_theme_dossier">档案主题</string>
+</resources>

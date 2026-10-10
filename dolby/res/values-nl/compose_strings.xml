@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Uiterlijk</string>
+    <string name="dolby_navigate_back">Terug</string>
+    <string name="dolby_sound_console">Geluidscontroles</string>
+    <string name="dolby_theme_description">Display hoekige panelen met rode accenten. Schakel deze optie uit om het uiterlijk van de systeeminstellingen te gebruiken.</string>
+    <string name="dolby_theme_dossier">Dossier-thema</string>
+</resources>

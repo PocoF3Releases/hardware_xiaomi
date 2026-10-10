@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Izgled</string>
+    <string name="dolby_navigate_back">Nazad</string>
+    <string name="dolby_sound_console">Kontrole zvuka</string>
+    <string name="dolby_theme_description">Displej ugaoni paneli sa crvenim akcentima. Onemogućite ovu opciju da biste koristili izgled sistemskih postavki.</string>
+    <string name="dolby_theme_dossier">Tema dosijea</string>
+</resources>

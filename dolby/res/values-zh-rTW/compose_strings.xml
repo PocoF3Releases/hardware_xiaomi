@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">外觀</string>
+    <string name="dolby_navigate_back">返回</string>
+    <string name="dolby_sound_console">聲音控制</string>
+    <string name="dolby_theme_description">顯示帶有紅色點綴的角落面板。停用此選項以使用系統設定外觀。</string>
+    <string name="dolby_theme_dossier">檔案主題</string>
+</resources>

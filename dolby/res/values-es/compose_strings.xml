@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Apariencia</string>
+    <string name="dolby_navigate_back">Atrás</string>
+    <string name="dolby_sound_console">controles de sonido</string>
+    <string name="dolby_theme_description">Muestre paneles angulares con detalles en rojo. Deshabilite esta opción para usar la apariencia de Configuración del sistema.</string>
+    <string name="dolby_theme_dossier">Tema del dossier</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">외관</string>
+    <string name="dolby_navigate_back">뒤로</string>
+    <string name="dolby_sound_console">사운드 컨트롤</string>
+    <string name="dolby_theme_description">빨간색 액센트가 있는 각진 패널을 표시합니다. 시스템 설정 모양을 사용하려면 이 옵션을 비활성화하십시오.</string>
+    <string name="dolby_theme_dossier">Dossier 테마</string>
+</resources>

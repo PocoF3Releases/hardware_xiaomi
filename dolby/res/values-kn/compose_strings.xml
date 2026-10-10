@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">ಗೋಚರತೆ</string>
+    <string name="dolby_navigate_back">ಹಿಂದೆ</string>
+    <string name="dolby_sound_console">ಧ್ವನಿ ನಿಯಂತ್ರಣಗಳು</string>
+    <string name="dolby_theme_description">ಕೆಂಪು ಉಚ್ಚಾರಣೆಗಳೊಂದಿಗೆ ಕೋನೀಯ ಫಲಕಗಳನ್ನು ಪ್ರದರ್ಶಿಸಿ. ಸಿಸ್ಟಮ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳ ನೋಟವನ್ನು ಬಳಸಲು ಈ ಆಯ್ಕೆಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ.</string>
+    <string name="dolby_theme_dossier">ಡಾಸಿಯರ್ ಥೀಮ್</string>
+</resources>

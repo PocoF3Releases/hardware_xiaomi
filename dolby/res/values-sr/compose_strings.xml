@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Изглед</string>
+    <string name="dolby_navigate_back">Назад</string>
+    <string name="dolby_sound_console">Контроле звука</string>
+    <string name="dolby_theme_description">Приказ угаоних панела са црвеним акцентима. Онемогућите ову опцију да бисте користили изглед системских поставки.</string>
+    <string name="dolby_theme_dossier">Тема досијеа</string>
+</resources>

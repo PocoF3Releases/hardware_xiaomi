@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Megjelenés</string>
+    <string name="dolby_navigate_back">Vissza</string>
+    <string name="dolby_sound_console">Hangvezérlők</string>
+    <string name="dolby_theme_description">Szögletes panelek piros díszítéssel. A rendszerbeállítások megjelenítéséhez kapcsolja ki ezt az opciót.</string>
+    <string name="dolby_theme_dossier">Dosszié téma</string>
+</resources>

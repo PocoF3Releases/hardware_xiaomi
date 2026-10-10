@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">រូបរាង</string>
+    <string name="dolby_navigate_back">ត្រឡប់មកវិញ</string>
+    <string name="dolby_sound_console">ការគ្រប់គ្រងសំឡេង</string>
+    <string name="dolby_theme_description">បង្ហាញបន្ទះជ្រុងជាមួយនឹងការសង្កត់សំឡេងពណ៌ក្រហម។ បិទជម្រើសនេះដើម្បីប្រើរូបរាងការកំណត់ប្រព័ន្ធ។</string>
+    <string name="dolby_theme_dossier">ប្រធានបទឯកសារ</string>
+</resources>
