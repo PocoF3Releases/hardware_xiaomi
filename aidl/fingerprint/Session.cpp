@@ -114,6 +114,13 @@ ndk::ScopedAStatus Session::enumerateEnrollments() {
 ndk::ScopedAStatus Session::removeEnrollments(const std::vector<int32_t>& enrollmentIds) {
     ALOGI("removeEnrollments, size: %zu", enrollmentIds.size());
 
+    // An empty request still needs completion, but must not reach a legacy HAL
+    // where an empty list or fingerprint ID zero can mean remove all templates.
+    if (enrollmentIds.empty()) {
+        mCb->onEnrollmentsRemoved({});
+        return ndk::ScopedAStatus::ok();
+    }
+
 #ifndef IMPL_V2
     for (int32_t fid : enrollmentIds) {
         int error = mDevice->remove(mDevice, mUserId, fid);
