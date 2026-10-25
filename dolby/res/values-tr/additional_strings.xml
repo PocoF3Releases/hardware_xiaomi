@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Profili kullan</string>
     <string name="dolby_profile_active">Etkin</string>
     <string name="game_effect_title">Oyun sesi geliştirme</string>
-    <string name="game_effect_summary">Seçili oyunlar için alioth\'un HyperOS FPS ses işlemesini kullanın. İşleme yalnızca desteklenen kablolu, USB, Bluetooth veya BLE kulaklıklarda uygulanır.</string>
     <string name="game_effect_active">%1$s için etkin</string>
     <string name="game_effect_manage">Oyunları yönet</string>
     <string name="game_effect_manage_summary">Oyunları seçin ve HyperOS ses parametrelerini ayarlayın.</string>

@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Profildən istifadə et</string>
     <string name="dolby_profile_active">Aktiv</string>
     <string name="game_effect_title">Oyun səsinin gücləndirilməsi</string>
-    <string name="game_effect_summary">Seçilmiş oyunlar üçün alioth-un HyperOS FPS səs emalından istifadə edin. Emal yalnız dəstəklənən simli, USB, Bluetooth və ya BLE qulaqlıqlarında tətbiq olunur.</string>
     <string name="game_effect_active">%1$s üçün aktiv</string>
     <string name="game_effect_manage">Oyunları idarə et</string>
     <string name="game_effect_manage_summary">Oyunları seçin və onların HyperOS səs parametrlərini tənzimləyin.</string>

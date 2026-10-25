@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">استفاده از پروفایل</string>
     <string name="dolby_profile_active">فعال</string>
     <string name="game_effect_title">بهبود صدای بازی</string>
-    <string name="game_effect_summary">از پردازش صدای HyperOS FPS مربوط به alioth برای بازی‌های انتخاب‌شده استفاده کنید. پردازش فقط روی هدست‌های سیمی، USB، Bluetooth یا BLE پشتیبانی‌شده اعمال می‌شود.</string>
     <string name="game_effect_active">فعال برای %1$s</string>
     <string name="game_effect_manage">مدیریت بازی‌ها</string>
     <string name="game_effect_manage_summary">بازی‌ها را انتخاب و پارامترهای صدای HyperOS آن‌ها را تنظیم کنید.</string>

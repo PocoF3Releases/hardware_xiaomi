@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">പ്രൊഫൈൽ ഉപയോഗിക്കുക</string>
     <string name="dolby_profile_active">സജീവം</string>
     <string name="game_effect_title">ഗെയിം ഓഡിയോ എൻഹാൻസ്മെന്റ്</string>
-    <string name="game_effect_summary">തിരഞ്ഞെടുത്ത ഗെയിമുകൾക്ക് alioth-ന്റെ HyperOS FPS ഓഡിയോ പ്രോസസ്സിംഗ് ഉപയോഗിക്കുക. പിന്തുണയ്ക്കുന്ന വയർഡ്, USB, Bluetooth അല്ലെങ്കിൽ BLE ഹെഡ്‌സെറ്റുകളിൽ മാത്രമേ പ്രോസസ്സിംഗ് പ്രയോഗിക്കൂ.</string>
     <string name="game_effect_active">%1$s-ന് സജീവം</string>
     <string name="game_effect_manage">ഗെയിമുകൾ നിയന്ത്രിക്കുക</string>
     <string name="game_effect_manage_summary">ഗെയിമുകൾ തിരഞ്ഞെടുത്ത് അവയുടെ HyperOS ഓഡിയോ പാരാമീറ്ററുകൾ ട്യൂൺ ചെയ്യുക.</string>

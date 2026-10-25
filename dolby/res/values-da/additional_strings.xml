@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Brug profil</string>
     <string name="dolby_profile_active">Aktiv</string>
     <string name="game_effect_title">Forbedring af spillyd</string>
-    <string name="game_effect_summary">Brug alioths HyperOS FPS-lydbehandling til valgte spil. Behandlingen anvendes kun på understøttede kablede, USB-, Bluetooth- eller BLE-headsets.</string>
     <string name="game_effect_active">Aktiv for %1$s</string>
     <string name="game_effect_manage">Administrer spil</string>
     <string name="game_effect_manage_summary">Vælg spil, og juster deres HyperOS-lydparametre.</string>

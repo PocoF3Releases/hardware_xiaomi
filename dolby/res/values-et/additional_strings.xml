@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Kasuta profiili</string>
     <string name="dolby_profile_active">Aktiivne</string>
     <string name="game_effect_title">Mänguheli täiustamine</string>
-    <string name="game_effect_summary">Kasuta valitud mängude jaoks aliothi HyperOS FPS-i helitöötlust. Töötlust rakendatakse ainult toetatud juhtmega, USB-, Bluetooth- või BLE-kõrvaklappidele.</string>
     <string name="game_effect_active">Aktiivne: %1$s</string>
     <string name="game_effect_manage">Halda mänge</string>
     <string name="game_effect_manage_summary">Vali mängud ja häälesta nende HyperOS-i heliparameetreid.</string>

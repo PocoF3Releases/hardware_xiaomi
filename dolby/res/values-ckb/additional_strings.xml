@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">بەکارهێنانی پرۆفایل</string>
     <string name="dolby_profile_active">چالاک</string>
     <string name="game_effect_title">باشترکردنی دەنگی یاری</string>
-    <string name="game_effect_summary">پرۆسەکردنی دەنگی HyperOS FPSی alioth بۆ یارییە هەڵبژێردراوەکان بەکاربهێنە. پرۆسەکردن تەنها لە سەرگۆێی سیمدار، USB، Bluetooth یان BLEی پشتگیریکراو جێبەجێ دەکرێت.</string>
     <string name="game_effect_active">چالاکە بۆ %1$s</string>
     <string name="game_effect_manage">بەڕێوەبردنی یارییەکان</string>
     <string name="game_effect_manage_summary">یارییەکان هەڵبژێرە و پارامەتەرەکانی دەنگی HyperOSیان ڕێکبخە.</string>

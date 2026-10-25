@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Օգտագործել պրոֆիլը</string>
     <string name="dolby_profile_active">Ակտիվ</string>
     <string name="game_effect_title">Խաղային ձայնի բարելավում</string>
-    <string name="game_effect_summary">Ընտրված խաղերի համար օգտագործել alioth-ի HyperOS FPS ձայնային մշակումը։ Մշակումը կիրառվում է միայն աջակցվող լարային, USB, Bluetooth կամ BLE ականջակալների դեպքում։</string>
     <string name="game_effect_active">Ակտիվ է %1$s-ի համար</string>
     <string name="game_effect_manage">Կառավարել խաղերը</string>
     <string name="game_effect_manage_summary">Ընտրեք խաղերը և կարգավորեք դրանց HyperOS ձայնային պարամետրերը։</string>

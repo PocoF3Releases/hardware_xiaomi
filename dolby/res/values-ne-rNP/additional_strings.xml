@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">प्रोफाइल प्रयोग गर्नुहोस्</string>
     <string name="dolby_profile_active">सक्रिय</string>
     <string name="game_effect_title">खेल अडियो संवर्द्धन</string>
-    <string name="game_effect_summary">चयन गरिएका खेलहरूका लागि alioth को HyperOS FPS अडियो प्रशोधन प्रयोग गर्नुहोस्। प्रशोधन समर्थित तारयुक्त, USB, Bluetooth वा BLE हेडसेटमा मात्र लागू हुन्छ।</string>
     <string name="game_effect_active">%1$s का लागि सक्रिय</string>
     <string name="game_effect_manage">खेलहरू व्यवस्थापन गर्नुहोस्</string>
     <string name="game_effect_manage_summary">खेलहरू छान्नुहोस् र तिनका HyperOS अडियो प्यारामिटर ट्युन गर्नुहोस्।</string>

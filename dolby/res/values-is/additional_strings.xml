@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Nota snið</string>
     <string name="dolby_profile_active">Virkt</string>
     <string name="game_effect_title">Bætt leikjahljóð</string>
-    <string name="game_effect_summary">Notaðu HyperOS FPS hljóðvinnslu alioth fyrir valda leiki. Vinnsla er aðeins notuð á studd heyrnartól með snúru, USB, Bluetooth eða BLE.</string>
     <string name="game_effect_active">Virkt fyrir %1$s</string>
     <string name="game_effect_manage">Stjórna leikjum</string>
     <string name="game_effect_manage_summary">Veldu leiki og stilltu HyperOS hljóðbreytur þeirra.</string>
