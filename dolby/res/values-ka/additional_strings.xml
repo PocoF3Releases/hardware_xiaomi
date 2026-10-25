@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">პროფილის გამოყენება</string>
     <string name="dolby_profile_active">აქტიური</string>
     <string name="game_effect_title">თამაშის ხმის გაუმჯობესება</string>
-    <string name="game_effect_summary">შერჩეული თამაშებისთვის გამოიყენეთ alioth-ის HyperOS FPS ხმის დამუშავება. დამუშავება გამოიყენება მხოლოდ მხარდაჭერილ სადენიან, USB, Bluetooth ან BLE ყურსასმენებზე.</string>
     <string name="game_effect_active">აქტიურია %1$s-ისთვის</string>
     <string name="game_effect_manage">თამაშების მართვა</string>
     <string name="game_effect_manage_summary">აირჩიეთ თამაშები და მოარგეთ მათი HyperOS ხმის პარამეტრები.</string>

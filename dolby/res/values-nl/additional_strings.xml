@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Profiel gebruiken</string>
     <string name="dolby_profile_active">Actief</string>
     <string name="game_effect_title">Verbetering van game-audio</string>
-    <string name="game_effect_summary">Gebruik alioths HyperOS FPS-audioverwerking voor geselecteerde games. Verwerking wordt alleen toegepast op ondersteunde bedrade, USB-, Bluetooth- of BLE-headsets.</string>
     <string name="game_effect_active">Actief voor %1$s</string>
     <string name="game_effect_manage">Games beheren</string>
     <string name="game_effect_manage_summary">Kies games en stem hun HyperOS-audioparameters af.</string>

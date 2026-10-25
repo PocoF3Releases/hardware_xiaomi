@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Profildan foydalanish</string>
     <string name="dolby_profile_active">Faol</string>
     <string name="game_effect_title">O‘yin audiosini yaxshilash</string>
-    <string name="game_effect_summary">Tanlangan o‘yinlar uchun alioth\'ning HyperOS FPS audio ishlov berishidan foydalaning. Ishlov berish faqat qo‘llab-quvvatlanadigan simli, USB, Bluetooth yoki BLE garnituralarda qo‘llanadi.</string>
     <string name="game_effect_active">%1$s uchun faol</string>
     <string name="game_effect_manage">O‘yinlarni boshqarish</string>
     <string name="game_effect_manage_summary">O‘yinlarni tanlang va ularning HyperOS audio parametrlarini sozlang.</string>

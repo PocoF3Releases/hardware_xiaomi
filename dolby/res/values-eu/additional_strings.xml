@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Erabili profila</string>
     <string name="dolby_profile_active">Aktibo</string>
     <string name="game_effect_title">Jokoen audio-hobekuntza</string>
-    <string name="game_effect_summary">Erabili alioth-en HyperOS FPS audio-prozesamendua hautatutako jokoetarako. Prozesamendua kabledun, USB, Bluetooth edo BLE aurikular bateragarrietan soilik aplikatzen da.</string>
     <string name="game_effect_active">Aktibo %1$s-rako</string>
     <string name="game_effect_manage">Kudeatu jokoak</string>
     <string name="game_effect_manage_summary">Aukeratu jokoak eta doitu haien HyperOS audio-parametroak.</string>

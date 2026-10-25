@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Defnyddio proffil</string>
     <string name="dolby_profile_active">Gweithredol</string>
     <string name="game_effect_title">Gwella sain gemau</string>
-    <string name="game_effect_summary">Defnyddiwch brosesu sain HyperOS FPS alioth ar gyfer gemau dethol. Dim ond ar glustffonau gwifredig, USB, Bluetooth neu BLE a gefnogir y cymhwysir y prosesu.</string>
     <string name="game_effect_active">Gweithredol ar gyfer %1$s</string>
     <string name="game_effect_manage">Rheoli gemau</string>
     <string name="game_effect_manage_summary">Dewiswch gemau a thiwniwch eu paramedrau sain HyperOS.</string>

@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">ئارخىپنى ئىشلىتىش</string>
     <string name="dolby_profile_active">ئاكتىپ</string>
     <string name="game_effect_title">ئويۇن ئاۋازىنى كۈچەيتىش</string>
-    <string name="game_effect_summary">تاللانغان ئويۇنلار ئۈچۈن alioth نىڭ HyperOS FPS ئاۋاز بىر تەرەپ قىلىشىنى ئىشلىتىڭ. بىر تەرەپ قىلىش پەقەت قوللايدىغان سىملىق، USB، Bluetooth ياكى BLE تىڭشىغۇچلارغا قوللىنىلىدۇ.</string>
     <string name="game_effect_active">%1$s ئۈچۈن ئاكتىپ</string>
     <string name="game_effect_manage">ئويۇنلارنى باشقۇرۇش</string>
     <string name="game_effect_manage_summary">ئويۇنلارنى تاللاپ ئۇلارنىڭ HyperOS ئاۋاز پارامېتىرلىرىنى تەڭشەڭ.</string>

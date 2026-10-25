@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">প্ৰ’ফাইল ব্যৱহাৰ কৰক</string>
     <string name="dolby_profile_active">সক্ৰিয়</string>
     <string name="game_effect_title">গেম অডিঅ’ বৰ্ধন</string>
-    <string name="game_effect_summary">বাছনি কৰা গেমসমূহৰ বাবে aliothৰ HyperOS FPS অডিঅ’ প্ৰচেছিং ব্যৱহাৰ কৰক। প্ৰচেছিং কেৱল সমৰ্থিত তাঁৰযুক্ত, USB, Bluetooth বা BLE হেডছেটত প্ৰয়োগ হয়।</string>
     <string name="game_effect_active">%1$sৰ বাবে সক্ৰিয়</string>
     <string name="game_effect_manage">গেমসমূহ পৰিচালনা কৰক</string>
     <string name="game_effect_manage_summary">গেম বাছক আৰু সিহঁতৰ HyperOS অডিঅ’ পেৰামিটাৰ টিউন কৰক।</string>

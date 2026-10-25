@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">ใช้โปรไฟล์</string>
     <string name="dolby_profile_active">ใช้งานอยู่</string>
     <string name="game_effect_title">การเพิ่มประสิทธิภาพเสียงเกม</string>
-    <string name="game_effect_summary">ใช้การประมวลผลเสียง FPS ของ HyperOS ของ alioth สำหรับเกมที่เลือก การประมวลผลจะใช้เฉพาะกับชุดหูฟังแบบมีสาย, USB, Bluetooth หรือ BLE ที่รองรับเท่านั้น</string>
     <string name="game_effect_active">ใช้งานสำหรับ %1$s</string>
     <string name="game_effect_manage">จัดการเกม</string>
     <string name="game_effect_manage_summary">เลือกเกมและปรับพารามิเตอร์เสียง HyperOS ของเกม</string>

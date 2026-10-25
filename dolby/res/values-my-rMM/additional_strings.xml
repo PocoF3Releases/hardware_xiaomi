@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">ပရိုဖိုင် အသုံးပြုရန်</string>
     <string name="dolby_profile_active">အသုံးပြုနေသည်</string>
     <string name="game_effect_title">ဂိမ်းအသံ မြှင့်တင်မှု</string>
-    <string name="game_effect_summary">ရွေးချယ်ထားသော ဂိမ်းများအတွက် alioth ၏ HyperOS FPS အသံလုပ်ဆောင်မှုကို အသုံးပြုပါ။ လုပ်ဆောင်မှုကို ပံ့ပိုးထားသော ကြိုးတပ်၊ USB၊ Bluetooth သို့မဟုတ် BLE နားကြပ်များတွင်သာ အသုံးပြုသည်။</string>
     <string name="game_effect_active">%1$s အတွက် အသုံးပြုနေသည်</string>
     <string name="game_effect_manage">ဂိမ်းများကို စီမံရန်</string>
     <string name="game_effect_manage_summary">ဂိမ်းများကို ရွေးပြီး ၎င်းတို့၏ HyperOS အသံ ပါရာမီတာများကို ချိန်ညှိပါ။</string>

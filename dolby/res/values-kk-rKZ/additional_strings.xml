@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Профильді пайдалану</string>
     <string name="dolby_profile_active">Белсенді</string>
     <string name="game_effect_title">Ойын дыбысын жақсарту</string>
-    <string name="game_effect_summary">Таңдалған ойындар үшін alioth құрылғысының HyperOS FPS дыбыс өңдеуін пайдаланыңыз. Өңдеу тек қолдау көрсетілетін сымды, USB, Bluetooth немесе BLE гарнитураларында қолданылады.</string>
     <string name="game_effect_active">%1$s үшін белсенді</string>
     <string name="game_effect_manage">Ойындарды басқару</string>
     <string name="game_effect_manage_summary">Ойындарды таңдап, олардың HyperOS дыбыс параметрлерін реттеңіз.</string>

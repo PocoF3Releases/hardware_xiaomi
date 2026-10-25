@@ -100,7 +100,6 @@
 
     <!-- HyperOS game audio effect -->
     <string name="game_effect_title">Игровое улучшение звука</string>
-    <string name="game_effect_summary">Использовать игровую FPS-обработку HyperOS для выбранных игр. Эффект применяется только с поддерживаемыми проводными, USB, Bluetooth или BLE-наушниками.</string>
     <string name="game_effect_active">Активно для %1$s</string>
     <string name="game_effect_manage">Управление играми</string>
     <string name="game_effect_manage_summary">Выберите игры и настройте их аудиопараметры HyperOS.</string>

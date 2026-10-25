@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">프로필 사용</string>
     <string name="dolby_profile_active">활성</string>
     <string name="game_effect_title">게임 오디오 강화</string>
-    <string name="game_effect_summary">선택한 게임에 alioth의 HyperOS FPS 오디오 처리를 사용합니다. 처리는 지원되는 유선, USB, Bluetooth 또는 BLE 헤드셋에서만 적용됩니다.</string>
     <string name="game_effect_active">%1$s에 활성</string>
     <string name="game_effect_manage">게임 관리</string>
     <string name="game_effect_manage_summary">게임을 선택하고 HyperOS 오디오 매개변수를 조정합니다.</string>

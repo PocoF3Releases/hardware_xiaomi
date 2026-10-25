@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Gunakan profil</string>
     <string name="dolby_profile_active">Aktif</string>
     <string name="game_effect_title">Peningkatan audio game</string>
-    <string name="game_effect_summary">Gunakan pemrosesan audio FPS HyperOS milik alioth untuk game yang dipilih. Pemrosesan hanya diterapkan pada headset kabel, USB, Bluetooth, atau BLE yang didukung.</string>
     <string name="game_effect_active">Aktif untuk %1$s</string>
     <string name="game_effect_manage">Kelola game</string>
     <string name="game_effect_manage_summary">Pilih game dan sesuaikan parameter audio HyperOS-nya.</string>

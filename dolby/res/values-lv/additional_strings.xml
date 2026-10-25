@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Izmantot profilu</string>
     <string name="dolby_profile_active">Aktīvs</string>
     <string name="game_effect_title">Spēļu audio uzlabošana</string>
-    <string name="game_effect_summary">Atlasītajām spēlēm izmantojiet alioth HyperOS FPS audio apstrādi. Apstrāde tiek lietota tikai atbalstītām vadu, USB, Bluetooth vai BLE austiņām.</string>
     <string name="game_effect_active">Aktīvs: %1$s</string>
     <string name="game_effect_manage">Pārvaldīt spēles</string>
     <string name="game_effect_manage_summary">Izvēlieties spēles un regulējiet to HyperOS audio parametrus.</string>

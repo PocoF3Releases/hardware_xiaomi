@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Profyl brûke</string>
     <string name="dolby_profile_active">Aktyf</string>
     <string name="game_effect_title">Ferbettering fan spullûd</string>
-    <string name="game_effect_summary">Brûk alioth syn HyperOS FPS-lûdferwurking foar selektearre spultsjes. Ferwurking wurdt allinnich tapast op stipe bedrade, USB-, Bluetooth- of BLE-headsets.</string>
     <string name="game_effect_active">Aktyf foar %1$s</string>
     <string name="game_effect_manage">Spultsjes beheare</string>
     <string name="game_effect_manage_summary">Kies spultsjes en stel harren HyperOS-lûdparameters ôf.</string>
