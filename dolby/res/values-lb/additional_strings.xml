@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Profil benotzen</string>
     <string name="dolby_profile_active">Aktiv</string>
     <string name="game_effect_title">Verbesserung vum Spilltoun</string>
-    <string name="game_effect_summary">Benotzt dem alioth seng HyperOS FPS-Audioveraarbechtung fir ausgewielte Spiller. D\'Veraarbechtung gëtt nëmme mat ënnerstëtzte verkabelten, USB-, Bluetooth- oder BLE-Headsets applizéiert.</string>
     <string name="game_effect_active">Aktiv fir %1$s</string>
     <string name="game_effect_manage">Spiller verwalten</string>
     <string name="game_effect_manage_summary">Wielt Spiller a passt hir HyperOS-Audioparameter un.</string>

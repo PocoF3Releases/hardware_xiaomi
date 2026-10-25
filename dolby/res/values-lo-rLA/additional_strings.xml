@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">ໃຊ້ໂປຣໄຟລ໌</string>
     <string name="dolby_profile_active">ເຮັດວຽກ</string>
     <string name="game_effect_title">ການເພີ່ມສຽງເກມ</string>
-    <string name="game_effect_summary">ໃຊ້ການປະມວນຜົນສຽງ FPS HyperOS ຂອງ alioth ສຳລັບເກມທີ່ເລືອກ. ການປະມວນຜົນໃຊ້ໄດ້ສະເພາະກັບຫູຟັງມີສາຍ, USB, Bluetooth ຫຼື BLE ທີ່ຮອງຮັບ.</string>
     <string name="game_effect_active">ເຮັດວຽກສຳລັບ %1$s</string>
     <string name="game_effect_manage">ຈັດການເກມ</string>
     <string name="game_effect_manage_summary">ເລືອກເກມ ແລະ ປັບພາຣາມິເຕີສຽງ HyperOS ຂອງເກມ.</string>

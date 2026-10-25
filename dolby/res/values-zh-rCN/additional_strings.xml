@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">使用配置文件</string>
     <string name="dolby_profile_active">活动</string>
     <string name="game_effect_title">游戏音频增强</string>
-    <string name="game_effect_summary">为所选游戏使用 alioth 的 HyperOS FPS 音频处理。处理仅应用于支持的有线、USB、Bluetooth 或 BLE 耳机。</string>
     <string name="game_effect_active">对 %1$s 活动</string>
     <string name="game_effect_manage">管理游戏</string>
     <string name="game_effect_manage_summary">选择游戏并调校其 HyperOS 音频参数。</string>

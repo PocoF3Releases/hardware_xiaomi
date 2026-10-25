@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Folosește profilul</string>
     <string name="dolby_profile_active">Activ</string>
     <string name="game_effect_title">Îmbunătățire audio pentru jocuri</string>
-    <string name="game_effect_summary">Folosește procesarea audio FPS HyperOS a lui alioth pentru jocurile selectate. Procesarea este aplicată numai pe căști cu fir, USB, Bluetooth sau BLE compatibile.</string>
     <string name="game_effect_active">Activ pentru %1$s</string>
     <string name="game_effect_manage">Gestionează jocurile</string>
     <string name="game_effect_manage_summary">Alege jocuri și reglează parametrii lor audio HyperOS.</string>

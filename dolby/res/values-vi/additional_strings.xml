@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Sử dụng hồ sơ</string>
     <string name="dolby_profile_active">Đang hoạt động</string>
     <string name="game_effect_title">Tăng cường âm thanh trò chơi</string>
-    <string name="game_effect_summary">Sử dụng xử lý âm thanh FPS HyperOS của alioth cho các trò chơi đã chọn. Xử lý chỉ được áp dụng trên tai nghe có dây, USB, Bluetooth hoặc BLE được hỗ trợ.</string>
     <string name="game_effect_active">Đang hoạt động cho %1$s</string>
     <string name="game_effect_manage">Quản lý trò chơi</string>
     <string name="game_effect_manage_summary">Chọn trò chơi và tinh chỉnh các tham số âm thanh HyperOS của chúng.</string>

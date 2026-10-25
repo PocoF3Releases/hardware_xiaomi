@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Cleachd pròifil</string>
     <string name="dolby_profile_active">Gnìomhach</string>
     <string name="game_effect_title">Leasachadh fuaim gheamannan</string>
-    <string name="game_effect_summary">Cleachd giullachd fuaime HyperOS FPS alioth airson geamannan taghte. Cha tèid a’ ghiullachd a chur an sàs ach air fònaichean-cluaise uèirichte, USB, Bluetooth no BLE a tha fo thaic.</string>
     <string name="game_effect_active">Gnìomhach airson %1$s</string>
     <string name="game_effect_manage">Stiùirich geamannan</string>
     <string name="game_effect_manage_summary">Tagh geamannan agus gleus na paramadairean fuaime HyperOS aca.</string>

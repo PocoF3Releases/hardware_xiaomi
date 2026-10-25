@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">சுயவிவரத்தைப் பயன்படுத்து</string>
     <string name="dolby_profile_active">செயலில்</string>
     <string name="game_effect_title">விளையாட்டு ஒலி மேம்பாடு</string>
-    <string name="game_effect_summary">தேர்ந்தெடுக்கப்பட்ட விளையாட்டுகளுக்கு alioth இன் HyperOS FPS ஒலி செயலாக்கத்தைப் பயன்படுத்தவும். ஆதரிக்கப்படும் கம்பி, USB, Bluetooth அல்லது BLE ஹெட்செட்களில் மட்டுமே செயலாக்கம் பயன்படுத்தப்படும்.</string>
     <string name="game_effect_active">%1$s க்கு செயலில்</string>
     <string name="game_effect_manage">விளையாட்டுகளை நிர்வகி</string>
     <string name="game_effect_manage_summary">விளையாட்டுகளைத் தேர்ந்தெடுத்து அவற்றின் HyperOS ஒலி அளவுருக்களைச் சீரமைக்கவும்.</string>

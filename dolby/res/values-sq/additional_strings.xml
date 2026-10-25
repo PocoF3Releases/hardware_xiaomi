@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Përdor profilin</string>
     <string name="dolby_profile_active">Aktiv</string>
     <string name="game_effect_title">Përmirësimi i audios së lojërave</string>
-    <string name="game_effect_summary">Përdor përpunimin audio FPS të HyperOS të alioth për lojërat e zgjedhura. Përpunimi zbatohet vetëm në kufje me kabllo, USB, Bluetooth ose BLE të mbështetura.</string>
     <string name="game_effect_active">Aktiv për %1$s</string>
     <string name="game_effect_manage">Menaxho lojërat</string>
     <string name="game_effect_manage_summary">Zgjidh lojërat dhe rregullo parametrat e tyre audio HyperOS.</string>
