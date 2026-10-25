@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">ಪ್ರೊಫೈಲ್ ಬಳಸಿ</string>
     <string name="dolby_profile_active">ಸಕ್ರಿಯ</string>
     <string name="game_effect_title">ಗೇಮ್ ಆಡಿಯೊ ವರ್ಧನೆ</string>
-    <string name="game_effect_summary">ಆಯ್ದ ಗೇಮ್‌ಗಳಿಗೆ alioth ನ HyperOS FPS ಆಡಿಯೊ ಪ್ರೊಸೆಸಿಂಗ್ ಬಳಸಿ. ಬೆಂಬಲಿತ ವೈರ್ಡ್, USB, Bluetooth ಅಥವಾ BLE ಹೆಡ್‌ಸೆಟ್‌ಗಳಲ್ಲಿ ಮಾತ್ರ ಪ್ರೊಸೆಸಿಂಗ್ ಅನ್ವಯಿಸಲಾಗುತ್ತದೆ.</string>
     <string name="game_effect_active">%1$s ಗೆ ಸಕ್ರಿಯ</string>
     <string name="game_effect_manage">ಗೇಮ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ</string>
     <string name="game_effect_manage_summary">ಗೇಮ್‌ಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ ಮತ್ತು ಅವುಗಳ HyperOS ಆಡಿಯೊ ನಿಯತಾಂಕಗಳನ್ನು ಟ್ಯೂನ್ ಮಾಡಿ.</string>

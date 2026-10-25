@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Gebruik profiel</string>
     <string name="dolby_profile_active">Aktief</string>
     <string name="game_effect_title">Spelklankverbetering</string>
-    <string name="game_effect_summary">Gebruik alioth se HyperOS FPS-klankverwerking vir geselekteerde speletjies. Verwerking word slegs op ondersteunde bedrade, USB-, Bluetooth- of BLE-oorfone toegepas.</string>
     <string name="game_effect_active">Aktief vir %1$s</string>
     <string name="game_effect_manage">Bestuur speletjies</string>
     <string name="game_effect_manage_summary">Kies speletjies en stel hul HyperOS-klankparameters in.</string>

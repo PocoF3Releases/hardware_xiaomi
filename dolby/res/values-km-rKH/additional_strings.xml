@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">ប្រើប្រវត្តិរូប</string>
     <string name="dolby_profile_active">សកម្ម</string>
     <string name="game_effect_title">ការបង្កើនសំឡេងហ្គេម</string>
-    <string name="game_effect_summary">ប្រើការដំណើរការសំឡេង FPS HyperOS របស់ alioth សម្រាប់ហ្គេមដែលបានជ្រើសរើស។ ការដំណើរការត្រូវបានអនុវត្តតែលើកាសមានខ្សែ USB, Bluetooth ឬ BLE ដែលគាំទ្រ។</string>
     <string name="game_effect_active">សកម្មសម្រាប់ %1$s</string>
     <string name="game_effect_manage">គ្រប់គ្រងហ្គេម</string>
     <string name="game_effect_manage_summary">ជ្រើសរើសហ្គេម និងកែសម្រួលប៉ារ៉ាម៉ែត្រសំឡេង HyperOS របស់វា។</string>

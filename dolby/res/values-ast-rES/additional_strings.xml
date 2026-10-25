@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Usar perfil</string>
     <string name="dolby_profile_active">Activu</string>
     <string name="game_effect_title">Meyora del soníu de xuegos</string>
-    <string name="game_effect_summary">Usa’l procesamientu d’audiu HyperOS FPS d’alioth pa los xuegos escoyíos. El procesamientu namái s’aplica a auriculares con cable, USB, Bluetooth o BLE compatibles.</string>
     <string name="game_effect_active">Activu pa %1$s</string>
     <string name="game_effect_manage">Xestionar xuegos</string>
     <string name="game_effect_manage_summary">Escueyi xuegos y axusta los sos parámetros d’audiu HyperOS.</string>

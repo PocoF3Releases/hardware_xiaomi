@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Uzi profilon</string>
     <string name="dolby_profile_active">Aktiva</string>
     <string name="game_effect_title">Plibonigo de ludsono</string>
-    <string name="game_effect_summary">Uzu la HyperOS FPS-sonprilaboradon de alioth por elektitaj ludoj. Prilaborado aplikiĝas nur al subtenataj kablaj, USB, Bluetooth aŭ BLE-aŭdiloj.</string>
     <string name="game_effect_active">Aktiva por %1$s</string>
     <string name="game_effect_manage">Administri ludojn</string>
     <string name="game_effect_manage_summary">Elektu ludojn kaj agordu iliajn HyperOS-sonparametrojn.</string>

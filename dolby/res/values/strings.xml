@@ -100,7 +100,6 @@
 
     <!-- HyperOS game audio effect -->
     <string name="game_effect_title">Game audio enhancement</string>
-    <string name="game_effect_summary">Use alioth’s HyperOS FPS audio processing for selected games. Processing is applied only on supported wired, USB, Bluetooth, or BLE headsets.</string>
     <string name="game_effect_active">Active for %1$s</string>
     <string name="game_effect_manage">Manage games</string>
     <string name="game_effect_manage_summary">Choose games and tune their HyperOS audio parameters.</string>

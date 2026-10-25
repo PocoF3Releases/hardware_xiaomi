@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Profil használata</string>
     <string name="dolby_profile_active">Aktív</string>
     <string name="game_effect_title">Játékhang javítása</string>
-    <string name="game_effect_summary">Az alioth HyperOS FPS hangfeldolgozásának használata a kiválasztott játékokhoz. A feldolgozás csak támogatott vezetékes, USB-, Bluetooth- vagy BLE-fejhallgatón alkalmazható.</string>
     <string name="game_effect_active">Aktív ehhez: %1$s</string>
     <string name="game_effect_manage">Játékok kezelése</string>
     <string name="game_effect_manage_summary">Válasszon játékokat, és hangolja a HyperOS hangparamétereiket.</string>

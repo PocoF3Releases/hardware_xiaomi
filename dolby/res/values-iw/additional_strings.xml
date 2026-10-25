@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">שימוש בפרופיל</string>
     <string name="dolby_profile_active">פעיל</string>
     <string name="game_effect_title">שיפור שמע במשחקים</string>
-    <string name="game_effect_summary">שימוש בעיבוד השמע FPS של HyperOS ב-alioth עבור משחקים נבחרים. העיבוד חל רק על אוזניות חוטיות, USB, Bluetooth או BLE נתמכות.</string>
     <string name="game_effect_active">פעיל עבור %1$s</string>
     <string name="game_effect_manage">ניהול משחקים</string>
     <string name="game_effect_manage_summary">בחירת משחקים וכוונון פרמטרי השמע שלהם ב-HyperOS.</string>

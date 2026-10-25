@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Úsáid próifíl</string>
     <string name="dolby_profile_active">Gníomhach</string>
     <string name="game_effect_title">Feabhsú fuaime cluiche</string>
-    <string name="game_effect_summary">Úsáid próiseáil fuaime HyperOS FPS alioth do chluichí roghnaithe. Ní chuirtear an phróiseáil i bhfeidhm ach ar chluasáin sreangaithe, USB, Bluetooth nó BLE a dtacaítear leo.</string>
     <string name="game_effect_active">Gníomhach do %1$s</string>
     <string name="game_effect_manage">Bainistigh cluichí</string>
     <string name="game_effect_manage_summary">Roghnaigh cluichí agus tiúnáil a bparaiméadair fuaime HyperOS.</string>

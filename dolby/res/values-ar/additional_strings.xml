@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">استخدام الملف الصوتي</string>
     <string name="dolby_profile_active">نشط</string>
     <string name="game_effect_title">تحسين صوت الألعاب</string>
-    <string name="game_effect_summary">استخدم معالجة الصوت HyperOS FPS الخاصة بـ alioth للألعاب المحددة. تُطبق المعالجة فقط على سماعات الرأس السلكية أو USB أو Bluetooth أو BLE المدعومة.</string>
     <string name="game_effect_active">نشط لـ %1$s</string>
     <string name="game_effect_manage">إدارة الألعاب</string>
     <string name="game_effect_manage_summary">اختر الألعاب واضبط معلمات صوت HyperOS الخاصة بها.</string>

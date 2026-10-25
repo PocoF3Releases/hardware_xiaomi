@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Utilitza el perfil</string>
     <string name="dolby_profile_active">Actiu</string>
     <string name="game_effect_title">Millora de l’àudio de jocs</string>
-    <string name="game_effect_summary">Utilitza el processament d’àudio HyperOS FPS d’alioth per als jocs seleccionats. El processament només s’aplica als auriculars amb cable, USB, Bluetooth o BLE compatibles.</string>
     <string name="game_effect_active">Actiu per a %1$s</string>
     <string name="game_effect_manage">Gestiona els jocs</string>
     <string name="game_effect_manage_summary">Tria jocs i ajusta els seus paràmetres d’àudio HyperOS.</string>

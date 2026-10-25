@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Выкарыстоўваць профіль</string>
     <string name="dolby_profile_active">Актыўны</string>
     <string name="game_effect_title">Паляпшэнне гуку ў гульнях</string>
-    <string name="game_effect_summary">Выкарыстоўваць апрацоўку гуку HyperOS FPS ад alioth для выбраных гульняў. Апрацоўка прымяняецца толькі на падтрымліваемых правадных, USB, Bluetooth або BLE-гарнітурах.</string>
     <string name="game_effect_active">Актыўна для %1$s</string>
     <string name="game_effect_manage">Кіраванне гульнямі</string>
     <string name="game_effect_manage_summary">Выберыце гульні і наладзьце іх параметры гуку HyperOS.</string>

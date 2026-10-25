@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Користи профил</string>
     <string name="dolby_profile_active">Активан</string>
     <string name="game_effect_title">Побољшање звука у играма</string>
-    <string name="game_effect_summary">Користите alioth HyperOS FPS обраду звука за изабране игре. Обрада се примењује само на подржаним жичним, USB, Bluetooth или BLE слушалицама.</string>
     <string name="game_effect_active">Активно за %1$s</string>
     <string name="game_effect_manage">Управљај играма</string>
     <string name="game_effect_manage_summary">Изаберите игре и подесите њихове HyperOS аудио параметре.</string>

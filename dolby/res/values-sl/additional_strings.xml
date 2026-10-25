@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Uporabi profil</string>
     <string name="dolby_profile_active">Aktivno</string>
     <string name="game_effect_title">Izboljšava zvoka iger</string>
-    <string name="game_effect_summary">Uporabite obdelavo zvoka FPS HyperOS naprave alioth za izbrane igre. Obdelava se uporablja samo na podprtih žičnih, USB, Bluetooth ali BLE slušalkah.</string>
     <string name="game_effect_active">Aktivno za %1$s</string>
     <string name="game_effect_manage">Upravljanje iger</string>
     <string name="game_effect_manage_summary">Izberite igre in prilagodite njihove zvočne parametre HyperOS.</string>

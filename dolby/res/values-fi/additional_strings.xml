@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Käytä profiilia</string>
     <string name="dolby_profile_active">Aktiivinen</string>
     <string name="game_effect_title">Peliäänen parannus</string>
-    <string name="game_effect_summary">Käytä aliothin HyperOS FPS -äänenkäsittelyä valituissa peleissä. Käsittelyä käytetään vain tuetuissa langallisissa, USB-, Bluetooth- tai BLE-kuulokkeissa.</string>
     <string name="game_effect_active">Aktiivinen kohteelle %1$s</string>
     <string name="game_effect_manage">Hallitse pelejä</string>
     <string name="game_effect_manage_summary">Valitse pelit ja viritä niiden HyperOS-ääniparametrit.</string>

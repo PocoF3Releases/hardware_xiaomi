@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Naudoti profilį</string>
     <string name="dolby_profile_active">Aktyvus</string>
     <string name="game_effect_title">Žaidimų garso patobulinimas</string>
-    <string name="game_effect_summary">Pasirinktiems žaidimams naudokite alioth HyperOS FPS garso apdorojimą. Apdorojimas taikomas tik palaikomoms laidinėms, USB, Bluetooth arba BLE ausinėms.</string>
     <string name="game_effect_active">Aktyvus: %1$s</string>
     <string name="game_effect_manage">Tvarkyti žaidimus</string>
     <string name="game_effect_manage_summary">Pasirinkite žaidimus ir derinkite jų HyperOS garso parametrus.</string>

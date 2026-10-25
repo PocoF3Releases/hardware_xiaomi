@@ -83,7 +83,6 @@
     <string name="dolby_profile_activate">Utilizar perfil</string>
     <string name="dolby_profile_active">Ativo</string>
     <string name="game_effect_title">Melhoria de áudio para jogos</string>
-    <string name="game_effect_summary">Utilize o processamento de áudio FPS do HyperOS do alioth para os jogos selecionados. O processamento é aplicado apenas em auscultadores com fios, USB, Bluetooth ou BLE compatíveis.</string>
     <string name="game_effect_active">Ativo para %1$s</string>
     <string name="game_effect_manage">Gerir jogos</string>
     <string name="game_effect_manage_summary">Escolha jogos e afine os respetivos parâmetros de áudio do HyperOS.</string>
