@@ -50,6 +50,7 @@ internal data class GameEffectTuning(
 internal data class GameEffectState(
     val supported: Boolean = false,
     val enabled: Boolean = false,
+    val tuningSupported: Boolean = false,
     val games: Set<String> = emptySet(),
     val activePackage: String? = null,
     val error: Boolean = false
@@ -60,7 +61,8 @@ internal class GameEffectController private constructor(context: Context) {
     private val audioManager = appContext.getSystemService(AudioManager::class.java)!!
     private val serverMonitor = DolbyAudioServerMonitor.get(appContext)
     private val prefs = appContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-    private val supported = SystemProperties.getBoolean(PROP_GAME_EFFECT, false)
+    private val backend = DolbyCapabilities.gameBackend
+    private val supported = backend != GameEffectBackend.NONE
 
     private val worker = HandlerThread("XiaomiGameEffect").apply { start() }
     private val handler = Handler(worker.looper)
@@ -74,7 +76,7 @@ internal class GameEffectController private constructor(context: Context) {
 
     private var appliedPackage: String? = null
     private var appliedTuning: GameEffectTuning? = null
-    private var pendingClear = false
+    private var pendingClear = backend == GameEffectBackend.QCOM_QDSP
     private var communicationActive: Boolean? = null
     private val retry = DolbyRetryPolicy()
     private val reconcileRevision = AtomicLong()
@@ -114,10 +116,15 @@ internal class GameEffectController private constructor(context: Context) {
                 if (communicationActive != active) {
                     communicationActive = active
                     appliedTuning = null
+                    if (active) {
+                        clearEffect(force = appliedPackage != null)
+                        publish(error = false)
+                    }
                     scheduleReconcile(SETTLE_DELAY_MS)
                 }
             } catch (error: RuntimeException) {
                 Log.w(TAG, "Cannot query communication lifecycle", error)
+                scheduleReconcile(0)
                 publish(error = true)
             }
         }
@@ -132,6 +139,11 @@ internal class GameEffectController private constructor(context: Context) {
     private fun invalidateTuning(delayMs: Long) {
         handler.post {
             appliedTuning = null
+            // Unsafe routes/modes must bypass immediately; only media re-entry settles.
+            if (!isMediaPlaybackMode() || !isSupportedRoute()) {
+                clearEffect(force = appliedPackage != null)
+                publish(error = false)
+            }
             scheduleReconcile(delayMs)
         }
     }
@@ -141,7 +153,7 @@ internal class GameEffectController private constructor(context: Context) {
             handler.post {
                 appliedPackage = null
                 appliedTuning = null
-                pendingClear = false
+                pendingClear = backend == GameEffectBackend.QCOM_QDSP
                 handler.removeCallbacks(reconcileRunnable)
                 publish(error = false)
             }
@@ -247,8 +259,13 @@ internal class GameEffectController private constructor(context: Context) {
         }
     }
 
+    fun isPackageSupported(packageName: String): Boolean =
+        PACKAGE_PATTERN.matches(packageName) &&
+            (backend != GameEffectBackend.QCOM_QDSP || packageName.length < 32)
+
     fun setGameEnabled(packageName: String, value: Boolean) {
         require(PACKAGE_PATTERN.matches(packageName)) { "Invalid package name" }
+        require(!value || isPackageSupported(packageName)) { "Package is not supported by this backend" }
         val games = games().toMutableSet()
         if (value) games.add(packageName) else games.remove(packageName)
         prefs.edit().putStringSet(KEY_GAMES, games).apply()
@@ -257,6 +274,7 @@ internal class GameEffectController private constructor(context: Context) {
     }
 
     fun setTuning(packageName: String, tuning: GameEffectTuning) {
+        check(backend.supportsTuning) { "This backend uses OEM game tuning" }
         require(PACKAGE_PATTERN.matches(packageName)) { "Invalid package name" }
         prefs.edit().putString(tuningKey(packageName), tuning.encode()).apply()
         scheduleReconcile(0)
@@ -264,6 +282,7 @@ internal class GameEffectController private constructor(context: Context) {
     }
 
     fun resetTuning(packageName: String) {
+        check(backend.supportsTuning) { "This backend uses OEM game tuning" }
         prefs.edit().remove(tuningKey(packageName)).apply()
         scheduleReconcile(0)
         handler.post { publish(error = false) }
@@ -284,7 +303,9 @@ internal class GameEffectController private constructor(context: Context) {
         }
         val foreground = foregroundPackage()
         val target = foreground?.takeIf {
-            isEnabled() && it in games() && isSupportedRoute() && !isSpatialAudioEnabled()
+            isEnabled() && it in games() && isSupportedRoute() && !isSpatialAudioEnabled() &&
+                isMediaPlaybackMode() &&
+                isPackageSupported(it)
         }
         if (target == null) {
             clearEffect(force = appliedPackage != null)
@@ -299,13 +320,20 @@ internal class GameEffectController private constructor(context: Context) {
         }
 
         try {
-            applyTuning(tuning)
+            applyTuning(target, tuning)
+            // Communication or routing may change during the synchronous HAL command.
+            // Never publish an active game after that transition.
+            if (!isMediaPlaybackMode() || !isSupportedRoute()) {
+                clearEffect(force = true)
+                publish(error = false)
+                return@Runnable
+            }
             appliedPackage = target
             appliedTuning = tuning
             pendingClear = false
             retry.reset()
             publish(error = false)
-            Log.i(TAG, "Applied HyperOS game audio for $target: $tuning")
+            Log.i(TAG, "Game-audio control acknowledged: backend=${backend.key}, package=$target")
         } catch (error: RuntimeException) {
             Log.e(TAG, "Cannot apply HyperOS game audio for $target", error)
             clearEffect(force = true, resetRetryOnSuccess = false)
@@ -325,6 +353,13 @@ internal class GameEffectController private constructor(context: Context) {
         null
     }
 
+    private fun isMediaPlaybackMode(): Boolean = try {
+        !audioManager.isDolbyCommunicationActive()
+    } catch (error: RuntimeException) {
+        Log.w(TAG, "Cannot query communication state; keeping game audio off", error)
+        false
+    }
+
     private fun isSpatialAudioEnabled(): Boolean =
         DolbyCapabilities.spatializerSupported && Settings.Global.getInt(
             appContext.contentResolver, SPATIAL_AUDIO_FEATURE_ENABLE, 0
@@ -337,11 +372,17 @@ internal class GameEffectController private constructor(context: Context) {
             Log.w(TAG, "Cannot query routed media output", error)
             return false
         }
-        // FPSOP is a global HAL parameter set. Do not guess a single endpoint for duplicated routes.
-        return devices.singleOrNull()?.type in SUPPORTED_DEVICE_TYPES
+        // Both protocols control HAL-wide state. Do not guess one endpoint for duplicated routes.
+        return devices.singleOrNull()?.type in if (backend == GameEffectBackend.QCOM_QDSP) {
+            QCOM_DEVICE_TYPES
+        } else SUPPORTED_DEVICE_TYPES
     }
 
-    private fun applyTuning(tuning: GameEffectTuning) {
+    private fun applyTuning(packageName: String, tuning: GameEffectTuning) {
+        if (backend == GameEffectBackend.QCOM_QDSP) {
+            writeQcomCommand(QcomGameEffect.enable(packageName), enabled = true)
+            return
+        }
         val values = intArrayOf(
             tuning.lowFrequency, tuning.vocal, tuning.footstep, tuning.soundField)
         try {
@@ -366,7 +407,7 @@ internal class GameEffectController private constructor(context: Context) {
             if (resetRetryOnSuccess) retry.reset()
         } catch (error: RuntimeException) {
             pendingClear = true
-            // Keep the dirty state until a complete four-parameter clear is acknowledged.
+            // Keep the dirty state until the selected backend acknowledges a complete clear.
             // The retry re-reads current foreground/route/enable state, never an old snapshot.
             retry.nextDelay()?.let { scheduleReconcile(it, newEvent = false) }
             Log.w(TAG, "Cannot clear all HyperOS game-audio parameters", error)
@@ -377,6 +418,10 @@ internal class GameEffectController private constructor(context: Context) {
     }
 
     private fun clearParameters() {
+        if (backend == GameEffectBackend.QCOM_QDSP) {
+            writeQcomCommand(QcomGameEffect.disable(), enabled = false)
+            return
+        }
         var failure: RuntimeException? = null
         for (key in PARAMETER_NAMES) {
             try {
@@ -387,6 +432,16 @@ internal class GameEffectController private constructor(context: Context) {
             }
         }
         failure?.let { throw it }
+    }
+
+    private fun writeQcomCommand(command: String, enabled: Boolean) {
+        val status = AudioSystem.setParameters(command)
+        check(status == AudioSystem.AUDIO_STATUS_OK) { "Qualcomm game-audio command failed: $status" }
+        // A generic HAL status alone also accepts unknown keys. These properties
+        // are written by this HAL's recognized switch handlers before returning.
+        check(QcomGameEffect.acknowledged(enabled) { SystemProperties.get(it, "") }) {
+            "Qualcomm game-audio state was not acknowledged"
+        }
     }
 
     private fun writeParameter(key: String, value: Int) {
@@ -402,6 +457,7 @@ internal class GameEffectController private constructor(context: Context) {
         _state.value = GameEffectState(
             supported = supported,
             enabled = isEnabled(),
+            tuningSupported = backend.supportsTuning,
             games = games(),
             activePackage = appliedPackage,
             error = error || pendingClear
@@ -412,7 +468,6 @@ internal class GameEffectController private constructor(context: Context) {
 
     companion object {
         private const val TAG = "XiaomiGameEffect"
-        private const val PROP_GAME_EFFECT = "ro.vendor.audio.game.effect"
         private const val PREFS = "game_effect"
         private const val KEY_ENABLED = "enabled"
         private const val KEY_GAMES = "games"
@@ -427,6 +482,14 @@ internal class GameEffectController private constructor(context: Context) {
             "FpsOpVocalBoost",
             "FpsOpFootStepBoost",
             "FpsOpSoundFieldBoost"
+        )
+        private val QCOM_DEVICE_TYPES = setOf(
+            AudioDeviceInfo.TYPE_BUILTIN_SPEAKER,
+            AudioDeviceInfo.TYPE_BUILTIN_SPEAKER_SAFE,
+            AudioDeviceInfo.TYPE_WIRED_HEADSET,
+            AudioDeviceInfo.TYPE_WIRED_HEADPHONES,
+            AudioDeviceInfo.TYPE_USB_HEADSET,
+            AudioDeviceInfo.TYPE_USB_DEVICE
         )
         private val SUPPORTED_DEVICE_TYPES = setOf(
             AudioDeviceInfo.TYPE_BLUETOOTH_A2DP,
