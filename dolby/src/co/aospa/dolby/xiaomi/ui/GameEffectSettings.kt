@@ -173,10 +173,12 @@ private fun GameAppsDialog(controller: GameEffectController, dismiss: () -> Unit
                         style = MaterialTheme.typography.headlineSmall,
                     )
                 }
-                Text(
-                    stringResource(R.string.game_effect_help),
-                    style = MaterialTheme.typography.bodyMedium,
-                )
+                if (state.tuningSupported) {
+                    Text(
+                        stringResource(R.string.game_effect_help),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                }
                 OutlinedTextField(
                     value = query,
                     onValueChange = { query = it },
@@ -238,7 +240,7 @@ private fun GameAppsDialog(controller: GameEffectController, dismiss: () -> Unit
                                     } else null,
                                 trailingContent = {
                                     Row(verticalAlignment = Alignment.CenterVertically) {
-                                        if (selected) {
+                                        if (selected && state.tuningSupported) {
                                             IconButton(
                                                 onClick = { tuningPackage = app.packageName }
                                             ) {
@@ -250,6 +252,7 @@ private fun GameAppsDialog(controller: GameEffectController, dismiss: () -> Unit
                                         }
                                         Checkbox(
                                             checked = selected,
+                                            enabled = selected || controller.isPackageSupported(app.packageName),
                                             onCheckedChange = {
                                                 controller.setGameEnabled(app.packageName, it)
                                             },
