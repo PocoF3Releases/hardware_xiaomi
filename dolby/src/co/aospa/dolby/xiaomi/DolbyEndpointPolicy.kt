@@ -25,8 +25,8 @@ internal object DolbyEndpointPolicy {
         maxVolume: Int,
         speakerTuning: SpeakerTuning = SpeakerTuning.AUTOMATIC
     ): Tuning? = when (route) {
-        // Rotation-specific speaker spatializer selection is not reconstructed from
-        // the incomplete decompilation. Do not overwrite the native spatializer endpoint.
+        // Speaker spatializer tuning also depends on rotation and platform support.
+        // Keep its native endpoint instead of substituting a legacy media tuning here.
         Route.SPEAKER -> if (spatializerActive) null else {
             val id = speakerTuning.tuningId ?: if (!volumeTuning || maxVolume <= 0 || volume < 0) {
                 "default_internal_speaker"
