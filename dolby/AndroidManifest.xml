@@ -21,6 +21,7 @@
     </queries>
 
     <application
+        android:name=".DolbyApplication"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/Theme.SubSettingsBase.Expressive"
         android:allowBackup="false"

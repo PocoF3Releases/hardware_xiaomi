@@ -6,6 +6,7 @@
 
 package co.aospa.dolby.xiaomi
 
+import android.app.Application
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -13,6 +14,15 @@ import android.util.Log
 import kotlinx.coroutines.*
 
 private const val TAG = "XiaomiDolby-Boot"
+
+/** Persistent app processes can be recreated without another boot broadcast. */
+class DolbyApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        GameEffectController.getInstance(this).start()
+        DolbyController.getInstance(this)
+    }
+}
 
 class BootCompletedReceiver : BroadcastReceiver() {
 
