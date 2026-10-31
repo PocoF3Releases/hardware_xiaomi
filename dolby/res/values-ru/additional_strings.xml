@@ -42,6 +42,9 @@
     <string name="dolby_virtual_bass_summary">Воссоздаёт глубокий бас во встроенных динамиках с помощью гармоник.</string>
     <string name="dolby_reverb_suppression">Подавление реверберации</string>
     <string name="dolby_reverb_summary">Уменьшает эхо помещения, чтобы речь звучала суше и чётче.</string>
+    <string name="dolby_ieq_amount">Интенсивность интеллектуального эквалайзера</string>
+    <string name="dolby_dialogue_ducking">Приглушение фона</string>
+    <string name="dolby_hp_distance">Удалённость виртуальных динамиков</string>
     <string name="dolby_reset_options">Параметры сброса</string>
     <string name="dolby_eq_scroll_hint">Проведите в сторону, чтобы открыть все 20 полос.</string>
 </resources>
