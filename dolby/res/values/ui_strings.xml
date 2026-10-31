@@ -4,6 +4,20 @@
     <string name="dolby_profiles_help_compact">Save your own equalizer and sound settings in a named profile.</string>
     <string name="dolby_bass_summary_compact">Add emphasis to low frequencies.</string>
     <string name="dolby_volume_summary_compact">Balance quiet and loud passages.</string>
+    <string name="dolby_category_tone">Tone</string>
+    <string name="dolby_category_voice">Voice and loudness</string>
+    <string name="dolby_category_surround">Surround</string>
+    <string name="dolby_virtual_bass">Virtual bass</string>
+    <string name="dolby_virtual_bass_summary">Recreate deep bass on the built-in speakers with harmonics.</string>
+    <string name="dolby_reverb_suppression">Reverb suppression</string>
+    <string name="dolby_reverb_summary">Reduce room echo so speech sounds drier and clearer.</string>
+    <string name="dolby_ieq_amount">Intelligent EQ amount</string>
+    <string name="dolby_dialogue_ducking">Background ducking</string>
+    <string name="dolby_hp_distance">Virtual speaker distance</string>
+    <string name="dolby_geq_enable">Graphic equalizer</string>
+    <string name="dolby_geq_enable_summary">Apply the 20-band curve from the Equalizer tab.</string>
+    <string name="dolby_reverb_amount">Reverb suppression amount</string>
+    <string name="dolby_volume_amount">Leveling amount</string>
     <string name="dolby_reset_options">Reset options</string>
     <string name="dolby_eq_scroll_hint">Swipe sideways to reach all 20 bands.</string>
 </resources>
