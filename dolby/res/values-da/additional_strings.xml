@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Afbalancer stille og høje passager.</string>
     <string name="dolby_reset_options">Nulstillingsindstillinger</string>
     <string name="dolby_eq_scroll_hint">Stryg sidelæns for at nå alle 20 bånd.</string>
+    <string name="dolby_category_tone">Klang</string>
+    <string name="dolby_category_voice">Stemme og lydstyrke</string>
+    <string name="dolby_category_surround">Surroundlyd</string>
+    <string name="dolby_virtual_bass">Virtuel bas</string>
+    <string name="dolby_virtual_bass_summary">Genskab dyb bas på de indbyggede højttalere med overtoner.</string>
+    <string name="dolby_reverb_suppression">Efterklangsdæmpning</string>
+    <string name="dolby_reverb_summary">Reducer rummets ekko for tørrere og tydeligere tale.</string>
+    <string name="dolby_ieq_amount">Styrke for intelligent equalizer</string>
+    <string name="dolby_dialogue_ducking">Dæmpning af baggrundslyd</string>
+    <string name="dolby_hp_distance">Afstand til virtuelle højttalere</string>
+    <string name="dolby_geq_enable">Grafisk equalizer</string>
+    <string name="dolby_geq_enable_summary">Anvend kurven med 20 bånd fra fanen Equalizer.</string>
+    <string name="dolby_reverb_amount">Styrke for efterklangsdæmpning</string>
+    <string name="dolby_volume_amount">Styrke for lydudjævning</string>
+    <string name="dolby_category_games">Spil</string>
+    <string name="dolby_geq_bypassed">Den grafiske equalizer er slået fra. Kurven er gemt, men anvendes ikke.</string>
+    <string name="dolby_geq_turn_on">Slå til</string>
 </resources>

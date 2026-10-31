@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Subalansuokite tylias ir garsias atkarpas.</string>
     <string name="dolby_reset_options">Atkūrimo parinktys</string>
     <string name="dolby_eq_scroll_hint">Braukite į šoną, kad pasiektumėte visas 20 juostų.</string>
+    <string name="dolby_category_tone">Tembras</string>
+    <string name="dolby_category_voice">Balsas ir garsumas</string>
+    <string name="dolby_category_surround">Erdvinis garsas</string>
+    <string name="dolby_virtual_bass">Virtualūs žemieji dažniai</string>
+    <string name="dolby_virtual_bass_summary">Atkurkite gilius žemuosius dažnius integruotuose garsiakalbiuose naudodami harmonikas.</string>
+    <string name="dolby_reverb_suppression">Aidėjimo slopinimas</string>
+    <string name="dolby_reverb_summary">Sumažinkite kambario aidą, kad kalba skambėtų sausiau ir aiškiau.</string>
+    <string name="dolby_ieq_amount">Išmaniojo glodintuvo stiprumas</string>
+    <string name="dolby_dialogue_ducking">Fono pritildymas</string>
+    <string name="dolby_hp_distance">Virtualių garsiakalbių atstumas</string>
+    <string name="dolby_geq_enable">Grafinis glodintuvas</string>
+    <string name="dolby_geq_enable_summary">Taikyti kortelės Glodintuvas 20 juostų kreivę.</string>
+    <string name="dolby_reverb_amount">Aidėjimo slopinimo stiprumas</string>
+    <string name="dolby_volume_amount">Garsumo išlyginimo stiprumas</string>
+    <string name="dolby_category_games">Žaidimai</string>
+    <string name="dolby_geq_bypassed">Grafinis glodintuvas išjungtas. Kreivė išsaugota, bet netaikoma.</string>
+    <string name="dolby_geq_turn_on">Įjungti</string>
 </resources>

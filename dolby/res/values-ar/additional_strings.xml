@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">وازن بين المقاطع الهادئة والعالية.</string>
     <string name="dolby_reset_options">خيارات إعادة الضبط</string>
     <string name="dolby_eq_scroll_hint">اسحب جانبياً للوصول إلى جميع النطاقات العشرين.</string>
+    <string name="dolby_category_tone">طابع الصوت</string>
+    <string name="dolby_category_voice">الصوت ومستوى العلو</string>
+    <string name="dolby_category_surround">الصوت المحيطي</string>
+    <string name="dolby_virtual_bass">جهير افتراضي</string>
+    <string name="dolby_virtual_bass_summary">إعادة إنشاء جهير عميق على مكبرات الصوت المدمجة باستخدام التوافقيات.</string>
+    <string name="dolby_reverb_suppression">تقليل الصدى</string>
+    <string name="dolby_reverb_summary">تقليل صدى الغرفة لجعل الكلام أكثر جفافًا ووضوحًا.</string>
+    <string name="dolby_ieq_amount">شدة المعادل الذكي</string>
+    <string name="dolby_dialogue_ducking">خفض صوت الخلفية</string>
+    <string name="dolby_hp_distance">مسافة مكبرات الصوت الافتراضية</string>
+    <string name="dolby_geq_enable">المعادل الرسومي</string>
+    <string name="dolby_geq_enable_summary">تطبيق منحنى النطاقات العشرين من علامة تبويب المعادل.</string>
+    <string name="dolby_reverb_amount">شدة تقليل الصدى</string>
+    <string name="dolby_volume_amount">شدة تسوية مستوى الصوت</string>
+    <string name="dolby_category_games">الألعاب</string>
+    <string name="dolby_geq_bypassed">المعادل الرسومي متوقف. هذا المنحنى محفوظ، لكنه لا يُطبّق.</string>
+    <string name="dolby_geq_turn_on">تفعيل</string>
 </resources>

@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Wyrównaj ciche i głośne fragmenty.</string>
     <string name="dolby_reset_options">Opcje resetowania</string>
     <string name="dolby_eq_scroll_hint">Przesuń w bok, aby uzyskać dostęp do wszystkich 20 pasm.</string>
+    <string name="dolby_category_tone">Barwa</string>
+    <string name="dolby_category_voice">Głos i głośność</string>
+    <string name="dolby_category_surround">Dźwięk przestrzenny</string>
+    <string name="dolby_virtual_bass">Wirtualny bas</string>
+    <string name="dolby_virtual_bass_summary">Odtwarzaj głęboki bas we wbudowanych głośnikach za pomocą harmonicznych.</string>
+    <string name="dolby_reverb_suppression">Tłumienie pogłosu</string>
+    <string name="dolby_reverb_summary">Zmniejsz pogłos pomieszczenia, aby głos brzmiał bardziej sucho i wyraźnie.</string>
+    <string name="dolby_ieq_amount">Siła inteligentnego korektora</string>
+    <string name="dolby_dialogue_ducking">Wyciszanie tła</string>
+    <string name="dolby_hp_distance">Odległość wirtualnych głośników</string>
+    <string name="dolby_geq_enable">Korektor graficzny</string>
+    <string name="dolby_geq_enable_summary">Zastosuj krzywą 20-pasmową z karty Korektor.</string>
+    <string name="dolby_reverb_amount">Siła tłumienia pogłosu</string>
+    <string name="dolby_volume_amount">Siła wyrównywania głośności</string>
+    <string name="dolby_category_games">Gry</string>
+    <string name="dolby_geq_bypassed">Korektor graficzny jest wyłączony. Ta krzywa jest zapisana, ale nie jest stosowana.</string>
+    <string name="dolby_geq_turn_on">Włącz</string>
 </resources>

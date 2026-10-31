@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Cothromaich earrannan sàmhach is àrd.</string>
     <string name="dolby_reset_options">Roghainnean ath-shuidheachaidh</string>
     <string name="dolby_eq_scroll_hint">Slaod gu taobhach gus na 20 bannan uile a ruigsinn.</string>
+    <string name="dolby_category_tone">Dath-fuaime</string>
+    <string name="dolby_category_voice">Guth agus àirde fuaime</string>
+    <string name="dolby_category_surround">Fuaim chuairteach</string>
+    <string name="dolby_virtual_bass">Beus mas-fhìor</string>
+    <string name="dolby_virtual_bass_summary">Ath-chruthaich beus domhainn air na glaodhairean togte le harmonagan.</string>
+    <string name="dolby_reverb_suppression">Bacadh ath-fhuaime</string>
+    <string name="dolby_reverb_summary">Lùghdaich mac-talla an t-seòmair airson cainnt nas tiorma is nas soilleire.</string>
+    <string name="dolby_ieq_amount">Neart a’ chothromaiche thuigsich</string>
+    <string name="dolby_dialogue_ducking">Lùghdachadh fuaim a’ chùlaibh</string>
+    <string name="dolby_hp_distance">Astar nan glaodhairean mas-fhìor</string>
+    <string name="dolby_geq_enable">Cothromaiche grafaigeach</string>
+    <string name="dolby_geq_enable_summary">Cleachd an lùb 20 bann air taba a’ Chothromaiche.</string>
+    <string name="dolby_reverb_amount">Neart bacadh ath-fhuaime</string>
+    <string name="dolby_volume_amount">Neart cothromachadh àirde</string>
+    <string name="dolby_category_games">Geamannan</string>
+    <string name="dolby_geq_bypassed">Tha an cothromaiche grafaigeach dheth. Tha an lùb air a sàbhaladh ach chan eilear ga cleachdadh.</string>
+    <string name="dolby_geq_turn_on">Cuir air</string>
 </resources>

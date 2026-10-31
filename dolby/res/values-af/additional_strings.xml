@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Balanseer stil en harde gedeeltes.</string>
     <string name="dolby_reset_options">Herstelopsies</string>
     <string name="dolby_eq_scroll_hint">Swiep sywaarts om al 20 bande te bereik.</string>
+    <string name="dolby_category_tone">Klankkleur</string>
+    <string name="dolby_category_voice">Stem en volume</string>
+    <string name="dolby_category_surround">Omringklank</string>
+    <string name="dolby_virtual_bass">Virtuele bas</string>
+    <string name="dolby_virtual_bass_summary">Herskep diep bas op die ingeboude luidsprekers met botone.</string>
+    <string name="dolby_reverb_suppression">Weerkaatsingsonderdrukking</string>
+    <string name="dolby_reverb_summary">Verminder die kamer se eggo vir droër, duideliker spraak.</string>
+    <string name="dolby_ieq_amount">Sterkte van intelligente gelykmaker</string>
+    <string name="dolby_dialogue_ducking">Agtergronddemping</string>
+    <string name="dolby_hp_distance">Afstand van virtuele luidsprekers</string>
+    <string name="dolby_geq_enable">Grafiese gelykmaker</string>
+    <string name="dolby_geq_enable_summary">Pas die 20-band-kurwe van die Gelykmaker-oortjie toe.</string>
+    <string name="dolby_reverb_amount">Sterkte van weerkaatsingsonderdrukking</string>
+    <string name="dolby_volume_amount">Sterkte van volume-egalisering</string>
+    <string name="dolby_category_games">Speletjies</string>
+    <string name="dolby_geq_bypassed">Die grafiese gelykmaker is af. Hierdie kurwe is gestoor, maar word nie toegepas nie.</string>
+    <string name="dolby_geq_turn_on">Skakel aan</string>
 </resources>

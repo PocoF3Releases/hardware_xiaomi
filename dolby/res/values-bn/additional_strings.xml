@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">নীরব ও জোরালো অংশগুলোর ভারসাম্য করুন।</string>
     <string name="dolby_reset_options">রিসেটের বিকল্প</string>
     <string name="dolby_eq_scroll_hint">সব ২০টি ব্যান্ডে পৌঁছাতে পাশে সোয়াইপ করুন।</string>
+    <string name="dolby_category_tone">স্বরের রং</string>
+    <string name="dolby_category_voice">কণ্ঠস্বর ও শব্দমাত্রা</string>
+    <string name="dolby_category_surround">চারপাশের শব্দ</string>
+    <string name="dolby_virtual_bass">ভার্চুয়াল বেস</string>
+    <string name="dolby_virtual_bass_summary">হারমোনিক ব্যবহার করে বিল্ট-ইন স্পিকারে গভীর বেস তৈরি করুন।</string>
+    <string name="dolby_reverb_suppression">প্রতিধ্বনি দমন</string>
+    <string name="dolby_reverb_summary">কথা আরও স্পষ্ট ও শুষ্ক শোনাতে ঘরের প্রতিধ্বনি কমান।</string>
+    <string name="dolby_ieq_amount">বুদ্ধিমান ইকুয়ালাইজারের তীব্রতা</string>
+    <string name="dolby_dialogue_ducking">পটভূমির শব্দ কমানো</string>
+    <string name="dolby_hp_distance">ভার্চুয়াল স্পিকারের দূরত্ব</string>
+    <string name="dolby_geq_enable">গ্রাফিক ইকুয়ালাইজার</string>
+    <string name="dolby_geq_enable_summary">ইকুয়ালাইজার ট্যাবের ২০-ব্যান্ডের রেখাচিত্র প্রয়োগ করুন।</string>
+    <string name="dolby_reverb_amount">প্রতিধ্বনি দমনের তীব্রতা</string>
+    <string name="dolby_volume_amount">শব্দমাত্রা সমান করার তীব্রতা</string>
+    <string name="dolby_category_games">গেম</string>
+    <string name="dolby_geq_bypassed">গ্রাফিক ইকুয়ালাইজার বন্ধ আছে। এই রেখাচিত্র সংরক্ষিত আছে, তবে প্রয়োগ করা হয় না।</string>
+    <string name="dolby_geq_turn_on">চালু করুন</string>
 </resources>

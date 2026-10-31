@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Līdzsvarojiet klusus un skaļus fragmentus.</string>
     <string name="dolby_reset_options">Atiestatīšanas opcijas</string>
     <string name="dolby_eq_scroll_hint">Velciet sānis, lai piekļūtu visām 20 joslām.</string>
+    <string name="dolby_category_tone">Tembrs</string>
+    <string name="dolby_category_voice">Balss un skaļums</string>
+    <string name="dolby_category_surround">Telpiskā skaņa</string>
+    <string name="dolby_virtual_bass">Virtuālais bass</string>
+    <string name="dolby_virtual_bass_summary">Atveido dziļu basu iebūvētajos skaļruņos ar harmoniku palīdzību.</string>
+    <string name="dolby_reverb_suppression">Reverberācijas slāpēšana</string>
+    <string name="dolby_reverb_summary">Samazini telpas atbalsi, lai balss skanētu sausāk un skaidrāk.</string>
+    <string name="dolby_ieq_amount">Viedā ekvalaizera stiprums</string>
+    <string name="dolby_dialogue_ducking">Fona pieklusināšana</string>
+    <string name="dolby_hp_distance">Virtuālo skaļruņu attālums</string>
+    <string name="dolby_geq_enable">Grafiskais ekvalaizers</string>
+    <string name="dolby_geq_enable_summary">Lietot cilnes Ekvalaizers 20 joslu līkni.</string>
+    <string name="dolby_reverb_amount">Reverberācijas slāpēšanas stiprums</string>
+    <string name="dolby_volume_amount">Skaļuma izlīdzināšanas stiprums</string>
+    <string name="dolby_category_games">Spēles</string>
+    <string name="dolby_geq_bypassed">Grafiskais ekvalaizers ir izslēgts. Līkne ir saglabāta, bet netiek lietota.</string>
+    <string name="dolby_geq_turn_on">Ieslēgt</string>
 </resources>

@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Breng stille en luide passages in balans.</string>
     <string name="dolby_reset_options">Resetopties</string>
     <string name="dolby_eq_scroll_hint">Veeg zijwaarts om alle 20 banden te bereiken.</string>
+    <string name="dolby_category_tone">Klank</string>
+    <string name="dolby_category_voice">Stem en volume</string>
+    <string name="dolby_category_surround">Surroundgeluid</string>
+    <string name="dolby_virtual_bass">Virtuele bas</string>
+    <string name="dolby_virtual_bass_summary">Diepe bastonen op de ingebouwde luidsprekers nabootsen met boventonen.</string>
+    <string name="dolby_reverb_suppression">Galm onderdrukken</string>
+    <string name="dolby_reverb_summary">Kamergalm verminderen voor een drogere en helderdere stem.</string>
+    <string name="dolby_ieq_amount">Sterkte intelligente equalizer</string>
+    <string name="dolby_dialogue_ducking">Achtergrondgeluid dempen</string>
+    <string name="dolby_hp_distance">Afstand virtuele luidsprekers</string>
+    <string name="dolby_geq_enable">Grafische equalizer</string>
+    <string name="dolby_geq_enable_summary">De 20-bands curve van het tabblad Equalizer toepassen.</string>
+    <string name="dolby_reverb_amount">Sterkte galmonderdrukking</string>
+    <string name="dolby_volume_amount">Sterkte volumenivellering</string>
+    <string name="dolby_category_games">Games</string>
+    <string name="dolby_geq_bypassed">De grafische equalizer staat uit. Deze curve is opgeslagen, maar wordt niet toegepast.</string>
+    <string name="dolby_geq_turn_on">Inschakelen</string>
 </resources>

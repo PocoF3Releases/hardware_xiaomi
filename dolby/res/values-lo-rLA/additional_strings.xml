@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">ປັບສົມດຸນຊ່ວງທີ່ສຽງເບົາ ແລະ ສຽງດັງ.</string>
     <string name="dolby_reset_options">ຕົວເລືອກຣີເຊັດ</string>
     <string name="dolby_eq_scroll_hint">ປັດໄປດ້ານຂ້າງເພື່ອເຂົ້າເຖິງທັງ 20 ແຖບ.</string>
+    <string name="dolby_category_tone">ສີສັນສຽງ</string>
+    <string name="dolby_category_voice">ສຽງເວົ້າ ແລະ ຄວາມດັງ</string>
+    <string name="dolby_category_surround">ສຽງອ້ອມຮອບ</string>
+    <string name="dolby_virtual_bass">ເບສຈຳລອງ</string>
+    <string name="dolby_virtual_bass_summary">ສ້າງເບສເລິກຄືນໃໝ່ໃນລຳໂພງໃນຕົວດ້ວຍຮາໂມນິກ.</string>
+    <string name="dolby_reverb_suppression">ການລົດສຽງກ້ອງ</string>
+    <string name="dolby_reverb_summary">ລົດສຽງສະທ້ອນໃນຫ້ອງ ເພື່ອໃຫ້ສຽງເວົ້າແຫ້ງ ແລະ ຊັດເຈນຂຶ້ນ.</string>
+    <string name="dolby_ieq_amount">ລະດັບອີຄວອໄລເຊີອັດສະລິຍະ</string>
+    <string name="dolby_dialogue_ducking">ການຫຼຸດສຽງພື້ນຫຼັງ</string>
+    <string name="dolby_hp_distance">ໄລຍະຫ່າງລຳໂພງຈຳລອງ</string>
+    <string name="dolby_geq_enable">ອີຄວອໄລເຊີແບບກຣາຟິກ</string>
+    <string name="dolby_geq_enable_summary">ໃຊ້ເສັ້ນໂຄ້ງ 20 ແຖບຈາກແຖບອີຄວອໄລເຊີ.</string>
+    <string name="dolby_reverb_amount">ລະດັບການລົດສຽງກ້ອງ</string>
+    <string name="dolby_volume_amount">ລະດັບການປັບຄວາມດັງໃຫ້ສະເໝີ</string>
+    <string name="dolby_category_games">ເກມ</string>
+    <string name="dolby_geq_bypassed">ອີຄວອໄລເຊີແບບກຣາຟິກປິດຢູ່. ເສັ້ນໂຄ້ງນີ້ຖືກບັນທຶກແຕ່ບໍ່ໄດ້ໃຊ້.</string>
+    <string name="dolby_geq_turn_on">ເປີດ</string>
 </resources>

@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Seimbangkan bahagian yang perlahan dan kuat.</string>
     <string name="dolby_reset_options">Pilihan tetapan semula</string>
     <string name="dolby_eq_scroll_hint">Leret ke sisi untuk mencapai kesemua 20 jalur.</string>
+    <string name="dolby_category_tone">Warna bunyi</string>
+    <string name="dolby_category_voice">Suara dan kelantangan</string>
+    <string name="dolby_category_surround">Bunyi keliling</string>
+    <string name="dolby_virtual_bass">Bes maya</string>
+    <string name="dolby_virtual_bass_summary">Hasilkan semula bes mendalam pada pembesar suara terbina dalam menggunakan harmonik.</string>
+    <string name="dolby_reverb_suppression">Penindasan gema</string>
+    <string name="dolby_reverb_summary">Kurangkan gema bilik supaya pertuturan lebih kering dan jelas.</string>
+    <string name="dolby_ieq_amount">Kekuatan penyama pintar</string>
+    <string name="dolby_dialogue_ducking">Peredaman latar</string>
+    <string name="dolby_hp_distance">Jarak pembesar suara maya</string>
+    <string name="dolby_geq_enable">Penyama grafik</string>
+    <string name="dolby_geq_enable_summary">Gunakan lengkung 20 jalur daripada tab Penyama.</string>
+    <string name="dolby_reverb_amount">Kekuatan penindasan gema</string>
+    <string name="dolby_volume_amount">Kekuatan perataan kelantangan</string>
+    <string name="dolby_category_games">Permainan</string>
+    <string name="dolby_geq_bypassed">Penyama grafik dimatikan. Lengkung ini disimpan tetapi tidak digunakan.</string>
+    <string name="dolby_geq_turn_on">Hidupkan</string>
 </resources>

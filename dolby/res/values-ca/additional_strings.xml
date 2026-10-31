@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Equilibra els passatges silenciosos i forts.</string>
     <string name="dolby_reset_options">Opcions de restabliment</string>
     <string name="dolby_eq_scroll_hint">Llisca lateralment per arribar a les 20 bandes.</string>
+    <string name="dolby_category_tone">Timbre</string>
+    <string name="dolby_category_voice">Veu i volum</string>
+    <string name="dolby_category_surround">So envoltant</string>
+    <string name="dolby_virtual_bass">Greus virtuals</string>
+    <string name="dolby_virtual_bass_summary">Recrea greus profunds als altaveus integrats mitjançant harmònics.</string>
+    <string name="dolby_reverb_suppression">Supressió de reverberació</string>
+    <string name="dolby_reverb_summary">Redueix l’eco de la sala perquè la veu soni més seca i clara.</string>
+    <string name="dolby_ieq_amount">Intensitat de l’equalitzador intel·ligent</string>
+    <string name="dolby_dialogue_ducking">Atenuació del fons</string>
+    <string name="dolby_hp_distance">Distància dels altaveus virtuals</string>
+    <string name="dolby_geq_enable">Equalitzador gràfic</string>
+    <string name="dolby_geq_enable_summary">Aplica la corba de 20 bandes de la pestanya Equalitzador.</string>
+    <string name="dolby_reverb_amount">Intensitat de supressió de reverberació</string>
+    <string name="dolby_volume_amount">Intensitat d’anivellament</string>
+    <string name="dolby_category_games">Jocs</string>
+    <string name="dolby_geq_bypassed">L’equalitzador gràfic està desactivat: la corba es desa, però no s’aplica.</string>
+    <string name="dolby_geq_turn_on">Activa</string>
 </resources>

@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">خاموش اور بلند حصوں کو متوازن کریں۔</string>
     <string name="dolby_reset_options">ری سیٹ کے اختیارات</string>
     <string name="dolby_eq_scroll_hint">تمام 20 بینڈز تک پہنچنے کے لیے ایک طرف سوائپ کریں۔</string>
+    <string name="dolby_category_tone">آواز کا رنگ</string>
+    <string name="dolby_category_voice">گفتار اور آواز کی سطح</string>
+    <string name="dolby_category_surround">گھیراؤ والی آواز</string>
+    <string name="dolby_virtual_bass">مجازی باس</string>
+    <string name="dolby_virtual_bass_summary">ہارمونکس کی مدد سے اندرونی اسپیکرز پر گہری باس پیدا کریں۔</string>
+    <string name="dolby_reverb_suppression">گونج دبانا</string>
+    <string name="dolby_reverb_summary">کمرے کی گونج کم کریں تاکہ گفتار زیادہ خشک اور واضح ہو۔</string>
+    <string name="dolby_ieq_amount">ذہین ایکولائزر کی شدت</string>
+    <string name="dolby_dialogue_ducking">پس منظر کی آواز گھٹانا</string>
+    <string name="dolby_hp_distance">مجازی اسپیکرز کا فاصلہ</string>
+    <string name="dolby_geq_enable">گرافک ایکولائزر</string>
+    <string name="dolby_geq_enable_summary">ایکولائزر ٹیب کا 20 بینڈ والا منحنی خط لاگو کریں۔</string>
+    <string name="dolby_reverb_amount">گونج دبانے کی شدت</string>
+    <string name="dolby_volume_amount">آواز برابر کرنے کی شدت</string>
+    <string name="dolby_category_games">گیمز</string>
+    <string name="dolby_geq_bypassed">گرافک ایکولائزر بند ہے۔ یہ منحنی خط محفوظ ہے، لیکن لاگو نہیں کیا جاتا۔</string>
+    <string name="dolby_geq_turn_on">چالو کریں</string>
 </resources>

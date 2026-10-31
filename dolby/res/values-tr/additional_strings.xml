@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Sessiz ve yüksek bölümleri dengeleyin.</string>
     <string name="dolby_reset_options">Sıfırlama seçenekleri</string>
     <string name="dolby_eq_scroll_hint">20 bandın tümüne ulaşmak için yana kaydırın.</string>
+    <string name="dolby_category_tone">Tını</string>
+    <string name="dolby_category_voice">Ses ve ses düzeyi</string>
+    <string name="dolby_category_surround">Çevresel ses</string>
+    <string name="dolby_virtual_bass">Sanal bas</string>
+    <string name="dolby_virtual_bass_summary">Harmoniklerle dahili hoparlörlerde derin bas oluşturun.</string>
+    <string name="dolby_reverb_suppression">Yankı bastırma</string>
+    <string name="dolby_reverb_summary">Daha kuru ve net konuşma için odadaki yankıyı azaltın.</string>
+    <string name="dolby_ieq_amount">Akıllı ekolayzır miktarı</string>
+    <string name="dolby_dialogue_ducking">Arka planı kısma</string>
+    <string name="dolby_hp_distance">Sanal hoparlör uzaklığı</string>
+    <string name="dolby_geq_enable">Grafik ekolayzır</string>
+    <string name="dolby_geq_enable_summary">Ekolayzır sekmesindeki 20 bantlı eğriyi uygulayın.</string>
+    <string name="dolby_reverb_amount">Yankı bastırma miktarı</string>
+    <string name="dolby_volume_amount">Ses dengeleme miktarı</string>
+    <string name="dolby_category_games">Oyunlar</string>
+    <string name="dolby_geq_bypassed">Grafik ekolayzır kapalı. Bu eğri kaydedilir ancak uygulanmaz.</string>
+    <string name="dolby_geq_turn_on">Aç</string>
 </resources>

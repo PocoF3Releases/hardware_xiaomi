@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">پەس ۋە يۇقىرى ئاۋازلىق بۆلەكلەرنى تەڭپۇڭلاشتۇرۇڭ.</string>
     <string name="dolby_reset_options">قايتا تەڭشەش تاللانمىلىرى</string>
     <string name="dolby_eq_scroll_hint">20 بەلۋاغنىڭ ھەممىسىگە يېتىش ئۈچۈن يانغا سىيرىڭ.</string>
+    <string name="dolby_category_tone">ئاۋاز تۈسى</string>
+    <string name="dolby_category_voice">سۆز ۋە ئاۋاز كۈچى</string>
+    <string name="dolby_category_surround">ئورالما ئاۋاز</string>
+    <string name="dolby_virtual_bass">مەۋھۇم باس</string>
+    <string name="dolby_virtual_bass_summary">گارمونىكلار ئارقىلىق ئىچكى ياڭراتقۇلاردا چوڭقۇر باس ھاسىل قىلىدۇ.</string>
+    <string name="dolby_reverb_suppression">ئەكس سادانى بېسىش</string>
+    <string name="dolby_reverb_summary">ئۆي ئەكس ساداسىنى ئازايتىپ، سۆزنى تېخىمۇ قۇرۇق ۋە ئېنىق قىلىدۇ.</string>
+    <string name="dolby_ieq_amount">ئەقلىي تەڭشىگۈچ كۈچى</string>
+    <string name="dolby_dialogue_ducking">تەگلىك ئاۋازىنى پەسەيتىش</string>
+    <string name="dolby_hp_distance">مەۋھۇم ياڭراتقۇ ئارىلىقى</string>
+    <string name="dolby_geq_enable">گرافىكلىق تەڭشىگۈچ</string>
+    <string name="dolby_geq_enable_summary">تەڭشىگۈچ بەتكۈچىدىكى 20 بەلۋاغلىق ئەگرى سىزىقنى قوللىنىش.</string>
+    <string name="dolby_reverb_amount">ئەكس سادانى بېسىش كۈچى</string>
+    <string name="dolby_volume_amount">ئاۋاز تەڭلەش كۈچى</string>
+    <string name="dolby_category_games">ئويۇنلار</string>
+    <string name="dolby_geq_bypassed">گرافىكلىق تەڭشىگۈچ تاقاق. بۇ ئەگرى سىزىق ساقلانغان، ئەمما قوللىنىلمايدۇ.</string>
+    <string name="dolby_geq_turn_on">ئېچىش</string>
 </resources>

@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">အသံတိုးနည်းသောနှင့် ကျယ်သော အပိုင်းများကို ညှိမျှပါ။</string>
     <string name="dolby_reset_options">ပြန်လည်သတ်မှတ်ရန် ရွေးချယ်စရာများ</string>
     <string name="dolby_eq_scroll_hint">ဘန်ဒ် 20 ခုလုံးကို ရောက်ရန် ဘေးသို့ ပွတ်ဆွဲပါ။</string>
+    <string name="dolby_category_tone">အသံအရောင်</string>
+    <string name="dolby_category_voice">စကားသံနှင့် အသံကျယ်နှုန်း</string>
+    <string name="dolby_category_surround">ပတ်လည်အသံ</string>
+    <string name="dolby_virtual_bass">အတုဘေ့စ်</string>
+    <string name="dolby_virtual_bass_summary">ဟာမိုနစ်များဖြင့် ပါဝင်ပြီးစပီကာများတွင် နက်ရှိုင်းသောဘေ့စ်ကို ပြန်လည်ဖန်တီးပါ။</string>
+    <string name="dolby_reverb_suppression">ပဲ့တင်သံ လျှော့ချခြင်း</string>
+    <string name="dolby_reverb_summary">စကားသံ ပိုမိုခြောက်သွေ့ရှင်းလင်းစေရန် အခန်း၏ပဲ့တင်သံကို လျှော့ချပါ။</string>
+    <string name="dolby_ieq_amount">စမတ်အီကွယ်လိုင်ဇာ အားပမာဏ</string>
+    <string name="dolby_dialogue_ducking">နောက်ခံအသံ လျှော့ချခြင်း</string>
+    <string name="dolby_hp_distance">အတုစပီကာများ၏ အကွာအဝေး</string>
+    <string name="dolby_geq_enable">ဂရပ်ဖစ်အီကွယ်လိုင်ဇာ</string>
+    <string name="dolby_geq_enable_summary">အီကွယ်လိုင်ဇာတဘ်မှ 20 ဘန်းမျဉ်းကွေးကို အသုံးပြုပါ။</string>
+    <string name="dolby_reverb_amount">ပဲ့တင်သံလျှော့ချမှု အားပမာဏ</string>
+    <string name="dolby_volume_amount">အသံညှိမျှမှု အားပမာဏ</string>
+    <string name="dolby_category_games">ဂိမ်းများ</string>
+    <string name="dolby_geq_bypassed">ဂရပ်ဖစ်အီကွယ်လိုင်ဇာ ပိတ်ထားသည်။ ဤမျဉ်းကွေးကို သိမ်းထားသော်လည်း အသုံးမပြုပါ။</string>
+    <string name="dolby_geq_turn_on">ဖွင့်ရန်</string>
 </resources>

@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Уравнотежите тихе и гласне делове.</string>
     <string name="dolby_reset_options">Опције ресетовања</string>
     <string name="dolby_eq_scroll_hint">Превуците у страну да бисте приступили свих 20 опсега.</string>
+    <string name="dolby_category_tone">Боја звука</string>
+    <string name="dolby_category_voice">Глас и јачина звука</string>
+    <string name="dolby_category_surround">Просторни звук</string>
+    <string name="dolby_virtual_bass">Виртуелни бас</string>
+    <string name="dolby_virtual_bass_summary">Створите дубоке басове на уграђеним звучницима помоћу хармоника.</string>
+    <string name="dolby_reverb_suppression">Потискивање одјека</string>
+    <string name="dolby_reverb_summary">Смањите одјек просторије за сувљи и јаснији глас.</string>
+    <string name="dolby_ieq_amount">Јачина паметног еквилајзера</string>
+    <string name="dolby_dialogue_ducking">Утишавање позадине</string>
+    <string name="dolby_hp_distance">Удаљеност виртуелних звучника</string>
+    <string name="dolby_geq_enable">Графички еквилајзер</string>
+    <string name="dolby_geq_enable_summary">Примени криву са 20 опсега са картице Еквилајзер.</string>
+    <string name="dolby_reverb_amount">Јачина потискивања одјека</string>
+    <string name="dolby_volume_amount">Јачина уједначавања јачине звука</string>
+    <string name="dolby_category_games">Игре</string>
+    <string name="dolby_geq_bypassed">Графички еквилајзер је искључен. Крива је сачувана, али се не примењује.</string>
+    <string name="dolby_geq_turn_on">Укључи</string>
 </resources>

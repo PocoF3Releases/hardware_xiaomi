@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">დააბალანსეთ ჩუმი და ხმამაღალი მონაკვეთები.</string>
     <string name="dolby_reset_options">გადატვირთვის პარამეტრები</string>
     <string name="dolby_eq_scroll_hint">გადაუსვით გვერდულად, რომ ყველა 20 ზოლს მიაღწიოთ.</string>
+    <string name="dolby_category_tone">ტემბრი</string>
+    <string name="dolby_category_voice">ხმა და ხმამაღლობა</string>
+    <string name="dolby_category_surround">მოცულობითი ხმა</string>
+    <string name="dolby_virtual_bass">ვირტუალური ბასი</string>
+    <string name="dolby_virtual_bass_summary">ჩაშენებულ დინამიკებში ღრმა ბასის აღდგენა ჰარმონიკების მეშვეობით.</string>
+    <string name="dolby_reverb_suppression">რევერბერაციის ჩახშობა</string>
+    <string name="dolby_reverb_summary">ოთახის ექოს შემცირება უფრო მშრალი და მკაფიო მეტყველებისთვის.</string>
+    <string name="dolby_ieq_amount">ჭკვიანი ეკვალაიზერის სიძლიერე</string>
+    <string name="dolby_dialogue_ducking">ფონური ხმის ჩაწევა</string>
+    <string name="dolby_hp_distance">ვირტუალური დინამიკების მანძილი</string>
+    <string name="dolby_geq_enable">გრაფიკული ეკვალაიზერი</string>
+    <string name="dolby_geq_enable_summary">ეკვალაიზერის ჩანართის 20-ზოლიანი მრუდის გამოყენება.</string>
+    <string name="dolby_reverb_amount">რევერბერაციის ჩახშობის სიძლიერე</string>
+    <string name="dolby_volume_amount">ხმამაღლობის გათანაბრების სიძლიერე</string>
+    <string name="dolby_category_games">თამაშები</string>
+    <string name="dolby_geq_bypassed">გრაფიკული ეკვალაიზერი გამორთულია. მრუდი შენახულია, მაგრამ არ გამოიყენება.</string>
+    <string name="dolby_geq_turn_on">ჩართვა</string>
 </resources>

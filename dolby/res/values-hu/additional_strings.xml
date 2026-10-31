@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Egyensúlyozza ki a halk és hangos részeket.</string>
     <string name="dolby_reset_options">Visszaállítási lehetőségek</string>
     <string name="dolby_eq_scroll_hint">Húzza oldalra az összes 20 sáv eléréséhez.</string>
+    <string name="dolby_category_tone">Hangszín</string>
+    <string name="dolby_category_voice">Beszéd és hangerő</string>
+    <string name="dolby_category_surround">Térhangzás</string>
+    <string name="dolby_virtual_bass">Virtuális basszus</string>
+    <string name="dolby_virtual_bass_summary">Mély basszus létrehozása a beépített hangszórókon felharmonikusokkal.</string>
+    <string name="dolby_reverb_suppression">Utózengés-csökkentés</string>
+    <string name="dolby_reverb_summary">A szoba visszhangjának csökkentése a szárazabb, tisztább beszédért.</string>
+    <string name="dolby_ieq_amount">Intelligens hangszínszabályzó erőssége</string>
+    <string name="dolby_dialogue_ducking">Háttér halkítása</string>
+    <string name="dolby_hp_distance">Virtuális hangszórók távolsága</string>
+    <string name="dolby_geq_enable">Grafikus hangszínszabályzó</string>
+    <string name="dolby_geq_enable_summary">A Hangszínszabályzó lap 20 sávos görbéjének alkalmazása.</string>
+    <string name="dolby_reverb_amount">Utózengés-csökkentés erőssége</string>
+    <string name="dolby_volume_amount">Hangerő-kiegyenlítés erőssége</string>
+    <string name="dolby_category_games">Játékok</string>
+    <string name="dolby_geq_bypassed">A grafikus hangszínszabályzó ki van kapcsolva. A görbe mentve van, de nincs alkalmazva.</string>
+    <string name="dolby_geq_turn_on">Bekapcsolás</string>
 </resources>

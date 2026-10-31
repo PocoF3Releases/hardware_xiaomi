@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Тыныш және қатты бөліктерді теңестіріңіз.</string>
     <string name="dolby_reset_options">Қалпына келтіру параметрлері</string>
     <string name="dolby_eq_scroll_hint">Барлық 20 жолаққа жету үшін жанға қарай сырғытыңыз.</string>
+    <string name="dolby_category_tone">Тембр</string>
+    <string name="dolby_category_voice">Дауыс және дыбыс деңгейі</string>
+    <string name="dolby_category_surround">Көлемді дыбыс</string>
+    <string name="dolby_virtual_bass">Виртуалды бас</string>
+    <string name="dolby_virtual_bass_summary">Гармоникалар арқылы кірістірілген динамиктерде терең бас жасаңыз.</string>
+    <string name="dolby_reverb_suppression">Жаңғырықты басу</string>
+    <string name="dolby_reverb_summary">Сөйлеуді анық әрі құрғақ ету үшін бөлме жаңғырығын азайтыңыз.</string>
+    <string name="dolby_ieq_amount">Ақылды эквалайзер қарқыны</string>
+    <string name="dolby_dialogue_ducking">Фон дыбысын бәсеңдету</string>
+    <string name="dolby_hp_distance">Виртуалды динамиктер қашықтығы</string>
+    <string name="dolby_geq_enable">Графикалық эквалайзер</string>
+    <string name="dolby_geq_enable_summary">Эквалайзер қойындысындағы 20 жолақты қисықты қолдану.</string>
+    <string name="dolby_reverb_amount">Жаңғырықты басу қарқыны</string>
+    <string name="dolby_volume_amount">Дыбыс деңгейін теңестіру қарқыны</string>
+    <string name="dolby_category_games">Ойындар</string>
+    <string name="dolby_geq_bypassed">Графикалық эквалайзер өшірулі. Қисық сақталған, бірақ қолданылмайды.</string>
+    <string name="dolby_geq_turn_on">Қосу</string>
 </resources>

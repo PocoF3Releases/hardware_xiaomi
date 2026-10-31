@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">શાંત અને ઊંચા અવાજવાળા ભાગોને સંતુલિત કરો.</string>
     <string name="dolby_reset_options">રીસેટ વિકલ્પો</string>
     <string name="dolby_eq_scroll_hint">બધા 20 બેન્ડ સુધી પહોંચવા માટે બાજુ તરફ સ્વાઇપ કરો.</string>
+    <string name="dolby_category_tone">સ્વરનો રંગ</string>
+    <string name="dolby_category_voice">વાણી અને અવાજનું સ્તર</string>
+    <string name="dolby_category_surround">સરાઉન્ડ અવાજ</string>
+    <string name="dolby_virtual_bass">વર્ચ્યુઅલ બાસ</string>
+    <string name="dolby_virtual_bass_summary">હાર્મોનિક્સ વડે બિલ્ટ-ઇન સ્પીકરમાં ઊંડો બાસ ફરી બનાવો.</string>
+    <string name="dolby_reverb_suppression">પડઘાનું દમન</string>
+    <string name="dolby_reverb_summary">વાણી વધુ કોરી અને સ્પષ્ટ સંભળાય તે માટે ઓરડાનો પડઘો ઘટાડો.</string>
+    <string name="dolby_ieq_amount">બુદ્ધિશાળી ઇક્વલાઇઝરની તીવ્રતા</string>
+    <string name="dolby_dialogue_ducking">પૃષ્ઠભૂમિનો અવાજ ઘટાડવો</string>
+    <string name="dolby_hp_distance">વર્ચ્યુઅલ સ્પીકરનું અંતર</string>
+    <string name="dolby_geq_enable">ગ્રાફિક ઇક્વલાઇઝર</string>
+    <string name="dolby_geq_enable_summary">ઇક્વલાઇઝર ટૅબનો 20-બૅન્ડ વક્ર લાગુ કરો.</string>
+    <string name="dolby_reverb_amount">પડઘાના દમનની તીવ્રતા</string>
+    <string name="dolby_volume_amount">અવાજ સમાન કરવાની તીવ્રતા</string>
+    <string name="dolby_category_games">ગેમ</string>
+    <string name="dolby_geq_bypassed">ગ્રાફિક ઇક્વલાઇઝર બંધ છે. આ વક્ર સાચવેલો છે, પણ લાગુ થતો નથી.</string>
+    <string name="dolby_geq_turn_on">ચાલુ કરો</string>
 </resources>

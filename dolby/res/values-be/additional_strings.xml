@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Збалансуйце ціхія і гучныя фрагменты.</string>
     <string name="dolby_reset_options">Параметры скіду</string>
     <string name="dolby_eq_scroll_hint">Правядзіце ўбок, каб атрымаць доступ да ўсіх 20 палос.</string>
+    <string name="dolby_category_tone">Тэмбр</string>
+    <string name="dolby_category_voice">Голас і гучнасць</string>
+    <string name="dolby_category_surround">Аб’ёмны гук</string>
+    <string name="dolby_virtual_bass">Віртуальны бас</string>
+    <string name="dolby_virtual_bass_summary">Узнаўляйце глыбокі бас ва ўбудаваных дынаміках з дапамогай гармонік.</string>
+    <string name="dolby_reverb_suppression">Падаўленне рэверберацыі</string>
+    <string name="dolby_reverb_summary">Змяншайце рэха пакоя, каб голас гучаў больш суха і выразна.</string>
+    <string name="dolby_ieq_amount">Інтэнсіўнасць інтэлектуальнага эквалайзера</string>
+    <string name="dolby_dialogue_ducking">Прыглушэнне фону</string>
+    <string name="dolby_hp_distance">Адлегласць да віртуальных дынамікаў</string>
+    <string name="dolby_geq_enable">Графічны эквалайзер</string>
+    <string name="dolby_geq_enable_summary">Ужываць 20-палосную крывую з укладкі Эквалайзер.</string>
+    <string name="dolby_reverb_amount">Сіла падаўлення рэверберацыі</string>
+    <string name="dolby_volume_amount">Сіла выраўноўвання гучнасці</string>
+    <string name="dolby_category_games">Гульні</string>
+    <string name="dolby_geq_bypassed">Графічны эквалайзер выключаны: крывая захавана, але не ўжываецца.</string>
+    <string name="dolby_geq_turn_on">Уключыць</string>
 </resources>

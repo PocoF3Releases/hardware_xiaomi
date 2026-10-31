@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">నిశ్శబ్ద మరియు గట్టిగా వినిపించే భాగాలను సమతుల్యం చేయండి.</string>
     <string name="dolby_reset_options">రీసెట్ ఎంపికలు</string>
     <string name="dolby_eq_scroll_hint">అన్ని 20 బ్యాండ్‌లను చేరుకోవడానికి పక్కకు స్వైప్ చేయండి.</string>
+    <string name="dolby_category_tone">స్వరవర్ణం</string>
+    <string name="dolby_category_voice">మాటలు మరియు శబ్దస్థాయి</string>
+    <string name="dolby_category_surround">సరౌండ్ సౌండ్</string>
+    <string name="dolby_virtual_bass">వర్చువల్ బాస్</string>
+    <string name="dolby_virtual_bass_summary">హార్మోనిక్స్‌తో అంతర్నిర్మిత స్పీకర్లలో లోతైన బాస్‌ను పునఃసృష్టించండి.</string>
+    <string name="dolby_reverb_suppression">ప్రతిధ్వని అణచివేత</string>
+    <string name="dolby_reverb_summary">మాటలు మరింత స్పష్టంగా, పొడిగా వినిపించేందుకు గది ప్రతిధ్వనిని తగ్గించండి.</string>
+    <string name="dolby_ieq_amount">తెలివైన ఈక్వలైజర్ తీవ్రత</string>
+    <string name="dolby_dialogue_ducking">నేపథ్య శబ్దాన్ని తగ్గించడం</string>
+    <string name="dolby_hp_distance">వర్చువల్ స్పీకర్ దూరం</string>
+    <string name="dolby_geq_enable">గ్రాఫిక్ ఈక్వలైజర్</string>
+    <string name="dolby_geq_enable_summary">ఈక్వలైజర్ ట్యాబ్‌లోని 20-బ్యాండ్ వక్రాన్ని వర్తింపజేయండి.</string>
+    <string name="dolby_reverb_amount">ప్రతిధ్వని అణచివేత తీవ్రత</string>
+    <string name="dolby_volume_amount">శబ్దస్థాయి సమీకరణ తీవ్రత</string>
+    <string name="dolby_category_games">గేమ్‌లు</string>
+    <string name="dolby_geq_bypassed">గ్రాఫిక్ ఈక్వలైజర్ ఆఫ్‌లో ఉంది. ఈ వక్రం సేవ్ అయింది, కానీ వర్తించదు.</string>
+    <string name="dolby_geq_turn_on">ఆన్ చేయండి</string>
 </resources>

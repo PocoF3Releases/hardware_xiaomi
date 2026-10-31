@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Ekvilibrigu kvietajn kaj laŭtajn partojn.</string>
     <string name="dolby_reset_options">Opcioj de restarigo</string>
     <string name="dolby_eq_scroll_hint">Ŝovu flanken por atingi ĉiujn 20 bendojn.</string>
+    <string name="dolby_category_tone">Sonkoloro</string>
+    <string name="dolby_category_voice">Voĉo kaj laŭteco</string>
+    <string name="dolby_category_surround">Ĉirkaŭsona efiko</string>
+    <string name="dolby_virtual_bass">Virtuala baso</string>
+    <string name="dolby_virtual_bass_summary">Rekreu profundan bason per harmonoj en la enkonstruitaj laŭtparoliloj.</string>
+    <string name="dolby_reverb_suppression">Subpremo de resonado</string>
+    <string name="dolby_reverb_summary">Reduktu ĉambran eĥon por pli seka kaj klara parolo.</string>
+    <string name="dolby_ieq_amount">Forto de la inteligenta egaligilo</string>
+    <string name="dolby_dialogue_ducking">Mallaŭtigo de la fono</string>
+    <string name="dolby_hp_distance">Distanco de virtualaj laŭtparoliloj</string>
+    <string name="dolby_geq_enable">Grafika egaligilo</string>
+    <string name="dolby_geq_enable_summary">Apliku la 20-bendan kurbon el la langeto Egaligilo.</string>
+    <string name="dolby_reverb_amount">Forto de resonada subpremo</string>
+    <string name="dolby_volume_amount">Forto de laŭteca egaligo</string>
+    <string name="dolby_category_games">Ludoj</string>
+    <string name="dolby_geq_bypassed">La grafika egaligilo estas malŝaltita. La kurbo estas konservita, sed ne aplikata.</string>
+    <string name="dolby_geq_turn_on">Ŝalti</string>
 </resources>

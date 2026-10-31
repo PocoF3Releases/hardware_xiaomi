@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Seimbangkan bagian yang pelan dan keras.</string>
     <string name="dolby_reset_options">Opsi reset</string>
     <string name="dolby_eq_scroll_hint">Geser ke samping untuk mengakses semua 20 band.</string>
+    <string name="dolby_category_tone">Warna suara</string>
+    <string name="dolby_category_voice">Suara dan kenyaringan</string>
+    <string name="dolby_category_surround">Suara surround</string>
+    <string name="dolby_virtual_bass">Bas virtual</string>
+    <string name="dolby_virtual_bass_summary">Ciptakan kembali bas yang dalam pada speaker bawaan dengan harmonik.</string>
+    <string name="dolby_reverb_suppression">Penekanan gema</string>
+    <string name="dolby_reverb_summary">Kurangi gema ruangan agar ucapan terdengar lebih kering dan jelas.</string>
+    <string name="dolby_ieq_amount">Kekuatan equalizer cerdas</string>
+    <string name="dolby_dialogue_ducking">Peredaman latar belakang</string>
+    <string name="dolby_hp_distance">Jarak speaker virtual</string>
+    <string name="dolby_geq_enable">Equalizer grafis</string>
+    <string name="dolby_geq_enable_summary">Terapkan kurva 20 pita dari tab Equalizer.</string>
+    <string name="dolby_reverb_amount">Kekuatan penekanan gema</string>
+    <string name="dolby_volume_amount">Kekuatan pemerataan volume</string>
+    <string name="dolby_category_games">Game</string>
+    <string name="dolby_geq_bypassed">Equalizer grafis mati. Kurva ini disimpan, tetapi tidak diterapkan.</string>
+    <string name="dolby_geq_turn_on">Aktifkan</string>
 </resources>

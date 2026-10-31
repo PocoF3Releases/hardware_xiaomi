@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">அமைதியான மற்றும் சத்தமான பகுதிகளை சமநிலைப்படுத்தவும்.</string>
     <string name="dolby_reset_options">மீட்டமைப்பு விருப்பங்கள்</string>
     <string name="dolby_eq_scroll_hint">அனைத்து 20 பேண்டுகளையும் அடைய பக்கமாக ஸ்வைப் செய்யவும்.</string>
+    <string name="dolby_category_tone">ஒலிநிறம்</string>
+    <string name="dolby_category_voice">பேச்சும் ஒலியளவும்</string>
+    <string name="dolby_category_surround">சூழொலி</string>
+    <string name="dolby_virtual_bass">மெய்நிகர் பாஸ்</string>
+    <string name="dolby_virtual_bass_summary">இசைமேற்சுரங்களைப் பயன்படுத்தி உள்ளமைந்த ஸ்பீக்கர்களில் ஆழமான பாஸை மீண்டும் உருவாக்கவும்.</string>
+    <string name="dolby_reverb_suppression">எதிரொலி ஒடுக்கம்</string>
+    <string name="dolby_reverb_summary">பேச்சு மேலும் தெளிவாகவும் உலர்வாகவும் ஒலிக்க அறையின் எதிரொலியைக் குறைக்கவும்.</string>
+    <string name="dolby_ieq_amount">நுண்ணறிவு சமனியின் அளவு</string>
+    <string name="dolby_dialogue_ducking">பின்னணி ஒலியைக் குறைத்தல்</string>
+    <string name="dolby_hp_distance">மெய்நிகர் ஸ்பீக்கர் தொலைவு</string>
+    <string name="dolby_geq_enable">வரைகலைச் சமனி</string>
+    <string name="dolby_geq_enable_summary">சமனி தாவலில் உள்ள 20-அலைவரிசை வளைவைப் பயன்படுத்தவும்.</string>
+    <string name="dolby_reverb_amount">எதிரொலி ஒடுக்கத்தின் அளவு</string>
+    <string name="dolby_volume_amount">ஒலியளவு சீராக்கத்தின் அளவு</string>
+    <string name="dolby_category_games">விளையாட்டுகள்</string>
+    <string name="dolby_geq_bypassed">வரைகலைச் சமனி முடக்கப்பட்டுள்ளது. இந்த வளைவு சேமிக்கப்பட்டுள்ளது, ஆனால் பயன்படுத்தப்படவில்லை.</string>
+    <string name="dolby_geq_turn_on">இயக்கு</string>
 </resources>

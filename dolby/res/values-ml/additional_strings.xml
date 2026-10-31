@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">ശാന്തവും ഉച്ചത്തിലുള്ളതുമായ ഭാഗങ്ങൾ സന്തുലിതമാക്കുക.</string>
     <string name="dolby_reset_options">റീസെറ്റ് ഓപ്ഷനുകൾ</string>
     <string name="dolby_eq_scroll_hint">എല്ലാ 20 ബാൻഡുകളിലും എത്താൻ വശത്തേക്ക് സ്വൈപ്പ് ചെയ്യുക.</string>
+    <string name="dolby_category_tone">സ്വരനിറം</string>
+    <string name="dolby_category_voice">സംസാരവും ശബ്ദനിലയും</string>
+    <string name="dolby_category_surround">സറൗണ്ട് ശബ്ദം</string>
+    <string name="dolby_virtual_bass">വെർച്വൽ ബാസ്</string>
+    <string name="dolby_virtual_bass_summary">ഹാർമോണിക്കുകൾ ഉപയോഗിച്ച് ബിൽറ്റ്-ഇൻ സ്പീക്കറുകളിൽ ആഴമുള്ള ബാസ് പുനഃസൃഷ്ടിക്കുക.</string>
+    <string name="dolby_reverb_suppression">പ്രതിധ്വനി കുറയ്ക്കൽ</string>
+    <string name="dolby_reverb_summary">സംസാരം കൂടുതൽ വരണ്ടതും വ്യക്തവുമായി കേൾക്കാൻ മുറിയിലെ പ്രതിധ്വനി കുറയ്ക്കുക.</string>
+    <string name="dolby_ieq_amount">ഇന്റലിജന്റ് ഇക്വലൈസറിന്റെ തീവ്രത</string>
+    <string name="dolby_dialogue_ducking">പശ്ചാത്തല ശബ്ദം കുറയ്ക്കൽ</string>
+    <string name="dolby_hp_distance">വെർച്വൽ സ്പീക്കർ ദൂരം</string>
+    <string name="dolby_geq_enable">ഗ്രാഫിക് ഇക്വലൈസർ</string>
+    <string name="dolby_geq_enable_summary">ഇക്വലൈസർ ടാബിലെ 20-ബാൻഡ് വക്രം പ്രയോഗിക്കുക.</string>
+    <string name="dolby_reverb_amount">പ്രതിധ്വനി കുറയ്ക്കലിന്റെ തീവ്രത</string>
+    <string name="dolby_volume_amount">ശബ്ദനില സമീകരണത്തിന്റെ തീവ്രത</string>
+    <string name="dolby_category_games">ഗെയിമുകൾ</string>
+    <string name="dolby_geq_bypassed">ഗ്രാഫിക് ഇക്വലൈസർ ഓഫാണ്. ഈ വക്രം സംരക്ഷിച്ചിട്ടുണ്ട്, പക്ഷേ പ്രയോഗിക്കുന്നില്ല.</string>
+    <string name="dolby_geq_turn_on">ഓണാക്കുക</string>
 </resources>

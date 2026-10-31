@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Vyvažte tiché a hlasité pasáže.</string>
     <string name="dolby_reset_options">Možnosti resetování</string>
     <string name="dolby_eq_scroll_hint">Přejetím do strany zobrazíte všech 20 pásem.</string>
+    <string name="dolby_category_tone">Barva zvuku</string>
+    <string name="dolby_category_voice">Hlas a hlasitost</string>
+    <string name="dolby_category_surround">Prostorový zvuk</string>
+    <string name="dolby_virtual_bass">Virtuální basy</string>
+    <string name="dolby_virtual_bass_summary">Vytvořte hluboké basy na vestavěných reproduktorech pomocí harmonických tónů.</string>
+    <string name="dolby_reverb_suppression">Potlačení dozvuku</string>
+    <string name="dolby_reverb_summary">Omezte ozvěnu místnosti pro sušší a čistší hlas.</string>
+    <string name="dolby_ieq_amount">Intenzita inteligentního ekvalizéru</string>
+    <string name="dolby_dialogue_ducking">Ztlumení pozadí</string>
+    <string name="dolby_hp_distance">Vzdálenost virtuálních reproduktorů</string>
+    <string name="dolby_geq_enable">Grafický ekvalizér</string>
+    <string name="dolby_geq_enable_summary">Použít 20pásmovou křivku z karty Ekvalizér.</string>
+    <string name="dolby_reverb_amount">Intenzita potlačení dozvuku</string>
+    <string name="dolby_volume_amount">Intenzita vyrovnávání hlasitosti</string>
+    <string name="dolby_category_games">Hry</string>
+    <string name="dolby_geq_bypassed">Grafický ekvalizér je vypnutý. Tato křivka je uložená, ale nepoužívá se.</string>
+    <string name="dolby_geq_turn_on">Zapnout</string>
 </resources>

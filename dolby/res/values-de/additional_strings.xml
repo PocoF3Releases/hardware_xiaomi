@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Gleiche leise und laute Passagen aus.</string>
     <string name="dolby_reset_options">Zurücksetzoptionen</string>
     <string name="dolby_eq_scroll_hint">Wische seitlich, um alle 20 Bänder zu erreichen.</string>
+    <string name="dolby_category_tone">Klang</string>
+    <string name="dolby_category_voice">Sprache und Lautstärke</string>
+    <string name="dolby_category_surround">Raumklang</string>
+    <string name="dolby_virtual_bass">Virtueller Bass</string>
+    <string name="dolby_virtual_bass_summary">Tiefen Bass auf den integrierten Lautsprechern durch Obertöne nachbilden.</string>
+    <string name="dolby_reverb_suppression">Hallunterdrückung</string>
+    <string name="dolby_reverb_summary">Raumhall für trockenere und klarere Sprache reduzieren.</string>
+    <string name="dolby_ieq_amount">Stärke des intelligenten Equalizers</string>
+    <string name="dolby_dialogue_ducking">Hintergrundabsenkung</string>
+    <string name="dolby_hp_distance">Abstand der virtuellen Lautsprecher</string>
+    <string name="dolby_geq_enable">Grafischer Equalizer</string>
+    <string name="dolby_geq_enable_summary">Die 20-Band-Kurve aus dem Tab Equalizer anwenden.</string>
+    <string name="dolby_reverb_amount">Stärke der Hallunterdrückung</string>
+    <string name="dolby_volume_amount">Stärke der Lautstärkeanpassung</string>
+    <string name="dolby_category_games">Spiele</string>
+    <string name="dolby_geq_bypassed">Der grafische Equalizer ist ausgeschaltet. Diese Kurve bleibt gespeichert, wird aber nicht angewendet.</string>
+    <string name="dolby_geq_turn_on">Einschalten</string>
 </resources>

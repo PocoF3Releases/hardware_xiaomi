@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Балансирайте тихите и силните пасажи.</string>
     <string name="dolby_reset_options">Опции за нулиране</string>
     <string name="dolby_eq_scroll_hint">Плъзнете настрани, за да достигнете всичките 20 ленти.</string>
+    <string name="dolby_category_tone">Тембър</string>
+    <string name="dolby_category_voice">Глас и сила на звука</string>
+    <string name="dolby_category_surround">Съраунд звук</string>
+    <string name="dolby_virtual_bass">Виртуален бас</string>
+    <string name="dolby_virtual_bass_summary">Пресъздавайте дълбок бас с вградените високоговорители чрез хармоници.</string>
+    <string name="dolby_reverb_suppression">Потискане на реверберацията</string>
+    <string name="dolby_reverb_summary">Намалете ехото в помещението за по-сух и ясен говор.</string>
+    <string name="dolby_ieq_amount">Сила на интелигентния еквалайзер</string>
+    <string name="dolby_dialogue_ducking">Приглушаване на фона</string>
+    <string name="dolby_hp_distance">Разстояние до виртуалните високоговорители</string>
+    <string name="dolby_geq_enable">Графичен еквалайзер</string>
+    <string name="dolby_geq_enable_summary">Прилагане на 20-лентовата крива от раздела Еквалайзер.</string>
+    <string name="dolby_reverb_amount">Сила на потискане на реверберацията</string>
+    <string name="dolby_volume_amount">Сила на изравняване на звука</string>
+    <string name="dolby_category_games">Игри</string>
+    <string name="dolby_geq_bypassed">Графичният еквалайзер е изключен. Кривата е запазена, но не се прилага.</string>
+    <string name="dolby_geq_turn_on">Включване</string>
 </resources>

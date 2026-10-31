@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Equilibre trechos silenciosos e altos.</string>
     <string name="dolby_reset_options">Opções de redefinição</string>
     <string name="dolby_eq_scroll_hint">Deslize para o lado para acessar todas as 20 bandas.</string>
+    <string name="dolby_category_tone">Timbre</string>
+    <string name="dolby_category_voice">Voz e volume</string>
+    <string name="dolby_category_surround">Som surround</string>
+    <string name="dolby_virtual_bass">Graves virtuais</string>
+    <string name="dolby_virtual_bass_summary">Recrie graves profundos nos alto-falantes integrados usando harmônicos.</string>
+    <string name="dolby_reverb_suppression">Supressão de reverberação</string>
+    <string name="dolby_reverb_summary">Reduza o eco do ambiente para uma voz mais seca e clara.</string>
+    <string name="dolby_ieq_amount">Intensidade do equalizador inteligente</string>
+    <string name="dolby_dialogue_ducking">Atenuação do som de fundo</string>
+    <string name="dolby_hp_distance">Distância dos alto-falantes virtuais</string>
+    <string name="dolby_geq_enable">Equalizador gráfico</string>
+    <string name="dolby_geq_enable_summary">Aplique a curva de 20 bandas da aba Equalizador.</string>
+    <string name="dolby_reverb_amount">Intensidade da supressão de reverberação</string>
+    <string name="dolby_volume_amount">Intensidade do nivelamento</string>
+    <string name="dolby_category_games">Jogos</string>
+    <string name="dolby_geq_bypassed">O equalizador gráfico está desligado: esta curva está salva, mas não é aplicada.</string>
+    <string name="dolby_geq_turn_on">Ativar</string>
 </resources>

@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">ଶାନ୍ତ ଏବଂ ଉଚ୍ଚ ଧ୍ୱନି ଅଂଶଗୁଡ଼ିକୁ ସନ୍ତୁଳିତ କରନ୍ତୁ।</string>
     <string name="dolby_reset_options">ରିସେଟ୍ ବିକଳ୍ପଗୁଡ଼ିକ</string>
     <string name="dolby_eq_scroll_hint">ସମସ୍ତ 20ଟି ବ୍ୟାଣ୍ଡକୁ ପହଞ୍ଚିବା ପାଇଁ ପାର୍ଶ୍ୱକୁ ସ୍ୱାଇପ୍ କରନ୍ତୁ।</string>
+    <string name="dolby_category_tone">ସ୍ୱରର ରଙ୍ଗ</string>
+    <string name="dolby_category_voice">ବାଣୀ ଏବଂ ଧ୍ୱନିର ମାତ୍ରା</string>
+    <string name="dolby_category_surround">ଚାରିପାଖର ଧ୍ୱନି</string>
+    <string name="dolby_virtual_bass">ଭର୍ଚୁଆଲ୍ ବେସ୍</string>
+    <string name="dolby_virtual_bass_summary">ହାର୍ମୋନିକ୍ସ ସାହାଯ୍ୟରେ ବିଲ୍ଟ-ଇନ୍ ସ୍ପିକରରେ ଗଭୀର ବେସ୍ ପୁନଃସୃଷ୍ଟି କରନ୍ତୁ।</string>
+    <string name="dolby_reverb_suppression">ପ୍ରତିଧ୍ୱନି ଦମନ</string>
+    <string name="dolby_reverb_summary">କଥା ଅଧିକ ଶୁଷ୍କ ଏବଂ ସ୍ପଷ୍ଟ ଶୁଣାଯିବା ପାଇଁ କୋଠରୀର ପ୍ରତିଧ୍ୱନି କମାନ୍ତୁ।</string>
+    <string name="dolby_ieq_amount">ବୁଦ୍ଧିମାନ ଇକ୍ୱାଲାଇଜରର ତୀବ୍ରତା</string>
+    <string name="dolby_dialogue_ducking">ପୃଷ୍ଠଭୂମିର ଧ୍ୱନି କମାଇବା</string>
+    <string name="dolby_hp_distance">ଭର୍ଚୁଆଲ୍ ସ୍ପିକରର ଦୂରତା</string>
+    <string name="dolby_geq_enable">ଗ୍ରାଫିକ୍ ଇକ୍ୱାଲାଇଜର</string>
+    <string name="dolby_geq_enable_summary">ଇକ୍ୱାଲାଇଜର ଟ୍ୟାବ୍‌ର 20-ବ୍ୟାଣ୍ଡ ବକ୍ର ପ୍ରୟୋଗ କରନ୍ତୁ।</string>
+    <string name="dolby_reverb_amount">ପ୍ରତିଧ୍ୱନି ଦମନର ତୀବ୍ରତା</string>
+    <string name="dolby_volume_amount">ଧ୍ୱନି ସମତଳକରଣର ତୀବ୍ରତା</string>
+    <string name="dolby_category_games">ଖେଳ</string>
+    <string name="dolby_geq_bypassed">ଗ୍ରାଫିକ୍ ଇକ୍ୱାଲାଇଜର ବନ୍ଦ ଅଛି। ଏହି ବକ୍ର ସଞ୍ଚିତ ଅଛି, କିନ୍ତୁ ପ୍ରୟୋଗ ହେଉନାହିଁ।</string>
+    <string name="dolby_geq_turn_on">ଚାଲୁ କରନ୍ତୁ</string>
 </resources>
