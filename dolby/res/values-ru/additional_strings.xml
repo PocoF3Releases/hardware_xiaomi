@@ -49,6 +49,9 @@
     <string name="dolby_geq_enable_summary">Применять 20-полосную кривую со вкладки «Эквалайзер».</string>
     <string name="dolby_reverb_amount">Сила подавления реверберации</string>
     <string name="dolby_volume_amount">Сила выравнивания</string>
+    <string name="dolby_category_games">Игры</string>
+    <string name="dolby_geq_bypassed">Графический эквалайзер выключен: кривая сохранена, но не применяется.</string>
+    <string name="dolby_geq_turn_on">Включить</string>
     <string name="dolby_reset_options">Параметры сброса</string>
     <string name="dolby_eq_scroll_hint">Проведите в сторону, чтобы открыть все 20 полос.</string>
 </resources>
