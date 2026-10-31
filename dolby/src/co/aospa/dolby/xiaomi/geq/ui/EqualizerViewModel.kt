@@ -28,6 +28,23 @@ class EqualizerViewModel(private val repository: EqualizerRepository) : ViewMode
         .stateIn(viewModelScope, SharingStarted.Eagerly, repository.activeState.value.key)
     val ready = repository.activeState.map { it.loaded && it.enabled }
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+    /** The 20-band curve is kept but not applied while the GEQ switch is off. */
+    val bypassed = repository.activeState
+        .map { it.loaded && it.settings[co.aospa.dolby.xiaomi.DolbyConstants.PREF_GEQ] == false }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
+    fun enableEqualizer() {
+        viewModelScope.launch {
+            try {
+                repository.enableEqualizer()
+                _error.value = null
+            } catch (cancel: CancellationException) {
+                throw cancel
+            } catch (_: RuntimeException) {
+                _error.value = "apply"
+            }
+        }
+    }
     private var key = repository.activeState.value.key
     private data class Edit(val key: String, val transform: (Preset) -> Preset,
         val rememberUndo: Boolean, val completion: CompletableDeferred<Unit>)

@@ -9,6 +9,7 @@ package co.aospa.dolby.xiaomi.geq.data
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_GEQ
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_PRESET
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.dlog
 import co.aospa.dolby.xiaomi.DolbyController
@@ -82,6 +83,8 @@ class EqualizerRepository(
     }
 
     fun beginEdit() = dolbyController.beginEqualizerEdit()
+
+    suspend fun enableEqualizer() = dolbyController.updateSetting(PREF_GEQ, true)
 
     suspend fun editBandGains(key: String, transform: (List<BandGain>) -> List<BandGain>) =
         dolbyController.editEqualizer(key, transform)

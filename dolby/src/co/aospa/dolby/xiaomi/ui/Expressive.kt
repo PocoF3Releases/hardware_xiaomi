@@ -14,6 +14,9 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -537,5 +540,23 @@ internal fun DolbyDialog(
         containerColor = containerColor,
         modifier = Modifier.widthIn(max = 560.dp).fillMaxWidth().padding(horizontal = 24.dp),
         properties = androidx.compose.ui.window.DialogProperties(usePlatformDefaultWidth = false),
+    )
+}
+
+/** Display-only switch for rows that own the toggle semantics; matches XiaomiParts thumbs. */
+@Composable
+internal fun DolbySwitch(checked: Boolean, enabled: Boolean = true) {
+    Switch(
+        checked = checked,
+        onCheckedChange = null,
+        enabled = enabled,
+        thumbContent = {
+            Icon(
+                if (checked) Icons.Default.Check
+                else Icons.Default.Close,
+                null,
+                Modifier.size(16.dp),
+            )
+        },
     )
 }
