@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Jafnaðu hljóðláta og háværa kafla.</string>
     <string name="dolby_reset_options">Endurstillingarvalkostir</string>
     <string name="dolby_eq_scroll_hint">Strjúktu til hliðar til að komast í öll 20 tíðnisviðin.</string>
+    <string name="dolby_category_tone">Hljómblær</string>
+    <string name="dolby_category_voice">Rödd og hljóðstyrkur</string>
+    <string name="dolby_category_surround">Umhverfishljóð</string>
+    <string name="dolby_virtual_bass">Sýndarbassi</string>
+    <string name="dolby_virtual_bass_summary">Endurskapa djúpan bassa í innbyggðu hátölurunum með yfirtónum.</string>
+    <string name="dolby_reverb_suppression">Ómunardeyfing</string>
+    <string name="dolby_reverb_summary">Minnka bergmál herbergisins svo tal hljómi þurrara og skýrar.</string>
+    <string name="dolby_ieq_amount">Styrkur snjallrar tónjöfnunar</string>
+    <string name="dolby_dialogue_ducking">Lækkun bakgrunnshljóðs</string>
+    <string name="dolby_hp_distance">Fjarlægð sýndarhátalara</string>
+    <string name="dolby_geq_enable">Grafísk tónjöfnun</string>
+    <string name="dolby_geq_enable_summary">Nota 20 banda ferilinn á flipanum Tónjafnari.</string>
+    <string name="dolby_reverb_amount">Styrkur ómunardeyfingar</string>
+    <string name="dolby_volume_amount">Styrkur hljóðstyrksjöfnunar</string>
+    <string name="dolby_category_games">Leikir</string>
+    <string name="dolby_geq_bypassed">Slökkt er á grafískri tónjöfnun. Ferillinn er vistaður en ekki notaður.</string>
+    <string name="dolby_geq_turn_on">Kveikja</string>
 </resources>

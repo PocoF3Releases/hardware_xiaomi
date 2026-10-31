@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">بەشە بێدەنگ و بەرزەکان هاوسەنگ بکە.</string>
     <string name="dolby_reset_options">هەڵبژاردەکانی ڕێکخستنەوە</string>
     <string name="dolby_eq_scroll_hint">بۆ گەیشتن بە هەموو ٢٠ باندەکە بە لایەندا بسڕە.</string>
+    <string name="dolby_category_tone">ڕەنگی دەنگ</string>
+    <string name="dolby_category_voice">قسە و بەرزی دەنگ</string>
+    <string name="dolby_category_surround">دەنگی دەوروبەر</string>
+    <string name="dolby_virtual_bass">باسی مەجازی</string>
+    <string name="dolby_virtual_bass_summary">باسی قووڵ لە بڵندگۆ ناوخۆییەکاندا بە هارمۆنیکەکان دروست بکەرەوە.</string>
+    <string name="dolby_reverb_suppression">کەمکردنەوەی دەنگدانەوە</string>
+    <string name="dolby_reverb_summary">دەنگدانەوەی ژوور کەم بکەرەوە بۆ قسەیەکی وشک‌تر و ڕوون‌تر.</string>
+    <string name="dolby_ieq_amount">هێزی یەکسانکەری زیرەک</string>
+    <string name="dolby_dialogue_ducking">نزمکردنەوەی دەنگی پاشبنەما</string>
+    <string name="dolby_hp_distance">دووری بڵندگۆ مەجازییەکان</string>
+    <string name="dolby_geq_enable">یەکسانکەری گرافیکی</string>
+    <string name="dolby_geq_enable_summary">چەماوەی ٢٠ باندی لە تابی یەکسانکەر جێبەجێ بکە.</string>
+    <string name="dolby_reverb_amount">هێزی کەمکردنەوەی دەنگدانەوە</string>
+    <string name="dolby_volume_amount">هێزی یەکسانکردنی بەرزی دەنگ</string>
+    <string name="dolby_category_games">یارییەکان</string>
+    <string name="dolby_geq_bypassed">یەکسانکەری گرافیکی کوژاوەتەوە. ئەم چەماوەیە پاشەکەوت کراوە، بەڵام جێبەجێ ناکرێت.</string>
+    <string name="dolby_geq_turn_on">چالاککردن</string>
 </resources>

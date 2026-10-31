@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Tasakaalusta vaiksed ja valjud lõigud.</string>
     <string name="dolby_reset_options">Lähtestamisvalikud</string>
     <string name="dolby_eq_scroll_hint">Kõigi 20 sagedusriba nägemiseks nipsa külgsuunas.</string>
+    <string name="dolby_category_tone">Kõlavärv</string>
+    <string name="dolby_category_voice">Hääl ja helitugevus</string>
+    <string name="dolby_category_surround">Ruumiline heli</string>
+    <string name="dolby_virtual_bass">Virtuaalne bass</string>
+    <string name="dolby_virtual_bass_summary">Taasesita sisseehitatud kõlaritel sügavat bassi ülemhelide abil.</string>
+    <string name="dolby_reverb_suppression">Järelkaja summutus</string>
+    <string name="dolby_reverb_summary">Vähenda ruumi kaja, et kõne oleks kuivem ja selgem.</string>
+    <string name="dolby_ieq_amount">Nutika ekvalaiseri tugevus</string>
+    <string name="dolby_dialogue_ducking">Tausta vaigistamine</string>
+    <string name="dolby_hp_distance">Virtuaalsete kõlarite kaugus</string>
+    <string name="dolby_geq_enable">Graafiline ekvalaiser</string>
+    <string name="dolby_geq_enable_summary">Rakenda vahekaardi Ekvalaiser 20-ribaline kõver.</string>
+    <string name="dolby_reverb_amount">Järelkaja summutuse tugevus</string>
+    <string name="dolby_volume_amount">Helitugevuse ühtlustamise tugevus</string>
+    <string name="dolby_category_games">Mängud</string>
+    <string name="dolby_geq_bypassed">Graafiline ekvalaiser on väljas. Kõver on salvestatud, kuid seda ei rakendata.</string>
+    <string name="dolby_geq_turn_on">Lülita sisse</string>
 </resources>

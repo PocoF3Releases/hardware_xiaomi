@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Cân bằng các đoạn yên tĩnh và lớn.</string>
     <string name="dolby_reset_options">Tùy chọn đặt lại</string>
     <string name="dolby_eq_scroll_hint">Vuốt ngang để truy cập đủ 20 dải.</string>
+    <string name="dolby_category_tone">Âm sắc</string>
+    <string name="dolby_category_voice">Giọng nói và âm lượng</string>
+    <string name="dolby_category_surround">Âm thanh vòm</string>
+    <string name="dolby_virtual_bass">Âm trầm ảo</string>
+    <string name="dolby_virtual_bass_summary">Tái tạo âm trầm sâu trên loa tích hợp bằng các họa âm.</string>
+    <string name="dolby_reverb_suppression">Khử tiếng vang</string>
+    <string name="dolby_reverb_summary">Giảm tiếng vang trong phòng để giọng nói khô và rõ hơn.</string>
+    <string name="dolby_ieq_amount">Mức cân bằng thông minh</string>
+    <string name="dolby_dialogue_ducking">Giảm âm nền</string>
+    <string name="dolby_hp_distance">Khoảng cách loa ảo</string>
+    <string name="dolby_geq_enable">Bộ cân bằng đồ họa</string>
+    <string name="dolby_geq_enable_summary">Áp dụng đường cong 20 dải từ thẻ Bộ cân bằng.</string>
+    <string name="dolby_reverb_amount">Mức khử tiếng vang</string>
+    <string name="dolby_volume_amount">Mức cân bằng âm lượng</string>
+    <string name="dolby_category_games">Trò chơi</string>
+    <string name="dolby_geq_bypassed">Bộ cân bằng đồ họa đang tắt. Đường cong này được lưu nhưng không được áp dụng.</string>
+    <string name="dolby_geq_turn_on">Bật</string>
 </resources>

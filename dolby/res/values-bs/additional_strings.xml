@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Uravnotežite tihe i glasne dijelove.</string>
     <string name="dolby_reset_options">Opcije resetovanja</string>
     <string name="dolby_eq_scroll_hint">Prevucite bočno da biste pristupili svim 20 opsega.</string>
+    <string name="dolby_category_tone">Boja zvuka</string>
+    <string name="dolby_category_voice">Glas i jačina zvuka</string>
+    <string name="dolby_category_surround">Prostorni zvuk</string>
+    <string name="dolby_virtual_bass">Virtuelni bas</string>
+    <string name="dolby_virtual_bass_summary">Stvorite duboke basove na ugrađenim zvučnicima pomoću harmonika.</string>
+    <string name="dolby_reverb_suppression">Suzbijanje odjeka</string>
+    <string name="dolby_reverb_summary">Smanjite odjek prostorije za suši i jasniji glas.</string>
+    <string name="dolby_ieq_amount">Jačina pametnog ekvilajzera</string>
+    <string name="dolby_dialogue_ducking">Utišavanje pozadine</string>
+    <string name="dolby_hp_distance">Udaljenost virtuelnih zvučnika</string>
+    <string name="dolby_geq_enable">Grafički ekvilajzer</string>
+    <string name="dolby_geq_enable_summary">Primijeni krivu s 20 opsega s kartice Ekvilajzer.</string>
+    <string name="dolby_reverb_amount">Jačina suzbijanja odjeka</string>
+    <string name="dolby_volume_amount">Jačina izjednačavanja glasnoće</string>
+    <string name="dolby_category_games">Igre</string>
+    <string name="dolby_geq_bypassed">Grafički ekvilajzer je isključen. Kriva je sačuvana, ali se ne primjenjuje.</string>
+    <string name="dolby_geq_turn_on">Uključi</string>
 </resources>

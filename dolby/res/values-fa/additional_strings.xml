@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">بخش‌های آرام و بلند را متعادل کنید.</string>
     <string name="dolby_reset_options">گزینه‌های بازنشانی</string>
     <string name="dolby_eq_scroll_hint">برای دسترسی به هر ۲۰ باند، به‌صورت افقی بکشید.</string>
+    <string name="dolby_category_tone">رنگ صدا</string>
+    <string name="dolby_category_voice">گفتار و بلندی صدا</string>
+    <string name="dolby_category_surround">صدای فراگیر</string>
+    <string name="dolby_virtual_bass">بیس مجازی</string>
+    <string name="dolby_virtual_bass_summary">بازسازی بیس عمیق در بلندگوهای داخلی با استفاده از هارمونیک‌ها.</string>
+    <string name="dolby_reverb_suppression">کاهش طنین</string>
+    <string name="dolby_reverb_summary">کاهش پژواک اتاق برای گفتاری خشک‌تر و واضح‌تر.</string>
+    <string name="dolby_ieq_amount">شدت اکولایزر هوشمند</string>
+    <string name="dolby_dialogue_ducking">کاهش صدای پس‌زمینه</string>
+    <string name="dolby_hp_distance">فاصلهٔ بلندگوهای مجازی</string>
+    <string name="dolby_geq_enable">اکولایزر گرافیکی</string>
+    <string name="dolby_geq_enable_summary">اعمال منحنی ۲۰ باندی از زبانهٔ اکولایزر.</string>
+    <string name="dolby_reverb_amount">شدت کاهش طنین</string>
+    <string name="dolby_volume_amount">شدت یکسان‌سازی بلندی صدا</string>
+    <string name="dolby_category_games">بازی‌ها</string>
+    <string name="dolby_geq_bypassed">اکولایزر گرافیکی خاموش است. این منحنی ذخیره شده، اما اعمال نمی‌شود.</string>
+    <string name="dolby_geq_turn_on">روشن کردن</string>
 </resources>

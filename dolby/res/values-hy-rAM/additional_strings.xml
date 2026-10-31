@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Հավասարակշռեք ցածր և բարձր ձայնով հատվածները։</string>
     <string name="dolby_reset_options">Վերակայման ընտրանքներ</string>
     <string name="dolby_eq_scroll_hint">Սահեցրեք կողք՝ բոլոր 20 գոտիներին հասնելու համար։</string>
+    <string name="dolby_category_tone">Տեմբր</string>
+    <string name="dolby_category_voice">Խոսք և բարձրություն</string>
+    <string name="dolby_category_surround">Շրջապատող ձայն</string>
+    <string name="dolby_virtual_bass">Վիրտուալ բաս</string>
+    <string name="dolby_virtual_bass_summary">Ներկառուցված բարձրախոսներով վերարտադրել խորը բաս՝ ներդաշնակների միջոցով։</string>
+    <string name="dolby_reverb_suppression">Արձագանքի ճնշում</string>
+    <string name="dolby_reverb_summary">Նվազեցնել սենյակի արձագանքը՝ խոսքն ավելի չոր ու հստակ դարձնելու համար։</string>
+    <string name="dolby_ieq_amount">Խելացի հավասարիչի ուժգնություն</string>
+    <string name="dolby_dialogue_ducking">Ֆոնի խլացում</string>
+    <string name="dolby_hp_distance">Վիրտուալ բարձրախոսների հեռավորություն</string>
+    <string name="dolby_geq_enable">Գրաֆիկական հավասարիչ</string>
+    <string name="dolby_geq_enable_summary">Կիրառել Հավասարիչ ներդիրի 20-շերտանի կորը։</string>
+    <string name="dolby_reverb_amount">Արձագանքի ճնշման ուժգնություն</string>
+    <string name="dolby_volume_amount">Բարձրության հավասարեցման ուժգնություն</string>
+    <string name="dolby_category_games">Խաղեր</string>
+    <string name="dolby_geq_bypassed">Գրաֆիկական հավասարիչն անջատված է։ Կորը պահպանված է, բայց չի կիրառվում։</string>
+    <string name="dolby_geq_turn_on">Միացնել</string>
 </resources>

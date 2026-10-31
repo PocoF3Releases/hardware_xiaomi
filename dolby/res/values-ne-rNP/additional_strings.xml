@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">शान्त र ठूलो आवाज भएका अंशहरू सन्तुलित गर्नुहोस्।</string>
     <string name="dolby_reset_options">रिसेट विकल्पहरू</string>
     <string name="dolby_eq_scroll_hint">सबै २० ब्यान्डमा पुग्न छेउतिर स्वाइप गर्नुहोस्।</string>
+    <string name="dolby_category_tone">स्वरको रङ</string>
+    <string name="dolby_category_voice">वाणी र आवाजको स्तर</string>
+    <string name="dolby_category_surround">वरिपरिको ध्वनि</string>
+    <string name="dolby_virtual_bass">भर्चुअल बास</string>
+    <string name="dolby_virtual_bass_summary">हार्मोनिक्स प्रयोग गरेर बिल्ट-इन स्पिकरमा गहिरो बास पुनः सिर्जना गर्नुहोस्।</string>
+    <string name="dolby_reverb_suppression">प्रतिध्वनि दमन</string>
+    <string name="dolby_reverb_summary">वाणी अझ सुक्खा र स्पष्ट सुनाउन कोठाको प्रतिध्वनि घटाउनुहोस्।</string>
+    <string name="dolby_ieq_amount">बुद्धिमान इक्वलाइजरको तीव्रता</string>
+    <string name="dolby_dialogue_ducking">पृष्ठभूमिको आवाज घटाउने</string>
+    <string name="dolby_hp_distance">भर्चुअल स्पिकरको दूरी</string>
+    <string name="dolby_geq_enable">ग्राफिक इक्वलाइजर</string>
+    <string name="dolby_geq_enable_summary">इक्वलाइजर ट्याबको 20-ब्यान्ड वक्र लागू गर्नुहोस्।</string>
+    <string name="dolby_reverb_amount">प्रतिध्वनि दमनको तीव्रता</string>
+    <string name="dolby_volume_amount">आवाज बराबरीको तीव्रता</string>
+    <string name="dolby_category_games">खेलहरू</string>
+    <string name="dolby_geq_bypassed">ग्राफिक इक्वलाइजर बन्द छ। यो वक्र सुरक्षित छ, तर लागू गरिँदैन।</string>
+    <string name="dolby_geq_turn_on">खोल्नुहोस्</string>
 </resources>

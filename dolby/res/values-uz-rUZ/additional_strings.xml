@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Sokin va baland qismlarni muvozanatlashtiring.</string>
     <string name="dolby_reset_options">Qayta tiklash parametrlari</string>
     <string name="dolby_eq_scroll_hint">Barcha 20 diapazonga yetish uchun yon tomonga suring.</string>
+    <string name="dolby_category_tone">Tembr</string>
+    <string name="dolby_category_voice">Ovoz va balandlik</string>
+    <string name="dolby_category_surround">Atrofdagi tovush</string>
+    <string name="dolby_virtual_bass">Virtual bas</string>
+    <string name="dolby_virtual_bass_summary">Garmonikalar yordamida ichki karnaylarda chuqur bas hosil qiling.</string>
+    <string name="dolby_reverb_suppression">Aks sadoni bostirish</string>
+    <string name="dolby_reverb_summary">Nutqni quruqroq va ravshanroq qilish uchun xona aks sadosini kamaytiring.</string>
+    <string name="dolby_ieq_amount">Aqlli ekvalayzer kuchi</string>
+    <string name="dolby_dialogue_ducking">Fon ovozini pasaytirish</string>
+    <string name="dolby_hp_distance">Virtual karnaylar masofasi</string>
+    <string name="dolby_geq_enable">Grafik ekvalayzer</string>
+    <string name="dolby_geq_enable_summary">Ekvalayzer varaqasidagi 20 tasmali egri chiziqni qo‘llash.</string>
+    <string name="dolby_reverb_amount">Aks sadoni bostirish kuchi</string>
+    <string name="dolby_volume_amount">Ovoz balandligini tenglashtirish kuchi</string>
+    <string name="dolby_category_games">O‘yinlar</string>
+    <string name="dolby_geq_bypassed">Grafik ekvalayzer o‘chirilgan. Egri chiziq saqlangan, ammo qo‘llanmaydi.</string>
+    <string name="dolby_geq_turn_on">Yoqish</string>
 </resources>

@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Equilibra los pasaxes silenciosos y fuertes.</string>
     <string name="dolby_reset_options">Opciones de restablecimientu</string>
     <string name="dolby_eq_scroll_hint">Desliza hacia un llau pa llegar a les 20 bandes.</string>
+    <string name="dolby_category_tone">Timbre</string>
+    <string name="dolby_category_voice">Voz y volume</string>
+    <string name="dolby_category_surround">Soníu envolvente</string>
+    <string name="dolby_virtual_bass">Graves virtuales</string>
+    <string name="dolby_virtual_bass_summary">Recrear graves fondos nos altavoces integraos per mediu d’harmónicos.</string>
+    <string name="dolby_reverb_suppression">Supresión de reverberación</string>
+    <string name="dolby_reverb_summary">Amenorgar l’ecu de la sala pa una voz más seca y clara.</string>
+    <string name="dolby_ieq_amount">Intensidá del ecualizador intelixente</string>
+    <string name="dolby_dialogue_ducking">Atenuación del fondu</string>
+    <string name="dolby_hp_distance">Distancia de los altavoces virtuales</string>
+    <string name="dolby_geq_enable">Ecualizador gráficu</string>
+    <string name="dolby_geq_enable_summary">Aplicar la curva de 20 bandes de la llingüeta Ecualizador.</string>
+    <string name="dolby_reverb_amount">Intensidá de supresión de reverberación</string>
+    <string name="dolby_volume_amount">Intensidá de nivelación</string>
+    <string name="dolby_category_games">Xuegos</string>
+    <string name="dolby_geq_bypassed">L’ecualizador gráficu ta desactiváu: la curva ta guardada, pero nun s’aplica.</string>
+    <string name="dolby_geq_turn_on">Activar</string>
 </resources>

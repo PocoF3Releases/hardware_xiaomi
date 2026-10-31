@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Cothromaigh sleachta ciúine agus arda.</string>
     <string name="dolby_reset_options">Roghanna athshocraithe</string>
     <string name="dolby_eq_scroll_hint">Svaidhpeáil cliathánach chun na 20 banda ar fad a bhaint amach.</string>
+    <string name="dolby_category_tone">Tondath</string>
+    <string name="dolby_category_voice">Guth agus airde fuaime</string>
+    <string name="dolby_category_surround">Fuaim timpeallach</string>
+    <string name="dolby_virtual_bass">Dord fíorúil</string>
+    <string name="dolby_virtual_bass_summary">Athchruthaigh dord domhain ar na callairí ionsuite le harmónaigh.</string>
+    <string name="dolby_reverb_suppression">Cosc ar aisfhuaimniú</string>
+    <string name="dolby_reverb_summary">Laghdaigh macalla an tseomra chun caint níos tirime agus níos soiléire a fháil.</string>
+    <string name="dolby_ieq_amount">Neart an chothromóra chliste</string>
+    <string name="dolby_dialogue_ducking">Maolú an chúlra</string>
+    <string name="dolby_hp_distance">Fad na gcallairí fíorúla</string>
+    <string name="dolby_geq_enable">Cothromóir grafach</string>
+    <string name="dolby_geq_enable_summary">Cuir an cuar 20 banda ón gcluaisín Cothromóir i bhfeidhm.</string>
+    <string name="dolby_reverb_amount">Neart an choisc ar aisfhuaimniú</string>
+    <string name="dolby_volume_amount">Neart an chothromaithe airde</string>
+    <string name="dolby_category_games">Cluichí</string>
+    <string name="dolby_geq_bypassed">Tá an cothromóir grafach as. Tá an cuar sábháilte, ach níl sé i bhfeidhm.</string>
+    <string name="dolby_geq_turn_on">Cas air</string>
 </resources>

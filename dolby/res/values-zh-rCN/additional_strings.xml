@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">平衡安静和响亮的片段。</string>
     <string name="dolby_reset_options">重置选项</string>
     <string name="dolby_eq_scroll_hint">横向滑动以访问全部 20 个频段。</string>
+    <string name="dolby_category_tone">音色</string>
+    <string name="dolby_category_voice">人声与响度</string>
+    <string name="dolby_category_surround">环绕声</string>
+    <string name="dolby_virtual_bass">虚拟低音</string>
+    <string name="dolby_virtual_bass_summary">利用谐波在内置扬声器上重现深沉低音。</string>
+    <string name="dolby_reverb_suppression">混响抑制</string>
+    <string name="dolby_reverb_summary">减少房间回声，让人声更干净清晰。</string>
+    <string name="dolby_ieq_amount">智能均衡器强度</string>
+    <string name="dolby_dialogue_ducking">背景音衰减</string>
+    <string name="dolby_hp_distance">虚拟扬声器距离</string>
+    <string name="dolby_geq_enable">图形均衡器</string>
+    <string name="dolby_geq_enable_summary">应用均衡器标签页中的 20 段曲线。</string>
+    <string name="dolby_reverb_amount">混响抑制强度</string>
+    <string name="dolby_volume_amount">响度均衡强度</string>
+    <string name="dolby_category_games">游戏</string>
+    <string name="dolby_geq_bypassed">图形均衡器已关闭，此曲线会保存，但不会应用。</string>
+    <string name="dolby_geq_turn_on">开启</string>
 </resources>

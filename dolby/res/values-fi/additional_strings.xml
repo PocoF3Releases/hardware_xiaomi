@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Tasapainota hiljaiset ja voimakkaat kohdat.</string>
     <string name="dolby_reset_options">Palautusasetukset</string>
     <string name="dolby_eq_scroll_hint">Pyyhkäise sivulle nähdäksesi kaikki 20 kaistaa.</string>
+    <string name="dolby_category_tone">Sävy</string>
+    <string name="dolby_category_voice">Puhe ja äänenvoimakkuus</string>
+    <string name="dolby_category_surround">Tilaääni</string>
+    <string name="dolby_virtual_bass">Virtuaalinen basso</string>
+    <string name="dolby_virtual_bass_summary">Luo syvä basso sisäänrakennetuilla kaiuttimilla käyttämällä harmonisia yläsäveliä.</string>
+    <string name="dolby_reverb_suppression">Jälkikaiunnan vaimennus</string>
+    <string name="dolby_reverb_summary">Vähennä huoneen kaikua, jotta puhe kuulostaa kuivemmalta ja selkeämmältä.</string>
+    <string name="dolby_ieq_amount">Älykkään taajuuskorjaimen voimakkuus</string>
+    <string name="dolby_dialogue_ducking">Taustaäänten vaimennus</string>
+    <string name="dolby_hp_distance">Virtuaalikaiuttimien etäisyys</string>
+    <string name="dolby_geq_enable">Graafinen taajuuskorjain</string>
+    <string name="dolby_geq_enable_summary">Käytä Taajuuskorjain-välilehden 20-kaistaista käyrää.</string>
+    <string name="dolby_reverb_amount">Jälkikaiunnan vaimennuksen voimakkuus</string>
+    <string name="dolby_volume_amount">Äänenvoimakkuuden tasauksen voimakkuus</string>
+    <string name="dolby_category_games">Pelit</string>
+    <string name="dolby_geq_bypassed">Graafinen taajuuskorjain on pois päältä. Käyrä on tallennettu, mutta sitä ei käytetä.</string>
+    <string name="dolby_geq_turn_on">Ota käyttöön</string>
 </resources>
