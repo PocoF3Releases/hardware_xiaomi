@@ -7,6 +7,7 @@
 package co.aospa.dolby.xiaomi
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.BroadcastReceiver
 import android.content.Intent
 import android.content.IntentFilter
@@ -38,6 +39,14 @@ import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_SPK_VIRTUALIZER
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_DIALOGUE
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_DIALOGUE_AMOUNT
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_IEQ
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_DIALOGUE_DUCKING
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_GEQ
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_REVERB_AMOUNT
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_VOLUME_AMOUNT
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_HP_DISTANCE
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_IEQ_AMOUNT
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_REVERB
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_VIRTUAL_BASS
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
@@ -452,6 +461,12 @@ internal class DolbyEngine(
         if (volumeLevelerSupported && prefs.contains(DolbyConstants.PREF_VOLUME)) {
             setVolumeLevelerEnabled(prefs.getBoolean(DolbyConstants.PREF_VOLUME, false), profile)
         }
+        if (prefs.contains(DolbyConstants.PREF_VIRTUAL_BASS)) {
+            setVirtualBassEnabled(prefs.getBoolean(DolbyConstants.PREF_VIRTUAL_BASS, false), profile)
+        }
+        if (prefs.contains(DolbyConstants.PREF_REVERB)) {
+            setReverbSuppressionEnabled(prefs.getBoolean(DolbyConstants.PREF_REVERB, false), profile)
+        }
         prefs.getString(DolbyConstants.PREF_IEQ, null)?.toIntOrNull()?.let {
             if (it in 0..3) setIeqPreset(it, profile)
         }
@@ -461,8 +476,26 @@ internal class DolbyEngine(
         if (prefs.contains(DolbyConstants.PREF_SPK_VIRTUALIZER)) {
             setSpeakerVirtEnabled(prefs.getBoolean(DolbyConstants.PREF_SPK_VIRTUALIZER, false), profile)
         }
-        // Retired strength overrides are intentionally not restored: parameter 113
-        // is not verified as a headphone surround strength control.
+        restoreAmount(prefs, PREF_IEQ_AMOUNT, DolbyConstants.IEQ_AMOUNT_RANGE, profile) {
+            setIeqAmount(it, profile)
+        }
+        if (prefs.contains(PREF_GEQ)) {
+            setGeqEnabled(prefs.getBoolean(PREF_GEQ, true), profile)
+        }
+        restoreAmount(prefs, PREF_REVERB_AMOUNT, DolbyConstants.REVERB_AMOUNT_RANGE, profile) {
+            setReverbSuppressionAmount(it, profile)
+        }
+        if (volumeLevelerSupported) {
+            restoreAmount(prefs, PREF_VOLUME_AMOUNT, DolbyConstants.VOLUME_AMOUNT_RANGE, profile) {
+                setVolumeLevelerAmount(it, profile)
+            }
+        }
+        restoreAmount(prefs, PREF_HP_DISTANCE, DolbyConstants.HP_DISTANCE_RANGE, profile) {
+            setHeadphoneVirtDistance(it, profile)
+        }
+        restoreAmount(prefs, PREF_DIALOGUE_DUCKING, DolbyConstants.DIALOGUE_DUCKING_RANGE, profile) {
+            setDialogueEnhancerDucking(it, profile)
+        }
         if (prefs.contains(DolbyConstants.PREF_DIALOGUE)) {
             setDialogueEnhancerEnabled(prefs.getBoolean(DolbyConstants.PREF_DIALOGUE, false), profile)
         }
@@ -474,6 +507,23 @@ internal class DolbyEngine(
                 Log.w(TAG, "Ignoring invalid saved dialogue amount for profile $profile")
                 prefs.edit().remove(DolbyConstants.PREF_DIALOGUE_AMOUNT).apply()
             }
+        }
+    }
+
+    private fun restoreAmount(
+        prefs: SharedPreferences,
+        key: String,
+        range: IntRange,
+        profile: Int,
+        apply: (Int) -> Unit
+    ) {
+        if (!prefs.contains(key)) return
+        val value = prefs.getInt(key, range.first)
+        if (value in range) {
+            apply(value)
+        } else {
+            Log.w(TAG, "Ignoring invalid saved $key for profile $profile")
+            prefs.edit().remove(key).apply()
         }
     }
 
@@ -820,6 +870,82 @@ internal class DolbyEngine(
         dolbyEffect.setDapParameter(DsParam.VOLUME_LEVELER_ENABLE, value, profile)
     }
 
+    // Stock MiSound IDs 112/114 map to vbon/rvse, which libhwdap forwards to the
+    // QDSP DAP; amounts stay at the vendor tuning values.
+    fun getVirtualBassEnabled(profile: Int = profiles.requireProfile(activeProfileKey).base) =
+        dolbyEffect.getDapParameterBool(DsParam.VIRTUAL_BASS_ENABLE, profile).also {
+            dlog(TAG, "getVirtualBassEnabled: $it")
+        }
+
+    fun setVirtualBassEnabled(value: Boolean, profile: Int = profiles.requireProfile(activeProfileKey).base) {
+        dlog(TAG, "setVirtualBassEnabled: $value")
+        checkEffect()
+        dolbyEffect.setDapParameter(DsParam.VIRTUAL_BASS_ENABLE, value, profile)
+    }
+
+    fun getReverbSuppressionEnabled(profile: Int = profiles.requireProfile(activeProfileKey).base) =
+        dolbyEffect.getDapParameterBool(DsParam.REVERB_SUPPRESSION_ENABLE, profile).also {
+            dlog(TAG, "getReverbSuppressionEnabled: $it")
+        }
+
+    fun setReverbSuppressionEnabled(value: Boolean, profile: Int = profiles.requireProfile(activeProfileKey).base) {
+        dlog(TAG, "setReverbSuppressionEnabled: $value")
+        checkEffect()
+        dolbyEffect.setDapParameter(DsParam.REVERB_SUPPRESSION_ENABLE, value, profile)
+    }
+
+    private fun setRangedParameter(param: DsParam, range: IntRange, value: Int, profile: Int) {
+        dlog(TAG, "set $param: $value")
+        checkEffect()
+        require(value in range) { "$param outside the DAP range $range" }
+        dolbyEffect.setDapParameter(param, value, profile)
+    }
+
+    fun getIeqAmount(profile: Int = profiles.requireProfile(activeProfileKey).base) =
+        dolbyEffect.getDapParameterInt(DsParam.IEQ_AMOUNT, profile)
+
+    fun setIeqAmount(value: Int, profile: Int = profiles.requireProfile(activeProfileKey).base) =
+        setRangedParameter(DsParam.IEQ_AMOUNT, DolbyConstants.IEQ_AMOUNT_RANGE, value, profile)
+
+    fun getDialogueEnhancerDucking(profile: Int = profiles.requireProfile(activeProfileKey).base) =
+        dolbyEffect.getDapParameterInt(DsParam.DIALOGUE_ENHANCER_DUCKING, profile)
+
+    fun setDialogueEnhancerDucking(value: Int, profile: Int = profiles.requireProfile(activeProfileKey).base) =
+        setRangedParameter(DsParam.DIALOGUE_ENHANCER_DUCKING,
+            DolbyConstants.DIALOGUE_DUCKING_RANGE, value, profile)
+
+    fun getGeqEnabled(profile: Int = profiles.requireProfile(activeProfileKey).base) =
+        dolbyEffect.getDapParameterBool(DsParam.GEQ_ENABLE, profile)
+
+    fun setGeqEnabled(value: Boolean, profile: Int = profiles.requireProfile(activeProfileKey).base) {
+        dlog(TAG, "setGeqEnabled: $value")
+        checkEffect()
+        dolbyEffect.setDapParameter(DsParam.GEQ_ENABLE, value, profile)
+    }
+
+    fun getReverbSuppressionAmount(profile: Int = profiles.requireProfile(activeProfileKey).base) =
+        dolbyEffect.getDapParameterInt(DsParam.REVERB_SUPPRESSION_AMOUNT, profile)
+
+    fun setReverbSuppressionAmount(value: Int, profile: Int = profiles.requireProfile(activeProfileKey).base) =
+        setRangedParameter(DsParam.REVERB_SUPPRESSION_AMOUNT,
+            DolbyConstants.REVERB_AMOUNT_RANGE, value, profile)
+
+    // Tunings leave the amount at 0; it only takes effect once the user moves it.
+    fun getVolumeLevelerAmount(profile: Int = profiles.requireProfile(activeProfileKey).base) =
+        dolbyEffect.getDapParameterInt(DsParam.VOLUME_LEVELER_AMOUNT, profile)
+
+    fun setVolumeLevelerAmount(value: Int, profile: Int = profiles.requireProfile(activeProfileKey).base) =
+        setRangedParameter(DsParam.VOLUME_LEVELER_AMOUNT,
+            DolbyConstants.VOLUME_AMOUNT_RANGE, value, profile)
+
+    // Parameter 113 is the headphone virtualizer steerer source distance in the tuning.
+    fun getHeadphoneVirtDistance(profile: Int = profiles.requireProfile(activeProfileKey).base) =
+        dolbyEffect.getDapParameterInt(DsParam.HEADPHONE_VIRTUALIZER_DISTANCE, profile)
+
+    fun setHeadphoneVirtDistance(value: Int, profile: Int = profiles.requireProfile(activeProfileKey).base) =
+        setRangedParameter(DsParam.HEADPHONE_VIRTUALIZER_DISTANCE,
+            DolbyConstants.HP_DISTANCE_RANGE, value, profile)
+
     fun getDialogueEnhancerEnabled(profile: Int = profiles.requireProfile(activeProfileKey).base) =
         dolbyEffect.getDapParameterBool(DsParam.DIALOGUE_ENHANCER_ENABLE, profile).also {
             dlog(TAG, "getDialogueEnhancerEnabled: $it")
@@ -868,7 +994,15 @@ internal class DolbyEngine(
                 PREF_SPK_VIRTUALIZER to getSpeakerVirtEnabled(target.base),
                 PREF_DIALOGUE to getDialogueEnhancerEnabled(target.base),
                 PREF_DIALOGUE_AMOUNT to getDialogueEnhancerAmount(target.base),
-                PREF_IEQ to getIeqPreset(target.base)
+                PREF_IEQ to getIeqPreset(target.base),
+                PREF_VIRTUAL_BASS to getVirtualBassEnabled(target.base),
+                PREF_REVERB to getReverbSuppressionEnabled(target.base),
+                PREF_IEQ_AMOUNT to getIeqAmount(target.base),
+                PREF_DIALOGUE_DUCKING to getDialogueEnhancerDucking(target.base),
+                PREF_HP_DISTANCE to getHeadphoneVirtDistance(target.base),
+                PREF_GEQ to getGeqEnabled(target.base),
+                PREF_REVERB_AMOUNT to getReverbSuppressionAmount(target.base),
+                PREF_VOLUME_AMOUNT to getVolumeLevelerAmount(target.base)
             )
             val runtime = DolbyRuntimeState(processingState.name, dolbyEffect.dsOn,
                 dolbyEffect.enabled, dolbyEffect.hasControl(), appliedTuning?.id,
@@ -907,6 +1041,14 @@ internal class DolbyEngine(
             PREF_DIALOGUE -> setDialogueEnhancerEnabled(value as Boolean)
             PREF_DIALOGUE_AMOUNT -> setDialogueEnhancerAmount(value as Int)
             PREF_IEQ -> setIeqPreset(value as Int)
+            PREF_VIRTUAL_BASS -> setVirtualBassEnabled(value as Boolean)
+            PREF_REVERB -> setReverbSuppressionEnabled(value as Boolean)
+            PREF_IEQ_AMOUNT -> setIeqAmount(value as Int)
+            PREF_DIALOGUE_DUCKING -> setDialogueEnhancerDucking(value as Int)
+            PREF_HP_DISTANCE -> setHeadphoneVirtDistance(value as Int)
+            PREF_GEQ -> setGeqEnabled(value as Boolean)
+            PREF_REVERB_AMOUNT -> setReverbSuppressionAmount(value as Int)
+            PREF_VOLUME_AMOUNT -> setVolumeLevelerAmount(value as Int)
             else -> error("Unsupported setting")
         }
         refreshActiveState()

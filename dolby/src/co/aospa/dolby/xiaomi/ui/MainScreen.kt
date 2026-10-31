@@ -23,6 +23,16 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import co.aospa.dolby.xiaomi.*
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_BASS
+import co.aospa.dolby.xiaomi.DolbyConstants
+import kotlin.math.roundToInt
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_DIALOGUE_DUCKING
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_GEQ
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_REVERB_AMOUNT
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_VOLUME_AMOUNT
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_HP_DISTANCE
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_IEQ_AMOUNT
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_REVERB
+import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_VIRTUAL_BASS
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_DIALOGUE
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_DIALOGUE_AMOUNT
 import co.aospa.dolby.xiaomi.DolbyConstants.Companion.PREF_HP_VIRTUALIZER
@@ -155,9 +165,10 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
                     ),
             )
         }
-        DossierSection("01", stringResource(R.string.dolby_category_settings))
-        val rows = mutableListOf<@Composable () -> Unit>()
-        fun toggle(key: String, title: Int, summary: Int) {
+        val tone = mutableListOf<@Composable () -> Unit>()
+        val voice = mutableListOf<@Composable () -> Unit>()
+        val surround = mutableListOf<@Composable () -> Unit>()
+        fun toggle(rows: MutableList<@Composable () -> Unit>, key: String, title: Int, summary: Int) {
             rows += {
                 ListItem(
                     headlineContent = { DolbyHeadline(stringResource(title)) },
@@ -187,14 +198,44 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
                 )
             }
         }
-        toggle(PREF_BASS, R.string.dolby_bass_enhancer, R.string.dolby_bass_summary_compact)
-        if (context.resources.getBoolean(R.bool.dolby_volume_leveler_supported))
-            toggle(
-                PREF_VOLUME,
-                R.string.dolby_volume_leveler,
-                R.string.dolby_volume_summary_compact,
-            )
-        rows += {
+        fun amount(
+            rows: MutableList<@Composable () -> Unit>,
+            key: String,
+            title: Int,
+            range: IntRange,
+        ) {
+            rows += {
+                val saved = (state.settings[key] as? Int ?: range.first).coerceIn(range)
+                var value by remember(state.key, saved) { mutableFloatStateOf(saved.toFloat()) }
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Row(
+                        Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            stringResource(title),
+                            modifier = Modifier.weight(1f).padding(end = 8.dp),
+                            style = MaterialTheme.typography.labelLarge,
+                        )
+                        Text(
+                            value.roundToInt().toString(),
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                    ExpressiveValueSlider(
+                        value = value,
+                        onValueChange = { value = it },
+                        onFinished = { apply(key, value.roundToInt()) },
+                        range = range.first.toFloat()..range.last.toFloat(),
+                        enabled = enabled,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                }
+            }
+        }
+        tone += {
             ListItem(
                 headlineContent = { DolbyHeadline(stringResource(R.string.dolby_ieq)) },
                 leadingContent = {
@@ -212,63 +253,92 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
                     ),
             )
         }
+        if ((state.settings[PREF_IEQ] as? Int ?: 0) != 0)
+            amount(tone, PREF_IEQ_AMOUNT, R.string.dolby_ieq_amount, DolbyConstants.IEQ_AMOUNT_RANGE)
+        toggle(tone, PREF_GEQ, R.string.dolby_geq_enable, R.string.dolby_geq_enable_summary)
+        toggle(tone, PREF_BASS, R.string.dolby_bass_enhancer, R.string.dolby_bass_summary_compact)
+        // Virtual bass is tuned for the small built-in speakers only.
         if (route.speaker)
             toggle(
+                tone,
+                PREF_VIRTUAL_BASS,
+                R.string.dolby_virtual_bass,
+                R.string.dolby_virtual_bass_summary,
+            )
+        toggle(voice, PREF_DIALOGUE, R.string.dolby_dialogue_enhancer, R.string.dolby_dialogue_summary)
+        if (checked(PREF_DIALOGUE)) {
+            amount(voice, PREF_DIALOGUE_AMOUNT, R.string.dolby_dialogue_strength_title, 1..12)
+            amount(
+                voice,
+                PREF_DIALOGUE_DUCKING,
+                R.string.dolby_dialogue_ducking,
+                DolbyConstants.DIALOGUE_DUCKING_RANGE,
+            )
+        }
+        toggle(voice, PREF_REVERB, R.string.dolby_reverb_suppression, R.string.dolby_reverb_summary)
+        if (checked(PREF_REVERB))
+            amount(
+                voice,
+                PREF_REVERB_AMOUNT,
+                R.string.dolby_reverb_amount,
+                DolbyConstants.REVERB_AMOUNT_RANGE,
+            )
+        if (context.resources.getBoolean(R.bool.dolby_volume_leveler_supported)) {
+            toggle(
+                voice,
+                PREF_VOLUME,
+                R.string.dolby_volume_leveler,
+                R.string.dolby_volume_summary_compact,
+            )
+            if (checked(PREF_VOLUME))
+                amount(
+                    voice,
+                    PREF_VOLUME_AMOUNT,
+                    R.string.dolby_volume_amount,
+                    DolbyConstants.VOLUME_AMOUNT_RANGE,
+                )
+        }
+        if (route.speaker)
+            toggle(
+                surround,
                 PREF_SPK_VIRTUALIZER,
                 R.string.dolby_spk_virtualizer,
                 R.string.dolby_speaker_summary,
             )
-        if (route.headphones)
+        if (route.headphones) {
             toggle(
+                surround,
                 PREF_HP_VIRTUALIZER,
                 R.string.dolby_hp_virtualizer,
                 R.string.dolby_headphone_summary,
             )
-        toggle(PREF_DIALOGUE, R.string.dolby_dialogue_enhancer, R.string.dolby_dialogue_summary)
-        if (checked(PREF_DIALOGUE))
-            rows += {
-                val amount = state.settings[PREF_DIALOGUE_AMOUNT] as? Int ?: 1
-                var value by
-                    remember(state.key, amount) {
-                        mutableFloatStateOf(amount.toFloat().coerceIn(1f, 12f))
-                    }
-                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    Row(
-                        Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Text(
-                            stringResource(R.string.dolby_dialogue_strength_title),
-                            modifier = Modifier.weight(1f).padding(end = 8.dp),
-                            style = MaterialTheme.typography.labelLarge,
+            if (checked(PREF_HP_VIRTUALIZER))
+                amount(
+                    surround,
+                    PREF_HP_DISTANCE,
+                    R.string.dolby_hp_distance,
+                    DolbyConstants.HP_DISTANCE_RANGE,
+                )
+        }
+        listOf(
+                R.string.dolby_category_tone to tone,
+                R.string.dolby_category_voice to voice,
+                R.string.dolby_category_surround to surround,
+            )
+            .filter { it.second.isNotEmpty() }
+            .forEachIndexed { section, (title, rows) ->
+                DossierSection("%02d".format(section + 1), stringResource(title))
+                Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                    rows.forEachIndexed { index, row ->
+                        EqualizerPanel(
+                            Modifier.fillMaxWidth(),
+                            connectedAbove = index > 0,
+                            connectedBelow = index < rows.lastIndex,
+                            content = row,
                         )
-                        Text(
-                            value.toInt().toString(),
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
                     }
-                    ExpressiveValueSlider(
-                        value = value,
-                        onValueChange = { value = it },
-                        onFinished = { apply(PREF_DIALOGUE_AMOUNT, value.toInt()) },
-                        range = 1f..12f,
-                        enabled = enabled,
-                        modifier = Modifier.fillMaxWidth(),
-                    )
                 }
             }
-        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            rows.forEachIndexed { index, row ->
-                EqualizerPanel(
-                    Modifier.fillMaxWidth(),
-                    connectedAbove = index > 0,
-                    connectedBelow = index < rows.lastIndex,
-                    content = row,
-                )
-            }
-        }
         if (failure || state.error != null)
             Text(
                 stringResource(R.string.dolby_setting_failed),
