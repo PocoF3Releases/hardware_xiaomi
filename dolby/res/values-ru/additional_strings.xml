@@ -35,6 +35,13 @@
     <string name="dolby_profiles_help_compact">Сохраняйте собственные настройки эквалайзера и звука в именованном профиле.</string>
     <string name="dolby_bass_summary_compact">Подчеркните низкие частоты.</string>
     <string name="dolby_volume_summary_compact">Сбалансируйте тихие и громкие фрагменты.</string>
+    <string name="dolby_category_tone">Тембр</string>
+    <string name="dolby_category_voice">Голос и громкость</string>
+    <string name="dolby_category_surround">Объёмный звук</string>
+    <string name="dolby_virtual_bass">Виртуальный бас</string>
+    <string name="dolby_virtual_bass_summary">Воссоздаёт глубокий бас во встроенных динамиках с помощью гармоник.</string>
+    <string name="dolby_reverb_suppression">Подавление реверберации</string>
+    <string name="dolby_reverb_summary">Уменьшает эхо помещения, чтобы речь звучала суше и чётче.</string>
     <string name="dolby_reset_options">Параметры сброса</string>
     <string name="dolby_eq_scroll_hint">Проведите в сторону, чтобы открыть все 20 полос.</string>
 </resources>
