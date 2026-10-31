@@ -47,6 +47,7 @@ fun EqualizerScreen(
                     editorModifier.verticalScroll(rememberScrollState()),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
+                    BypassNotice(viewModel)
                     EqualizerBands(
                         viewModel,
                         graphHeight = trackHeight,
@@ -82,6 +83,7 @@ fun EqualizerScreen(
                         Modifier.fillMaxWidth(),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
+                        BypassNotice(viewModel)
                         EqualizerBands(
                             viewModel,
                             graphHeight = trackHeight,
@@ -128,6 +130,32 @@ private fun EqualizerProfile(
                 if (sliders) 1 else 0,
                 { onView(it == 1) },
             )
+        }
+    }
+}
+
+@Composable
+private fun BypassNotice(viewModel: EqualizerViewModel) {
+    val bypassed by viewModel.bypassed.collectAsState()
+    if (!bypassed) return
+    Surface(
+        Modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.secondaryContainer,
+        shape = MaterialTheme.shapes.large,
+    ) {
+        Row(
+            Modifier.padding(start = 16.dp, end = 8.dp, top = 8.dp, bottom = 8.dp),
+            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+        ) {
+            Text(
+                stringResource(R.string.dolby_geq_bypassed),
+                modifier = Modifier.weight(1f).padding(end = 8.dp),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+            )
+            TextButton(onClick = viewModel::enableEqualizer) {
+                Text(stringResource(R.string.dolby_geq_turn_on))
+            }
         }
     }
 }

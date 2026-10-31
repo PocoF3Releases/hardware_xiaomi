@@ -11,8 +11,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -124,17 +122,7 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
                         }
                     },
                 trailingContent = {
-                    Switch(
-                        checked = state.enabled,
-                        onCheckedChange = null,
-                        thumbContent = {
-                            Icon(
-                                if (state.enabled) Icons.Default.Check else Icons.Default.Close,
-                                null,
-                                Modifier.size(16.dp),
-                            )
-                        },
-                    )
+                    DolbySwitch(state.enabled)
                 },
                 colors =
                     ListItemDefaults.colors(
@@ -178,18 +166,7 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
                             toggle(key)
                         },
                     trailingContent = {
-                        Switch(
-                            checked(key),
-                            onCheckedChange = null,
-                            enabled = enabled,
-                            thumbContent = {
-                                Icon(
-                                    if (checked(key)) Icons.Default.Check else Icons.Default.Close,
-                                    null,
-                                    Modifier.size(16.dp),
-                                )
-                            },
-                        )
+                        DolbySwitch(checked(key), enabled)
                     },
                     colors =
                         ListItemDefaults.colors(
