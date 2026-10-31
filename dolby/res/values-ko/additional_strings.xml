@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">조용한 구간과 큰 구간의 음량을 균형 있게 맞춥니다.</string>
     <string name="dolby_reset_options">초기화 옵션</string>
     <string name="dolby_eq_scroll_hint">옆으로 스와이프하여 20개 밴드에 모두 접근하세요.</string>
+    <string name="dolby_category_tone">음색</string>
+    <string name="dolby_category_voice">음성 및 음량</string>
+    <string name="dolby_category_surround">서라운드</string>
+    <string name="dolby_virtual_bass">가상 저음</string>
+    <string name="dolby_virtual_bass_summary">배음을 사용하여 내장 스피커에서 깊은 저음을 재현합니다.</string>
+    <string name="dolby_reverb_suppression">잔향 억제</string>
+    <string name="dolby_reverb_summary">실내 울림을 줄여 음성을 더 또렷하고 명확하게 만듭니다.</string>
+    <string name="dolby_ieq_amount">지능형 이퀄라이저 강도</string>
+    <string name="dolby_dialogue_ducking">배경음 줄이기</string>
+    <string name="dolby_hp_distance">가상 스피커 거리</string>
+    <string name="dolby_geq_enable">그래픽 이퀄라이저</string>
+    <string name="dolby_geq_enable_summary">이퀄라이저 탭의 20밴드 곡선을 적용합니다.</string>
+    <string name="dolby_reverb_amount">잔향 억제 강도</string>
+    <string name="dolby_volume_amount">음량 균등화 강도</string>
+    <string name="dolby_category_games">게임</string>
+    <string name="dolby_geq_bypassed">그래픽 이퀄라이저가 꺼져 있습니다. 이 곡선은 저장되지만 적용되지 않습니다.</string>
+    <string name="dolby_geq_turn_on">켜기</string>
 </resources>

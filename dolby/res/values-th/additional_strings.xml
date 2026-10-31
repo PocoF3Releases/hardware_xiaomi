@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">ปรับสมดุลช่วงที่เบาและดัง</string>
     <string name="dolby_reset_options">ตัวเลือกการรีเซ็ต</string>
     <string name="dolby_eq_scroll_hint">ปัดไปด้านข้างเพื่อเข้าถึงทั้ง 20 แบนด์</string>
+    <string name="dolby_category_tone">โทนเสียง</string>
+    <string name="dolby_category_voice">เสียงพูดและความดัง</string>
+    <string name="dolby_category_surround">เสียงรอบทิศทาง</string>
+    <string name="dolby_virtual_bass">เสียงเบสเสมือน</string>
+    <string name="dolby_virtual_bass_summary">สร้างเสียงเบสทุ้มลึกบนลำโพงในตัวด้วยฮาร์มอนิก</string>
+    <string name="dolby_reverb_suppression">การลดเสียงก้อง</string>
+    <string name="dolby_reverb_summary">ลดเสียงสะท้อนในห้องเพื่อให้เสียงพูดแห้งและชัดเจนขึ้น</string>
+    <string name="dolby_ieq_amount">ระดับอีควอไลเซอร์อัจฉริยะ</string>
+    <string name="dolby_dialogue_ducking">การลดเสียงพื้นหลัง</string>
+    <string name="dolby_hp_distance">ระยะห่างลำโพงเสมือน</string>
+    <string name="dolby_geq_enable">อีควอไลเซอร์กราฟิก</string>
+    <string name="dolby_geq_enable_summary">ใช้เส้นโค้ง 20 ย่านความถี่จากแท็บอีควอไลเซอร์</string>
+    <string name="dolby_reverb_amount">ระดับการลดเสียงก้อง</string>
+    <string name="dolby_volume_amount">ระดับการปรับความดังให้เท่ากัน</string>
+    <string name="dolby_category_games">เกม</string>
+    <string name="dolby_geq_bypassed">อีควอไลเซอร์กราฟิกปิดอยู่ เส้นโค้งนี้ถูกบันทึกไว้แต่ไม่ได้ใช้งาน</string>
+    <string name="dolby_geq_turn_on">เปิด</string>
 </resources>

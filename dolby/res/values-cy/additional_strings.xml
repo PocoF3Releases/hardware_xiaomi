@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Cydbwyswch ddarnau tawel ac uchel.</string>
     <string name="dolby_reset_options">Dewisiadau ailosod</string>
     <string name="dolby_eq_scroll_hint">Sychwch i’r ochr i gyrraedd pob un o’r 20 band.</string>
+    <string name="dolby_category_tone">Ansawdd sain</string>
+    <string name="dolby_category_voice">Llais a lefel sain</string>
+    <string name="dolby_category_surround">Sain amgylchynol</string>
+    <string name="dolby_virtual_bass">Bas rhithwir</string>
+    <string name="dolby_virtual_bass_summary">Ail-greu bas dwfn ar y seinyddion adeiledig gyda harmonigau.</string>
+    <string name="dolby_reverb_suppression">Atal atseiniad</string>
+    <string name="dolby_reverb_summary">Lleihau adlais yr ystafell am leferydd sychach a chliriach.</string>
+    <string name="dolby_ieq_amount">Cryfder y cyfartalydd deallus</string>
+    <string name="dolby_dialogue_ducking">Gostegu’r cefndir</string>
+    <string name="dolby_hp_distance">Pellter seinyddion rhithwir</string>
+    <string name="dolby_geq_enable">Cyfartalydd graffig</string>
+    <string name="dolby_geq_enable_summary">Defnyddio’r gromlin 20 band o’r tab Cyfartalydd.</string>
+    <string name="dolby_reverb_amount">Cryfder atal atseiniad</string>
+    <string name="dolby_volume_amount">Cryfder cysoni lefel sain</string>
+    <string name="dolby_category_games">Gemau</string>
+    <string name="dolby_geq_bypassed">Mae’r cyfartalydd graffig wedi’i ddiffodd. Mae’r gromlin wedi’i chadw, ond nid yw’n cael ei defnyddio.</string>
+    <string name="dolby_geq_turn_on">Galluogi</string>
 </resources>

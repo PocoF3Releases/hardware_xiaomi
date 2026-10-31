@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">ಮಂದ ಮತ್ತು ಜೋರಾದ ಭಾಗಗಳನ್ನು ಸಮತೋಲನಗೊಳಿಸಿ.</string>
     <string name="dolby_reset_options">ಮರುಹೊಂದಿಸುವ ಆಯ್ಕೆಗಳು</string>
     <string name="dolby_eq_scroll_hint">ಎಲ್ಲಾ 20 ಬ್ಯಾಂಡ್‌ಗಳಿಗೆ ತಲುಪಲು ಬದಿಗೆ ಸ್ವೈಪ್ ಮಾಡಿ.</string>
+    <string name="dolby_category_tone">ಸ್ವರದ ಬಣ್ಣ</string>
+    <string name="dolby_category_voice">ಮಾತು ಮತ್ತು ಧ್ವನಿಮಟ್ಟ</string>
+    <string name="dolby_category_surround">ಸರೌಂಡ್ ಧ್ವನಿ</string>
+    <string name="dolby_virtual_bass">ವರ್ಚುವಲ್ ಬಾಸ್</string>
+    <string name="dolby_virtual_bass_summary">ಹಾರ್ಮೋನಿಕ್ಸ್ ಬಳಸಿ ಅಂತರ್ನಿರ್ಮಿತ ಸ್ಪೀಕರ್‌ಗಳಲ್ಲಿ ಆಳವಾದ ಬಾಸ್ ಮರುಸೃಷ್ಟಿಸಿ.</string>
+    <string name="dolby_reverb_suppression">ಪ್ರತಿಧ್ವನಿ ನಿಗ್ರಹ</string>
+    <string name="dolby_reverb_summary">ಮಾತು ಹೆಚ್ಚು ಒಣವಾಗಿ ಮತ್ತು ಸ್ಪಷ್ಟವಾಗಿ ಕೇಳಲು ಕೋಣೆಯ ಪ್ರತಿಧ್ವನಿ ಕಡಿಮೆ ಮಾಡಿ.</string>
+    <string name="dolby_ieq_amount">ಬುದ್ಧಿವಂತ ಈಕ್ವಲೈಜರ್ ತೀವ್ರತೆ</string>
+    <string name="dolby_dialogue_ducking">ಹಿನ್ನೆಲೆ ಧ್ವನಿ ತಗ್ಗಿಸುವಿಕೆ</string>
+    <string name="dolby_hp_distance">ವರ್ಚುವಲ್ ಸ್ಪೀಕರ್ ದೂರ</string>
+    <string name="dolby_geq_enable">ಗ್ರಾಫಿಕ್ ಈಕ್ವಲೈಜರ್</string>
+    <string name="dolby_geq_enable_summary">ಈಕ್ವಲೈಜರ್ ಟ್ಯಾಬ್‌ನ 20-ಬ್ಯಾಂಡ್ ವಕ್ರವನ್ನು ಅನ್ವಯಿಸಿ.</string>
+    <string name="dolby_reverb_amount">ಪ್ರತಿಧ್ವನಿ ನಿಗ್ರಹದ ತೀವ್ರತೆ</string>
+    <string name="dolby_volume_amount">ಧ್ವನಿಮಟ್ಟ ಸಮೀಕರಣದ ತೀವ್ರತೆ</string>
+    <string name="dolby_category_games">ಆಟಗಳು</string>
+    <string name="dolby_geq_bypassed">ಗ್ರಾಫಿಕ್ ಈಕ್ವಲೈಜರ್ ಆಫ್ ಆಗಿದೆ. ಈ ವಕ್ರ ಉಳಿಸಲಾಗಿದೆ, ಆದರೆ ಅನ್ವಯಿಸುವುದಿಲ್ಲ.</string>
+    <string name="dolby_geq_turn_on">ಆನ್ ಮಾಡಿ</string>
 </resources>

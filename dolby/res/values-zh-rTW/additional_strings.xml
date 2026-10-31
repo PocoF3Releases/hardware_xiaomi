@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">平衡較安靜與較響亮的段落。</string>
     <string name="dolby_reset_options">重設選項</string>
     <string name="dolby_eq_scroll_hint">向側邊滑動以存取全部 20 個頻段。</string>
+    <string name="dolby_category_tone">音色</string>
+    <string name="dolby_category_voice">人聲與響度</string>
+    <string name="dolby_category_surround">環繞音效</string>
+    <string name="dolby_virtual_bass">虛擬低音</string>
+    <string name="dolby_virtual_bass_summary">利用諧波在內建喇叭上重現深沉低音。</string>
+    <string name="dolby_reverb_suppression">殘響抑制</string>
+    <string name="dolby_reverb_summary">減少室內回音，讓人聲更乾淨清晰。</string>
+    <string name="dolby_ieq_amount">智慧等化器強度</string>
+    <string name="dolby_dialogue_ducking">背景音衰減</string>
+    <string name="dolby_hp_distance">虛擬喇叭距離</string>
+    <string name="dolby_geq_enable">圖形等化器</string>
+    <string name="dolby_geq_enable_summary">套用等化器分頁中的 20 頻段曲線。</string>
+    <string name="dolby_reverb_amount">殘響抑制強度</string>
+    <string name="dolby_volume_amount">響度等化強度</string>
+    <string name="dolby_category_games">遊戲</string>
+    <string name="dolby_geq_bypassed">圖形等化器已關閉，此曲線會儲存，但不會套用。</string>
+    <string name="dolby_geq_turn_on">開啟</string>
 </resources>

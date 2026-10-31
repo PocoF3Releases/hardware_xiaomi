@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Sakit və yüksək hissələri balanslaşdırın.</string>
     <string name="dolby_reset_options">Sıfırlama seçimləri</string>
     <string name="dolby_eq_scroll_hint">Bütün 20 zolağa çatmaq üçün yana sürüşdürün.</string>
+    <string name="dolby_category_tone">Səs çaları</string>
+    <string name="dolby_category_voice">Səs və ucalıq</string>
+    <string name="dolby_category_surround">Ətraf səsi</string>
+    <string name="dolby_virtual_bass">Virtual bas</string>
+    <string name="dolby_virtual_bass_summary">Harmoniklər vasitəsilə daxili dinamiklərdə dərin bas yaradın.</string>
+    <string name="dolby_reverb_suppression">Əks-sədanın yatırılması</string>
+    <string name="dolby_reverb_summary">Nitqin daha quru və aydın səslənməsi üçün otaq əks-sədasını azaldın.</string>
+    <string name="dolby_ieq_amount">Ağıllı ekvalayzerin gücü</string>
+    <string name="dolby_dialogue_ducking">Fon səsinin azaldılması</string>
+    <string name="dolby_hp_distance">Virtual dinamiklərin məsafəsi</string>
+    <string name="dolby_geq_enable">Qrafik ekvalayzer</string>
+    <string name="dolby_geq_enable_summary">Ekvalayzer bölməsindəki 20 zolaqlı əyrini tətbiq edin.</string>
+    <string name="dolby_reverb_amount">Əks-səda yatırma gücü</string>
+    <string name="dolby_volume_amount">Səs səviyyəsini bərabərləşdirmə gücü</string>
+    <string name="dolby_category_games">Oyunlar</string>
+    <string name="dolby_geq_bypassed">Qrafik ekvalayzer söndürülüb. Əyri saxlanılıb, lakin tətbiq edilmir.</string>
+    <string name="dolby_geq_turn_on">Aktivləşdir</string>
 </resources>

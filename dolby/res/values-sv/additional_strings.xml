@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Balansera tysta och höga partier.</string>
     <string name="dolby_reset_options">Återställningsalternativ</string>
     <string name="dolby_eq_scroll_hint">Svep i sidled för att nå alla 20 banden.</string>
+    <string name="dolby_category_tone">Klang</string>
+    <string name="dolby_category_voice">Röst och volym</string>
+    <string name="dolby_category_surround">Surroundljud</string>
+    <string name="dolby_virtual_bass">Virtuell bas</string>
+    <string name="dolby_virtual_bass_summary">Återskapa djup bas i de inbyggda högtalarna med övertoner.</string>
+    <string name="dolby_reverb_suppression">Efterklangsdämpning</string>
+    <string name="dolby_reverb_summary">Minska rummets eko för torrare och tydligare tal.</string>
+    <string name="dolby_ieq_amount">Styrka för intelligent equalizer</string>
+    <string name="dolby_dialogue_ducking">Dämpning av bakgrundsljud</string>
+    <string name="dolby_hp_distance">Avstånd till virtuella högtalare</string>
+    <string name="dolby_geq_enable">Grafisk equalizer</string>
+    <string name="dolby_geq_enable_summary">Använd kurvan med 20 band från fliken Equalizer.</string>
+    <string name="dolby_reverb_amount">Styrka för efterklangsdämpning</string>
+    <string name="dolby_volume_amount">Styrka för volymutjämning</string>
+    <string name="dolby_category_games">Spel</string>
+    <string name="dolby_geq_bypassed">Den grafiska equalizern är avstängd. Kurvan är sparad men används inte.</string>
+    <string name="dolby_geq_turn_on">Aktivera</string>
 </resources>

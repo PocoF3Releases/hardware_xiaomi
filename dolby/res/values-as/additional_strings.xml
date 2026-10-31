@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">নীৰৱ আৰু উচ্চ শব্দৰ অংশসমূহৰ মাজত ভাৰসাম্য ৰাখক।</string>
     <string name="dolby_reset_options">ৰিছেট বিকল্পসমূহ</string>
     <string name="dolby_eq_scroll_hint">সকলো ২০টা বেণ্ড পাবলৈ কাষলৈ ছোৱাইপ কৰক।</string>
+    <string name="dolby_category_tone">স্বৰৰ ৰং</string>
+    <string name="dolby_category_voice">কণ্ঠস্বৰ আৰু শব্দৰ মাত্ৰা</string>
+    <string name="dolby_category_surround">চাৰিওফালৰ শব্দ</string>
+    <string name="dolby_virtual_bass">ভাৰ্চুৱেল বেছ</string>
+    <string name="dolby_virtual_bass_summary">হাৰমনিক ব্যৱহাৰ কৰি বিল্ট-ইন স্পীকাৰত গভীৰ বেছ সৃষ্টি কৰক।</string>
+    <string name="dolby_reverb_suppression">প্ৰতিধ্বনি দমন</string>
+    <string name="dolby_reverb_summary">কথা অধিক স্পষ্ট আৰু শুকানকৈ শুনাবলৈ কোঠাৰ প্ৰতিধ্বনি কমাওক।</string>
+    <string name="dolby_ieq_amount">বুদ্ধিমান ইকুৱেলাইজাৰৰ তীব্ৰতা</string>
+    <string name="dolby_dialogue_ducking">পটভূমিৰ শব্দ কমোৱা</string>
+    <string name="dolby_hp_distance">ভাৰ্চুৱেল স্পীকাৰৰ দূৰত্ব</string>
+    <string name="dolby_geq_enable">গ্ৰাফিক ইকুৱেলাইজাৰ</string>
+    <string name="dolby_geq_enable_summary">ইকুৱেলাইজাৰ টেবৰ ২০-বেণ্ডৰ বক্ৰৰেখা প্ৰয়োগ কৰক।</string>
+    <string name="dolby_reverb_amount">প্ৰতিধ্বনি দমনৰ তীব্ৰতা</string>
+    <string name="dolby_volume_amount">শব্দৰ মাত্ৰা সমান কৰাৰ তীব্ৰতা</string>
+    <string name="dolby_category_games">গেম</string>
+    <string name="dolby_geq_bypassed">গ্ৰাফিক ইকুৱেলাইজাৰ বন্ধ আছে। এই বক্ৰৰেখা সংৰক্ষিত আছে, কিন্তু প্ৰয়োগ কৰা নহয়।</string>
+    <string name="dolby_geq_turn_on">চালু কৰক</string>
 </resources>

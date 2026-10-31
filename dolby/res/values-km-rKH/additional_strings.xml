@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">ធ្វើឱ្យផ្នែកស្ងាត់ និងខ្លាំងមានតុល្យភាព។</string>
     <string name="dolby_reset_options">ជម្រើសកំណត់ឡើងវិញ</string>
     <string name="dolby_eq_scroll_hint">អូសទៅចំហៀង ដើម្បីទៅដល់ក្រុមប្រេកង់ទាំង 20។</string>
+    <string name="dolby_category_tone">ពណ៌សំឡេង</string>
+    <string name="dolby_category_voice">សំឡេងនិយាយ និងកម្រិតសំឡេង</string>
+    <string name="dolby_category_surround">សំឡេងជុំវិញ</string>
+    <string name="dolby_virtual_bass">បាសនិម្មិត</string>
+    <string name="dolby_virtual_bass_summary">បង្កើតបាសជ្រៅឡើងវិញលើឧបករណ៍បំពងសំឡេងក្នុងម៉ាស៊ីនដោយប្រើអាម៉ូនិក។</string>
+    <string name="dolby_reverb_suppression">ការទប់សំឡេងខ្ទរ</string>
+    <string name="dolby_reverb_summary">កាត់បន្ថយសំឡេងអេកូក្នុងបន្ទប់ ដើម្បីឱ្យសំឡេងនិយាយស្ងួត និងច្បាស់ជាងមុន។</string>
+    <string name="dolby_ieq_amount">កម្រិតអេគ្វាល័រឆ្លាតវៃ</string>
+    <string name="dolby_dialogue_ducking">ការបន្ថយសំឡេងផ្ទៃខាងក្រោយ</string>
+    <string name="dolby_hp_distance">ចម្ងាយឧបករណ៍បំពងសំឡេងនិម្មិត</string>
+    <string name="dolby_geq_enable">អេគ្វាល័រក្រាហ្វិក</string>
+    <string name="dolby_geq_enable_summary">អនុវត្តខ្សែកោង 20 ប្រេកង់ពីផ្ទាំងអេគ្វាល័រ។</string>
+    <string name="dolby_reverb_amount">កម្រិតទប់សំឡេងខ្ទរ</string>
+    <string name="dolby_volume_amount">កម្រិតសម្រួលសំឡេងឱ្យស្មើគ្នា</string>
+    <string name="dolby_category_games">ហ្គេម</string>
+    <string name="dolby_geq_bypassed">អេគ្វាល័រក្រាហ្វិកបានបិទ។ ខ្សែកោងនេះត្រូវបានរក្សាទុក ប៉ុន្តែមិនត្រូវបានអនុវត្តទេ។</string>
+    <string name="dolby_geq_turn_on">បើក</string>
 </resources>

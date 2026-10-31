@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Echilibrați pasajele silențioase și cele puternice.</string>
     <string name="dolby_reset_options">Opțiuni de resetare</string>
     <string name="dolby_eq_scroll_hint">Glisați lateral pentru a accesa toate cele 20 de benzi.</string>
+    <string name="dolby_category_tone">Timbru</string>
+    <string name="dolby_category_voice">Voce și volum</string>
+    <string name="dolby_category_surround">Sunet surround</string>
+    <string name="dolby_virtual_bass">Bas virtual</string>
+    <string name="dolby_virtual_bass_summary">Recreează basul profund pe difuzoarele integrate folosind armonice.</string>
+    <string name="dolby_reverb_suppression">Suprimarea reverberației</string>
+    <string name="dolby_reverb_summary">Redu ecoul camerei pentru o voce mai uscată și mai clară.</string>
+    <string name="dolby_ieq_amount">Intensitatea egalizatorului inteligent</string>
+    <string name="dolby_dialogue_ducking">Atenuarea fundalului</string>
+    <string name="dolby_hp_distance">Distanța difuzoarelor virtuale</string>
+    <string name="dolby_geq_enable">Egalizator grafic</string>
+    <string name="dolby_geq_enable_summary">Aplică curba cu 20 de benzi din fila Egalizator.</string>
+    <string name="dolby_reverb_amount">Intensitatea suprimării reverberației</string>
+    <string name="dolby_volume_amount">Intensitatea nivelării</string>
+    <string name="dolby_category_games">Jocuri</string>
+    <string name="dolby_geq_bypassed">Egalizatorul grafic este oprit: curba este salvată, dar nu este aplicată.</string>
+    <string name="dolby_geq_turn_on">Activează</string>
 </resources>

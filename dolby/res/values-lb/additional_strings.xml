@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Gläicht roueg a haart Passagen aus.</string>
     <string name="dolby_reset_options">Optioune fir zeréckzesetzen</string>
     <string name="dolby_eq_scroll_hint">Wischt säitlech, fir all 20 Bänner z’erreechen.</string>
+    <string name="dolby_category_tone">Klang</string>
+    <string name="dolby_category_voice">Stëmm a Lautstäerkt</string>
+    <string name="dolby_category_surround">Raumklang</string>
+    <string name="dolby_virtual_bass">Virtuelle Bass</string>
+    <string name="dolby_virtual_bass_summary">Déife Bass op den agebaute Lautsprecher mat Iwwertéin nobilden.</string>
+    <string name="dolby_reverb_suppression">Hallënnerdréckung</string>
+    <string name="dolby_reverb_summary">Den Echo am Raum reduzéiere fir méi dréchen a kloer Sprooch.</string>
+    <string name="dolby_ieq_amount">Stäerkt vum intelligenten Equalizer</string>
+    <string name="dolby_dialogue_ducking">Hannergrond ofschwächen</string>
+    <string name="dolby_hp_distance">Distanz vun de virtuelle Lautsprecher</string>
+    <string name="dolby_geq_enable">Grafeschen Equalizer</string>
+    <string name="dolby_geq_enable_summary">D’20-Band-Kéier vum Tab Equalizer uwenden.</string>
+    <string name="dolby_reverb_amount">Stäerkt vun der Hallënnerdréckung</string>
+    <string name="dolby_volume_amount">Stäerkt vum Lautstäerktausgläich</string>
+    <string name="dolby_category_games">Spiller</string>
+    <string name="dolby_geq_bypassed">De grafeschen Equalizer ass aus. D’Kéier ass gespäichert, gëtt awer net ugewannt.</string>
+    <string name="dolby_geq_turn_on">Aschalten</string>
 </resources>

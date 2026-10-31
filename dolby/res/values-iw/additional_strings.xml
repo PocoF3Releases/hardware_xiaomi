@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">אזן בין קטעים שקטים לחזקים.</string>
     <string name="dolby_reset_options">אפשרויות איפוס</string>
     <string name="dolby_eq_scroll_hint">החלק הצידה כדי להגיע לכל 20 התחומים.</string>
+    <string name="dolby_category_tone">גוון צליל</string>
+    <string name="dolby_category_voice">דיבור ועוצמת קול</string>
+    <string name="dolby_category_surround">צליל היקפי</string>
+    <string name="dolby_virtual_bass">בס וירטואלי</string>
+    <string name="dolby_virtual_bass_summary">שחזור בס עמוק ברמקולים המובנים באמצעות הרמוניות.</string>
+    <string name="dolby_reverb_suppression">דיכוי הדהוד</string>
+    <string name="dolby_reverb_summary">הפחתת הד החדר לקבלת דיבור יבש וברור יותר.</string>
+    <string name="dolby_ieq_amount">עוצמת האקולייזר החכם</string>
+    <string name="dolby_dialogue_ducking">הנמכת הרקע</string>
+    <string name="dolby_hp_distance">מרחק הרמקולים הווירטואליים</string>
+    <string name="dolby_geq_enable">אקולייזר גרפי</string>
+    <string name="dolby_geq_enable_summary">החלת עקומת 20 הרצועות מהכרטיסייה אקולייזר.</string>
+    <string name="dolby_reverb_amount">עוצמת דיכוי ההדהוד</string>
+    <string name="dolby_volume_amount">עוצמת איזון עוצמת הקול</string>
+    <string name="dolby_category_games">משחקים</string>
+    <string name="dolby_geq_bypassed">האקולייזר הגרפי כבוי. העקומה נשמרת אך אינה מוחלת.</string>
+    <string name="dolby_geq_turn_on">הפעלה</string>
 </resources>

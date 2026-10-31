@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Balancojini pjesët e qeta dhe të forta.</string>
     <string name="dolby_reset_options">Opsionet e rivendosjes</string>
     <string name="dolby_eq_scroll_hint">Rrëshqitni anash për të arritur të 20 brezat.</string>
+    <string name="dolby_category_tone">Timbri</string>
+    <string name="dolby_category_voice">Zëri dhe volumi</string>
+    <string name="dolby_category_surround">Tingull rrethues</string>
+    <string name="dolby_virtual_bass">Bas virtual</string>
+    <string name="dolby_virtual_bass_summary">Rikrijoni basin e thellë në altoparlantët e integruar përmes harmonikave.</string>
+    <string name="dolby_reverb_suppression">Shtypja e jehonës</string>
+    <string name="dolby_reverb_summary">Ulni jehonën e dhomës për të folur më të thatë e më të qartë.</string>
+    <string name="dolby_ieq_amount">Intensiteti i barazuesit inteligjent</string>
+    <string name="dolby_dialogue_ducking">Ulja e sfondit</string>
+    <string name="dolby_hp_distance">Largësia e altoparlantëve virtualë</string>
+    <string name="dolby_geq_enable">Barazues grafik</string>
+    <string name="dolby_geq_enable_summary">Zbatoni kurbën me 20 breza nga skeda Barazuesi.</string>
+    <string name="dolby_reverb_amount">Intensiteti i shtypjes së jehonës</string>
+    <string name="dolby_volume_amount">Intensiteti i nivelimit</string>
+    <string name="dolby_category_games">Lojëra</string>
+    <string name="dolby_geq_bypassed">Barazuesi grafik është i fikur. Kurba ruhet, por nuk zbatohet.</string>
+    <string name="dolby_geq_turn_on">Aktivizo</string>
 </resources>

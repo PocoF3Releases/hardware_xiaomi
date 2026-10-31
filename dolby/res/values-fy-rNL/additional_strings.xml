@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Balansearje stille en lûde passaazjes.</string>
     <string name="dolby_reset_options">Opsjes foar weromsette</string>
     <string name="dolby_eq_scroll_hint">Feegje sydlings om alle 20 bannen te berikken.</string>
+    <string name="dolby_category_tone">Klank</string>
+    <string name="dolby_category_voice">Stim en folume</string>
+    <string name="dolby_category_surround">Surroundlûd</string>
+    <string name="dolby_virtual_bass">Firtuele bas</string>
+    <string name="dolby_virtual_bass_summary">Meitsje djippe bastoanen op de ynboude lûdsprekkers mei boppetoanen.</string>
+    <string name="dolby_reverb_suppression">Galmûnderdrukking</string>
+    <string name="dolby_reverb_summary">Ferminderje de galm yn de keamer foar in drûgere en dúdlikere stim.</string>
+    <string name="dolby_ieq_amount">Sterkte fan de yntelliginte equalizer</string>
+    <string name="dolby_dialogue_ducking">Eftergrûnlûd dimme</string>
+    <string name="dolby_hp_distance">Ofstân fan firtuele lûdsprekkers</string>
+    <string name="dolby_geq_enable">Grafyske equalizer</string>
+    <string name="dolby_geq_enable_summary">Brûk de 20-bâns kromme fan it ljepblêd Equalizer.</string>
+    <string name="dolby_reverb_amount">Sterkte fan galmûnderdrukking</string>
+    <string name="dolby_volume_amount">Sterkte fan folume-lykmjitting</string>
+    <string name="dolby_category_games">Spultsjes</string>
+    <string name="dolby_geq_bypassed">De grafyske equalizer stiet út. De kromme is bewarre, mar wurdt net tapast.</string>
+    <string name="dolby_geq_turn_on">Ynskeakelje</string>
 </resources>

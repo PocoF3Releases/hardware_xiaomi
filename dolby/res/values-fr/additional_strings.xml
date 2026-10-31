@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Équilibrez les passages faibles et forts.</string>
     <string name="dolby_reset_options">Options de réinitialisation</string>
     <string name="dolby_eq_scroll_hint">Balayez latéralement pour accéder aux 20 bandes.</string>
+    <string name="dolby_category_tone">Timbre</string>
+    <string name="dolby_category_voice">Voix et volume</string>
+    <string name="dolby_category_surround">Son surround</string>
+    <string name="dolby_virtual_bass">Basses virtuelles</string>
+    <string name="dolby_virtual_bass_summary">Recréer des basses profondes sur les haut-parleurs intégrés grâce aux harmoniques.</string>
+    <string name="dolby_reverb_suppression">Réduction de la réverbération</string>
+    <string name="dolby_reverb_summary">Réduire la réverbération de la pièce pour une voix plus sèche et plus claire.</string>
+    <string name="dolby_ieq_amount">Intensité de l’égaliseur intelligent</string>
+    <string name="dolby_dialogue_ducking">Atténuation du fond sonore</string>
+    <string name="dolby_hp_distance">Distance des haut-parleurs virtuels</string>
+    <string name="dolby_geq_enable">Égaliseur graphique</string>
+    <string name="dolby_geq_enable_summary">Appliquer la courbe à 20 bandes de l’onglet Égaliseur.</string>
+    <string name="dolby_reverb_amount">Intensité de la réduction de réverbération</string>
+    <string name="dolby_volume_amount">Intensité du nivellement</string>
+    <string name="dolby_category_games">Jeux</string>
+    <string name="dolby_geq_bypassed">L’égaliseur graphique est désactivé : cette courbe est enregistrée, mais n’est pas appliquée.</string>
+    <string name="dolby_geq_turn_on">Activer</string>
 </resources>

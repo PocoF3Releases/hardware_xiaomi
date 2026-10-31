@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">ਹੌਲੀਆਂ ਅਤੇ ਉੱਚੀਆਂ ਆਵਾਜ਼ ਵਾਲੀਆਂ ਥਾਵਾਂ ਨੂੰ ਸੰਤੁਲਿਤ ਕਰੋ।</string>
     <string name="dolby_reset_options">ਰੀਸੈੱਟ ਵਿਕਲਪ</string>
     <string name="dolby_eq_scroll_hint">ਸਾਰੇ 20 ਬੈਂਡਾਂ ਤੱਕ ਪਹੁੰਚਣ ਲਈ ਪਾਸੇ ਵੱਲ ਸਵਾਈਪ ਕਰੋ।</string>
+    <string name="dolby_category_tone">ਸੁਰ ਦਾ ਰੰਗ</string>
+    <string name="dolby_category_voice">ਬੋਲ ਅਤੇ ਆਵਾਜ਼ ਦਾ ਪੱਧਰ</string>
+    <string name="dolby_category_surround">ਆਲੇ-ਦੁਆਲੇ ਦੀ ਆਵਾਜ਼</string>
+    <string name="dolby_virtual_bass">ਵਰਚੁਅਲ ਬਾਸ</string>
+    <string name="dolby_virtual_bass_summary">ਹਾਰਮੋਨਿਕਸ ਰਾਹੀਂ ਬਿਲਟ-ਇਨ ਸਪੀਕਰਾਂ ਉੱਤੇ ਡੂੰਘੀ ਬਾਸ ਮੁੜ ਬਣਾਓ।</string>
+    <string name="dolby_reverb_suppression">ਗੂੰਜ ਘਟਾਉਣਾ</string>
+    <string name="dolby_reverb_summary">ਬੋਲ ਹੋਰ ਸੁੱਕੇ ਅਤੇ ਸਪਸ਼ਟ ਸੁਣਾਉਣ ਲਈ ਕਮਰੇ ਦੀ ਗੂੰਜ ਘਟਾਓ।</string>
+    <string name="dolby_ieq_amount">ਬੁੱਧੀਮਾਨ ਇਕੁਅਲਾਈਜ਼ਰ ਦੀ ਤੀਬਰਤਾ</string>
+    <string name="dolby_dialogue_ducking">ਪਿਛੋਕੜ ਦੀ ਆਵਾਜ਼ ਘਟਾਉਣਾ</string>
+    <string name="dolby_hp_distance">ਵਰਚੁਅਲ ਸਪੀਕਰਾਂ ਦੀ ਦੂਰੀ</string>
+    <string name="dolby_geq_enable">ਗ੍ਰਾਫਿਕ ਇਕੁਅਲਾਈਜ਼ਰ</string>
+    <string name="dolby_geq_enable_summary">ਇਕੁਅਲਾਈਜ਼ਰ ਟੈਬ ਦਾ 20-ਬੈਂਡ ਵਕਰ ਲਾਗੂ ਕਰੋ।</string>
+    <string name="dolby_reverb_amount">ਗੂੰਜ ਘਟਾਉਣ ਦੀ ਤੀਬਰਤਾ</string>
+    <string name="dolby_volume_amount">ਆਵਾਜ਼ ਬਰਾਬਰ ਕਰਨ ਦੀ ਤੀਬਰਤਾ</string>
+    <string name="dolby_category_games">ਗੇਮਾਂ</string>
+    <string name="dolby_geq_bypassed">ਗ੍ਰਾਫਿਕ ਇਕੁਅਲਾਈਜ਼ਰ ਬੰਦ ਹੈ। ਇਹ ਵਕਰ ਸੰਭਾਲਿਆ ਹੈ, ਪਰ ਲਾਗੂ ਨਹੀਂ ਹੁੰਦਾ।</string>
+    <string name="dolby_geq_turn_on">ਚਾਲੂ ਕਰੋ</string>
 </resources>

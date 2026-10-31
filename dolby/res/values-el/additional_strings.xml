@@ -136,4 +136,21 @@
     <string name="dolby_volume_summary_compact">Εξισορρόπησε τα ήσυχα και δυνατά αποσπάσματα.</string>
     <string name="dolby_reset_options">Επιλογές επαναφοράς</string>
     <string name="dolby_eq_scroll_hint">Σύρε προς τα πλάγια για να φτάσεις και στις 20 ζώνες.</string>
+    <string name="dolby_category_tone">Χροιά</string>
+    <string name="dolby_category_voice">Φωνή και ένταση</string>
+    <string name="dolby_category_surround">Ήχος surround</string>
+    <string name="dolby_virtual_bass">Εικονικά μπάσα</string>
+    <string name="dolby_virtual_bass_summary">Αναδημιουργία βαθιών μπάσων στα ενσωματωμένα ηχεία μέσω αρμονικών.</string>
+    <string name="dolby_reverb_suppression">Καταστολή αντήχησης</string>
+    <string name="dolby_reverb_summary">Μείωση της αντήχησης του χώρου για πιο στεγνή και καθαρή ομιλία.</string>
+    <string name="dolby_ieq_amount">Ένταση έξυπνου ισοσταθμιστή</string>
+    <string name="dolby_dialogue_ducking">Εξασθένηση παρασκηνίου</string>
+    <string name="dolby_hp_distance">Απόσταση εικονικών ηχείων</string>
+    <string name="dolby_geq_enable">Γραφικός ισοσταθμιστής</string>
+    <string name="dolby_geq_enable_summary">Εφαρμογή της καμπύλης 20 ζωνών από την καρτέλα Ισοσταθμιστής.</string>
+    <string name="dolby_reverb_amount">Ένταση καταστολής αντήχησης</string>
+    <string name="dolby_volume_amount">Ένταση εξισορρόπησης έντασης</string>
+    <string name="dolby_category_games">Παιχνίδια</string>
+    <string name="dolby_geq_bypassed">Ο γραφικός ισοσταθμιστής είναι ανενεργός. Η καμπύλη αποθηκεύεται, αλλά δεν εφαρμόζεται.</string>
+    <string name="dolby_geq_turn_on">Ενεργοποίηση</string>
 </resources>
