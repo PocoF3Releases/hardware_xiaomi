@@ -66,11 +66,7 @@ internal fun GameEffectSettings(controller: GameEffectController) {
                     )
                 },
                 trailingContent = {
-                    Switch(
-                        checked = state.enabled,
-                        onCheckedChange = null,
-                        enabled = state.supported,
-                    )
+                    DolbySwitch(state.enabled, state.supported)
                 },
                 modifier =
                     Modifier.toggleable(

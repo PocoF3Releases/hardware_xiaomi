@@ -72,7 +72,7 @@ internal fun ProfileManager(
                         supportingContent = {
                             Text(stringResource(R.string.dolby_theme_description))
                         },
-                        trailingContent = { Switch(checked = dossier, onCheckedChange = null) },
+                        trailingContent = { DolbySwitch(dossier) },
                         colors =
                             ListItemDefaults.colors(
                                 containerColor = androidx.compose.ui.graphics.Color.Transparent
@@ -95,8 +95,9 @@ internal fun ProfileManager(
                 }
             }
         }
+        item { DossierSection("02", stringResource(R.string.dolby_category_games)) }
         item { GameEffectSettings(gameEffectController) }
-        item { DossierSection("02", stringResource(R.string.dolby_profiles_title)) }
+        item { DossierSection("03", stringResource(R.string.dolby_profiles_title)) }
 
         if (customProfiles.isEmpty()) {
             item {
