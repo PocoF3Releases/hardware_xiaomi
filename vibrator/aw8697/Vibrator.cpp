@@ -23,13 +23,15 @@ struct EffectMapping {
 };
 // Waveforms are chosen by output, not sample energy: the LRA is narrow band,
 // so RAM 5 (mostly ~325 Hz, HyperOS key-down) reaches only ~0.3 of RAM 0
-// (~170 Hz). CLICK and HEAVY_CLICK both use RAM 0, at 0.8 and 1.0; DOUBLE_CLICK
-// prefers packaged effect_1.bin (HyperOS feedbackNegativeLight).
+// (~170 Hz). CLICK and HEAVY_CLICK use RAM 0 at full strength. THUD uses RAM 1,
+// two pulses ~9 ms apart that land as one heavy knock; on the phone it measured
+// close to RAM 0 and above RAM 3/6. DOUBLE_CLICK prefers packaged effect_1.bin
+// (HyperOS feedbackNegativeLight).
 constexpr std::array<EffectMapping, 7> kEffects{{
-        {Effect::CLICK, 0, 0.8f},
+        {Effect::CLICK, 0, 1},
         {Effect::DOUBLE_CLICK, 0, 1},
         {Effect::TICK, 2, 0.8f},
-        {Effect::THUD, 3, 1},
+        {Effect::THUD, 1, 1},
         {Effect::POP, 4, 1},
         {Effect::HEAVY_CLICK, 0, 1},
         {Effect::TEXTURE_TICK, 5, 1},
@@ -468,7 +470,7 @@ int primitiveRam(CompositePrimitive primitive) {
         case CompositePrimitive::CLICK: return 0;
         case CompositePrimitive::LIGHT_TICK:
         case CompositePrimitive::LOW_TICK: return 2;
-        case CompositePrimitive::THUD: return 3;
+        case CompositePrimitive::THUD: return 1;
         default: return -1;
     }
 }
