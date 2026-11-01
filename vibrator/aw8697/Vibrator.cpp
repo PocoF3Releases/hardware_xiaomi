@@ -21,23 +21,22 @@ struct EffectMapping {
     int ramId;
     float base;  // strength at Android's default MEDIUM intensity
 };
-// HyperOS UI palette from miui-framework HapticFeedbackUtil and the stock
-// sys.haptic.* "RAM,strength" properties; strength codes 0/1/2 select
-// 0.375/0.625/1.0 per event, independent of the user's level:
-//   virtual key down 5,2   long press 0,1   keyboard tap 3,2   clock tick 5,1
-// CLICK takes the key-down waveform and HEAVY_CLICK the long-press waveform at
-// full strength, so it stays heavier than CLICK. Light feedback keeps 0.625.
+// Bases are set by modelled output, not waveform energy: the LRA is narrow
+// band, so RAM 5 (mostly ~325 Hz, HyperOS key-down) reaches only ~0.3 of
+// RAM 0 (~170 Hz). Relative peak acceleration at MEDIUM: CLICK 0.83 from
+// packaged effect_0.bin (HyperOS launcherIconSelection, braked; RAM 0 is
+// the fallback), HEAVY_CLICK 1.0, DOUBLE_CLICK 0.93 (effect_1.bin), TICK 0.51,
+// THUD 0.51, POP 0.28, TEXTURE_TICK 0.25.
 constexpr std::array<EffectMapping, 7> kEffects{{
-        {Effect::CLICK, 5, 1},
-        {Effect::DOUBLE_CLICK, 5, 1},
-        {Effect::TICK, 2, 0.625f},
+        {Effect::CLICK, 0, 1},
+        {Effect::DOUBLE_CLICK, 0, 1},
+        {Effect::TICK, 2, 0.8f},
         {Effect::THUD, 3, 1},
-        {Effect::POP, 4, 0.625f},
+        {Effect::POP, 4, 1},
         {Effect::HEAVY_CLICK, 0, 1},
-        {Effect::TEXTURE_TICK, 5, 0.625f},
+        {Effect::TEXTURE_TICK, 5, 0.8f},
 }};
-// Android's intensity setting scales the per-effect base. A 0.625 base keeps
-// the accepted 0.375/0.625/1.0 (gains 48/80/128) across LIGHT/MEDIUM/STRONG.
+// Android's intensity setting scales the per-effect base.
 constexpr float kLightFactor = 0.6f;
 constexpr float kStrongFactor = 1.6f;
 // The stock driver maps 0..0x3fff to gain 30, then (value-0x3fff)/128,
@@ -137,9 +136,19 @@ Vibrator::Vibrator() {
                 const auto* stream = get_effect_stream_exact(static_cast<uint32_t>(kEffects[i].effect));
                 if (streamDuration(stream)) mEffectStreams[i] = stream;
             }
+            // Stock primitive slices stop driving without a brake and ring for
+            // 20-70 ms; keep their samples and append active damping.
             for (size_t i = 1; i < mPrimitiveStreams.size(); ++i) {
                 const auto* stream = get_effect_stream_exact((1u << 15) | i);
-                if (streamDuration(stream)) mPrimitiveStreams[i] = stream;
+                if (!streamDuration(stream)) continue;
+                auto& samples = mOwnedSamples[i];
+                samples.assign(stream->data, stream->data + stream->length);
+                alioth::haptics::appendDamping(&samples, mResonantFrequency);
+                mOwnedStreams[i] = std::make_unique<effect_stream>(
+                        stream->effect_id, samples.size(), stream->play_rate_hz, samples.data());
+                mPrimitiveStreams[i] = streamDuration(mOwnedStreams[i].get())
+                                               ? mOwnedStreams[i].get()
+                                               : stream;
             }
             // Packaged files take priority over synthesized envelopes.
             using alioth::haptics::Shape;
@@ -152,12 +161,12 @@ Vibrator::Vibrator() {
             for (const auto& [primitive, shape] : kSynth) {
                 const auto index = static_cast<size_t>(primitive);
                 if (mPrimitiveStreams[index]) continue;
-                auto& samples = mSynthSamples[index];
+                auto& samples = mOwnedSamples[index];
                 samples = alioth::haptics::synthesize(shape, mResonantFrequency);
-                mSynthStreams[index] = std::make_unique<effect_stream>(
+                mOwnedStreams[index] = std::make_unique<effect_stream>(
                         (1u << 15) | index, samples.size(), 24000, samples.data());
-                if (streamDuration(mSynthStreams[index].get()))
-                    mPrimitiveStreams[index] = mSynthStreams[index].get();
+                if (streamDuration(mOwnedStreams[index].get()))
+                    mPrimitiveStreams[index] = mOwnedStreams[index].get();
             }
         }
     }
