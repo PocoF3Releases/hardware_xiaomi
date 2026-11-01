@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "Vibrator.h"
+#include "PrimitiveSynth.h"
 #include <dirent.h>
 #include <fcntl.h>
 #include <linux/input.h>
@@ -18,18 +19,27 @@ namespace {
 struct EffectMapping {
     Effect effect;
     int ramId;
+    float base;  // strength at Android's default MEDIUM intensity
 };
-// Audited against Alioth's RAM bank and MIUI selectors. Filename IDs are
-// not Android enum identities: mesh.heavy uses RAM 8 and mesh.light uses RAM 5.
+// HyperOS UI palette from miui-framework HapticFeedbackUtil and the stock
+// sys.haptic.* "RAM,strength" properties; strength codes 0/1/2 select
+// 0.375/0.625/1.0 per event, independent of the user's level:
+//   virtual key down 5,2   long press 0,1   keyboard tap 3,2   clock tick 5,1
+// CLICK takes the key-down waveform and HEAVY_CLICK the long-press waveform at
+// full strength, so it stays heavier than CLICK. Light feedback keeps 0.625.
 constexpr std::array<EffectMapping, 7> kEffects{{
-        {Effect::CLICK, 0},
-        {Effect::DOUBLE_CLICK, 0},
-        {Effect::TICK, 2},
-        {Effect::THUD, 3},
-        {Effect::POP, 4},
-        {Effect::HEAVY_CLICK, 8},
-        {Effect::TEXTURE_TICK, 5},
+        {Effect::CLICK, 5, 1},
+        {Effect::DOUBLE_CLICK, 5, 1},
+        {Effect::TICK, 2, 0.625f},
+        {Effect::THUD, 3, 1},
+        {Effect::POP, 4, 0.625f},
+        {Effect::HEAVY_CLICK, 0, 1},
+        {Effect::TEXTURE_TICK, 5, 0.625f},
 }};
+// Android's intensity setting scales the per-effect base. A 0.625 base keeps
+// the accepted 0.375/0.625/1.0 (gains 48/80/128) across LIGHT/MEDIUM/STRONG.
+constexpr float kLightFactor = 0.6f;
+constexpr float kStrongFactor = 1.6f;
 // The stock driver maps 0..0x3fff to gain 30, then (value-0x3fff)/128,
 // with 0x7fff selecting gain 128. Invert that encoding rather than passing
 // a linear Android amplitude, which collapses all values <= 0.5 to gain 30.
@@ -130,6 +140,24 @@ Vibrator::Vibrator() {
             for (size_t i = 1; i < mPrimitiveStreams.size(); ++i) {
                 const auto* stream = get_effect_stream_exact((1u << 15) | i);
                 if (streamDuration(stream)) mPrimitiveStreams[i] = stream;
+            }
+            // Packaged files take priority over synthesized envelopes.
+            using alioth::haptics::Shape;
+            constexpr std::pair<CompositePrimitive, Shape> kSynth[] = {
+                    {CompositePrimitive::SPIN, Shape::kSpin},
+                    {CompositePrimitive::QUICK_RISE, Shape::kQuickRise},
+                    {CompositePrimitive::SLOW_RISE, Shape::kSlowRise},
+                    {CompositePrimitive::QUICK_FALL, Shape::kQuickFall},
+            };
+            for (const auto& [primitive, shape] : kSynth) {
+                const auto index = static_cast<size_t>(primitive);
+                if (mPrimitiveStreams[index]) continue;
+                auto& samples = mSynthSamples[index];
+                samples = alioth::haptics::synthesize(shape, mResonantFrequency);
+                mSynthStreams[index] = std::make_unique<effect_stream>(
+                        (1u << 15) | index, samples.size(), 24000, samples.data());
+                if (streamDuration(mSynthStreams[index].get()))
+                    mPrimitiveStreams[index] = mSynthStreams[index].get();
             }
         }
     }
@@ -378,18 +406,16 @@ ndk::ScopedAStatus Vibrator::perform(Effect e, EffectStrength strength,
     const int id = mapping->ramId;
     float scale;
     switch (strength) {
-        // Alioth enables sys.haptic.infinitelevel. Stock VibrateUtils sends
-        // 0.375/0.625/1.0 through configStrengthForEffect; this overrides the
-        // old 0/0.5/1.0 EffectStrength table in InputFFDevice::playEffect.
-        // Use the active stock levels (gains 48/80/128), not that fallback.
+        // Stock playEffect drives magnitude 16384 * strength + 16383, which the
+        // driver maps to gain 128 * strength.
         case EffectStrength::LIGHT:
-            scale = 0.375f;
+            scale = mapping->base * kLightFactor;
             break;
         case EffectStrength::MEDIUM:
-            scale = 0.625f;
+            scale = mapping->base;
             break;
         case EffectStrength::STRONG:
-            scale = 1;
+            scale = std::min(1.0f, mapping->base * kStrongFactor);
             break;
         default:
             return unsupported();
@@ -401,17 +427,17 @@ ndk::ScopedAStatus Vibrator::perform(Effect e, EffectStrength strength,
         if (status.isOk()) *out = duration;
         return status;
     }
-    // Alioth's driver effect 1 is a single waveform, not a timed pair.
-    // Compose two stock clicks so DOUBLE_CLICK has two distinct onsets.
+    // Alioth packages HyperOS feedbackNegativeLight as effect_1.bin, used above.
+    // Without it: stock RAM 1 packs two pulses about 9 ms apart, which reads
+    // as one tap, so compose two CLICK waveforms with distinct onsets.
     if (e == Effect::DOUBLE_CLICK) {
         constexpr int kDoubleClickGapMs = 80;
-        auto status = start(
-                {{0, mDurations[0], scale, 0}, {0, mDurations[0], scale, kDoubleClickGapMs}}, cb);
-        if (status.isOk()) *out = 2 * mDurations[0] + kDoubleClickGapMs;
+        auto status = start({{id, mDurations[id], scale, 0},
+                             {id, mDurations[id], scale, kDoubleClickGapMs}},
+                            cb);
+        if (status.isOk()) *out = 2 * mDurations[id] + kDoubleClickGapMs;
         return status;
     }
-    // TEXTURE_TICK uses MIUI mesh.light (RAM 5, medium gain 80). The
-    // waveform already provides light feedback; do not attenuate it again.
     auto status = start({{id, mDurations[id], scale, 0}}, cb);
     if (status.isOk()) *out = mDurations[id];
     return status;

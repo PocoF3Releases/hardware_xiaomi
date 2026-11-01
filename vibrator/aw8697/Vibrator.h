@@ -4,6 +4,7 @@
 #include <array>
 #include <effect.h>
 #include <condition_variable>
+#include <memory>
 #include <mutex>
 #include <thread>
 namespace aidl::android::hardware::vibrator {
@@ -67,6 +68,8 @@ class Vibrator final : public BnVibrator {
     unsigned int mWavePeriod = 0;
     std::array<const effect_stream*, 7> mEffectStreams{};
     std::array<const effect_stream*, 9> mPrimitiveStreams{};
+    std::array<std::vector<int8_t>, 9> mSynthSamples;
+    std::array<std::unique_ptr<effect_stream>, 9> mSynthStreams;
     bool mDirectRamGain = false;
     static constexpr int kRamEffectCount = 10;
     std::array<int, kRamEffectCount> mDurations{};
