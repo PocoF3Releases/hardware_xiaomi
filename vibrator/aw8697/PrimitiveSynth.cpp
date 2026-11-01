@@ -71,12 +71,18 @@ void appendDamping(std::vector<int8_t>* samples, float resonanceHz) {
     Resonator model(f0);
     double peak = 0;
     for (const int8_t s : *samples) peak = std::max(peak, std::abs(model.step(s)));
-    const size_t cycle = static_cast<size_t>(kRate / f0);
+    const size_t cycle = static_cast<size_t>(std::ceil(kRate / f0));
+    double cyclePeak = 0;
     for (size_t n = 0; n < static_cast<size_t>(kRate * 0.04); ++n) {
-        if (n > cycle && std::abs(model.last()) < 0.05 * peak) break;
         const double drive = std::clamp(-kDampingGain * model.last(), -127.0, 127.0);
         samples->push_back(static_cast<int8_t>(std::lround(drive)));
         model.step(samples->back());
+        cyclePeak = std::max(cyclePeak, std::abs(model.last()));
+        // A velocity zero-crossing is not a settled oscillation. Check a full cycle.
+        if ((n + 1) % cycle == 0) {
+            if (cyclePeak < 0.05 * peak) break;
+            cyclePeak = 0;
+        }
     }
     while (samples->size() > 1 && samples->back() == 0) samples->pop_back();
 }
