@@ -10,11 +10,8 @@ namespace alioth::haptics {
 // narrow band (stock compensation table: about 1/8 output at +-25 Hz), so
 // shape comes from the envelope rather than from frequency changes.
 enum class Shape { kQuickRise, kSlowRise, kQuickFall, kSpin };
+// Sustained drive rings for 50-70 ms, so each envelope ends with active
+// damping against a second-order actuator model (cached resonance, Q 18
+// fitted to the stock vibratorfeature drive-compensation table).
 std::vector<int8_t> synthesize(Shape shape, float resonanceHz);
-
-// Appends active damping after a waveform: drives against the velocity of a
-// second-order model of the actuator until its ring-down falls below 5%.
-// The model uses the cached resonance and Q 18, fitted to the stock
-// vibratorfeature drive-compensation table. Existing samples are unchanged.
-void appendDamping(std::vector<int8_t>* samples, float resonanceHz);
 }  // namespace alioth::haptics

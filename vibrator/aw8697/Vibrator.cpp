@@ -21,20 +21,18 @@ struct EffectMapping {
     int ramId;
     float base;  // strength at Android's default MEDIUM intensity
 };
-// Bases are set by modelled output, not waveform energy: the LRA is narrow
-// band, so RAM 5 (mostly ~325 Hz, HyperOS key-down) reaches only ~0.3 of
-// RAM 0 (~170 Hz). Relative peak acceleration at MEDIUM: CLICK 0.83 from
-// packaged effect_0.bin (HyperOS launcherIconSelection, braked; RAM 0 is
-// the fallback), HEAVY_CLICK 1.0, DOUBLE_CLICK 0.93 (effect_1.bin), TICK 0.51,
-// THUD 0.51, POP 0.28, TEXTURE_TICK 0.25.
+// Waveforms are chosen by output, not sample energy: the LRA is narrow band,
+// so RAM 5 (mostly ~325 Hz, HyperOS key-down) reaches only ~0.3 of RAM 0
+// (~170 Hz). CLICK and HEAVY_CLICK both use RAM 0, at 0.8 and 1.0; DOUBLE_CLICK
+// prefers packaged effect_1.bin (HyperOS feedbackNegativeLight).
 constexpr std::array<EffectMapping, 7> kEffects{{
-        {Effect::CLICK, 0, 1},
+        {Effect::CLICK, 0, 0.8f},
         {Effect::DOUBLE_CLICK, 0, 1},
         {Effect::TICK, 2, 0.8f},
         {Effect::THUD, 3, 1},
         {Effect::POP, 4, 1},
         {Effect::HEAVY_CLICK, 0, 1},
-        {Effect::TEXTURE_TICK, 5, 0.8f},
+        {Effect::TEXTURE_TICK, 5, 1},
 }};
 // Android's intensity setting scales the per-effect base.
 constexpr float kLightFactor = 0.6f;
@@ -136,19 +134,11 @@ Vibrator::Vibrator() {
                 const auto* stream = get_effect_stream_exact(static_cast<uint32_t>(kEffects[i].effect));
                 if (streamDuration(stream)) mEffectStreams[i] = stream;
             }
-            // Stock primitive slices stop driving without a brake and ring for
-            // 20-70 ms; keep their samples and append active damping.
+            // Stock slices play undamped: their ~20-30 ms ring-down is most of
+            // what a tap feels like, and clipping it read as no feedback.
             for (size_t i = 1; i < mPrimitiveStreams.size(); ++i) {
                 const auto* stream = get_effect_stream_exact((1u << 15) | i);
-                if (!streamDuration(stream)) continue;
-                auto& samples = mOwnedSamples[i];
-                samples.assign(stream->data, stream->data + stream->length);
-                alioth::haptics::appendDamping(&samples, mResonantFrequency);
-                mOwnedStreams[i] = std::make_unique<effect_stream>(
-                        stream->effect_id, samples.size(), stream->play_rate_hz, samples.data());
-                mPrimitiveStreams[i] = streamDuration(mOwnedStreams[i].get())
-                                               ? mOwnedStreams[i].get()
-                                               : stream;
+                if (streamDuration(stream)) mPrimitiveStreams[i] = stream;
             }
             // Packaged files take priority over synthesized envelopes.
             using alioth::haptics::Shape;
