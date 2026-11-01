@@ -37,6 +37,10 @@ constexpr std::array<EffectMapping, 7> kEffects{{
 // Android's intensity setting scales the per-effect base.
 constexpr float kLightFactor = 0.6f;
 constexpr float kStrongFactor = 1.6f;
+// Launcher and SystemUI taps arrive as PRIMITIVE_CLICK at scale 0.70 (keyboard
+// 0.62). HyperOS plays taps at full strength, so 0.70 maps to 1.0; smaller
+// scales such as slider ticks keep their proportions.
+constexpr float kCompositionGain = 1 / 0.7f;
 // The stock driver maps 0..0x3fff to gain 30, then (value-0x3fff)/128,
 // with 0x7fff selecting gain 128. Invert that encoding rather than passing
 // a linear Android amplitude, which collapses all values <= 0.5 to gain 30.
@@ -513,7 +517,7 @@ ndk::ScopedAStatus Vibrator::compose(const std::vector<CompositeEffect>& composi
         if (!stream && effect.primitive == CompositePrimitive::LOW_TICK)
             stream = mPrimitiveStreams[static_cast<int>(CompositePrimitive::LIGHT_TICK)];
         steps.push_back({stream ? 193 : primitiveRam(effect.primitive), duration,
-                         effect.scale, effect.delayMs, stream});
+                         std::min(1.0f, effect.scale * kCompositionGain), effect.delayMs, stream});
     }
     return start(std::move(steps), callback);
 }
