@@ -64,8 +64,8 @@ class Resonator {
   private:
     double mB0, mA1, mA2, mX1 = 0, mX2 = 0, mY1 = 0, mY2 = 0;
 };
-}  // namespace
 
+// Drives against the model's velocity until its ring-down falls below 5%.
 void appendDamping(std::vector<int8_t>* samples, float resonanceHz) {
     const double f0 = resonance(resonanceHz);
     Resonator model(f0);
@@ -80,6 +80,7 @@ void appendDamping(std::vector<int8_t>* samples, float resonanceHz) {
     }
     while (samples->size() > 1 && samples->back() == 0) samples->pop_back();
 }
+}  // namespace
 
 std::vector<int8_t> synthesize(Shape shape, float resonanceHz) {
     const double f0 = resonance(resonanceHz);
