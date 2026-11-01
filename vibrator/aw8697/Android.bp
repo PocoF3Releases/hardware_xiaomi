@@ -1,0 +1,20 @@
+cc_binary {
+    name: "android.hardware.vibrator-service.xiaomi_aw8697",
+    vendor: true,
+    relative_install_path: "hw",
+    srcs: ["PrimitiveSynth.cpp", "Vibrator.cpp", "service.cpp"],
+    shared_libs: ["libqtivibratoreffect.xiaomi", "libbinder_ndk", "liblog", "android.hardware.vibrator-V2-ndk"],
+    cflags: ["-Wall", "-Wextra", "-Werror"],
+    init_rc: ["vibrator.rc"],
+    vintf_fragments: ["vibrator.xml"],
+}
+
+// Explicit developer target; not installed by the product or linked into the HAL.
+cc_binary {
+    name: "xiaomi-alioth-richtap-render",
+    vendor: true,
+    compile_multilib: "64",
+    srcs: ["richtap-render.cpp"],
+    shared_libs: ["libdl"],
+    cflags: ["-Wall", "-Wextra", "-Werror"],
+}
