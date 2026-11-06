@@ -27,9 +27,11 @@ import kotlin.math.roundToInt
 fun BandGainSlider(
     bandGain: BandGain,
     enabled: Boolean = true,
+    resetRevision: Int = 0,
+    profileKey: String = "",
     onValueChangeFinished: (Int) -> Unit
 ) {
-    var position by remember(bandGain.band, bandGain.gain) {
+    var position by remember(bandGain.band, bandGain.gain, resetRevision, profileKey) {
         mutableFloatStateOf(bandGain.gain.toFloat())
     }
     val frequencies = LocalContext.current.resources.getIntArray(R.array.dolby_geq_frequencies)

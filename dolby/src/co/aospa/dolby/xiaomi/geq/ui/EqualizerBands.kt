@@ -48,6 +48,7 @@ fun EqualizerBands(
     val preset by viewModel.preset.collectAsState()
     val profileKey by viewModel.profileKey.collectAsState()
     val ready by viewModel.ready.collectAsState()
+    val gainEditRevision by viewModel.gainEditRevision.collectAsState()
     val context = LocalContext.current
     val frequencies = remember(context) { context.resources.getIntArray(R.array.dolby_geq_frequencies) }
     var selected by rememberSaveable { mutableIntStateOf(0) }
@@ -227,7 +228,10 @@ fun EqualizerBands(
                 val selectedBand = gains[selected].let { band ->
                     preview?.takeIf { it.first == selected }?.let { band.copy(gain = it.second) } ?: band
                 }
-                BandGainSlider(selectedBand, enabled = ready) { applyGain(selected, it) }
+                BandGainSlider(
+                    selectedBand, enabled = ready,
+                    resetRevision = gainEditRevision, profileKey = profileKey,
+                ) { applyGain(selected, it) }
             }
         }
     }

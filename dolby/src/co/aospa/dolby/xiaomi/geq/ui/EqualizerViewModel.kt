@@ -18,6 +18,8 @@ class EqualizerViewModel(private val repository: EqualizerRepository) : ViewMode
     val presets = _presets.asStateFlow()
     private val _preset = MutableStateFlow(repository.defaultPreset)
     val preset = _preset.asStateFlow()
+    private val _gainEditRevision = MutableStateFlow(0)
+    val gainEditRevision = _gainEditRevision.asStateFlow()
     private val _undoPreset = MutableStateFlow<Preset?>(null)
     val undoPreset = _undoPreset.asStateFlow()
     private val _error = MutableStateFlow<String?>(null)
@@ -102,7 +104,12 @@ class EqualizerViewModel(private val repository: EqualizerRepository) : ViewMode
                   catch (_: RuntimeException) {
                     // Keep the last accepted configuration; never crash a gesture coroutine.
                     _error.value = "apply"
-                } finally { edit.completion.complete(Unit) }
+                } finally {
+                    // A rejected write can leave the saved gain unchanged. Invalidate
+                    // the slider draft even when there is no new preset emission.
+                    _gainEditRevision.value++
+                    edit.completion.complete(Unit)
+                }
             }
         }
     }
