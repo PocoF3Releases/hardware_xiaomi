@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
@@ -32,7 +33,9 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.sample
 import kotlin.math.abs
 import kotlin.math.roundToInt
+import java.util.Locale
 import co.aospa.dolby.xiaomi.R
+import co.aospa.dolby.xiaomi.geq.data.EqualizerGains
 import co.aospa.dolby.xiaomi.geq.data.EqualizerGraphScale as Scale
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, FlowPreview::class)
@@ -87,11 +90,18 @@ fun EqualizerBands(
             this.textSize = textSize
         }
     }
-    val left = maxOf(with(density) { 38.dp.toPx() }, axisPaint.measureText("+10") + with(density) { 8.dp.toPx() })
+    val locale = LocalConfiguration.current.locales[0] ?: Locale.getDefault()
+    val gainTicks = listOf(-100, -50, 0, 50, 100)
+    val gainLabels = gainTicks.associateWith { Scale.axisLabel(it, locale) }
+    // Fractional dB labels are wider than the old integer labels, especially at large font sizes.
+    val left = maxOf(with(density) { 38.dp.toPx() },
+        gainLabels.values.maxOf { axisPaint.measureText(it) } + with(density) { 8.dp.toPx() })
     val right = maxOf(with(density) { 16.dp.toPx() }, axisPaint.measureText(frequencies.last().toString()) / 2 + with(density) { 4.dp.toPx() })
     val top = maxOf(with(density) { 14.dp.toPx() }, textSize + with(density) { 4.dp.toPx() })
     val bottom = maxOf(with(density) { 28.dp.toPx() }, textSize + with(density) { 12.dp.toPx() })
-    val description = stringResource(R.string.dolby_geq_graph_description)
+    val description = stringResource(R.string.dolby_geq_graph_description,
+        -Scale.decibels(EqualizerGains.MIN_GAIN.toFloat()),
+        Scale.decibels(EqualizerGains.MAX_GAIN.toFloat()))
     val previous = stringResource(R.string.dolby_geq_previous_band)
     val next = stringResource(R.string.dolby_geq_next_band)
 
@@ -153,12 +163,12 @@ fun EqualizerBands(
                     val width = (size.width - left - right).coerceAtLeast(1f)
                     val height = (size.height - top - bottom).coerceAtLeast(1f)
                     val paint = axisPaint
-                    for (gain in listOf(-100, -50, 0, 50, 100)) {
+                    for (gain in gainTicks) {
                         val y = top + Scale.y(gain) * height
                         drawLine(colors.outline.copy(alpha = if (gain == 0) .6f else .2f),
                             Offset(left, y), Offset(left + width, y), 1.dp.toPx())
                         drawContext.canvas.nativeCanvas.drawText(
-                            if (gain > 0) "+${gain / 10}" else "${gain / 10}", 4.dp.toPx(), y + textSize / 3, paint
+                            gainLabels.getValue(gain), 4.dp.toPx(), y + textSize / 3, paint
                         )
                     }
                     val points = animatedGains.mapIndexed { index, gain ->

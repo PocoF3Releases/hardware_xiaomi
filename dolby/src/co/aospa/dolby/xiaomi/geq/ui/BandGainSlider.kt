@@ -20,6 +20,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import co.aospa.dolby.xiaomi.R
 import co.aospa.dolby.xiaomi.geq.data.BandGain
+import co.aospa.dolby.xiaomi.geq.data.EqualizerGraphScale
 import co.aospa.dolby.xiaomi.ui.ExpressiveValueSlider
 import kotlin.math.roundToInt
 
@@ -49,7 +50,7 @@ fun BandGainSlider(
     Column(Modifier.fillMaxWidth().padding(horizontal = 8.dp)) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             Text(bandLabel, modifier = Modifier.weight(1f).padding(end = 8.dp))
-            Text(stringResource(R.string.dolby_geq_gain_db, position / 10f))
+            Text(stringResource(R.string.dolby_geq_gain_db, EqualizerGraphScale.decibels(position)))
         }
         ExpressiveValueSlider(
             value = position,
