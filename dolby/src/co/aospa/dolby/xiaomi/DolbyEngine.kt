@@ -192,7 +192,7 @@ internal class DolbyEngine(
     private val mediaMode: Boolean
         get() = !audioManager.isDolbyCommunicationActive()
 
-    private fun applyEnabledState(force: Boolean = false): Boolean {
+    private fun applyEnabledState(force: Boolean = false, restoringMedia: Boolean = false): Boolean {
         checkEffect()
         val enabled = requestedEnabled && mediaMode && processingState == ProcessingState.MEDIA
         if (enabled) {
@@ -206,10 +206,18 @@ internal class DolbyEngine(
                 throw failure
             }
             // AudioService may change while the synchronous native transaction runs.
-            if (!mediaMode) {
-                processingState = ProcessingState.COMMUNICATION
-                dolbyEffect.dsOn = false
-                requestRestore()
+            val stillMediaBeforeEnable = mediaMode
+            if (!stillMediaBeforeEnable || (restoringMedia &&
+                    SystemClock.elapsedRealtime() - lastAudioStateInvalidationMs < MEDIA_RESTORE_SETTLE_MS)) {
+                processingState = if (stillMediaBeforeEnable) ProcessingState.MEDIA_RESTORE
+                    else ProcessingState.COMMUNICATION
+                try {
+                    dolbyEffect.dsOn = false
+                } finally {
+                    appliedTuning = null
+                    appliedProfileKey = null
+                    requestRestore()
+                }
                 return false
             }
         }
@@ -238,8 +246,10 @@ internal class DolbyEngine(
                 }
                 throw failure
             }
-            if (!stillMedia) {
-                processingState = ProcessingState.COMMUNICATION
+            if (!stillMedia || (restoringMedia &&
+                    SystemClock.elapsedRealtime() - lastAudioStateInvalidationMs < MEDIA_RESTORE_SETTLE_MS)) {
+                processingState = if (stillMedia) ProcessingState.MEDIA_RESTORE
+                    else ProcessingState.COMMUNICATION
                 try {
                     dolbyEffect.dsOn = false
                 } finally {
@@ -296,9 +306,12 @@ internal class DolbyEngine(
 
             Log.i(TAG, "Media route settled: requested=$requestedEnabled")
             processingState = ProcessingState.MEDIA
-            applyEnabledState(force = true)
+            applyEnabledState(force = true, restoringMedia = true)
             refreshActiveState()
-            return null
+            return if (processingState == ProcessingState.MEDIA_RESTORE) {
+                val quietFor = (SystemClock.elapsedRealtime() - lastAudioStateInvalidationMs).coerceAtLeast(0L)
+                (MEDIA_RESTORE_SETTLE_MS - quietFor).coerceAtLeast(0L)
+            } else null
         }
 
         applyEnabledState()
