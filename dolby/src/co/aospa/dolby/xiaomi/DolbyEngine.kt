@@ -195,7 +195,7 @@ internal class DolbyEngine(
 
     private fun applyEnabledState(force: Boolean = false, restoringMedia: Boolean = false): Boolean {
         checkEffect()
-        val enabled = requestedEnabled && mediaMode && processingState == ProcessingState.MEDIA
+        val enabled = requestedEnabled && processingState == ProcessingState.MEDIA && mediaMode
         if (enabled) {
             // Endpoint/profile setup must precede activation. A failed restore stays bypassed.
             try {
@@ -322,7 +322,7 @@ internal class DolbyEngine(
         if (!mediaMode) {
             val enteringCommunication = processingState != ProcessingState.COMMUNICATION
             if (enteringCommunication) {
-                Log.i(TAG, "Entering communication bypass: mode=${audioManager.mode}, " +
+                Log.i(TAG, "Entering communication bypass: " +
                     "requested=$requestedEnabled")
             }
             processingState = ProcessingState.COMMUNICATION
@@ -336,7 +336,7 @@ internal class DolbyEngine(
             processingState = ProcessingState.MEDIA_RESTORE
             if (startingRestore) {
                 Log.i(TAG, "Communication ended; waiting for the media route: " +
-                    "mode=${audioManager.mode}, requested=$requestedEnabled")
+                    "requested=$requestedEnabled")
                 // Reassert both effect gates off after communication. This also repairs a
                 // partially failed disable once the route has started returning to media.
                 applyEnabledState(force = true)
