@@ -981,12 +981,10 @@ internal class DolbyEngine(
         dolbyEffect.setDapParameter(DsParam.IEQ_PRESET, value, profile)
     }
 
-    fun refreshActiveState() {
-        if (!initialized) return
+    /** Read one native snapshot without publishing an unconfirmed user edit. */
+    private fun readActiveState(): ActiveProfileState {
         val target = profiles.requireProfile(activeProfileKey)
         try {
-            // Preferences are restore requests; only native readback describes the
-            // active endpoint after routing, profile changes or vendor normalization.
             val tuning = mapOf<String, Any>(
                 PREF_BASS to getBassEnhancerEnabled(target.base),
                 PREF_VOLUME to (volumeLevelerSupported && getVolumeLevelerEnabled(target.base)),
@@ -1020,7 +1018,7 @@ internal class DolbyEngine(
                     "native=${runtime.nativeEnabled}, framework=${runtime.frameworkEnabled}, " +
                     "control=${runtime.hasControl}, mode=${audioManager.mode}")
             }
-            _activeState.value = ActiveProfileState(target.key, target.name, target.base,
+            return ActiveProfileState(target.key, target.name, target.base,
                 profiles.all, dsOn, EqualizerGains.decode(getSavedPreset(target.key)), tuning, true,
                 runtime = runtime)
         } catch (error: RuntimeException) {
@@ -1029,6 +1027,30 @@ internal class DolbyEngine(
                 base = target.base, profiles = profiles.all, loaded = false,
                 error = context.getString(R.string.dolby_setting_failed))
             throw error
+        }
+    }
+
+    fun refreshActiveState() {
+        if (!initialized) return
+        _activeState.value = readActiveState()
+    }
+
+    private fun confirmSetting(key: String, value: Any, savedVirtualBass: Boolean?): ActiveProfileState {
+        // DMS posts SETs to its handler but serves GETs synchronously. A reply can
+        // precede the queued write, including the companion virtual-bass restore.
+        // Re-read only; transport failures propagate and writes are never replayed.
+        var attempt = 0
+        while (true) {
+            val snapshot = readActiveState()
+            if (snapshot.settings[key] == value &&
+                (savedVirtualBass == null || snapshot.settings[PREF_VIRTUAL_BASS] == savedVirtualBass)) {
+                return snapshot
+            }
+            check(attempt < SETTING_READBACK_DELAYS_MS.size) {
+                "Dolby setting not confirmed: $key requested=$value, " +
+                    "observed=${snapshot.settings[key]}, virtualBass=${snapshot.settings[PREF_VIRTUAL_BASS]}"
+            }
+            SystemClock.sleep(SETTING_READBACK_DELAYS_MS[attempt++])
         }
     }
 
@@ -1061,31 +1083,27 @@ internal class DolbyEngine(
             PREF_VOLUME_AMOUNT -> setVolumeLevelerAmount(value as Int)
             else -> error("Unsupported setting")
         }
-        refreshActiveState()
-        check(activeState.value.loaded && activeState.value.settings[key] == value) {
-            "Dolby did not confirm the requested setting: $key"
-        }
-        check(savedVirtualBass == null || activeState.value.settings[PREF_VIRTUAL_BASS] == savedVirtualBass) {
-            "Dolby did not preserve the saved virtual-bass setting"
-        }
+        val confirmed = confirmSetting(key, value, savedVirtualBass)
         val editor = profiles.preferences(activeProfileKey).edit()
         when (value) {
             is Boolean -> editor.putBoolean(key, value)
             is Int -> if (key == PREF_IEQ) editor.putString(key, value.toString()) else editor.putInt(key, value)
         }
-        // Persistence does not change the acknowledged native values. Keep the
-        // checked snapshot rather than repeating the same full HAL query.
         editor.apply()
+        // Neither a pending native write nor a rejected edit becomes checked UI state.
+        _activeState.value = confirmed
     } catch (failure: RuntimeException) {
-        // A bass write or its companion restore may reach DMS before a failed
-        // reply/readback. Force saved-profile replay instead of trusting the
-        // previous slot ACK; persistence still contains the last accepted pair.
-        if (key == PREF_BASS) appliedProfileKey = null
+        // A queued write can outlive a failed reply/readback. Replay the last
+        // accepted preferences instead of trusting the previous profile ACK.
+        appliedProfileKey = null
+        _activeState.value = _activeState.value.copy(loaded = false,
+            error = context.getString(R.string.dolby_setting_failed))
         throw failure
     }
 
     companion object {
         private const val TAG = "DolbyController"
+        private val SETTING_READBACK_DELAYS_MS = longArrayOf(5L, 10L, 20L)
         private const val EFFECT_PRIORITY = 100
         private const val MEDIA_RESTORE_SETTLE_MS = 500L
         private const val PREF_SPEAKER_TUNING = "speaker_tuning"
