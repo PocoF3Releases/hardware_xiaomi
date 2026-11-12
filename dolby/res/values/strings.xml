@@ -63,7 +63,7 @@
     <string name="dolby_reset_profile">Reset current profile</string>
     <string name="dolby_reset_profile_message">Restore the current profile to its factory settings? Saved equalizer presets will be kept.</string>
     <string name="dolby_setting_failed">Dolby could not apply this setting. Please try again.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Emphasize low frequencies. Use the graphic equalizer for finer bass adjustments.</string>
     <string name="dolby_volume_summary">Reduce loudness differences between tracks and quiet or loud passages.</string>
     <string name="dolby_speaker_summary">Add a wider surround impression to the built-in speakers.</string>
@@ -74,7 +74,7 @@
     <string name="dolby_geq_profile_heading">Tuning: %1$s</string>
     <string name="dolby_geq_band_frequency">Band %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Touch a band and drag up or down to adjust; release to apply.</string>
-    <string name="dolby_geq_graph_description">20-band equalizer graph. Frequency increases left to right; gain ranges from minus 10 to plus 10 dB. Use the band controls below for precise adjustments.</string>
+    <string name="dolby_geq_graph_description">20-band equalizer graph. Frequency increases left to right; gain ranges from minus %1$.2f to plus %2$.2f dB. Use the band controls below for precise adjustments.</string>
     <string name="dolby_geq_previous_band">Previous frequency band</string>
     <string name="dolby_geq_next_band">Next frequency band</string>
     <string name="dolby_geq_band_counter">Band %1$d of %2$d</string>
