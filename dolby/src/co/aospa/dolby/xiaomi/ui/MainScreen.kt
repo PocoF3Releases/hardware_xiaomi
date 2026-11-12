@@ -244,7 +244,12 @@ internal fun MainScreen(controller: DolbyController, modifier: Modifier) {
             )
         toggle(voice, PREF_DIALOGUE, R.string.dolby_dialogue_enhancer, R.string.dolby_dialogue_summary)
         if (checked(PREF_DIALOGUE)) {
-            amount(voice, PREF_DIALOGUE_AMOUNT, R.string.dolby_dialogue_strength_title, 1..12)
+            amount(
+                voice,
+                PREF_DIALOGUE_AMOUNT,
+                R.string.dolby_dialogue_strength_title,
+                DolbyConstants.DIALOGUE_AMOUNT_RANGE,
+            )
             amount(
                 voice,
                 PREF_DIALOGUE_DUCKING,

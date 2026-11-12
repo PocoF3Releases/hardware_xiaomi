@@ -501,7 +501,7 @@ internal class DolbyEngine(
         }
         if (prefs.contains(DolbyConstants.PREF_DIALOGUE_AMOUNT)) {
             val amount = prefs.getInt(DolbyConstants.PREF_DIALOGUE_AMOUNT, 4)
-            if (amount in 1..12) {
+            if (amount in DolbyConstants.DIALOGUE_AMOUNT_RANGE) {
                 setDialogueEnhancerAmount(amount, profile)
             } else {
                 Log.w(TAG, "Ignoring invalid saved dialogue amount for profile $profile")
@@ -965,7 +965,7 @@ internal class DolbyEngine(
     fun setDialogueEnhancerAmount(value: Int, profile: Int = profiles.requireProfile(activeProfileKey).base) {
         dlog(TAG, "setDialogueEnhancerAmount: $value")
         checkEffect()
-        require(value in 1..12) { "Dialogue amount outside the supported app range" }
+        require(value in DolbyConstants.DIALOGUE_AMOUNT_RANGE) { "Dialogue amount outside the supported app range" }
         dolbyEffect.setDapParameter(DsParam.DIALOGUE_ENHANCER_AMOUNT, value, profile)
     }
 
