@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Izskats</string>
+    <string name="dolby_navigate_back">Atpakaļ</string>
+    <string name="dolby_sound_console">Skaņas vadības ierīces</string>
+    <string name="dolby_theme_description">Displeja leņķiskie paneļi ar sarkaniem akcentiem. Atspējojiet šo opciju, lai izmantotu sistēmas iestatījumu izskatu.</string>
+    <string name="dolby_theme_dossier">Dokumentācijas tēma</string>
+</resources>

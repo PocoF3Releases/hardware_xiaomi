@@ -12,6 +12,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import androidx.preference.PreferenceManager
 import co.aospa.dolby.xiaomi.R
 import com.android.settingslib.drawer.TileUtils.META_DATA_PREFERENCE_SUMMARY
 
@@ -58,12 +59,21 @@ class SummaryProvider : ContentProvider() {
     ): Int = 0
 
     private fun getDolbySummary(): String {
-        val context = context!!
-        val dolbyController = DolbyController.getInstance(context)
-        if (!dolbyController.dsOn) {
+        val context = requireNotNull(context)
+        val controller = DolbyController.getInstance(context)
+        val state = controller.activeState.value
+        // Until the engine has published its first snapshot (or after a failed
+        // transaction) the live state holds defaults. Settings shows the saved
+        // user choice instead of a transient "Off" or an empty profile name.
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val enabled = if (state.loaded) state.enabled
+            else prefs.getBoolean(DolbyConstants.PREF_ENABLE, true)
+        if (!enabled) {
             return context.getString(R.string.dolby_off)
         }
-        return dolbyController.getProfileName()?.let {
+        val name = state.name.takeIf { state.loaded && it.isNotEmpty() }
+            ?: controller.profiles.find(prefs.getString(DolbyConstants.PREF_PROFILE, "0") ?: "0")?.name
+        return name?.takeIf { it.isNotEmpty() }?.let {
             context.getString(R.string.dolby_on_with_profile, it)
         } ?: context.getString(R.string.dolby_on)
     }

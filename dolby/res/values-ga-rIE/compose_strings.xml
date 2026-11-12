@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Dealramh</string>
+    <string name="dolby_navigate_back">Ar ais</string>
+    <string name="dolby_sound_console">Rialuithe fuaime</string>
+    <string name="dolby_theme_description">Taispeáin painéil uilleacha le variant dearg. Díchumasaigh an rogha seo chun cuma Socruithe an chórais a úsáid.</string>
+    <string name="dolby_theme_dossier">Téama an chomhaid</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Aspeutu</string>
+    <string name="dolby_navigate_back">Atrás</string>
+    <string name="dolby_sound_console">Controles de soníu</string>
+    <string name="dolby_theme_description">Amosar paneles angulares con detalles coloraos. Desactiva esta opción pa usar l\'aspeutu de los axustes del sistema.</string>
+    <string name="dolby_theme_dossier">Tema Dossier</string>
+</resources>

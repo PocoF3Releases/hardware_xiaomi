@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Aspekto</string>
+    <string name="dolby_navigate_back">Reen</string>
+    <string name="dolby_sound_console">Sonaj kontroloj</string>
+    <string name="dolby_theme_description">Montru angulajn panelojn kun ruĝaj supersignoj. Malebligu ĉi tiun opcion por uzi la aspekton de la sistema Agordoj.</string>
+    <string name="dolby_theme_dossier">Dosiera temo</string>
+</resources>

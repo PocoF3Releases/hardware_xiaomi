@@ -1,0 +1,3 @@
+# SPDX-License-Identifier: Apache-2.0
+# Read-only product contract shared by AudioFlinger and the system Dolby app.
+vendor_public_prop(vendor_dolby_config_prop)

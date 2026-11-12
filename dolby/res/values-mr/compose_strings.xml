@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">देखावा</string>
+    <string name="dolby_navigate_back">मागे</string>
+    <string name="dolby_sound_console">ध्वनी नियंत्रणे</string>
+    <string name="dolby_theme_description">लाल ॲक्सेंटसह कोनीय पटल प्रदर्शित करा. सिस्टम सेटिंग्ज देखावा वापरण्यासाठी हा पर्याय अक्षम करा.</string>
+    <string name="dolby_theme_dossier">डॉसियर थीम</string>
+</resources>

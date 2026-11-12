@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Videz</string>
+    <string name="dolby_navigate_back">Nazaj</string>
+    <string name="dolby_sound_console">Kontrole zvoka</string>
+    <string name="dolby_theme_description">Prikažite kotne plošče z rdečimi poudarki. Onemogočite to možnost, če želite uporabiti videz sistemskih nastavitev.</string>
+    <string name="dolby_theme_dossier">Tema dosjeja</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Apparence</string>
+    <string name="dolby_navigate_back">Retour</string>
+    <string name="dolby_sound_console">Contrôles du son</string>
+    <string name="dolby_theme_description">Affichez des panneaux angulaires avec des accents rouges. Désactivez cette option pour utiliser l’apparence des paramètres système.</string>
+    <string name="dolby_theme_dossier">Thème du dossier</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">دەرکەوتن</string>
+    <string name="dolby_navigate_back">گەڕانەوە</string>
+    <string name="dolby_sound_console">کۆنتڕۆڵی دەنگ</string>
+    <string name="dolby_theme_description">پانێڵی گۆشەیی پیشان بدە بە لەهجەی سوور. ئەم هەڵبژاردنە لەکاربخە بۆ بەکارهێنانی دەرکەوتنی ڕێکخستنەکانی سیستەم.</string>
+    <string name="dolby_theme_dossier">تەوەرەی دۆسیە</string>
+</resources>

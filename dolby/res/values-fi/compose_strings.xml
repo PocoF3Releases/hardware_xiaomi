@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Ulkonäkö</string>
+    <string name="dolby_navigate_back">Takaisin</string>
+    <string name="dolby_sound_console">Ääniohjaimet</string>
+    <string name="dolby_theme_description">Näytä kulmikkaat paneelit punaisilla korostuksilla. Poista tämä asetus käytöstä, jos haluat käyttää järjestelmän asetusten ulkoasua.</string>
+    <string name="dolby_theme_dossier">Asiakirjan teema</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="dolby_appearance">Görünüş</string>
+    <string name="dolby_navigate_back">Geri</string>
+    <string name="dolby_sound_console">Səs nəzarətləri</string>
+    <string name="dolby_theme_description">Qırmızı vurğu ilə bucaqlı panelləri göstərin. Sistem Parametrlərinin görünüşündən istifadə etmək üçün bu seçimi söndürün.</string>
+    <string name="dolby_theme_dossier">Dosye mövzusu</string>
+</resources>
