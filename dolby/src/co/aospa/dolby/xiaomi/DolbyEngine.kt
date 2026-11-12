@@ -99,6 +99,7 @@ internal class DolbyEngine(
     @Volatile
     private var lastAudioStateInvalidationMs = SystemClock.elapsedRealtime()
     private var processingState = ProcessingState.MEDIA
+    private var needsBypassConfirmation = false
     private val volumeLevelerSupported =
         context.getResources().getBoolean(R.bool.dolby_volume_leveler_supported)
 
@@ -223,7 +224,47 @@ internal class DolbyEngine(
         }
         if (force || dolbyEffect.dsOn != enabled || dolbyEffect.enabled != enabled) {
             dlog(TAG, "DAP requested=$requestedEnabled state=$processingState applied=$enabled")
-            dolbyEffect.dsOn = enabled
+            if (enabled) {
+                var abortState: ProcessingState? = null
+                var attemptCompleted = false
+                val acknowledged = try {
+                    dolbyEffect.enableProcessing {
+                        val stillMedia = try {
+                            mediaMode
+                        } catch (failure: RuntimeException) {
+                            appliedTuning = null
+                            appliedProfileKey = null
+                            throw failure
+                        }
+                        when {
+                            !stillMedia -> {
+                                abortState = ProcessingState.COMMUNICATION
+                                false
+                            }
+                            restoringMedia && SystemClock.elapsedRealtime() - lastAudioStateInvalidationMs <
+                                    MEDIA_RESTORE_SETTLE_MS -> {
+                                abortState = ProcessingState.MEDIA_RESTORE
+                                false
+                            }
+                            else -> true
+                        }
+                    }.also { attemptCompleted = true }
+                } finally {
+                    abortState?.let {
+                        processingState = it
+                        appliedTuning = null
+                        appliedProfileKey = null
+                        if (!attemptCompleted) needsBypassConfirmation = true
+                    }
+                }
+                if (!acknowledged) {
+                    checkNotNull(abortState)
+                    requestRestore()
+                    return false
+                }
+            } else {
+                dolbyEffect.dsOn = false
+            }
             if (!enabled) {
                 appliedTuning = null
                 appliedProfileKey = null
@@ -272,6 +313,11 @@ internal class DolbyEngine(
      * returned delay without cancelling any native transaction already in progress.
      */
     fun restoreForAudioState(): Long? {
+        if (needsBypassConfirmation) {
+            checkEffect()
+            dolbyEffect.dsOn = false
+            needsBypassConfirmation = false
+        }
         val now = SystemClock.elapsedRealtime()
         if (!mediaMode) {
             val enteringCommunication = processingState != ProcessingState.COMMUNICATION
@@ -306,7 +352,17 @@ internal class DolbyEngine(
 
             Log.i(TAG, "Media route settled: requested=$requestedEnabled")
             processingState = ProcessingState.MEDIA
-            applyEnabledState(force = true, restoringMedia = true)
+            try {
+                applyEnabledState(force = true, restoringMedia = true)
+            } catch (failure: RuntimeException) {
+                if (processingState == ProcessingState.MEDIA) {
+                    processingState = ProcessingState.MEDIA_RESTORE
+                }
+                appliedTuning = null
+                appliedProfileKey = null
+                needsBypassConfirmation = true
+                throw failure
+            }
             refreshActiveState()
             return if (processingState == ProcessingState.MEDIA_RESTORE) {
                 val quietFor = (SystemClock.elapsedRealtime() - lastAudioStateInvalidationMs).coerceAtLeast(0L)
