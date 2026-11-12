@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Restableix el perfil actual</string>
     <string name="dolby_reset_profile_message">Vols restaurar el perfil actual als ajustos de fàbrica? Es conservaran els preajustos de l’equalitzador desats.</string>
     <string name="dolby_setting_failed">Dolby no ha pogut aplicar aquest ajust. Torna-ho a provar.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Ressalta les freqüències baixes. Utilitza l’equalitzador gràfic per fer ajustos de greus més fins.</string>
     <string name="dolby_volume_summary">Redueix les diferències de sonoritat entre pistes i passatges silenciosos o forts.</string>
     <string name="dolby_speaker_summary">Afegeix una sensació envoltant més àmplia als altaveus integrats.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Ajust: %1$s</string>
     <string name="dolby_geq_band_frequency">Banda %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Toca una banda i arrossega-la amunt o avall per ajustar-la; deixa-la anar per aplicar.</string>
-    <string name="dolby_geq_graph_description">Gràfic de l’equalitzador de 20 bandes. La freqüència augmenta d’esquerra a dreta; el guany va de menys 10 a més 10 dB. Utilitza els controls de banda de sota per fer ajustos precisos.</string>
+    <string name="dolby_geq_graph_description">Gràfic de l’equalitzador de 20 bandes. La freqüència augmenta d’esquerra a dreta; el guany va de menys %1$.2f a més %2$.2f dB. Utilitza els controls de banda de sota per fer ajustos precisos.</string>
     <string name="dolby_geq_previous_band">Banda de freqüència anterior</string>
     <string name="dolby_geq_next_band">Banda de freqüència següent</string>
     <string name="dolby_geq_band_counter">Banda %1$d de %2$d</string>

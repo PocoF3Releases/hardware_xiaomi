@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Berrezarri uneko profila</string>
     <string name="dolby_reset_profile_message">Uneko profila fabrikako ezarpenetara leheneratu? Gordetako ekualizadore-aurrezarpenak mantenduko dira.</string>
     <string name="dolby_setting_failed">Dolby-k ezin izan du ezarpen hau aplikatu. Saiatu berriro.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Nabarmendu maiztasun baxuak. Erabili ekualizadore grafikoa baxuak zehaztasun handiagoz doitzeko.</string>
     <string name="dolby_volume_summary">Murriztu ozentasun-aldeak pisten eta pasarte isilen edo ozenen artean.</string>
     <string name="dolby_speaker_summary">Gehitu ingurumen-sentsazio zabalagoa integratutako bozgorailuei.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Doikuntza: %1$s</string>
     <string name="dolby_geq_band_frequency">Banda %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Ukitu banda bat eta arrastatu gora edo behera doitzeko; askatu aplikatzeko.</string>
-    <string name="dolby_geq_graph_description">20 bandako ekualizadorearen grafikoa. Maiztasuna ezkerretik eskuinera handitzen da; irabazia minus 10etik plus 10 dB-ra doa. Erabili beheko banda-kontrolak doikuntza zehatzetarako.</string>
+    <string name="dolby_geq_graph_description">20 bandako ekualizadorearen grafikoa. Maiztasuna ezkerretik eskuinera handitzen da; irabazia minus %1$.2fetik plus %2$.2f dB-ra doa. Erabili beheko banda-kontrolak doikuntza zehatzetarako.</string>
     <string name="dolby_geq_previous_band">Aurreko maiztasun-banda</string>
     <string name="dolby_geq_next_band">Hurrengo maiztasun-banda</string>
     <string name="dolby_geq_band_counter">%1$d. banda / %2$d</string>

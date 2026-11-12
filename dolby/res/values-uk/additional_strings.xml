@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Скинути поточний профіль</string>
     <string name="dolby_reset_profile_message">Відновити заводські налаштування поточного профілю? Збережені пресети еквалайзера буде збережено.</string>
     <string name="dolby_setting_failed">Не вдалося застосувати це налаштування Dolby. Спробуйте ще раз.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Підкреслює низькі частоти. Для точнішого налаштування басів використовуйте графічний еквалайзер.</string>
     <string name="dolby_volume_summary">Зменшує різницю гучності між треками, а також тихими й гучними фрагментами.</string>
     <string name="dolby_speaker_summary">Додає ширший ефект об\'ємного звуку до вбудованих динаміків.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Налаштування: %1$s</string>
     <string name="dolby_geq_band_frequency">Смуга %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Торкніться смуги й перетягніть її вгору або вниз для налаштування; відпустіть, щоб застосувати.</string>
-    <string name="dolby_geq_graph_description">Графік 20-смугового еквалайзера. Частота зростає зліва направо; підсилення — від мінус 10 до плюс 10 dB. Для точного налаштування використовуйте елементи керування смугами нижче.</string>
+    <string name="dolby_geq_graph_description">Графік 20-смугового еквалайзера. Частота зростає зліва направо; підсилення — від мінус %1$.2f до плюс %2$.2f dB. Для точного налаштування використовуйте елементи керування смугами нижче.</string>
     <string name="dolby_geq_previous_band">Попередня смуга частот</string>
     <string name="dolby_geq_next_band">Наступна смуга частот</string>
     <string name="dolby_geq_band_counter">Смуга %1$d із %2$d</string>

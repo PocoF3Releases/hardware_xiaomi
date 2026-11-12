@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Joriy profilni tiklash</string>
     <string name="dolby_reset_profile_message">Joriy profil zavod sozlamalariga qaytarilsinmi? Saqlangan ekvalayzer oldindan sozlamalari saqlanadi.</string>
     <string name="dolby_setting_failed">Dolby bu sozlamani qo‘llay olmadi. Qayta urinib ko‘ring.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Past chastotalarni ajrating. Basni aniqroq sozlash uchun grafik ekvalayzerdan foydalaning.</string>
     <string name="dolby_volume_summary">Treklar hamda sokin yoki baland qismlar orasidagi ovoz balandligi farqini kamaytiring.</string>
     <string name="dolby_speaker_summary">Ichki karnaylarga kengroq surround taassurotini qo‘shing.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Sozlash: %1$s</string>
     <string name="dolby_geq_band_frequency">Diapazon %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Diapazonga teging va sozlash uchun yuqoriga yoki pastga torting; qo‘llash uchun qo‘yib yuboring.</string>
-    <string name="dolby_geq_graph_description">20 diapazonli ekvalayzer grafigi. Chastota chapdan o‘ngga oshadi; kuchaytirish minus 10 dan plyus 10 dB gacha. Aniq sozlash uchun quyidagi diapazon boshqaruvlaridan foydalaning.</string>
+    <string name="dolby_geq_graph_description">20 diapazonli ekvalayzer grafigi. Chastota chapdan o‘ngga oshadi; kuchaytirish minus %1$.2f dan plyus %2$.2f dB gacha. Aniq sozlash uchun quyidagi diapazon boshqaruvlaridan foydalaning.</string>
     <string name="dolby_geq_previous_band">Oldingi chastota diapazoni</string>
     <string name="dolby_geq_next_band">Keyingi chastota diapazoni</string>
     <string name="dolby_geq_band_counter">Diapazon %1$d / %2$d</string>

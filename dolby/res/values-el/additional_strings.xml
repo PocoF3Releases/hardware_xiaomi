@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Επαναφορά τρέχοντος προφίλ</string>
     <string name="dolby_reset_profile_message">Να επαναφερθεί το τρέχον προφίλ στις εργοστασιακές ρυθμίσεις; Οι αποθηκευμένες προεπιλογές ισοσταθμιστή θα διατηρηθούν.</string>
     <string name="dolby_setting_failed">Το Dolby δεν μπόρεσε να εφαρμόσει αυτήν τη ρύθμιση. Δοκιμάστε ξανά.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Τονίστε τις χαμηλές συχνότητες. Χρησιμοποιήστε τον γραφικό ισοσταθμιστή για λεπτομερέστερες ρυθμίσεις μπάσων.</string>
     <string name="dolby_volume_summary">Μειώστε τις διαφορές έντασης μεταξύ κομματιών και ήσυχων ή δυνατών περασμάτων.</string>
     <string name="dolby_speaker_summary">Προσθέστε ευρύτερη αίσθηση περιβάλλοντος ήχου στα ενσωματωμένα ηχεία.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Ρύθμιση: %1$s</string>
     <string name="dolby_geq_band_frequency">Ζώνη %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Αγγίξτε μια ζώνη και σύρετε πάνω ή κάτω για ρύθμιση· αφήστε για εφαρμογή.</string>
-    <string name="dolby_geq_graph_description">Γράφημα ισοσταθμιστή 20 ζωνών. Η συχνότητα αυξάνεται από αριστερά προς τα δεξιά· η ενίσχυση κυμαίνεται από μείον 10 έως συν 10 dB. Χρησιμοποιήστε τα στοιχεία ελέγχου ζωνών παρακάτω για ακριβείς ρυθμίσεις.</string>
+    <string name="dolby_geq_graph_description">Γράφημα ισοσταθμιστή 20 ζωνών. Η συχνότητα αυξάνεται από αριστερά προς τα δεξιά· η ενίσχυση κυμαίνεται από μείον %1$.2f έως συν %2$.2f dB. Χρησιμοποιήστε τα στοιχεία ελέγχου ζωνών παρακάτω για ακριβείς ρυθμίσεις.</string>
     <string name="dolby_geq_previous_band">Προηγούμενη ζώνη συχνοτήτων</string>
     <string name="dolby_geq_next_band">Επόμενη ζώνη συχνοτήτων</string>
     <string name="dolby_geq_band_counter">Ζώνη %1$d από %2$d</string>

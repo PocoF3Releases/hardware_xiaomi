@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">موجودہ پروفائل ری سیٹ کریں</string>
     <string name="dolby_reset_profile_message">موجودہ پروفائل کو اس کی فیکٹری سیٹنگز پر بحال کریں؟ محفوظ کردہ ایکولائزر پری سیٹس برقرار رہیں گے۔</string>
     <string name="dolby_setting_failed">Dolby یہ سیٹنگ لاگو نہیں کر سکا۔ دوبارہ کوشش کریں۔</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">کم فریکوئنسیز کو نمایاں کریں۔ بیس کو مزید باریک انداز میں ایڈجسٹ کرنے کے لیے گرافک ایکولائزر استعمال کریں۔</string>
     <string name="dolby_volume_summary">ٹریکس اور خاموش یا تیز حصوں کے درمیان آواز کی بلندی کے فرق کو کم کریں۔</string>
     <string name="dolby_speaker_summary">بلٹ اِن اسپیکرز میں زیادہ وسیع سراؤنڈ احساس شامل کریں۔</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">ٹیوننگ: %1$s</string>
     <string name="dolby_geq_band_frequency">بینڈ %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">بینڈ کو چھوئیں اور ایڈجسٹ کرنے کے لیے اوپر یا نیچے کھینچیں؛ لاگو کرنے کے لیے چھوڑ دیں۔</string>
-    <string name="dolby_geq_graph_description">20-بینڈ ایکولائزر گراف۔ فریکوئنسی بائیں سے دائیں بڑھتی ہے؛ گین منفی 10 سے مثبت 10 dB تک ہے۔ درست ایڈجسٹمنٹ کے لیے نیچے دیے گئے بینڈ کنٹرولز استعمال کریں۔</string>
+    <string name="dolby_geq_graph_description">20-بینڈ ایکولائزر گراف۔ فریکوئنسی بائیں سے دائیں بڑھتی ہے؛ گین منفی %1$.2f سے مثبت %2$.2f dB تک ہے۔ درست ایڈجسٹمنٹ کے لیے نیچے دیے گئے بینڈ کنٹرولز استعمال کریں۔</string>
     <string name="dolby_geq_previous_band">پچھلا فریکوئنسی بینڈ</string>
     <string name="dolby_geq_next_band">اگلا فریکوئنسی بینڈ</string>
     <string name="dolby_geq_band_counter">بینڈ %1$d از %2$d</string>

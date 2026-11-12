@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Tetapkan semula profil semasa</string>
     <string name="dolby_reset_profile_message">Pulihkan profil semasa kepada tetapan kilangnya? Pratetap penyama yang disimpan akan dikekalkan.</string>
     <string name="dolby_setting_failed">Dolby tidak dapat menggunakan tetapan ini. Sila cuba lagi.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Tekankan frekuensi rendah. Gunakan penyama grafik untuk pelarasan bes yang lebih halus.</string>
     <string name="dolby_volume_summary">Kurangkan perbezaan kelantangan antara trek serta bahagian yang perlahan atau kuat.</string>
     <string name="dolby_speaker_summary">Tambahkan kesan keliling yang lebih luas pada pembesar suara terbina dalam.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Penalaan: %1$s</string>
     <string name="dolby_geq_band_frequency">Jalur %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Sentuh jalur dan seret ke atas atau bawah untuk melaras; lepaskan untuk menerapkan.</string>
-    <string name="dolby_geq_graph_description">Graf penyama 20 jalur. Frekuensi meningkat dari kiri ke kanan; gandaan berjulat daripada tolak 10 hingga tambah 10 dB. Gunakan kawalan jalur di bawah untuk pelarasan tepat.</string>
+    <string name="dolby_geq_graph_description">Graf penyama 20 jalur. Frekuensi meningkat dari kiri ke kanan; gandaan berjulat daripada tolak %1$.2f hingga tambah %2$.2f dB. Gunakan kawalan jalur di bawah untuk pelarasan tepat.</string>
     <string name="dolby_geq_previous_band">Jalur frekuensi sebelumnya</string>
     <string name="dolby_geq_next_band">Jalur frekuensi seterusnya</string>
     <string name="dolby_geq_band_counter">Jalur %1$d daripada %2$d</string>

@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Restablecer o perfil actual</string>
     <string name="dolby_reset_profile_message">Restaurar o perfil actual aos seus axustes de fábrica? Manteranse os preaxustes do ecualizador gardados.</string>
     <string name="dolby_setting_failed">Dolby non puido aplicar este axuste. Téntao de novo.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Realza as frecuencias baixas. Usa o ecualizador gráfico para facer axustes de graves máis finos.</string>
     <string name="dolby_volume_summary">Reduce as diferenzas de volume entre pistas e entre pasaxes silenciosas ou fortes.</string>
     <string name="dolby_speaker_summary">Engade unha sensación envolvente máis ampla aos altofalantes integrados.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Axuste: %1$s</string>
     <string name="dolby_geq_band_frequency">Banda %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Toca unha banda e arrástraa cara arriba ou abaixo para axustala; solta para aplicar.</string>
-    <string name="dolby_geq_graph_description">Gráfico do ecualizador de 20 bandas. A frecuencia aumenta de esquerda a dereita; a ganancia vai de menos 10 a máis 10 dB. Usa os controis de banda de abaixo para facer axustes precisos.</string>
+    <string name="dolby_geq_graph_description">Gráfico do ecualizador de 20 bandas. A frecuencia aumenta de esquerda a dereita; a ganancia vai de menos %1$.2f a máis %2$.2f dB. Usa os controis de banda de abaixo para facer axustes precisos.</string>
     <string name="dolby_geq_previous_band">Banda de frecuencia anterior</string>
     <string name="dolby_geq_next_band">Banda de frecuencia seguinte</string>
     <string name="dolby_geq_band_counter">Banda %1$d de %2$d</string>

@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Återställ aktuell profil</string>
     <string name="dolby_reset_profile_message">Återställa den aktuella profilen till fabriksinställningarna? Sparade equalizerförinställningar behålls.</string>
     <string name="dolby_setting_failed">Dolby kunde inte tillämpa den här inställningen. Försök igen.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Framhäv låga frekvenser. Använd den grafiska equalizern för finare basjusteringar.</string>
     <string name="dolby_volume_summary">Minska skillnader i ljudstyrka mellan spår och tysta eller höga partier.</string>
     <string name="dolby_speaker_summary">Lägg till en bredare surroundkänsla i de inbyggda högtalarna.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Justering: %1$s</string>
     <string name="dolby_geq_band_frequency">Band %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Tryck på ett band och dra upp eller ned för att justera; släpp för att tillämpa.</string>
-    <string name="dolby_geq_graph_description">Diagram för 20-bands equalizer. Frekvensen ökar från vänster till höger; förstärkningen går från minus 10 till plus 10 dB. Använd bandkontrollerna nedan för exakta justeringar.</string>
+    <string name="dolby_geq_graph_description">Diagram för 20-bands equalizer. Frekvensen ökar från vänster till höger; förstärkningen går från minus %1$.2f till plus %2$.2f dB. Använd bandkontrollerna nedan för exakta justeringar.</string>
     <string name="dolby_geq_previous_band">Föregående frekvensband</string>
     <string name="dolby_geq_next_band">Nästa frekvensband</string>
     <string name="dolby_geq_band_counter">Band %1$d av %2$d</string>

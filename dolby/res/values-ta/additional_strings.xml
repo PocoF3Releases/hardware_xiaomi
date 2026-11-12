@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">தற்போதைய சுயவிவரத்தை மீட்டமை</string>
     <string name="dolby_reset_profile_message">தற்போதைய சுயவிவரத்தை அதன் தொழிற்சாலை அமைப்புகளுக்கு மீட்டெடுக்கவா? சேமித்த சமநிலைப்படுத்தி முன்னமைவுகள் பாதுகாக்கப்படும்.</string>
     <string name="dolby_setting_failed">Dolby இந்த அமைப்பைப் பயன்படுத்த முடியவில்லை. மீண்டும் முயற்சிக்கவும்.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">குறைந்த அதிர்வெண்களை வலுப்படுத்தவும். பேஸை நுணுக்கமாகச் சரிசெய்ய வரைகலை சமநிலைப்படுத்தியைப் பயன்படுத்தவும்.</string>
     <string name="dolby_volume_summary">பாடல்களுக்கும் அமைதியான அல்லது அதிக ஒலி பகுதிகளுக்கும் இடையிலான ஒலி வலிமை வேறுபாடுகளைக் குறைக்கவும்.</string>
     <string name="dolby_speaker_summary">உள்ளமைந்த ஸ்பீக்கர்களுக்கு விரிந்த சுற்றொலி உணர்வைச் சேர்க்கவும்.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">சீரமைப்பு: %1$s</string>
     <string name="dolby_geq_band_frequency">பட்டை %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">ஒரு பட்டையைத் தொட்டு மேலே அல்லது கீழே இழுத்துச் சரிசெய்யவும்; பயன்படுத்த விடவும்.</string>
-    <string name="dolby_geq_graph_description">20-பட்டை சமநிலைப்படுத்தி வரைபடம். அதிர்வெண் இடமிருந்து வலமாக அதிகரிக்கும்; ஆதாயம் மைனஸ் 10 முதல் பிளஸ் 10 dB வரை இருக்கும். துல்லியமான சரிசெய்தலுக்கு கீழே உள்ள பட்டை கட்டுப்பாடுகளைப் பயன்படுத்தவும்.</string>
+    <string name="dolby_geq_graph_description">20-பட்டை சமநிலைப்படுத்தி வரைபடம். அதிர்வெண் இடமிருந்து வலமாக அதிகரிக்கும்; ஆதாயம் மைனஸ் %1$.2f முதல் பிளஸ் %2$.2f dB வரை இருக்கும். துல்லியமான சரிசெய்தலுக்கு கீழே உள்ள பட்டை கட்டுப்பாடுகளைப் பயன்படுத்தவும்.</string>
     <string name="dolby_geq_previous_band">முந்தைய அதிர்வெண் பட்டை</string>
     <string name="dolby_geq_next_band">அடுத்த அதிர்வெண் பட்டை</string>
     <string name="dolby_geq_band_counter">பட்டை %1$d / %2$d</string>

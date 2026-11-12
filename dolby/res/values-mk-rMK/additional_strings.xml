@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Ресетирај го тековниот профил</string>
     <string name="dolby_reset_profile_message">Да се врати тековниот профил на фабричките поставки? Зачуваните претпоставки на еквилајзерот ќе се задржат.</string>
     <string name="dolby_setting_failed">Dolby не можеше да ја примени оваа поставка. Обидете се повторно.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Нагласете ги ниските фреквенции. Користете го графичкиот еквилајзер за попрецизно приспособување на басот.</string>
     <string name="dolby_volume_summary">Намалете ги разликите во гласноста меѓу песните и тивките или гласните делови.</string>
     <string name="dolby_speaker_summary">Додајте поширок впечаток на опкружувачки звук на вградените звучници.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Подесување: %1$s</string>
     <string name="dolby_geq_band_frequency">Опсег %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Допрете опсег и повлечете нагоре или надолу за да го приспособите; отпуштете за да примените.</string>
-    <string name="dolby_geq_graph_description">График на еквилајзер со 20 опсези. Фреквенцијата се зголемува одлево надесно; засилувањето е од минус 10 до плус 10 dB. Користете ги контролите за опсег подолу за прецизни приспособувања.</string>
+    <string name="dolby_geq_graph_description">График на еквилајзер со 20 опсези. Фреквенцијата се зголемува одлево надесно; засилувањето е од минус %1$.2f до плус %2$.2f dB. Користете ги контролите за опсег подолу за прецизни приспособувања.</string>
     <string name="dolby_geq_previous_band">Претходен фреквентен опсег</string>
     <string name="dolby_geq_next_band">Следен фреквентен опсег</string>
     <string name="dolby_geq_band_counter">Опсег %1$d од %2$d</string>

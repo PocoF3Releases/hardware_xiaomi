@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">सध्याचे प्रोफाइल रीसेट करा</string>
     <string name="dolby_reset_profile_message">सध्याचे प्रोफाइल त्याच्या फॅक्टरी सेटिंग्जवर पुनर्संचयित करायचे आहे का? जतन केलेले इक्वलायझर प्रीसेट ठेवले जातील.</string>
     <string name="dolby_setting_failed">Dolby ही सेटिंग लागू करू शकले नाही. कृपया पुन्हा प्रयत्न करा.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">कमी वारंवारता ठळक करा. बासचे अधिक सूक्ष्म समायोजन करण्यासाठी ग्राफिक इक्वलायझर वापरा.</string>
     <string name="dolby_volume_summary">ट्रॅक तसेच शांत किंवा मोठ्या आवाजाच्या भागांमधील ध्वनीपातळीतील फरक कमी करा.</string>
     <string name="dolby_speaker_summary">अंगभूत स्पीकरमध्ये अधिक रुंद सराउंड प्रभाव जोडा.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">ट्यूनिंग: %1$s</string>
     <string name="dolby_geq_band_frequency">बँड %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">बँडला स्पर्श करून समायोजनासाठी वर किंवा खाली ओढा; लागू करण्यासाठी सोडा.</string>
-    <string name="dolby_geq_graph_description">20-बँड इक्वलायझर आलेख. वारंवारता डावीकडून उजवीकडे वाढते; गेन उणे 10 ते अधिक 10 dB पर्यंत आहे. अचूक समायोजनासाठी खालील बँड नियंत्रणे वापरा.</string>
+    <string name="dolby_geq_graph_description">20-बँड इक्वलायझर आलेख. वारंवारता डावीकडून उजवीकडे वाढते; गेन उणे %1$.2f ते अधिक %2$.2f dB पर्यंत आहे. अचूक समायोजनासाठी खालील बँड नियंत्रणे वापरा.</string>
     <string name="dolby_geq_previous_band">मागील वारंवारता बँड</string>
     <string name="dolby_geq_next_band">पुढील वारंवारता बँड</string>
     <string name="dolby_geq_band_counter">बँड %1$d पैकी %2$d</string>

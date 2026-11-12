@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Hjoeddeisk profyl weromsette</string>
     <string name="dolby_reset_profile_message">It hjoeddeiske profyl weromsette nei de fabryksynstellingen? Bewarre equalizer-foarynstellingen bliuwe bewarre.</string>
     <string name="dolby_setting_failed">Dolby koe dizze ynstelling net tapasse. Besykje it nochris.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Beklamje lege frekwinsjes. Brûk de grafyske equalizer foar finere basoanpassingen.</string>
     <string name="dolby_volume_summary">Ferminderje ferskillen yn lûdsterkte tusken nûmers en stille of lûde passaazjes.</string>
     <string name="dolby_speaker_summary">Foegje in breder surroundgefoel ta oan de ynboude sprekkers.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Ôfstimming: %1$s</string>
     <string name="dolby_geq_band_frequency">Bân %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Tik op in bân en sleep omheech of omleech om oan te passen; lit los om ta te passen.</string>
-    <string name="dolby_geq_graph_description">Grafyk fan in 20-bâns equalizer. Frekwinsje nimt fan links nei rjochts ta; fersterking rint fan min 10 oant plus 10 dB. Brûk de bânkontrôles hjirûnder foar presize oanpassingen.</string>
+    <string name="dolby_geq_graph_description">Grafyk fan in 20-bâns equalizer. Frekwinsje nimt fan links nei rjochts ta; fersterking rint fan min %1$.2f oant plus %2$.2f dB. Brûk de bânkontrôles hjirûnder foar presize oanpassingen.</string>
     <string name="dolby_geq_previous_band">Foarige frekwinsjebân</string>
     <string name="dolby_geq_next_band">Folgjende frekwinsjebân</string>
     <string name="dolby_geq_band_counter">Bân %1$d fan %2$d</string>

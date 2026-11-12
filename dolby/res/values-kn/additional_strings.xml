@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">ಪ್ರಸ್ತುತ ಪ್ರೊಫೈಲ್ ಮರುಹೊಂದಿಸಿ</string>
     <string name="dolby_reset_profile_message">ಪ್ರಸ್ತುತ ಪ್ರೊಫೈಲ್ ಅನ್ನು ಅದರ ಫ್ಯಾಕ್ಟರಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಮರುಸ್ಥಾಪಿಸಬೇಕೆ? ಉಳಿಸಿದ ಈಕ್ವಲೈಜರ್ ಪ್ರಿಸೆಟ್‌ಗಳನ್ನು ಉಳಿಸಿಕೊಳ್ಳಲಾಗುತ್ತದೆ.</string>
     <string name="dolby_setting_failed">Dolby ಈ ಸೆಟ್ಟಿಂಗ್ ಅನ್ನು ಅನ್ವಯಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">ಕಡಿಮೆ ಆವರ್ತನಗಳನ್ನು ಒತ್ತಿಹೇಳಿ. ಬಾಸ್ ಅನ್ನು ಇನ್ನಷ್ಟು ನಿಖರವಾಗಿ ಹೊಂದಿಸಲು ಗ್ರಾಫಿಕ್ ಈಕ್ವಲೈಜರ್ ಬಳಸಿ.</string>
     <string name="dolby_volume_summary">ಟ್ರ್ಯಾಕ್‌ಗಳು ಮತ್ತು ನಿಶ್ಶಬ್ದ ಅಥವಾ ಜೋರಾದ ಭಾಗಗಳ ನಡುವಿನ ಧ್ವನಿಯ ತೀವ್ರತೆಯ ವ್ಯತ್ಯಾಸಗಳನ್ನು ಕಡಿಮೆ ಮಾಡಿ.</string>
     <string name="dolby_speaker_summary">ಅಂತರ್ನಿರ್ಮಿತ ಸ್ಪೀಕರ್‌ಗಳಿಗೆ ವಿಶಾಲವಾದ ಸರೌಂಡ್ ಅನುಭವವನ್ನು ಸೇರಿಸಿ.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">ಟ್ಯೂನಿಂಗ್: %1$s</string>
     <string name="dolby_geq_band_frequency">ಬ್ಯಾಂಡ್ %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">ಬ್ಯಾಂಡ್ ಅನ್ನು ಸ್ಪರ್ಶಿಸಿ ಮತ್ತು ಹೊಂದಿಸಲು ಮೇಲಕ್ಕೆ ಅಥವಾ ಕೆಳಕ್ಕೆ ಎಳೆಯಿರಿ; ಅನ್ವಯಿಸಲು ಬಿಡಿ.</string>
-    <string name="dolby_geq_graph_description">20-ಬ್ಯಾಂಡ್ ಈಕ್ವಲೈಜರ್ ಗ್ರಾಫ್. ಆವರ್ತನ ಎಡದಿಂದ ಬಲಕ್ಕೆ ಹೆಚ್ಚುತ್ತದೆ; ಗೇನ್ ಮೈನಸ್ 10 ರಿಂದ ಪ್ಲಸ್ 10 dB ವರೆಗೆ ಇರುತ್ತದೆ. ನಿಖರ ಹೊಂದಾಣಿಕೆಗಾಗಿ ಕೆಳಗಿನ ಬ್ಯಾಂಡ್ ನಿಯಂತ್ರಣಗಳನ್ನು ಬಳಸಿ.</string>
+    <string name="dolby_geq_graph_description">20-ಬ್ಯಾಂಡ್ ಈಕ್ವಲೈಜರ್ ಗ್ರಾಫ್. ಆವರ್ತನ ಎಡದಿಂದ ಬಲಕ್ಕೆ ಹೆಚ್ಚುತ್ತದೆ; ಗೇನ್ ಮೈನಸ್ %1$.2f ರಿಂದ ಪ್ಲಸ್ %2$.2f dB ವರೆಗೆ ಇರುತ್ತದೆ. ನಿಖರ ಹೊಂದಾಣಿಕೆಗಾಗಿ ಕೆಳಗಿನ ಬ್ಯಾಂಡ್ ನಿಯಂತ್ರಣಗಳನ್ನು ಬಳಸಿ.</string>
     <string name="dolby_geq_previous_band">ಹಿಂದಿನ ಆವರ್ತನ ಬ್ಯಾಂಡ್</string>
     <string name="dolby_geq_next_band">ಮುಂದಿನ ಆವರ್ತನ ಬ್ಯಾಂಡ್</string>
     <string name="dolby_geq_band_counter">ಬ್ಯಾಂಡ್ %1$d / %2$d</string>

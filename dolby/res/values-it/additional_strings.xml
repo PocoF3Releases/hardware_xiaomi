@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Reimposta profilo corrente</string>
     <string name="dolby_reset_profile_message">Ripristinare il profilo corrente alle impostazioni di fabbrica? Le preimpostazioni dell\'equalizzatore salvate verranno mantenute.</string>
     <string name="dolby_setting_failed">Dolby non ha potuto applicare questa impostazione. Riprova.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Enfatizza le basse frequenze. Usa l\'equalizzatore grafico per regolare i bassi con maggiore precisione.</string>
     <string name="dolby_volume_summary">Riduce le differenze di volume tra le tracce e tra i passaggi più silenziosi o più forti.</string>
     <string name="dolby_speaker_summary">Aggiunge una sensazione surround più ampia agli altoparlanti integrati.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Regolazione: %1$s</string>
     <string name="dolby_geq_band_frequency">Banda %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Tocca una banda e trascinala verso l\'alto o il basso per regolarla; rilascia per applicare.</string>
-    <string name="dolby_geq_graph_description">Grafico dell\'equalizzatore a 20 bande. La frequenza aumenta da sinistra a destra; il guadagno varia da meno 10 a più 10 dB. Usa i controlli delle bande qui sotto per regolazioni precise.</string>
+    <string name="dolby_geq_graph_description">Grafico dell\'equalizzatore a 20 bande. La frequenza aumenta da sinistra a destra; il guadagno varia da meno %1$.2f a più %2$.2f dB. Usa i controlli delle bande qui sotto per regolazioni precise.</string>
     <string name="dolby_geq_previous_band">Banda di frequenza precedente</string>
     <string name="dolby_geq_next_band">Banda di frequenza successiva</string>
     <string name="dolby_geq_band_counter">Banda %1$d di %2$d</string>

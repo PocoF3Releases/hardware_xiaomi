@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Geçerli profili sıfırla</string>
     <string name="dolby_reset_profile_message">Geçerli profil fabrika ayarlarına geri yüklensin mi? Kaydedilmiş ekolayzır ön ayarları korunacaktır.</string>
     <string name="dolby_setting_failed">Dolby bu ayarı uygulayamadı. Lütfen tekrar deneyin.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Düşük frekansları vurgulayın. Daha ince bas ayarları için grafik ekolayzırı kullanın.</string>
     <string name="dolby_volume_summary">Parçalar ile sessiz veya yüksek sesli bölümler arasındaki ses yüksekliği farklarını azaltın.</string>
     <string name="dolby_speaker_summary">Yerleşik hoparlörlere daha geniş bir surround hissi ekleyin.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Ayar: %1$s</string>
     <string name="dolby_geq_band_frequency">Bant %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Ayarlamak için bir banda dokunup yukarı veya aşağı sürükleyin; uygulamak için bırakın.</string>
-    <string name="dolby_geq_graph_description">20 bantlı ekolayzır grafiği. Frekans soldan sağa artar; kazanç eksi 10 ile artı 10 dB arasında değişir. Hassas ayarlar için aşağıdaki bant kontrollerini kullanın.</string>
+    <string name="dolby_geq_graph_description">20 bantlı ekolayzır grafiği. Frekans soldan sağa artar; kazanç eksi %1$.2f ile artı %2$.2f dB arasında değişir. Hassas ayarlar için aşağıdaki bant kontrollerini kullanın.</string>
     <string name="dolby_geq_previous_band">Önceki frekans bandı</string>
     <string name="dolby_geq_next_band">Sonraki frekans bandı</string>
     <string name="dolby_geq_band_counter">Bant %1$d / %2$d</string>

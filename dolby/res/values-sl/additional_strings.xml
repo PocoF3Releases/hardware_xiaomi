@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Ponastavi trenutni profil</string>
     <string name="dolby_reset_profile_message">Obnoviti trenutni profil na tovarniške nastavitve? Shranjene prednastavitve izenačevalnika bodo ohranjene.</string>
     <string name="dolby_setting_failed">Dolby ni mogel uporabiti te nastavitve. Poskusite znova.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Poudarite nizke frekvence. Za natančnejše prilagoditve nizkih tonov uporabite grafični izenačevalnik.</string>
     <string name="dolby_volume_summary">Zmanjšajte razlike v glasnosti med skladbami ter tihimi ali glasnimi deli.</string>
     <string name="dolby_speaker_summary">Dodajte širši občutek prostorskega zvoka vgrajenim zvočnikom.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Uglaševanje: %1$s</string>
     <string name="dolby_geq_band_frequency">Pas %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Dotaknite se pasu in povlecite gor ali dol za prilagoditev; spustite za uporabo.</string>
-    <string name="dolby_geq_graph_description">Graf 20-pasovnega izenačevalnika. Frekvenca narašča od leve proti desni; ojačanje sega od minus 10 do plus 10 dB. Za natančne prilagoditve uporabite spodnje kontrole pasov.</string>
+    <string name="dolby_geq_graph_description">Graf 20-pasovnega izenačevalnika. Frekvenca narašča od leve proti desni; ojačanje sega od minus %1$.2f do plus %2$.2f dB. Za natančne prilagoditve uporabite spodnje kontrole pasov.</string>
     <string name="dolby_geq_previous_band">Prejšnji frekvenčni pas</string>
     <string name="dolby_geq_next_band">Naslednji frekvenčni pas</string>
     <string name="dolby_geq_band_counter">Pas %1$d od %2$d</string>

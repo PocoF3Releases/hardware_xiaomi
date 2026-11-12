@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Resetovat aktuální profil</string>
     <string name="dolby_reset_profile_message">Obnovit aktuální profil do továrního nastavení? Uložené předvolby ekvalizéru budou zachovány.</string>
     <string name="dolby_setting_failed">Dolby toto nastavení nemohlo použít. Zkuste to znovu.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Zvýrazněte nízké frekvence. Pro jemnější úpravy basů použijte grafický ekvalizér.</string>
     <string name="dolby_volume_summary">Snižte rozdíly v hlasitosti mezi skladbami a tichými či hlasitými pasážemi.</string>
     <string name="dolby_speaker_summary">Přidejte širší prostorový dojem vestavěným reproduktorům.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Ladění: %1$s</string>
     <string name="dolby_geq_band_frequency">Pásmo %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Dotkněte se pásma a tažením nahoru nebo dolů jej upravte; uvolněním změnu použijte.</string>
-    <string name="dolby_geq_graph_description">Graf 20pásmového ekvalizéru. Frekvence roste zleva doprava; zisk je od minus 10 do plus 10 dB. Pro přesné úpravy použijte ovládací prvky pásem níže.</string>
+    <string name="dolby_geq_graph_description">Graf 20pásmového ekvalizéru. Frekvence roste zleva doprava; zisk je od minus %1$.2f do plus %2$.2f dB. Pro přesné úpravy použijte ovládací prvky pásem níže.</string>
     <string name="dolby_geq_previous_band">Předchozí frekvenční pásmo</string>
     <string name="dolby_geq_next_band">Další frekvenční pásmo</string>
     <string name="dolby_geq_band_counter">Pásmo %1$d z %2$d</string>

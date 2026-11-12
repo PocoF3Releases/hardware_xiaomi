@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Nollaa nykyinen profiili</string>
     <string name="dolby_reset_profile_message">Palautetaanko nykyinen profiili tehdasasetuksiin? Tallennetut taajuuskorjaimen esiasetukset säilytetään.</string>
     <string name="dolby_setting_failed">Dolby ei voinut ottaa tätä asetusta käyttöön. Yritä uudelleen.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Korosta matalia taajuuksia. Käytä graafista taajuuskorjainta basson hienosäätöön.</string>
     <string name="dolby_volume_summary">Pienennä äänekkyyseroja kappaleiden sekä hiljaisten ja voimakkaiden kohtien välillä.</string>
     <string name="dolby_speaker_summary">Lisää sisäisiin kaiuttimiin leveämpi tilaäänen vaikutelma.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Viritys: %1$s</string>
     <string name="dolby_geq_band_frequency">Kaista %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Kosketa kaistaa ja säädä vetämällä ylös tai alas; vapauta ottaaksesi käyttöön.</string>
-    <string name="dolby_geq_graph_description">20-kaistaisen taajuuskorjaimen kuvaaja. Taajuus kasvaa vasemmalta oikealle; vahvistus vaihtelee miinus 10:stä plus 10 dB:iin. Käytä alla olevia kaistasäätimiä tarkkaan säätöön.</string>
+    <string name="dolby_geq_graph_description">20-kaistaisen taajuuskorjaimen kuvaaja. Taajuus kasvaa vasemmalta oikealle; vahvistus vaihtelee miinus %1$.2f:stä plus %2$.2f dB:iin. Käytä alla olevia kaistasäätimiä tarkkaan säätöön.</string>
     <string name="dolby_geq_previous_band">Edellinen taajuuskaista</string>
     <string name="dolby_geq_next_band">Seuraava taajuuskaista</string>
     <string name="dolby_geq_band_counter">Kaista %1$d / %2$d</string>

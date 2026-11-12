@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Ағымдағы профильді қалпына келтіру</string>
     <string name="dolby_reset_profile_message">Ағымдағы профильдің зауыттық параметрлерін қалпына келтіру керек пе? Сақталған эквалайзер алдын ала баптаулары сақталады.</string>
     <string name="dolby_setting_failed">Dolby бұл параметрді қолдана алмады. Қайталап көріңіз.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Төмен жиіліктерді айқындаңыз. Басты дәлірек реттеу үшін графикалық эквалайзерді пайдаланыңыз.</string>
     <string name="dolby_volume_summary">Тректер мен тыныш немесе қатты үзінділер арасындағы дыбыс қаттылығы айырмасын азайтыңыз.</string>
     <string name="dolby_speaker_summary">Кірістірілген динамиктерге кеңірек көлемді дыбыс әсерін қосыңыз.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Баптау: %1$s</string>
     <string name="dolby_geq_band_frequency">Жолақ %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Жолақты түртіп, реттеу үшін жоғары немесе төмен сүйреңіз; қолдану үшін жіберіңіз.</string>
-    <string name="dolby_geq_graph_description">20 жолақты эквалайзер графигі. Жиілік солдан оңға қарай артады; күшейту минус 10-нан плюс 10 dB-ге дейін. Дәл реттеу үшін төмендегі жолақ басқару элементтерін пайдаланыңыз.</string>
+    <string name="dolby_geq_graph_description">20 жолақты эквалайзер графигі. Жиілік солдан оңға қарай артады; күшейту минус %1$.2f-нан плюс %2$.2f dB-ге дейін. Дәл реттеу үшін төмендегі жолақ басқару элементтерін пайдаланыңыз.</string>
     <string name="dolby_geq_previous_band">Алдыңғы жиілік жолағы</string>
     <string name="dolby_geq_next_band">Келесі жиілік жолағы</string>
     <string name="dolby_geq_band_counter">%1$d-жолақ / %2$d</string>

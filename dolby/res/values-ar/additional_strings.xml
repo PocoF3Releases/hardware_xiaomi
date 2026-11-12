@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">إعادة ضبط الملف الصوتي الحالي</string>
     <string name="dolby_reset_profile_message">هل تريد استعادة الملف الصوتي الحالي إلى إعدادات المصنع؟ سيتم الاحتفاظ بإعدادات المعادل المسبقة المحفوظة.</string>
     <string name="dolby_setting_failed">تعذر على Dolby تطبيق هذا الإعداد. يُرجى المحاولة مرة أخرى.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">عزّز الترددات المنخفضة. استخدم المعادل الرسومي لإجراء تعديلات أدق على الجهير.</string>
     <string name="dolby_volume_summary">قلّل اختلافات مستوى الصوت بين المقاطع وبين الأجزاء الهادئة والعالية.</string>
     <string name="dolby_speaker_summary">أضف إحساسًا محيطيًا أوسع إلى مكبرات الصوت المدمجة.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">الضبط: %1$s</string>
     <string name="dolby_geq_band_frequency">النطاق %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">المس نطاقًا واسحبه لأعلى أو لأسفل للضبط، ثم اتركه للتطبيق.</string>
-    <string name="dolby_geq_graph_description">مخطط معادل من 20 نطاقًا. يزداد التردد من اليسار إلى اليمين، ويتراوح الكسب من سالب 10 إلى موجب 10 dB. استخدم عناصر تحكم النطاق أدناه لإجراء تعديلات دقيقة.</string>
+    <string name="dolby_geq_graph_description">مخطط معادل من 20 نطاقًا. يزداد التردد من اليسار إلى اليمين، ويتراوح الكسب من سالب %1$.2f إلى موجب %2$.2f dB. استخدم عناصر تحكم النطاق أدناه لإجراء تعديلات دقيقة.</string>
     <string name="dolby_geq_previous_band">نطاق التردد السابق</string>
     <string name="dolby_geq_next_band">نطاق التردد التالي</string>
     <string name="dolby_geq_band_counter">النطاق %1$d من %2$d</string>

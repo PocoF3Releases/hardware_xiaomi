@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">მიმდინარე პროფილის ჩამოყრა</string>
     <string name="dolby_reset_profile_message">დაბრუნდეს მიმდინარე პროფილი ქარხნულ პარამეტრებზე? შენახული ეკვალაიზერის წინასწარი პარამეტრები დარჩება.</string>
     <string name="dolby_setting_failed">Dolby-მ ამ პარამეტრის გამოყენება ვერ შეძლო. სცადეთ ხელახლა.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">გამოკვეთეთ დაბალი სიხშირეები. ბასის უფრო ზუსტი მორგებისთვის გამოიყენეთ გრაფიკული ეკვალაიზერი.</string>
     <string name="dolby_volume_summary">შეამცირეთ ხმამაღლობის განსხვავება ტრეკებსა და ჩუმ ან ხმამაღალ მონაკვეთებს შორის.</string>
     <string name="dolby_speaker_summary">ჩაშენებულ დინამიკებს დაამატეთ უფრო ფართო გარსშემომცველი ხმის შეგრძნება.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">მორგება: %1$s</string>
     <string name="dolby_geq_band_frequency">ზოლი %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">შეეხეთ ზოლს და გადაათრიეთ ზემოთ ან ქვემოთ მოსარგებად; გასააქტიურებლად გაუშვით.</string>
-    <string name="dolby_geq_graph_description">20-ზოლიანი ეკვალაიზერის გრაფიკი. სიხშირე იზრდება მარცხნიდან მარჯვნივ; გაძლიერება მერყეობს მინუს 10-დან პლუს 10 dB-მდე. ზუსტი მორგებისთვის გამოიყენეთ ქვემოთ არსებული ზოლის კონტროლები.</string>
+    <string name="dolby_geq_graph_description">20-ზოლიანი ეკვალაიზერის გრაფიკი. სიხშირე იზრდება მარცხნიდან მარჯვნივ; გაძლიერება მერყეობს მინუს %1$.2f-დან პლუს %2$.2f dB-მდე. ზუსტი მორგებისთვის გამოიყენეთ ქვემოთ არსებული ზოლის კონტროლები.</string>
     <string name="dolby_geq_previous_band">წინა სიხშირული ზოლი</string>
     <string name="dolby_geq_next_band">შემდეგი სიხშირული ზოლი</string>
     <string name="dolby_geq_band_counter">ზოლი %1$d / %2$d</string>

@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Restarigi nunan profilon</string>
     <string name="dolby_reset_profile_message">Ĉu restarigi la nunan profilon al ĝiaj fabrikaj agordoj? Konservitaj antaŭagordoj de la ekvalizilo restos.</string>
     <string name="dolby_setting_failed">Dolby ne povis apliki ĉi tiun agordon. Bonvolu reprovi.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Emfazu malaltajn frekvencojn. Uzu la grafikan ekvalizilon por pli fajnaj basaj ĝustigoj.</string>
     <string name="dolby_volume_summary">Reduktu laŭtecajn diferencojn inter trakoj kaj trankvilaj aŭ laŭtaj partoj.</string>
     <string name="dolby_speaker_summary">Aldonu pli larĝan ĉirkaŭsonan impreson al la enkonstruitaj laŭtparoliloj.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Agordado: %1$s</string>
     <string name="dolby_geq_band_frequency">Bendo %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Tuŝu bendon kaj trenu supren aŭ malsupren por ĝustigi; liberigu por apliki.</string>
-    <string name="dolby_geq_graph_description">Grafikaĵo de 20-benda ekvalizilo. Frekvenco kreskas de maldekstre dekstren; amplifo varias de minus 10 ĝis plus 10 dB. Uzu la bendajn regilojn sube por precizaj ĝustigoj.</string>
+    <string name="dolby_geq_graph_description">Grafikaĵo de 20-benda ekvalizilo. Frekvenco kreskas de maldekstre dekstren; amplifo varias de minus %1$.2f ĝis plus %2$.2f dB. Uzu la bendajn regilojn sube por precizaj ĝustigoj.</string>
     <string name="dolby_geq_previous_band">Antaŭa frekvenca bendo</string>
     <string name="dolby_geq_next_band">Sekva frekvenca bendo</string>
     <string name="dolby_geq_band_counter">Bendo %1$d el %2$d</string>

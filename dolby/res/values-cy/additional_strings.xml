@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Ailosod y proffil presennol</string>
     <string name="dolby_reset_profile_message">Adfer y proffil presennol i’w osodiadau ffatri? Bydd rhagosodiadau’r cydraddolydd sydd wedi’u cadw yn cael eu cadw.</string>
     <string name="dolby_setting_failed">Ni allai Dolby gymhwyso’r gosodiad hwn. Rhowch gynnig arall arni.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Pwysleisio amleddau isel. Defnyddiwch y cydraddolydd graffig ar gyfer addasiadau bas manylach.</string>
     <string name="dolby_volume_summary">Lleihau gwahaniaethau cryfder sain rhwng traciau a darnau tawel neu uchel.</string>
     <string name="dolby_speaker_summary">Ychwanegu teimlad amgylchynol ehangach i’r seinyddion adeiledig.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Tiwnio: %1$s</string>
     <string name="dolby_geq_band_frequency">Band %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Cyffyrddwch â band a’i lusgo i fyny neu i lawr i addasu; rhyddhewch i gymhwyso.</string>
-    <string name="dolby_geq_graph_description">Graff cydraddolydd 20 band. Mae’r amledd yn cynyddu o’r chwith i’r dde; mae’r cynnydd yn amrywio o minws 10 i blws 10 dB. Defnyddiwch y rheolyddion band isod ar gyfer addasiadau manwl.</string>
+    <string name="dolby_geq_graph_description">Graff cydraddolydd 20 band. Mae’r amledd yn cynyddu o’r chwith i’r dde; mae’r cynnydd yn amrywio o minws %1$.2f i blws %2$.2f dB. Defnyddiwch y rheolyddion band isod ar gyfer addasiadau manwl.</string>
     <string name="dolby_geq_previous_band">Band amledd blaenorol</string>
     <string name="dolby_geq_next_band">Band amledd nesaf</string>
     <string name="dolby_geq_band_counter">Band %1$d o %2$d</string>

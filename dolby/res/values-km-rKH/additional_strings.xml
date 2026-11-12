@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">កំណត់ប្រវត្តិរូបបច្ចុប្បន្នឡើងវិញ</string>
     <string name="dolby_reset_profile_message">ស្ដារប្រវត្តិរូបបច្ចុប្បន្នទៅការកំណត់ពីរោងចក្រទេ? ការកំណត់អ៊ីក្វាឡៃហ្សឺជាមុនដែលបានរក្សាទុកនឹងត្រូវបានរក្សា។</string>
     <string name="dolby_setting_failed">Dolby មិនអាចអនុវត្តការកំណត់នេះបានទេ។ សូមព្យាយាមម្តងទៀត។</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">បញ្ជាក់ប្រេកង់ទាប។ ប្រើអ៊ីក្វាឡៃហ្សឺក្រាហ្វិកសម្រាប់ការកែសម្រួលបាសឱ្យលម្អិតជាងមុន។</string>
     <string name="dolby_volume_summary">កាត់បន្ថយភាពខុសគ្នានៃកម្រិតសំឡេងរវាងបទ និងផ្នែកស្ងាត់ឬខ្លាំង។</string>
     <string name="dolby_speaker_summary">បន្ថែមអារម្មណ៍សំឡេងជុំវិញកាន់តែទូលំទូលាយទៅឧបករណ៍បំពងសំឡេងដែលភ្ជាប់មកជាមួយ។</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">ការកែសម្រួល៖ %1$s</string>
     <string name="dolby_geq_band_frequency">ក្រុម %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">ប៉ះក្រុម ហើយអូសឡើងឬចុះដើម្បីកែសម្រួល; លែងដើម្បីអនុវត្ត។</string>
-    <string name="dolby_geq_graph_description">ក្រាហ្វអ៊ីក្វាឡៃហ្សឺ 20 ក្រុម។ ប្រេកង់កើនពីឆ្វេងទៅស្តាំ; ការបង្កើនស្ថិតពីដក 10 ដល់បូក 10 dB។ ប្រើការគ្រប់គ្រងក្រុមខាងក្រោមសម្រាប់ការកែសម្រួលច្បាស់លាស់។</string>
+    <string name="dolby_geq_graph_description">ក្រាហ្វអ៊ីក្វាឡៃហ្សឺ 20 ក្រុម។ ប្រេកង់កើនពីឆ្វេងទៅស្តាំ; ការបង្កើនស្ថិតពីដក %1$.2f ដល់បូក %2$.2f dB។ ប្រើការគ្រប់គ្រងក្រុមខាងក្រោមសម្រាប់ការកែសម្រួលច្បាស់លាស់។</string>
     <string name="dolby_geq_previous_band">ក្រុមប្រេកង់មុន</string>
     <string name="dolby_geq_next_band">ក្រុមប្រេកង់បន្ទាប់</string>
     <string name="dolby_geq_band_counter">ក្រុម %1$d នៃ %2$d</string>

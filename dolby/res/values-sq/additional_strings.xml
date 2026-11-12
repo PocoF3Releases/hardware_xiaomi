@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Rivendos profilin aktual</string>
     <string name="dolby_reset_profile_message">Ta rikthesh profilin aktual në cilësimet e fabrikës? Paracaktimet e ruajtura të barazuesit do të ruhen.</string>
     <string name="dolby_setting_failed">Dolby nuk mundi ta zbatojë këtë cilësim. Provo përsëri.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Thekso frekuencat e ulëta. Përdor barazuesin grafik për rregullime më të imta të basit.</string>
     <string name="dolby_volume_summary">Zvogëlo dallimet e fortësisë së zërit midis pjesëve dhe pasazheve të qeta ose të zhurmshme.</string>
     <string name="dolby_speaker_summary">Shto një përshtypje më të gjerë rrethuese te altoparlantët e integruar.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Rregullimi: %1$s</string>
     <string name="dolby_geq_band_frequency">Brezi %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Prek një brez dhe tërhiqe lart ose poshtë për ta rregulluar; lëshoje për ta zbatuar.</string>
-    <string name="dolby_geq_graph_description">Grafik barazuesi me 20 breza. Frekuenca rritet nga e majta në të djathtë; përforcimi varion nga minus 10 në plus 10 dB. Përdor kontrollet e brezave më poshtë për rregullime të sakta.</string>
+    <string name="dolby_geq_graph_description">Grafik barazuesi me 20 breza. Frekuenca rritet nga e majta në të djathtë; përforcimi varion nga minus %1$.2f në plus %2$.2f dB. Përdor kontrollet e brezave më poshtë për rregullime të sakta.</string>
     <string name="dolby_geq_previous_band">Brezi i mëparshëm i frekuencës</string>
     <string name="dolby_geq_next_band">Brezi tjetër i frekuencës</string>
     <string name="dolby_geq_band_counter">Brezi %1$d nga %2$d</string>

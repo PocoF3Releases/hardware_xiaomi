@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">हालको प्रोफाइल रिसेट गर्नुहोस्</string>
     <string name="dolby_reset_profile_message">हालको प्रोफाइललाई यसको फ्याक्ट्री सेटिङमा पुनर्स्थापना गर्ने? सुरक्षित इक्वलाइजर प्रिसेटहरू कायम रहनेछन्।</string>
     <string name="dolby_setting_failed">Dolby ले यो सेटिङ लागू गर्न सकेन। कृपया फेरि प्रयास गर्नुहोस्।</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">कम फ्रिक्वेन्सीलाई जोड दिनुहोस्। बासलाई अझ सूक्ष्म रूपमा मिलाउन ग्राफिक इक्वलाइजर प्रयोग गर्नुहोस्।</string>
     <string name="dolby_volume_summary">ट्र्याकहरू र शान्त वा ठूलो आवाज भएका अंशहरूबीचको ध्वनि स्तरको फरक घटाउनुहोस्।</string>
     <string name="dolby_speaker_summary">निर्मित स्पिकरमा अझ फराकिलो सराउन्ड अनुभूति थप्नुहोस्।</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">ट्युनिङ: %1$s</string>
     <string name="dolby_geq_band_frequency">ब्यान्ड %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">ब्यान्ड छोएर माथि वा तल तान्दै समायोजन गर्नुहोस्; लागू गर्न छोड्नुहोस्।</string>
-    <string name="dolby_geq_graph_description">20-ब्यान्ड इक्वलाइजर ग्राफ। फ्रिक्वेन्सी बायाँबाट दायाँ बढ्छ; गेन माइनस 10 देखि प्लस 10 dB सम्म हुन्छ। सटीक समायोजनका लागि तलका ब्यान्ड नियन्त्रणहरू प्रयोग गर्नुहोस्।</string>
+    <string name="dolby_geq_graph_description">20-ब्यान्ड इक्वलाइजर ग्राफ। फ्रिक्वेन्सी बायाँबाट दायाँ बढ्छ; गेन माइनस %1$.2f देखि प्लस %2$.2f dB सम्म हुन्छ। सटीक समायोजनका लागि तलका ब्यान्ड नियन्त्रणहरू प्रयोग गर्नुहोस्।</string>
     <string name="dolby_geq_previous_band">अघिल्लो फ्रिक्वेन्सी ब्यान्ड</string>
     <string name="dolby_geq_next_band">अर्को फ्रिक्वेन्सी ब्यान्ड</string>
     <string name="dolby_geq_band_counter">ब्यान्ड %1$d / %2$d</string>

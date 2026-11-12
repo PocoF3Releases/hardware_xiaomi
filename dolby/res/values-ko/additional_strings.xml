@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">현재 프로필 재설정</string>
     <string name="dolby_reset_profile_message">현재 프로필을 공장 설정으로 복원하시겠습니까? 저장된 이퀄라이저 프리셋은 유지됩니다.</string>
     <string name="dolby_setting_failed">Dolby에서 이 설정을 적용하지 못했습니다. 다시 시도해 주세요.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">저주파를 강조합니다. 저음을 더 세밀하게 조정하려면 그래픽 이퀄라이저를 사용하세요.</string>
     <string name="dolby_volume_summary">트랙 간과 조용하거나 큰 구간 사이의 음량 차이를 줄입니다.</string>
     <string name="dolby_speaker_summary">내장 스피커에 더 넓은 서라운드 느낌을 추가합니다.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">튜닝: %1$s</string>
     <string name="dolby_geq_band_frequency">밴드 %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">밴드를 터치한 뒤 위나 아래로 드래그해 조정하고, 놓으면 적용됩니다.</string>
-    <string name="dolby_geq_graph_description">20밴드 이퀄라이저 그래프입니다. 주파수는 왼쪽에서 오른쪽으로 증가하며 게인은 -10~+10 dB 범위입니다. 정확한 조정은 아래의 밴드 컨트롤을 사용하세요.</string>
+    <string name="dolby_geq_graph_description">20밴드 이퀄라이저 그래프입니다. 주파수는 왼쪽에서 오른쪽으로 증가하며 게인은 -%1$.2f~+%2$.2f dB 범위입니다. 정확한 조정은 아래의 밴드 컨트롤을 사용하세요.</string>
     <string name="dolby_geq_previous_band">이전 주파수 밴드</string>
     <string name="dolby_geq_next_band">다음 주파수 밴드</string>
     <string name="dolby_geq_band_counter">밴드 %1$d/%2$d</string>

@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">بازنشانی پروفایل فعلی</string>
     <string name="dolby_reset_profile_message">پروفایل فعلی به تنظیمات کارخانه برگردانده شود؟ پیش‌تنظیم‌های ذخیره‌شده اکولایزر حفظ خواهند شد.</string>
     <string name="dolby_setting_failed">Dolby نتوانست این تنظیم را اعمال کند. دوباره تلاش کنید.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">فرکانس‌های پایین را برجسته کنید. برای تنظیم دقیق‌تر بیس از اکولایزر گرافیکی استفاده کنید.</string>
     <string name="dolby_volume_summary">اختلاف بلندی صدا بین قطعه‌ها و بخش‌های آرام یا بلند را کاهش دهید.</string>
     <string name="dolby_speaker_summary">حس فراگیر گسترده‌تری به بلندگوهای داخلی اضافه کنید.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">تنظیم: %1$s</string>
     <string name="dolby_geq_band_frequency">باند %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">برای تنظیم، یک باند را لمس کنید و به بالا یا پایین بکشید؛ برای اعمال رها کنید.</string>
-    <string name="dolby_geq_graph_description">نمودار اکولایزر ۲۰ بانده. فرکانس از چپ به راست افزایش می‌یابد؛ بهره از منفی ۱۰ تا مثبت ۱۰ dB است. برای تنظیم دقیق از کنترل‌های باند پایین استفاده کنید.</string>
+    <string name="dolby_geq_graph_description">نمودار اکولایزر ۲۰ بانده. فرکانس از چپ به راست افزایش می‌یابد؛ بهره از منفی %1$.2f تا مثبت %2$.2f dB است. برای تنظیم دقیق از کنترل‌های باند پایین استفاده کنید.</string>
     <string name="dolby_geq_previous_band">باند فرکانسی قبلی</string>
     <string name="dolby_geq_next_band">باند فرکانسی بعدی</string>
     <string name="dolby_geq_band_counter">باند %1$d از %2$d</string>

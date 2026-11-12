@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Tilbakestill gjeldende profil</string>
     <string name="dolby_reset_profile_message">Gjenopprette gjeldende profil til fabrikkinnstillingene? Lagrede equalizer-forhåndsinnstillinger beholdes.</string>
     <string name="dolby_setting_failed">Dolby kunne ikke bruke denne innstillingen. Prøv igjen.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Fremhev lave frekvenser. Bruk den grafiske equalizeren for finere bassjusteringer.</string>
     <string name="dolby_volume_summary">Reduser forskjeller i lydstyrke mellom spor og stille eller høye partier.</string>
     <string name="dolby_speaker_summary">Legg til en bredere surroundopplevelse i de innebygde høyttalerne.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Justering: %1$s</string>
     <string name="dolby_geq_band_frequency">Bånd %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Trykk på et bånd og dra opp eller ned for å justere; slipp for å bruke.</string>
-    <string name="dolby_geq_graph_description">20-bånds equalizer-graf. Frekvensen øker fra venstre mot høyre; forsterkningen går fra minus 10 til pluss 10 dB. Bruk båndkontrollene nedenfor for presise justeringer.</string>
+    <string name="dolby_geq_graph_description">20-bånds equalizer-graf. Frekvensen øker fra venstre mot høyre; forsterkningen går fra minus %1$.2f til pluss %2$.2f dB. Bruk båndkontrollene nedenfor for presise justeringer.</string>
     <string name="dolby_geq_previous_band">Forrige frekvensbånd</string>
     <string name="dolby_geq_next_band">Neste frekvensbånd</string>
     <string name="dolby_geq_band_counter">Bånd %1$d av %2$d</string>
