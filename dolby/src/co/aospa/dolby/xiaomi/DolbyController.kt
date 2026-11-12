@@ -86,7 +86,10 @@ internal class DolbyController private constructor(private val context: Context)
                 if (initialize) target.ensureInitialized()
                 target.action()
             } catch (error: RuntimeException) {
-                if (recoverOnFailure && error !is CancellationException) requestRestore()
+                if (recoverOnFailure && error !is CancellationException) {
+                    Log.w("DolbyController", "Audio transaction failed", error)
+                    requestRestore()
+                }
                 throw error
             }
         }
