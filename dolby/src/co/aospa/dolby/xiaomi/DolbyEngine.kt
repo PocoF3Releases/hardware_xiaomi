@@ -1032,9 +1032,19 @@ internal class DolbyEngine(
         }
     }
 
-    fun updateSetting(key: String, value: Any) {
+    fun updateSetting(key: String, value: Any) = try {
+        // DMS mirrors bass-enable (111) into virtual-bass (112). Preserve an
+        // explicit independent override, as restoreSettings does after reset.
+        // With no override, keep the OEM coupling and endpoint factory policy.
+        val savedVirtualBass = if (key == PREF_BASS) {
+            val prefs = profiles.preferences(activeProfileKey)
+            if (prefs.contains(PREF_VIRTUAL_BASS)) prefs.getBoolean(PREF_VIRTUAL_BASS, false) else null
+        } else null
         when (key) {
-            PREF_BASS -> setBassEnhancerEnabled(value as Boolean)
+            PREF_BASS -> {
+                setBassEnhancerEnabled(value as Boolean)
+                savedVirtualBass?.let { setVirtualBassEnabled(it) }
+            }
             PREF_VOLUME -> setVolumeLevelerEnabled(value as Boolean)
             PREF_HP_VIRTUALIZER -> setHeadphoneVirtEnabled(value as Boolean)
             PREF_SPK_VIRTUALIZER -> setSpeakerVirtEnabled(value as Boolean)
@@ -1055,6 +1065,9 @@ internal class DolbyEngine(
         check(activeState.value.loaded && activeState.value.settings[key] == value) {
             "Dolby did not confirm the requested setting: $key"
         }
+        check(savedVirtualBass == null || activeState.value.settings[PREF_VIRTUAL_BASS] == savedVirtualBass) {
+            "Dolby did not preserve the saved virtual-bass setting"
+        }
         val editor = profiles.preferences(activeProfileKey).edit()
         when (value) {
             is Boolean -> editor.putBoolean(key, value)
@@ -1063,6 +1076,12 @@ internal class DolbyEngine(
         // Persistence does not change the acknowledged native values. Keep the
         // checked snapshot rather than repeating the same full HAL query.
         editor.apply()
+    } catch (failure: RuntimeException) {
+        // A bass write or its companion restore may reach DMS before a failed
+        // reply/readback. Force saved-profile replay instead of trusting the
+        // previous slot ACK; persistence still contains the last accepted pair.
+        if (key == PREF_BASS) appliedProfileKey = null
+        throw failure
     }
 
     companion object {
