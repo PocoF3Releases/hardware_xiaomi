@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Нулиране на текущия профил</string>
     <string name="dolby_reset_profile_message">Да се възстановят ли фабричните настройки на текущия профил? Запазените предварителни настройки на еквалайзера ще се запазят.</string>
     <string name="dolby_setting_failed">Dolby не можа да приложи тази настройка. Опитайте отново.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Подчертайте ниските честоти. Използвайте графичния еквалайзер за по-фини настройки на басите.</string>
     <string name="dolby_volume_summary">Намалете разликите в силата на звука между песните и тихите или силните пасажи.</string>
     <string name="dolby_speaker_summary">Добавете по-широко усещане за съраунд към вградените високоговорители.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Настройка: %1$s</string>
     <string name="dolby_geq_band_frequency">Лента %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Докоснете лента и плъзнете нагоре или надолу за настройка; пуснете, за да приложите.</string>
-    <string name="dolby_geq_graph_description">Графика на 20-лентов еквалайзер. Честотата се увеличава отляво надясно; усилването е от минус 10 до плюс 10 dB. Използвайте контролите на лентите по-долу за прецизни настройки.</string>
+    <string name="dolby_geq_graph_description">Графика на 20-лентов еквалайзер. Честотата се увеличава отляво надясно; усилването е от минус %1$.2f до плюс %2$.2f dB. Използвайте контролите на лентите по-долу за прецизни настройки.</string>
     <string name="dolby_geq_previous_band">Предишна честотна лента</string>
     <string name="dolby_geq_next_band">Следваща честотна лента</string>
     <string name="dolby_geq_band_counter">Лента %1$d от %2$d</string>

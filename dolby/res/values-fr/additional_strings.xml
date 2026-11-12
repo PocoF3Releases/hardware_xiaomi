@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Réinitialiser le profil actuel</string>
     <string name="dolby_reset_profile_message">Restaurer le profil actuel à ses réglages d’usine ? Les préréglages d’égaliseur enregistrés seront conservés.</string>
     <string name="dolby_setting_failed">Dolby n’a pas pu appliquer ce réglage. Réessayez.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Accentuez les basses fréquences. Utilisez l’égaliseur graphique pour régler les basses plus finement.</string>
     <string name="dolby_volume_summary">Réduisez les écarts de volume entre les pistes et les passages calmes ou forts.</string>
     <string name="dolby_speaker_summary">Ajoutez une sensation surround plus large aux haut-parleurs intégrés.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Réglage : %1$s</string>
     <string name="dolby_geq_band_frequency">Bande %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Touchez une bande et faites-la glisser vers le haut ou le bas pour l’ajuster ; relâchez pour appliquer.</string>
-    <string name="dolby_geq_graph_description">Graphique de l’égaliseur 20 bandes. La fréquence augmente de gauche à droite ; le gain va de moins 10 à plus 10 dB. Utilisez les commandes de bande ci-dessous pour des réglages précis.</string>
+    <string name="dolby_geq_graph_description">Graphique de l’égaliseur 20 bandes. La fréquence augmente de gauche à droite ; le gain va de moins %1$.2f à plus %2$.2f dB. Utilisez les commandes de bande ci-dessous pour des réglages précis.</string>
     <string name="dolby_geq_previous_band">Bande de fréquence précédente</string>
     <string name="dolby_geq_next_band">Bande de fréquence suivante</string>
     <string name="dolby_geq_band_counter">Bande %1$d sur %2$d</string>

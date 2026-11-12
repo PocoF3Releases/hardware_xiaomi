@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Lähtesta praegune profiil</string>
     <string name="dolby_reset_profile_message">Kas taastada praegune profiil tehaseseadetele? Salvestatud ekvalaiseri eelseadistused säilitatakse.</string>
     <string name="dolby_setting_failed">Dolby ei saanud seda seadet rakendada. Proovi uuesti.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Rõhuta madalaid sagedusi. Bassi täpsemaks reguleerimiseks kasuta graafilist ekvalaiserit.</string>
     <string name="dolby_volume_summary">Vähenda valjuse erinevusi lugude ning vaiksete või valjude lõikude vahel.</string>
     <string name="dolby_speaker_summary">Lisa sisseehitatud kõlaritele laiem ruumilise heli mulje.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Häälestus: %1$s</string>
     <string name="dolby_geq_band_frequency">Riba %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Puuduta riba ja lohista reguleerimiseks üles või alla; rakendamiseks vabasta.</string>
-    <string name="dolby_geq_graph_description">20-ribalise ekvalaiseri graafik. Sagedus suureneb vasakult paremale; võimendus on miinus 10 kuni pluss 10 dB. Täpseks reguleerimiseks kasuta allolevaid ribajuhte.</string>
+    <string name="dolby_geq_graph_description">20-ribalise ekvalaiseri graafik. Sagedus suureneb vasakult paremale; võimendus on miinus %1$.2f kuni pluss %2$.2f dB. Täpseks reguleerimiseks kasuta allolevaid ribajuhte.</string>
     <string name="dolby_geq_previous_band">Eelmine sagedusriba</string>
     <string name="dolby_geq_next_band">Järgmine sagedusriba</string>
     <string name="dolby_geq_band_counter">Riba %1$d / %2$d</string>

@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">നിലവിലെ പ്രൊഫൈൽ റീസെറ്റ് ചെയ്യുക</string>
     <string name="dolby_reset_profile_message">നിലവിലെ പ്രൊഫൈൽ അതിന്റെ ഫാക്ടറി ക്രമീകരണങ്ങളിലേക്ക് പുനഃസ്ഥാപിക്കണോ? സംരക്ഷിച്ച ഇക്വലൈസർ പ്രീസെറ്റുകൾ നിലനിർത്തും.</string>
     <string name="dolby_setting_failed">Dolby-ക്ക് ഈ ക്രമീകരണം പ്രയോഗിക്കാനായില്ല. വീണ്ടും ശ്രമിക്കുക.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">കുറഞ്ഞ ആവൃത്തികൾക്ക് ഊന്നൽ നൽകുക. ബാസ് കൂടുതൽ സൂക്ഷ്മമായി ക്രമീകരിക്കാൻ ഗ്രാഫിക് ഇക്വലൈസർ ഉപയോഗിക്കുക.</string>
     <string name="dolby_volume_summary">ട്രാക്കുകൾക്കും ശാന്തമോ ഉച്ചത്തിലുള്ളതോ ആയ ഭാഗങ്ങൾക്കും ഇടയിലെ ശബ്ദതീവ്രത വ്യത്യാസങ്ങൾ കുറയ്ക്കുക.</string>
     <string name="dolby_speaker_summary">ബിൽറ്റ്-ഇൻ സ്പീക്കറുകൾക്ക് കൂടുതൽ വിശാലമായ സറൗണ്ട് അനുഭവം നൽകുക.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">ട്യൂണിംഗ്: %1$s</string>
     <string name="dolby_geq_band_frequency">ബാൻഡ് %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">ഒരു ബാൻഡ് സ്പർശിച്ച് ക്രമീകരിക്കാൻ മുകളിലേക്കോ താഴേക്കോ വലിക്കുക; പ്രയോഗിക്കാൻ വിടുക.</string>
-    <string name="dolby_geq_graph_description">20-ബാൻഡ് ഇക്വലൈസർ ഗ്രാഫ്. ആവൃത്തി ഇടത്തുനിന്ന് വലത്തോട്ട് വർധിക്കുന്നു; ഗെയിൻ മൈനസ് 10 മുതൽ പ്ലസ് 10 dB വരെ. കൃത്യമായ ക്രമീകരണങ്ങൾക്ക് താഴെയുള്ള ബാൻഡ് നിയന്ത്രണങ്ങൾ ഉപയോഗിക്കുക.</string>
+    <string name="dolby_geq_graph_description">20-ബാൻഡ് ഇക്വലൈസർ ഗ്രാഫ്. ആവൃത്തി ഇടത്തുനിന്ന് വലത്തോട്ട് വർധിക്കുന്നു; ഗെയിൻ മൈനസ് %1$.2f മുതൽ പ്ലസ് %2$.2f dB വരെ. കൃത്യമായ ക്രമീകരണങ്ങൾക്ക് താഴെയുള്ള ബാൻഡ് നിയന്ത്രണങ്ങൾ ഉപയോഗിക്കുക.</string>
     <string name="dolby_geq_previous_band">മുമ്പത്തെ ഫ്രീക്വൻസി ബാൻഡ്</string>
     <string name="dolby_geq_next_band">അടുത്ത ഫ്രീക്വൻസി ബാൻഡ്</string>
     <string name="dolby_geq_band_counter">ബാൻഡ് %1$d / %2$d</string>

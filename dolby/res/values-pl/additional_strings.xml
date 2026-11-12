@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Zresetuj bieżący profil</string>
     <string name="dolby_reset_profile_message">Przywrócić bieżący profil do ustawień fabrycznych? Zapisane ustawienia wstępne korektora zostaną zachowane.</string>
     <string name="dolby_setting_failed">Dolby nie może zastosować tego ustawienia. Spróbuj ponownie.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Podkreśl niskie częstotliwości. Użyj korektora graficznego, aby precyzyjniej dostroić basy.</string>
     <string name="dolby_volume_summary">Zmniejsz różnice głośności między utworami oraz cichymi i głośnymi fragmentami.</string>
     <string name="dolby_speaker_summary">Dodaj szersze wrażenie dźwięku przestrzennego do wbudowanych głośników.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Dostrajanie: %1$s</string>
     <string name="dolby_geq_band_frequency">Pasmo %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Dotknij pasma i przeciągnij w górę lub w dół, aby dostosować; puść, aby zastosować.</string>
-    <string name="dolby_geq_graph_description">Wykres 20-pasmowego korektora. Częstotliwość rośnie od lewej do prawej; wzmocnienie mieści się od minus 10 do plus 10 dB. Użyj poniższych elementów sterujących pasmami, aby precyzyjnie dostroić ustawienia.</string>
+    <string name="dolby_geq_graph_description">Wykres 20-pasmowego korektora. Częstotliwość rośnie od lewej do prawej; wzmocnienie mieści się od minus %1$.2f do plus %2$.2f dB. Użyj poniższych elementów sterujących pasmami, aby precyzyjnie dostroić ustawienia.</string>
     <string name="dolby_geq_previous_band">Poprzednie pasmo częstotliwości</string>
     <string name="dolby_geq_next_band">Następne pasmo częstotliwości</string>
     <string name="dolby_geq_band_counter">Pasmo %1$d z %2$d</string>

@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Resetează profilul curent</string>
     <string name="dolby_reset_profile_message">Restabilești profilul curent la setările din fabrică? Presetările salvate ale egalizatorului vor fi păstrate.</string>
     <string name="dolby_setting_failed">Dolby nu a putut aplica această setare. Încearcă din nou.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Evidențiază frecvențele joase. Folosește egalizatorul grafic pentru ajustări mai fine ale basului.</string>
     <string name="dolby_volume_summary">Reduce diferențele de volum dintre piese și pasajele liniștite sau puternice.</string>
     <string name="dolby_speaker_summary">Adaugă o senzație surround mai largă difuzoarelor încorporate.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Reglare: %1$s</string>
     <string name="dolby_geq_band_frequency">Bandă %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Atinge o bandă și trage în sus sau în jos pentru reglare; eliberează pentru aplicare.</string>
-    <string name="dolby_geq_graph_description">Grafic de egalizator cu 20 de benzi. Frecvența crește de la stânga la dreapta; amplificarea variază de la minus 10 la plus 10 dB. Folosește comenzile benzilor de mai jos pentru ajustări precise.</string>
+    <string name="dolby_geq_graph_description">Grafic de egalizator cu 20 de benzi. Frecvența crește de la stânga la dreapta; amplificarea variază de la minus %1$.2f la plus %2$.2f dB. Folosește comenzile benzilor de mai jos pentru ajustări precise.</string>
     <string name="dolby_geq_previous_band">Banda de frecvență anterioară</string>
     <string name="dolby_geq_next_band">Banda de frecvență următoare</string>
     <string name="dolby_geq_band_counter">Banda %1$d din %2$d</string>

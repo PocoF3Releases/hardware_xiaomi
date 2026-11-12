@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">איפוס הפרופיל הנוכחי</string>
     <string name="dolby_reset_profile_message">לשחזר את הפרופיל הנוכחי להגדרות היצרן? הגדרות אקולייזר שנשמרו יישארו.</string>
     <string name="dolby_setting_failed">Dolby לא הצליח להחיל את ההגדרה הזו. יש לנסות שוב.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">הדגשת תדרים נמוכים. לכוונון עדין יותר של הבס, השתמשו באקולייזר הגרפי.</string>
     <string name="dolby_volume_summary">הפחתת הבדלי עוצמה בין רצועות ובין קטעים שקטים או חזקים.</string>
     <string name="dolby_speaker_summary">הוספת תחושת סראונד רחבה יותר לרמקולים המובנים.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">כוונון: %1$s</string>
     <string name="dolby_geq_band_frequency">תחום %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">יש לגעת בתחום ולגרור למעלה או למטה כדי לכוון; יש לשחרר כדי להחיל.</string>
-    <string name="dolby_geq_graph_description">גרף אקולייזר בן 20 תחומים. התדר עולה משמאל לימין; ההגבר נע בין מינוס 10 לפלוס 10 dB. לכוונון מדויק השתמשו בפקדי התחומים שלמטה.</string>
+    <string name="dolby_geq_graph_description">גרף אקולייזר בן 20 תחומים. התדר עולה משמאל לימין; ההגבר נע בין מינוס %1$.2f לפלוס %2$.2f dB. לכוונון מדויק השתמשו בפקדי התחומים שלמטה.</string>
     <string name="dolby_geq_previous_band">תחום התדר הקודם</string>
     <string name="dolby_geq_next_band">תחום התדר הבא</string>
     <string name="dolby_geq_band_counter">תחום %1$d מתוך %2$d</string>

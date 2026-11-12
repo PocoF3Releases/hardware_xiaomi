@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Đặt lại hồ sơ hiện tại</string>
     <string name="dolby_reset_profile_message">Khôi phục hồ sơ hiện tại về cài đặt ban đầu? Các cài đặt sẵn của bộ cân bằng đã lưu sẽ được giữ lại.</string>
     <string name="dolby_setting_failed">Dolby không thể áp dụng cài đặt này. Vui lòng thử lại.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Nhấn mạnh các tần số thấp. Sử dụng bộ cân bằng đồ họa để tinh chỉnh âm trầm chính xác hơn.</string>
     <string name="dolby_volume_summary">Giảm chênh lệch độ lớn giữa các bản nhạc và các đoạn yên tĩnh hoặc lớn tiếng.</string>
     <string name="dolby_speaker_summary">Tạo cảm giác âm thanh vòm rộng hơn cho loa tích hợp.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Tinh chỉnh: %1$s</string>
     <string name="dolby_geq_band_frequency">Dải %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Chạm vào một dải rồi kéo lên hoặc xuống để điều chỉnh; thả ra để áp dụng.</string>
-    <string name="dolby_geq_graph_description">Đồ thị bộ cân bằng 20 dải. Tần số tăng từ trái sang phải; độ khuếch đại nằm trong khoảng âm 10 đến dương 10 dB. Sử dụng các điều khiển dải bên dưới để điều chỉnh chính xác.</string>
+    <string name="dolby_geq_graph_description">Đồ thị bộ cân bằng 20 dải. Tần số tăng từ trái sang phải; độ khuếch đại nằm trong khoảng âm %1$.2f đến dương %2$.2f dB. Sử dụng các điều khiển dải bên dưới để điều chỉnh chính xác.</string>
     <string name="dolby_geq_previous_band">Dải tần trước</string>
     <string name="dolby_geq_next_band">Dải tần tiếp theo</string>
     <string name="dolby_geq_band_counter">Dải %1$d trên %2$d</string>

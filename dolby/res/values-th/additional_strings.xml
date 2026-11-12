@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">รีเซ็ตโปรไฟล์ปัจจุบัน</string>
     <string name="dolby_reset_profile_message">คืนค่าโปรไฟล์ปัจจุบันเป็นการตั้งค่าจากโรงงานหรือไม่? ค่าที่ตั้งไว้ของอีควอไลเซอร์ที่บันทึกไว้จะยังคงอยู่</string>
     <string name="dolby_setting_failed">Dolby ไม่สามารถใช้การตั้งค่านี้ได้ โปรดลองอีกครั้ง</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">เน้นความถี่ต่ำ ใช้อีควอไลเซอร์กราฟิกเพื่อปรับเสียงเบสได้ละเอียดขึ้น</string>
     <string name="dolby_volume_summary">ลดความแตกต่างของความดังระหว่างแทร็กและช่วงที่เบาหรือดัง</string>
     <string name="dolby_speaker_summary">เพิ่มความรู้สึกเสียงรอบทิศทางที่กว้างขึ้นให้กับลำโพงในตัว</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">การปรับแต่ง: %1$s</string>
     <string name="dolby_geq_band_frequency">ย่าน %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">แตะย่านแล้วลากขึ้นหรือลงเพื่อปรับ ปล่อยเพื่อใช้งาน</string>
-    <string name="dolby_geq_graph_description">กราฟอีควอไลเซอร์ 20 ย่าน ความถี่เพิ่มจากซ้ายไปขวา เกนอยู่ในช่วงลบ 10 ถึงบวก 10 dB ใช้ตัวควบคุมย่านด้านล่างเพื่อปรับอย่างแม่นยำ</string>
+    <string name="dolby_geq_graph_description">กราฟอีควอไลเซอร์ 20 ย่าน ความถี่เพิ่มจากซ้ายไปขวา เกนอยู่ในช่วงลบ %1$.2f ถึงบวก %2$.2f dB ใช้ตัวควบคุมย่านด้านล่างเพื่อปรับอย่างแม่นยำ</string>
     <string name="dolby_geq_previous_band">ย่านความถี่ก่อนหน้า</string>
     <string name="dolby_geq_next_band">ย่านความถี่ถัดไป</string>
     <string name="dolby_geq_band_counter">ย่าน %1$d จาก %2$d</string>

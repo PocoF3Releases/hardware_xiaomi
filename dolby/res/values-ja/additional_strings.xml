@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">現在のプロファイルをリセット</string>
     <string name="dolby_reset_profile_message">現在のプロファイルを工場出荷時の設定に戻しますか？保存済みのイコライザープリセットは保持されます。</string>
     <string name="dolby_setting_failed">Dolby でこの設定を適用できませんでした。もう一度お試しください。</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">低域を強調します。低音をより細かく調整するにはグラフィックイコライザーを使用してください。</string>
     <string name="dolby_volume_summary">トラック間や静かな部分と大きな部分の音量差を抑えます。</string>
     <string name="dolby_speaker_summary">内蔵スピーカーに、より広がりのあるサラウンド感を加えます。</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">調整: %1$s</string>
     <string name="dolby_geq_band_frequency">バンド %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">バンドをタッチして上下にドラッグして調整し、離すと適用されます。</string>
-    <string name="dolby_geq_graph_description">20 バンドイコライザーグラフ。周波数は左から右へ高くなり、ゲインは -10 ～ +10 dB です。正確な調整には下のバンドコントロールを使用してください。</string>
+    <string name="dolby_geq_graph_description">20 バンドイコライザーグラフ。周波数は左から右へ高くなり、ゲインは -%1$.2f ～ +%2$.2f dB です。正確な調整には下のバンドコントロールを使用してください。</string>
     <string name="dolby_geq_previous_band">前の周波数バンド</string>
     <string name="dolby_geq_next_band">次の周波数バンド</string>
     <string name="dolby_geq_band_counter">バンド %1$d / %2$d</string>

@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Վերակայել ընթացիկ պրոֆիլը</string>
     <string name="dolby_reset_profile_message">Վերականգնե՞լ ընթացիկ պրոֆիլի գործարանային կարգավորումները։ Պահված հավասարիչի նախադրվածքները կպահպանվեն։</string>
     <string name="dolby_setting_failed">Dolby-ին չհաջողվեց կիրառել այս կարգավորումը։ Կրկին փորձեք։</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Ընդգծել ցածր հաճախականությունները։ Բասի ավելի ճշգրիտ կարգավորման համար օգտագործեք գրաֆիկական հավասարիչը։</string>
     <string name="dolby_volume_summary">Նվազեցնել բարձրության տարբերությունները երգերի և ցածր կամ բարձր հատվածների միջև։</string>
     <string name="dolby_speaker_summary">Ներկառուցված բարձրախոսներին տալ ավելի լայն շրջապատող ձայնի տպավորություն։</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Կարգավորում՝ %1$s</string>
     <string name="dolby_geq_band_frequency">Գոտի %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Դիպեք գոտուն և քաշեք վեր կամ վար՝ կարգավորելու համար, ապա բաց թողեք՝ կիրառելու համար։</string>
-    <string name="dolby_geq_graph_description">20-գոտանոց հավասարիչի գրաֆիկ։ Հաճախականությունը մեծանում է ձախից աջ, ուժեղացումը՝ մինուս 10-ից մինչև պլյուս 10 dB։ Ճշգրիտ կարգավորման համար օգտագործեք ստորև գտնվող գոտիների կառավարիչները։</string>
+    <string name="dolby_geq_graph_description">20-գոտանոց հավասարիչի գրաֆիկ։ Հաճախականությունը մեծանում է ձախից աջ, ուժեղացումը՝ մինուս %1$.2f-ից մինչև պլյուս %2$.2f dB։ Ճշգրիտ կարգավորման համար օգտագործեք ստորև գտնվող գոտիների կառավարիչները։</string>
     <string name="dolby_geq_previous_band">Նախորդ հաճախականության գոտի</string>
     <string name="dolby_geq_next_band">Հաջորդ հաճախականության գոտի</string>
     <string name="dolby_geq_band_counter">Գոտի %1$d՝ %2$d-ից</string>

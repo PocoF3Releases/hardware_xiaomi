@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Atkurti dabartinį profilį</string>
     <string name="dolby_reset_profile_message">Atkurti dabartinio profilio gamyklinius nustatymus? Išsaugoti glodintuvo išankstiniai nustatymai bus palikti.</string>
     <string name="dolby_setting_failed">Dolby nepavyko pritaikyti šio nustatymo. Bandykite dar kartą.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Paryškinkite žemuosius dažnius. Tikslesniam žemųjų dažnių derinimui naudokite grafinį glodintuvą.</string>
     <string name="dolby_volume_summary">Sumažinkite garsumo skirtumus tarp takelių bei tylių ir garsių fragmentų.</string>
     <string name="dolby_speaker_summary">Suteikite integruotiems garsiakalbiams platesnio erdvinio garso pojūtį.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Derinimas: %1$s</string>
     <string name="dolby_geq_band_frequency">Juosta %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Palieskite juostą ir vilkite aukštyn arba žemyn, kad sureguliuotumėte; atleiskite, kad pritaikytumėte.</string>
-    <string name="dolby_geq_graph_description">20 juostų glodintuvo grafikas. Dažnis didėja iš kairės į dešinę; stiprinimas svyruoja nuo minus 10 iki plus 10 dB. Tiksliam derinimui naudokite toliau esančius juostų valdiklius.</string>
+    <string name="dolby_geq_graph_description">20 juostų glodintuvo grafikas. Dažnis didėja iš kairės į dešinę; stiprinimas svyruoja nuo minus %1$.2f iki plus %2$.2f dB. Tiksliam derinimui naudokite toliau esančius juostų valdiklius.</string>
     <string name="dolby_geq_previous_band">Ankstesnė dažnių juosta</string>
     <string name="dolby_geq_next_band">Kita dažnių juosta</string>
     <string name="dolby_geq_band_counter">Juosta %1$d iš %2$d</string>

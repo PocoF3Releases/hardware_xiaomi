@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Atiestatīt pašreizējo profilu</string>
     <string name="dolby_reset_profile_message">Vai atjaunot pašreizējā profila rūpnīcas iestatījumus? Saglabātie ekvalaizera priekšiestatījumi tiks paturēti.</string>
     <string name="dolby_setting_failed">Dolby nevarēja lietot šo iestatījumu. Mēģiniet vēlreiz.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Izceliet zemās frekvences. Precīzākai basu regulēšanai izmantojiet grafisko ekvalaizeru.</string>
     <string name="dolby_volume_summary">Samaziniet skaļuma atšķirības starp ierakstiem un klusiem vai skaļiem fragmentiem.</string>
     <string name="dolby_speaker_summary">Pievienojiet iebūvētajiem skaļruņiem plašāku telpiskās skaņas iespaidu.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Regulēšana: %1$s</string>
     <string name="dolby_geq_band_frequency">Josla %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Pieskarieties joslai un velciet uz augšu vai uz leju, lai regulētu; atlaidiet, lai lietotu.</string>
-    <string name="dolby_geq_graph_description">20 joslu ekvalaizera grafiks. Frekvence palielinās no kreisās uz labo; pastiprinājums ir no mīnus 10 līdz plus 10 dB. Precīzai regulēšanai izmantojiet tālāk esošās joslu vadīklas.</string>
+    <string name="dolby_geq_graph_description">20 joslu ekvalaizera grafiks. Frekvence palielinās no kreisās uz labo; pastiprinājums ir no mīnus %1$.2f līdz plus %2$.2f dB. Precīzai regulēšanai izmantojiet tālāk esošās joslu vadīklas.</string>
     <string name="dolby_geq_previous_band">Iepriekšējā frekvenču josla</string>
     <string name="dolby_geq_next_band">Nākamā frekvenču josla</string>
     <string name="dolby_geq_band_counter">Josla %1$d no %2$d</string>

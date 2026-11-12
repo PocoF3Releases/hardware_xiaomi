@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Jelenlegi profil visszaállítása</string>
     <string name="dolby_reset_profile_message">Visszaállítja a jelenlegi profilt a gyári beállításokra? A mentett hangszínszabályzó-előbeállítások megmaradnak.</string>
     <string name="dolby_setting_failed">A Dolby nem tudta alkalmazni ezt a beállítást. Próbálja újra.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Az alacsony frekvenciák kiemelése. A basszus finomabb beállításához használja a grafikus hangszínszabályzót.</string>
     <string name="dolby_volume_summary">Csökkenti a hangerőkülönbséget a zeneszámok, illetve a halk és hangos részek között.</string>
     <string name="dolby_speaker_summary">Szélesebb térhatás érzetét adja a beépített hangszórókon.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Hangolás: %1$s</string>
     <string name="dolby_geq_band_frequency">%1$d. sáv · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Érintsen meg egy sávot, és húzza fel vagy le a beállításhoz; az alkalmazáshoz engedje el.</string>
-    <string name="dolby_geq_graph_description">20 sávos hangszínszabályzó-grafikon. A frekvencia balról jobbra nő; az erősítés mínusz 10 és plusz 10 dB között állítható. A pontos beállításhoz használja az alábbi sávvezérlőket.</string>
+    <string name="dolby_geq_graph_description">20 sávos hangszínszabályzó-grafikon. A frekvencia balról jobbra nő; az erősítés mínusz %1$.2f és plusz %2$.2f dB között állítható. A pontos beállításhoz használja az alábbi sávvezérlőket.</string>
     <string name="dolby_geq_previous_band">Előző frekvenciasáv</string>
     <string name="dolby_geq_next_band">Következő frekvenciasáv</string>
     <string name="dolby_geq_band_counter">%1$d. sáv / %2$d</string>

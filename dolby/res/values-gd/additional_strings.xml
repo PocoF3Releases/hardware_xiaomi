@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Ath-shuidhich a’ phròifil làithreach</string>
     <string name="dolby_reset_profile_message">Ath-nuadhaich a’ phròifil làithreach gu roghainnean an fhactaraidh? Cumar na ro-shuidheachaidhean co-ionannair a chaidh a shàbhaladh.</string>
     <string name="dolby_setting_failed">Cha b’ urrainn do Dolby an roghainn seo a chur an sàs. Feuch ris a-rithist.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Cuir cuideam air triceadan ìosal. Cleachd an co-ionannair grafaigeach airson gleusadh bas nas mionaidiche.</string>
     <string name="dolby_volume_summary">Lùghdaich eadar-dhealachaidhean ann an àirde-fuaime eadar tracaichean agus earrannan sàmhach no àrd.</string>
     <string name="dolby_speaker_summary">Cuir faireachdainn cuairteachaidh nas fharsainge ris na glaodhairean a-staigh.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Gleusadh: %1$s</string>
     <string name="dolby_geq_band_frequency">Bann %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Suath ri bann agus slaod suas no sìos gus a ghleusadh; leig às gus a chur an sàs.</string>
-    <string name="dolby_geq_graph_description">Graf co-ionannair 20 bann. Meudaichidh an tricead bho chlì gu deas; tha a’ bhuannachd eadar minus 10 agus plus 10 dB. Cleachd smachdan nam bannan gu h-ìosal airson gleusadh mionaideach.</string>
+    <string name="dolby_geq_graph_description">Graf co-ionannair 20 bann. Meudaichidh an tricead bho chlì gu deas; tha a’ bhuannachd eadar minus %1$.2f agus plus %2$.2f dB. Cleachd smachdan nam bannan gu h-ìosal airson gleusadh mionaideach.</string>
     <string name="dolby_geq_previous_band">Bann tricead roimhe</string>
     <string name="dolby_geq_next_band">An ath bhann tricead</string>
     <string name="dolby_geq_band_counter">Bann %1$d à %2$d</string>

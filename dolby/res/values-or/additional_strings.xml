@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">ବର୍ତ୍ତମାନର ପ୍ରୋଫାଇଲ ରିସେଟ କରନ୍ତୁ</string>
     <string name="dolby_reset_profile_message">ବର୍ତ୍ତମାନର ପ୍ରୋଫାଇଲକୁ ଏହାର ଫ୍ୟାକ୍ଟରି ସେଟିଂକୁ ପୁନଃସ୍ଥାପନ କରିବେ କି? ସେଭ ହୋଇଥିବା ଇକ୍ୱାଲାଇଜର ପ୍ରିସେଟଗୁଡ଼ିକ ରହିବ।</string>
     <string name="dolby_setting_failed">Dolby ଏହି ସେଟିଂ ଲାଗୁ କରିପାରିଲା ନାହିଁ। ଦୟାକରି ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ।</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">ନିମ୍ନ ଫ୍ରିକ୍ୱେନ୍ସିକୁ ଅଧିକ ପ୍ରକାଶ କରନ୍ତୁ। ବେସକୁ ଅଧିକ ସୂକ୍ଷ୍ମ ଭାବରେ ସମଯୋଜନ କରିବା ପାଇଁ ଗ୍ରାଫିକ ଇକ୍ୱାଲାଇଜର ବ୍ୟବହାର କରନ୍ତୁ।</string>
     <string name="dolby_volume_summary">ଟ୍ରାକ ଏବଂ ଶାନ୍ତ କିମ୍ବା ଉଚ୍ଚ ଧ୍ୱନିର ଅଂଶମଧ୍ୟରେ ଲାଉଡନେସର ତଫାତ କମାନ୍ତୁ।</string>
     <string name="dolby_speaker_summary">ବିଲ୍ଟ-ଇନ ସ୍ପିକରରେ ଅଧିକ ପ୍ରଶସ୍ତ ସରାଉଣ୍ଡ ଅନୁଭୂତି ଯୋଡ଼ନ୍ତୁ।</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">ଟ୍ୟୁନିଂ: %1$s</string>
     <string name="dolby_geq_band_frequency">ବ୍ୟାଣ୍ଡ %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">ଏକ ବ୍ୟାଣ୍ଡକୁ ସ୍ପର୍ଶ କରି ଉପରକୁ କିମ୍ବା ତଳକୁ ଟାଣି ସମଯୋଜନ କରନ୍ତୁ; ଲାଗୁ କରିବାକୁ ଛାଡ଼ନ୍ତୁ।</string>
-    <string name="dolby_geq_graph_description">20-ବ୍ୟାଣ୍ଡ ଇକ୍ୱାଲାଇଜର ଗ୍ରାଫ। ଫ୍ରିକ୍ୱେନ୍ସି ବାମରୁ ଡାହାଣକୁ ବଢ଼େ; ଗେନ ମାଇନସ 10 ରୁ ପ୍ଲସ 10 dB ପର୍ଯ୍ୟନ୍ତ। ସଠିକ ସମଯୋଜନ ପାଇଁ ତଳେ ଥିବା ବ୍ୟାଣ୍ଡ ନିୟନ୍ତ୍ରଣ ବ୍ୟବହାର କରନ୍ତୁ।</string>
+    <string name="dolby_geq_graph_description">20-ବ୍ୟାଣ୍ଡ ଇକ୍ୱାଲାଇଜର ଗ୍ରାଫ। ଫ୍ରିକ୍ୱେନ୍ସି ବାମରୁ ଡାହାଣକୁ ବଢ଼େ; ଗେନ ମାଇନସ %1$.2f ରୁ ପ୍ଲସ %2$.2f dB ପର୍ଯ୍ୟନ୍ତ। ସଠିକ ସମଯୋଜନ ପାଇଁ ତଳେ ଥିବା ବ୍ୟାଣ୍ଡ ନିୟନ୍ତ୍ରଣ ବ୍ୟବହାର କରନ୍ତୁ।</string>
     <string name="dolby_geq_previous_band">ପୂର୍ବ ଫ୍ରିକ୍ୱେନ୍ସି ବ୍ୟାଣ୍ଡ</string>
     <string name="dolby_geq_next_band">ପରବର୍ତ୍ତୀ ଫ୍ରିକ୍ୱେନ୍ସି ବ୍ୟାଣ୍ଡ</string>
     <string name="dolby_geq_band_counter">ବ୍ୟାଣ୍ଡ %1$d / %2$d</string>

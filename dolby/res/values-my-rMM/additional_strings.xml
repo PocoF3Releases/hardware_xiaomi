@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">လက်ရှိ ပရိုဖိုင်ကို ပြန်လည်သတ်မှတ်ရန်</string>
     <string name="dolby_reset_profile_message">လက်ရှိ ပရိုဖိုင်ကို ၎င်း၏ စက်ရုံဆက်တင်များသို့ ပြန်ထားမလား? သိမ်းထားသော အီကွာလိုက်ဇာ ကြိုတင်သတ်မှတ်ချက်များကို ဆက်လက်ထားရှိမည်။</string>
     <string name="dolby_setting_failed">Dolby သည် ဤဆက်တင်ကို အသုံးမပြုနိုင်ပါ။ ထပ်မံကြိုးစားပါ။</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">အနိမ့်ကြိမ်နှုန်းများကို ပိုထင်ရှားစေပါ။ ဘေ့စ်ကို ပိုမိုတိကျစွာ ချိန်ညှိရန် ဂရပ်ဖစ် အီကွာလိုက်ဇာကို အသုံးပြုပါ။</string>
     <string name="dolby_volume_summary">သီချင်းများနှင့် တိတ်ဆိတ်သည့် သို့မဟုတ် ကျယ်လောင်သည့် အပိုင်းများကြား အသံကျယ်နှုန်း ကွာခြားမှုကို လျှော့ချပါ။</string>
     <string name="dolby_speaker_summary">စက်တွင်းစပီကာများတွင် ပိုကျယ်ပြန့်သော ပတ်လည်အသံ ခံစားချက်ကို ထည့်ပါ။</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">ချိန်ညှိမှု: %1$s</string>
     <string name="dolby_geq_band_frequency">ဘန်ဒ် %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">ဘန်ဒ်တစ်ခုကို ထိပြီး အပေါ် သို့မဟုတ် အောက်သို့ ဆွဲကာ ချိန်ညှိပါ; အသုံးပြုရန် လွှတ်ပါ။</string>
-    <string name="dolby_geq_graph_description">20-ဘန်ဒ် အီကွာလိုက်ဇာ ဂရပ်။ ကြိမ်နှုန်းသည် ဘယ်မှညာသို့ တိုးလာပြီး ဂိန်းသည် အနှုတ် 10 မှ အပေါင်း 10 dB အထိ ဖြစ်သည်။ တိကျသော ချိန်ညှိမှုများအတွက် အောက်ရှိ ဘန်ဒ်ထိန်းချုပ်မှုများကို အသုံးပြုပါ။</string>
+    <string name="dolby_geq_graph_description">20-ဘန်ဒ် အီကွာလိုက်ဇာ ဂရပ်။ ကြိမ်နှုန်းသည် ဘယ်မှညာသို့ တိုးလာပြီး ဂိန်းသည် အနှုတ် %1$.2f မှ အပေါင်း %2$.2f dB အထိ ဖြစ်သည်။ တိကျသော ချိန်ညှိမှုများအတွက် အောက်ရှိ ဘန်ဒ်ထိန်းချုပ်မှုများကို အသုံးပြုပါ။</string>
     <string name="dolby_geq_previous_band">ယခင် ကြိမ်နှုန်း ဘန်ဒ်</string>
     <string name="dolby_geq_next_band">နောက် ကြိမ်နှုန်း ဘန်ဒ်</string>
     <string name="dolby_geq_band_counter">ဘန်ဒ် %1$d / %2$d</string>

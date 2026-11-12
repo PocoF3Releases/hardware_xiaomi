@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">વર્તમાન પ્રોફાઇલ રીસેટ કરો</string>
     <string name="dolby_reset_profile_message">વર્તમાન પ્રોફાઇલને તેની ફેક્ટરી સેટિંગ્સ પર પુનઃસ્થાપિત કરવી? સાચવેલા ઇક્વલાઇઝર પ્રીસેટ જાળવી રાખવામાં આવશે.</string>
     <string name="dolby_setting_failed">Dolby આ સેટિંગ લાગુ કરી શક્યું નથી. ફરી પ્રયાસ કરો.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">નીચી ફ્રીક્વન્સીને વધુ સ્પષ્ટ કરો. બેસને વધુ સૂક્ષ્મ રીતે ગોઠવવા ગ્રાફિક ઇક્વલાઇઝરનો ઉપયોગ કરો.</string>
     <string name="dolby_volume_summary">ટ્રૅક્સ અને શાંત અથવા જોરદાર ભાગો વચ્ચે અવાજની તીવ્રતાનો તફાવત ઘટાડો.</string>
     <string name="dolby_speaker_summary">બિલ્ટ-ઇન સ્પીકરમાં વધુ વિશાળ સરાઉન્ડ અનુભવ ઉમેરો.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">ટ્યુનિંગ: %1$s</string>
     <string name="dolby_geq_band_frequency">બેન્ડ %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">ગોઠવવા માટે બેન્ડને સ્પર્શ કરીને ઉપર અથવા નીચે ખેંચો; લાગુ કરવા છોડો.</string>
-    <string name="dolby_geq_graph_description">20-બેન્ડ ઇક્વલાઇઝર ગ્રાફ. ફ્રીક્વન્સી ડાબેથી જમણે વધે છે; ગેઇન માઇનસ 10 થી પ્લસ 10 dB સુધી છે. ચોક્કસ ગોઠવણી માટે નીચેના બેન્ડ નિયંત્રણોનો ઉપયોગ કરો.</string>
+    <string name="dolby_geq_graph_description">20-બેન્ડ ઇક્વલાઇઝર ગ્રાફ. ફ્રીક્વન્સી ડાબેથી જમણે વધે છે; ગેઇન માઇનસ %1$.2f થી પ્લસ %2$.2f dB સુધી છે. ચોક્કસ ગોઠવણી માટે નીચેના બેન્ડ નિયંત્રણોનો ઉપયોગ કરો.</string>
     <string name="dolby_geq_previous_band">પાછલો ફ્રીક્વન્સી બેન્ડ</string>
     <string name="dolby_geq_next_band">આગલો ફ્રીક્વન્સી બેન્ડ</string>
     <string name="dolby_geq_band_counter">બેન્ડ %1$d માંથી %2$d</string>

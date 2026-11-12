@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">বর্তমান প্রোফাইল রিসেট করুন</string>
     <string name="dolby_reset_profile_message">বর্তমান প্রোফাইলটি ফ্যাক্টরি সেটিংসে ফিরিয়ে আনবেন? সংরক্ষিত ইকুয়ালাইজার প্রিসেটগুলো রাখা হবে।</string>
     <string name="dolby_setting_failed">Dolby এই সেটিং প্রয়োগ করতে পারেনি। আবার চেষ্টা করুন।</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">নিম্ন ফ্রিকোয়েন্সি জোরালো করুন। আরও সূক্ষ্ম বেস সমন্বয়ের জন্য গ্রাফিক ইকুয়ালাইজার ব্যবহার করুন।</string>
     <string name="dolby_volume_summary">ট্র্যাক এবং নীরব বা জোরালো অংশগুলোর মধ্যে শব্দের উচ্চতার পার্থক্য কমান।</string>
     <string name="dolby_speaker_summary">বিল্ট-ইন স্পিকারে আরও বিস্তৃত সারাউন্ড অনুভূতি যোগ করুন।</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">টিউনিং: %1$s</string>
     <string name="dolby_geq_band_frequency">ব্যান্ড %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">সমন্বয় করতে একটি ব্যান্ড স্পর্শ করে ওপরে বা নিচে টানুন; প্রয়োগ করতে ছেড়ে দিন।</string>
-    <string name="dolby_geq_graph_description">20-ব্যান্ড ইকুয়ালাইজার গ্রাফ। ফ্রিকোয়েন্সি বাম থেকে ডানে বাড়ে; গেইন মাইনাস 10 থেকে প্লাস 10 dB পর্যন্ত। নির্ভুল সমন্বয়ের জন্য নিচের ব্যান্ড নিয়ন্ত্রণ ব্যবহার করুন।</string>
+    <string name="dolby_geq_graph_description">20-ব্যান্ড ইকুয়ালাইজার গ্রাফ। ফ্রিকোয়েন্সি বাম থেকে ডানে বাড়ে; গেইন মাইনাস %1$.2f থেকে প্লাস %2$.2f dB পর্যন্ত। নির্ভুল সমন্বয়ের জন্য নিচের ব্যান্ড নিয়ন্ত্রণ ব্যবহার করুন।</string>
     <string name="dolby_geq_previous_band">আগের ফ্রিকোয়েন্সি ব্যান্ড</string>
     <string name="dolby_geq_next_band">পরের ফ্রিকোয়েন্সি ব্যান্ড</string>
     <string name="dolby_geq_band_counter">ব্যান্ড %1$d / %2$d</string>

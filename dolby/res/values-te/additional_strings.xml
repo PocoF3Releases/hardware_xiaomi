@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">ప్రస్తుత ప్రొఫైల్‌ను రీసెట్ చేయండి</string>
     <string name="dolby_reset_profile_message">ప్రస్తుత ప్రొఫైల్‌ను దాని ఫ్యాక్టరీ సెట్టింగ్‌లకు పునరుద్ధరించాలా? సేవ్ చేసిన ఈక్వలైజర్ ప్రీసెట్‌లు అలాగే ఉంటాయి.</string>
     <string name="dolby_setting_failed">Dolby ఈ సెట్టింగ్‌ను వర్తింపజేయలేకపోయింది. మళ్లీ ప్రయత్నించండి.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">తక్కువ ఫ్రీక్వెన్సీలను ఉద్ఘాటించండి. బాస్‌ను మరింత సున్నితంగా సర్దుబాటు చేయడానికి గ్రాఫిక్ ఈక్వలైజర్‌ను ఉపయోగించండి.</string>
     <string name="dolby_volume_summary">ట్రాక్‌లు మరియు నిశ్శబ్ద లేదా బిగ్గర భాగాల మధ్య లౌడ్‌నెస్ తేడాలను తగ్గించండి.</string>
     <string name="dolby_speaker_summary">అంతర్నిర్మిత స్పీకర్లకు మరింత విస్తృత సరౌండ్ అనుభూతిని జోడించండి.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">ట్యూనింగ్: %1$s</string>
     <string name="dolby_geq_band_frequency">బ్యాండ్ %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">బ్యాండ్‌ను తాకి సర్దుబాటు చేయడానికి పైకి లేదా కిందికి లాగండి; వర్తింపజేయడానికి వదలండి.</string>
-    <string name="dolby_geq_graph_description">20-బ్యాండ్ ఈక్వలైజర్ గ్రాఫ్. ఫ్రీక్వెన్సీ ఎడమ నుంచి కుడికి పెరుగుతుంది; గెయిన్ మైనస్ 10 నుంచి ప్లస్ 10 dB వరకు ఉంటుంది. ఖచ్చితమైన సర్దుబాట్ల కోసం దిగువ బ్యాండ్ నియంత్రణలను ఉపయోగించండి.</string>
+    <string name="dolby_geq_graph_description">20-బ్యాండ్ ఈక్వలైజర్ గ్రాఫ్. ఫ్రీక్వెన్సీ ఎడమ నుంచి కుడికి పెరుగుతుంది; గెయిన్ మైనస్ %1$.2f నుంచి ప్లస్ %2$.2f dB వరకు ఉంటుంది. ఖచ్చితమైన సర్దుబాట్ల కోసం దిగువ బ్యాండ్ నియంత్రణలను ఉపయోగించండి.</string>
     <string name="dolby_geq_previous_band">మునుపటి ఫ్రీక్వెన్సీ బ్యాండ్</string>
     <string name="dolby_geq_next_band">తదుపరి ఫ్రీక్వెన్సీ బ్యాండ్</string>
     <string name="dolby_geq_band_counter">బ్యాండ్ %1$d / %2$d</string>

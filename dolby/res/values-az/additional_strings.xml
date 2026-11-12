@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Cari profili sıfırla</string>
     <string name="dolby_reset_profile_message">Cari profili zavod ayarlarına qaytarmaq istəyirsiniz? Saxlanmış ekvalayzer ön ayarları qorunacaq.</string>
     <string name="dolby_setting_failed">Dolby bu ayarı tətbiq edə bilmədi. Yenidən cəhd edin.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Aşağı tezlikləri vurğulayın. Bası daha dəqiq tənzimləmək üçün qrafik ekvalayzerdən istifadə edin.</string>
     <string name="dolby_volume_summary">Treklər və sakit və ya yüksək hissələr arasındakı səs ucalığı fərqlərini azaldın.</string>
     <string name="dolby_speaker_summary">Daxili dinamiklərə daha geniş ətraf səs təsiri əlavə edin.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Tənzimləmə: %1$s</string>
     <string name="dolby_geq_band_frequency">Zolaq %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Tənzimləmək üçün zolağa toxunub yuxarı və ya aşağı sürüşdürün; tətbiq etmək üçün buraxın.</string>
-    <string name="dolby_geq_graph_description">20 zolaqlı ekvalayzer qrafiki. Tezlik soldan sağa artır; gücləndirmə mənfi 10-dan müsbət 10 dB-yə qədərdir. Dəqiq tənzimləmələr üçün aşağıdakı zolaq idarələrindən istifadə edin.</string>
+    <string name="dolby_geq_graph_description">20 zolaqlı ekvalayzer qrafiki. Tezlik soldan sağa artır; gücləndirmə mənfi %1$.2f-dan müsbət %2$.2f dB-yə qədərdir. Dəqiq tənzimləmələr üçün aşağıdakı zolaq idarələrindən istifadə edin.</string>
     <string name="dolby_geq_previous_band">Əvvəlki tezlik zolağı</string>
     <string name="dolby_geq_next_band">Növbəti tezlik zolağı</string>
     <string name="dolby_geq_band_counter">Zolaq %1$d / %2$d</string>

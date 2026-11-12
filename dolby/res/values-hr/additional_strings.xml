@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Poništi trenutačni profil</string>
     <string name="dolby_reset_profile_message">Vratiti trenutačni profil na tvorničke postavke? Spremljene postavke ekvilizatora bit će sačuvane.</string>
     <string name="dolby_setting_failed">Dolby nije mogao primijeniti ovu postavku. Pokušajte ponovno.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Naglasite niske frekvencije. Za finije podešavanje basa koristite grafički ekvilizator.</string>
     <string name="dolby_volume_summary">Smanjite razlike u glasnoći između zapisa i tihih ili glasnih dijelova.</string>
     <string name="dolby_speaker_summary">Dodajte širi dojam surround zvuka ugrađenim zvučnicima.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Podešavanje: %1$s</string>
     <string name="dolby_geq_band_frequency">Pojas %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Dodirnite pojas i povucite gore ili dolje za podešavanje; otpustite za primjenu.</string>
-    <string name="dolby_geq_graph_description">Graf 20-pojasnog ekvilizatora. Frekvencija raste slijeva nadesno; pojačanje je od minus 10 do plus 10 dB. Za precizno podešavanje koristite kontrole pojasa u nastavku.</string>
+    <string name="dolby_geq_graph_description">Graf 20-pojasnog ekvilizatora. Frekvencija raste slijeva nadesno; pojačanje je od minus %1$.2f do plus %2$.2f dB. Za precizno podešavanje koristite kontrole pojasa u nastavku.</string>
     <string name="dolby_geq_previous_band">Prethodni frekvencijski pojas</string>
     <string name="dolby_geq_next_band">Sljedeći frekvencijski pojas</string>
     <string name="dolby_geq_band_counter">Pojas %1$d od %2$d</string>

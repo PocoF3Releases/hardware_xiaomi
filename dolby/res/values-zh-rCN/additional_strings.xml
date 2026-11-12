@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">重置当前配置文件</string>
     <string name="dolby_reset_profile_message">将当前配置文件恢复为出厂设置？已保存的均衡器预设将保留。</string>
     <string name="dolby_setting_failed">Dolby 无法应用此设置。请重试。</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">增强低频。使用图形均衡器可更精细地调整低音。</string>
     <string name="dolby_volume_summary">减小不同曲目以及安静或响亮片段之间的响度差异。</string>
     <string name="dolby_speaker_summary">为内置扬声器增加更宽广的环绕感。</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">调校：%1$s</string>
     <string name="dolby_geq_band_frequency">频段 %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">触摸一个频段并向上或向下拖动以调整；松开即可应用。</string>
-    <string name="dolby_geq_graph_description">20 段均衡器图。频率从左到右递增；增益范围为 -10 到 +10 dB。使用下方的频段控件进行精确调整。</string>
+    <string name="dolby_geq_graph_description">20 段均衡器图。频率从左到右递增；增益范围为 -%1$.2f 到 +%2$.2f dB。使用下方的频段控件进行精确调整。</string>
     <string name="dolby_geq_previous_band">上一个频段</string>
     <string name="dolby_geq_next_band">下一个频段</string>
     <string name="dolby_geq_band_counter">频段 %1$d / %2$d</string>

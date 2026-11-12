@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">ຣີເຊັດໂປຣໄຟລ໌ປັດຈຸບັນ</string>
     <string name="dolby_reset_profile_message">ຄືນຄ່າໂປຣໄຟລ໌ປັດຈຸບັນເປັນຄ່າໂຮງງານບໍ? ຄ່າຕັ້ງອີຄວາໄລເຊີທີ່ບັນທຶກໄວ້ຈະຖືກຮັກສາ.</string>
     <string name="dolby_setting_failed">Dolby ບໍ່ສາມາດນຳໃຊ້ການຕັ້ງຄ່ານີ້ໄດ້. ລອງໃໝ່.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">ເນັ້ນຄວາມຖີ່ຕ່ຳ. ໃຊ້ອີຄວາໄລເຊີແບບກຣາຟິກເພື່ອປັບເບດໃຫ້ລະອຽດຂຶ້ນ.</string>
     <string name="dolby_volume_summary">ຫຼຸດຄວາມແຕກຕ່າງຂອງຄວາມດັງລະຫວ່າງເພງ ແລະ ຊ່ວງທີ່ຄ່ອຍຫຼືດັງ.</string>
     <string name="dolby_speaker_summary">ເພີ່ມຄວາມຮູ້ສຶກສຽງຮອບທິດທີ່ກວ້າງຂຶ້ນໃຫ້ລຳໂພງໃນຕົວ.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">ການປັບແຕ່ງ: %1$s</string>
     <string name="dolby_geq_band_frequency">ແຖບ %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">ແຕະແຖບ ແລ້ວລາກຂຶ້ນຫຼືລົງເພື່ອປັບ; ປ່ອຍເພື່ອນຳໃຊ້.</string>
-    <string name="dolby_geq_graph_description">ກຣາຟອີຄວາໄລເຊີ 20 ແຖບ. ຄວາມຖີ່ເພີ່ມຈາກຊ້າຍໄປຂວາ; ການຂະຫຍາຍຢູ່ໃນຊ່ວງລົບ 10 ຫາ ບວກ 10 dB. ໃຊ້ຕົວຄວບຄຸມແຖບດ້ານລຸ່ມເພື່ອປັບໃຫ້ແມ່ນຍຳ.</string>
+    <string name="dolby_geq_graph_description">ກຣາຟອີຄວາໄລເຊີ 20 ແຖບ. ຄວາມຖີ່ເພີ່ມຈາກຊ້າຍໄປຂວາ; ການຂະຫຍາຍຢູ່ໃນຊ່ວງລົບ %1$.2f ຫາ ບວກ %2$.2f dB. ໃຊ້ຕົວຄວບຄຸມແຖບດ້ານລຸ່ມເພື່ອປັບໃຫ້ແມ່ນຍຳ.</string>
     <string name="dolby_geq_previous_band">ແຖບຄວາມຖີ່ກ່ອນໜ້າ</string>
     <string name="dolby_geq_next_band">ແຖບຄວາມຖີ່ຖັດໄປ</string>
     <string name="dolby_geq_band_counter">ແຖບ %1$d ຈາກ %2$d</string>

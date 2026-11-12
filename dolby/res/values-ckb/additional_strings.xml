@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">ڕێکخستنەوەی پرۆفایلی ئێستا</string>
     <string name="dolby_reset_profile_message">پرۆفایلی ئێستا بۆ ڕێکخستنەکانی کارگە بگەڕێندرێتەوە؟ پێش‌ڕێکخستنە پاشەکەوتکراوەکانی هاوسەنگکەر دەمێننەوە.</string>
     <string name="dolby_setting_failed">Dolby نەیتوانی ئەم ڕێکخستنە جێبەجێ بکات. تکایە دووبارە هەوڵ بدەوە.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">فریکوێنسییە نزمەکان بەهێز بکە. بۆ وردتر ڕێکخستنی بەیس هاوسەنگکەری گرافیکی بەکاربهێنە.</string>
     <string name="dolby_volume_summary">جیاوازی بەرزی دەنگ لەنێوان تراکەکان و بەشە بێدەنگ یان بەرزەکان کەم بکەوە.</string>
     <string name="dolby_speaker_summary">هەستێکی دەوروبەری فراوانتر بۆ سپیکەرە ناوخۆییەکان زیاد بکە.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">ڕێکخستن: %1$s</string>
     <string name="dolby_geq_band_frequency">باند %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">باندێک دەست لێبدە و بۆ سەرەوە یان خوارەوە ڕایبکێشە بۆ ڕێکخستن؛ بەری بدە بۆ جێبەجێکردن.</string>
-    <string name="dolby_geq_graph_description">گرافی هاوسەنگکەری 20 باند. فریکوێنسی لە چەپ بۆ ڕاست زیاد دەبێت؛ بەهێزکردن لە منفی 10 تا پۆزەتیڤ 10 dBە. بۆ ڕێکخستنی ورد کۆنترۆڵەکانی باندی خوارەوە بەکاربهێنە.</string>
+    <string name="dolby_geq_graph_description">گرافی هاوسەنگکەری 20 باند. فریکوێنسی لە چەپ بۆ ڕاست زیاد دەبێت؛ بەهێزکردن لە منفی %1$.2f تا پۆزەتیڤ %2$.2f dBە. بۆ ڕێکخستنی ورد کۆنترۆڵەکانی باندی خوارەوە بەکاربهێنە.</string>
     <string name="dolby_geq_previous_band">باندی فریکوێنسی پێشوو</string>
     <string name="dolby_geq_next_band">باندی فریکوێنسی داهاتوو</string>
     <string name="dolby_geq_band_counter">باند %1$d لە %2$d</string>

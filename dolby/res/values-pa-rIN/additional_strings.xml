@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">ਮੌਜੂਦਾ ਪ੍ਰੋਫਾਈਲ ਰੀਸੈੱਟ ਕਰੋ</string>
     <string name="dolby_reset_profile_message">ਮੌਜੂਦਾ ਪ੍ਰੋਫਾਈਲ ਨੂੰ ਇਸ ਦੀਆਂ ਫੈਕਟਰੀ ਸੈਟਿੰਗਾਂ \'ਤੇ ਮੁੜ ਸਥਾਪਤ ਕਰਨਾ ਹੈ? ਸੰਭਾਲੇ ਇਕੁਅਲਾਈਜ਼ਰ ਪ੍ਰੀਸੈੱਟ ਰੱਖੇ ਜਾਣਗੇ।</string>
     <string name="dolby_setting_failed">Dolby ਇਹ ਸੈਟਿੰਗ ਲਾਗੂ ਨਹੀਂ ਕਰ ਸਕਿਆ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">ਘੱਟ ਫ੍ਰੀਕਵੈਂਸੀ ਨੂੰ ਉਭਾਰੋ। ਬੇਸ ਨੂੰ ਹੋਰ ਸੁਖਮ ਤਰੀਕੇ ਨਾਲ ਠੀਕ ਕਰਨ ਲਈ ਗ੍ਰਾਫਿਕ ਇਕੁਅਲਾਈਜ਼ਰ ਵਰਤੋ।</string>
     <string name="dolby_volume_summary">ਟਰੈਕਾਂ ਅਤੇ ਹੌਲੇ ਜਾਂ ਉੱਚੇ ਹਿੱਸਿਆਂ ਵਿਚਕਾਰ ਆਵਾਜ਼ ਦੀ ਤੀਬਰਤਾ ਦੇ ਫਰਕ ਨੂੰ ਘਟਾਓ।</string>
     <string name="dolby_speaker_summary">ਬਿਲਟ-ਇਨ ਸਪੀਕਰਾਂ ਵਿੱਚ ਵਧੇਰੇ ਚੌੜਾ ਸਰਾਊਂਡ ਅਹਿਸਾਸ ਸ਼ਾਮਲ ਕਰੋ।</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">ਟਿਊਨਿੰਗ: %1$s</string>
     <string name="dolby_geq_band_frequency">ਬੈਂਡ %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">ਕਿਸੇ ਬੈਂਡ ਨੂੰ ਛੂਹੋ ਅਤੇ ਠੀਕ ਕਰਨ ਲਈ ਉੱਪਰ ਜਾਂ ਹੇਠਾਂ ਖਿੱਚੋ; ਲਾਗੂ ਕਰਨ ਲਈ ਛੱਡੋ।</string>
-    <string name="dolby_geq_graph_description">20-ਬੈਂਡ ਇਕੁਅਲਾਈਜ਼ਰ ਗ੍ਰਾਫ। ਫ੍ਰੀਕਵੈਂਸੀ ਖੱਬੇ ਤੋਂ ਸੱਜੇ ਵਧਦੀ ਹੈ; ਗੇਨ ਮਾਇਨਸ 10 ਤੋਂ ਪਲੱਸ 10 dB ਤੱਕ ਹੈ। ਸਟੀਕ ਠੀਕ ਕਰਨ ਲਈ ਹੇਠਾਂ ਦਿੱਤੇ ਬੈਂਡ ਕੰਟਰੋਲ ਵਰਤੋ।</string>
+    <string name="dolby_geq_graph_description">20-ਬੈਂਡ ਇਕੁਅਲਾਈਜ਼ਰ ਗ੍ਰਾਫ। ਫ੍ਰੀਕਵੈਂਸੀ ਖੱਬੇ ਤੋਂ ਸੱਜੇ ਵਧਦੀ ਹੈ; ਗੇਨ ਮਾਇਨਸ %1$.2f ਤੋਂ ਪਲੱਸ %2$.2f dB ਤੱਕ ਹੈ। ਸਟੀਕ ਠੀਕ ਕਰਨ ਲਈ ਹੇਠਾਂ ਦਿੱਤੇ ਬੈਂਡ ਕੰਟਰੋਲ ਵਰਤੋ।</string>
     <string name="dolby_geq_previous_band">ਪਿਛਲਾ ਫ੍ਰੀਕਵੈਂਸੀ ਬੈਂਡ</string>
     <string name="dolby_geq_next_band">ਅਗਲਾ ਫ੍ਰੀਕਵੈਂਸੀ ਬੈਂਡ</string>
     <string name="dolby_geq_band_counter">ਬੈਂਡ %1$d / %2$d</string>

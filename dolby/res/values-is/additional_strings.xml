@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Endurstilla núverandi snið</string>
     <string name="dolby_reset_profile_message">Endurheimta núverandi snið í verksmiðjustillingar? Vistaðar forstillingar tónjafnara verða varðveittar.</string>
     <string name="dolby_setting_failed">Dolby gat ekki beitt þessari stillingu. Reyndu aftur.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Leggðu áherslu á lága tíðni. Notaðu grafíska tónjafnarann fyrir nákvæmari bassastillingu.</string>
     <string name="dolby_volume_summary">Minnkaðu mun á hljóðstyrk milli laga og hljóðlátum eða háværum köflum.</string>
     <string name="dolby_speaker_summary">Bættu víðari umhverfishljóðstilfinningu við innbyggðu hátalarana.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Stilling: %1$s</string>
     <string name="dolby_geq_band_frequency">Tíðniband %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Snertu band og dragðu upp eða niður til að stilla; slepptu til að virkja.</string>
-    <string name="dolby_geq_graph_description">20 banda tónjafnaragraf. Tíðni eykst frá vinstri til hægri; mögnun er frá mínus 10 til plús 10 dB. Notaðu bandstýringarnar hér fyrir neðan fyrir nákvæmar stillingar.</string>
+    <string name="dolby_geq_graph_description">20 banda tónjafnaragraf. Tíðni eykst frá vinstri til hægri; mögnun er frá mínus %1$.2f til plús %2$.2f dB. Notaðu bandstýringarnar hér fyrir neðan fyrir nákvæmar stillingar.</string>
     <string name="dolby_geq_previous_band">Fyrra tíðniband</string>
     <string name="dolby_geq_next_band">Næsta tíðniband</string>
     <string name="dolby_geq_band_counter">Tíðniband %1$d af %2$d</string>

@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Setel ulang profil saat ini</string>
     <string name="dolby_reset_profile_message">Pulihkan profil saat ini ke setelan pabrik? Preset equalizer yang tersimpan akan dipertahankan.</string>
     <string name="dolby_setting_failed">Dolby tidak dapat menerapkan setelan ini. Coba lagi.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Tonjolkan frekuensi rendah. Gunakan equalizer grafis untuk penyesuaian bass yang lebih rinci.</string>
     <string name="dolby_volume_summary">Kurangi perbedaan kenyaringan antara trek serta bagian yang pelan atau keras.</string>
     <string name="dolby_speaker_summary">Tambahkan kesan surround yang lebih lebar ke speaker bawaan.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Penyetelan: %1$s</string>
     <string name="dolby_geq_band_frequency">Pita %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Sentuh band lalu seret ke atas atau bawah untuk menyesuaikan; lepaskan untuk menerapkan.</string>
-    <string name="dolby_geq_graph_description">Grafik equalizer 20-band. Frekuensi meningkat dari kiri ke kanan; gain berkisar dari minus 10 hingga plus 10 dB. Gunakan kontrol band di bawah untuk penyesuaian yang presisi.</string>
+    <string name="dolby_geq_graph_description">Grafik equalizer 20-band. Frekuensi meningkat dari kiri ke kanan; gain berkisar dari minus %1$.2f hingga plus %2$.2f dB. Gunakan kontrol band di bawah untuk penyesuaian yang presisi.</string>
     <string name="dolby_geq_previous_band">Band frekuensi sebelumnya</string>
     <string name="dolby_geq_next_band">Band frekuensi berikutnya</string>
     <string name="dolby_geq_band_counter">Band %1$d dari %2$d</string>

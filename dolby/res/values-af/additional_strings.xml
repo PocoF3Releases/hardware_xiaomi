@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Stel huidige profiel terug</string>
     <string name="dolby_reset_profile_message">Herstel die huidige profiel na sy fabrieksinstellings? Gestoorde gelykmaker-voorinstellings sal behoue bly.</string>
     <string name="dolby_setting_failed">Dolby kon nie hierdie instelling toepas nie. Probeer asseblief weer.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Beklemtoon lae frekwensies. Gebruik die grafiese gelykmaker vir fyner basaanpassings.</string>
     <string name="dolby_volume_summary">Verminder hardheidsverskille tussen snitte en stil of harde gedeeltes.</string>
     <string name="dolby_speaker_summary">Voeg ’n wyer omringklankindruk by die ingeboude luidsprekers.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Instelling: %1$s</string>
     <string name="dolby_geq_band_frequency">Band %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Raak ’n band en sleep op of af om aan te pas; laat los om toe te pas.</string>
-    <string name="dolby_geq_graph_description">20-band-gelykmakergrafiek. Frekwensie neem van links na regs toe; versterking wissel van minus 10 tot plus 10 dB. Gebruik die bandkontroles hieronder vir presiese aanpassings.</string>
+    <string name="dolby_geq_graph_description">20-band-gelykmakergrafiek. Frekwensie neem van links na regs toe; versterking wissel van minus %1$.2f tot plus %2$.2f dB. Gebruik die bandkontroles hieronder vir presiese aanpassings.</string>
     <string name="dolby_geq_previous_band">Vorige frekwensieband</string>
     <string name="dolby_geq_next_band">Volgende frekwensieband</string>
     <string name="dolby_geq_band_counter">Band %1$d van %2$d</string>

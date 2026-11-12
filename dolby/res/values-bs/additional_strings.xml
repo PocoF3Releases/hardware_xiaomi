@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Resetuj trenutni profil</string>
     <string name="dolby_reset_profile_message">Vratiti trenutni profil na fabričke postavke? Sačuvane postavke ekvilajzera će biti zadržane.</string>
     <string name="dolby_setting_failed">Dolby nije mogao primijeniti ovu postavku. Pokušajte ponovo.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Naglasite niske frekvencije. Koristite grafički ekvilajzer za finije podešavanje basa.</string>
     <string name="dolby_volume_summary">Smanjite razlike u glasnoći između pjesama i tihih ili glasnih dijelova.</string>
     <string name="dolby_speaker_summary">Dodajte širi osjećaj surround zvuka ugrađenim zvučnicima.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Podešavanje: %1$s</string>
     <string name="dolby_geq_band_frequency">Opseg %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Dodirnite opseg i povucite gore ili dolje da ga podesite; otpustite da primijenite.</string>
-    <string name="dolby_geq_graph_description">Grafik 20-opsežnog ekvilajzera. Frekvencija raste slijeva nadesno; pojačanje je od minus 10 do plus 10 dB. Za precizno podešavanje koristite kontrole opsega ispod.</string>
+    <string name="dolby_geq_graph_description">Grafik 20-opsežnog ekvilajzera. Frekvencija raste slijeva nadesno; pojačanje je od minus %1$.2f do plus %2$.2f dB. Za precizno podešavanje koristite kontrole opsega ispod.</string>
     <string name="dolby_geq_previous_band">Prethodni frekvencijski opseg</string>
     <string name="dolby_geq_next_band">Sljedeći frekvencijski opseg</string>
     <string name="dolby_geq_band_counter">Opseg %1$d od %2$d</string>

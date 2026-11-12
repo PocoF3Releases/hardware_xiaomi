@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Aktuelle Profil zerécksetzen</string>
     <string name="dolby_reset_profile_message">Den aktuelle Profil op seng Fabrécksastellungen zerécksetzen? Gespäichert Equalizer-Virstellunge bleiwen erhalen.</string>
     <string name="dolby_setting_failed">Dolby konnt dës Astellung net uwenden. Probéiert nach eng Kéier.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Niddereg Frequenze betounen. Benotzt de grafeschen Equalizer fir de Bass méi genee unzepassen.</string>
     <string name="dolby_volume_summary">Ënnerscheeder an der Lautstäerkt tëscht Titelen a rouegen oder haarde Passagen reduzéieren.</string>
     <string name="dolby_speaker_summary">Eng méi breet Surround-Wierkung un déi agebaute Spriecher bäifügen.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Ofstëmmung: %1$s</string>
     <string name="dolby_geq_band_frequency">Band %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Tippt op e Band an zitt et erop oder erof fir et unzepassen; loosst lass fir unzewenden.</string>
-    <string name="dolby_geq_graph_description">20-Band-Equalizer-Grafik. D\'Frequenz klëmmt vu lénks no riets; d\'Verstäerkung geet vu minus 10 bis plus 10 dB. Benotzt d\'Bandkontrollen hei ënnen fir präzis Upassungen.</string>
+    <string name="dolby_geq_graph_description">20-Band-Equalizer-Grafik. D\'Frequenz klëmmt vu lénks no riets; d\'Verstäerkung geet vu minus %1$.2f bis plus %2$.2f dB. Benotzt d\'Bandkontrollen hei ënnen fir präzis Upassungen.</string>
     <string name="dolby_geq_previous_band">Viregt Frequenzband</string>
     <string name="dolby_geq_next_band">Nächst Frequenzband</string>
     <string name="dolby_geq_band_counter">Band %1$d vun %2$d</string>

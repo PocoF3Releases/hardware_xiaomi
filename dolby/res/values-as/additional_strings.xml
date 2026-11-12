@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">বৰ্তমান প্ৰ’ফাইল ৰিছেট কৰক</string>
     <string name="dolby_reset_profile_message">বৰ্তমান প্ৰ’ফাইলটো ফেক্টৰী ছেটিংছলৈ পুনৰুদ্ধাৰ কৰিব নেকি? সংৰক্ষিত ইকুৱেলাইজাৰ প্ৰিছেটসমূহ ৰখা হ’ব।</string>
     <string name="dolby_setting_failed">Dolby-এ এই ছেটিং প্ৰয়োগ কৰিব নোৱাৰিলে। অনুগ্ৰহ কৰি পুনৰ চেষ্টা কৰক।</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">নিম্ন ফ্ৰিকুৱেন্সী অধিক স্পষ্ট কৰক। বেছ সূক্ষ্মভাৱে সামঞ্জস্য কৰিবলৈ গ্ৰাফিক ইকুৱেলাইজাৰ ব্যৱহাৰ কৰক।</string>
     <string name="dolby_volume_summary">ট্ৰেকসমূহ আৰু নীৰৱ বা উচ্চ শব্দৰ অংশসমূহৰ মাজৰ শব্দ-উচ্চতাৰ পাৰ্থক্য কমাওক।</string>
     <string name="dolby_speaker_summary">বিল্ট-ইন স্পীকাৰত অধিক বিস্তৃত ছাৰাউণ্ড অনুভৱ যোগ কৰক।</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">টিউনিং: %1$s</string>
     <string name="dolby_geq_band_frequency">বেণ্ড %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">সামঞ্জস্য কৰিবলৈ এটা বেণ্ড স্পৰ্শ কৰি ওপৰলৈ বা তললৈ টানক; প্ৰয়োগ কৰিবলৈ এৰি দিয়ক।</string>
-    <string name="dolby_geq_graph_description">20-বেণ্ড ইকুৱেলাইজাৰ গ্ৰাফ। ফ্ৰিকুৱেন্সী বাওঁফালৰ পৰা সোঁফাললৈ বৃদ্ধি পায়; গেইন মাইনাছ 10ৰ পৰা প্লাছ 10 dBলৈ। নিখুঁত সামঞ্জস্যৰ বাবে তলৰ বেণ্ড নিয়ন্ত্ৰণ ব্যৱহাৰ কৰক।</string>
+    <string name="dolby_geq_graph_description">20-বেণ্ড ইকুৱেলাইজাৰ গ্ৰাফ। ফ্ৰিকুৱেন্সী বাওঁফালৰ পৰা সোঁফাললৈ বৃদ্ধি পায়; গেইন মাইনাছ %1$.2fৰ পৰা প্লাছ %2$.2f dBলৈ। নিখুঁত সামঞ্জস্যৰ বাবে তলৰ বেণ্ড নিয়ন্ত্ৰণ ব্যৱহাৰ কৰক।</string>
     <string name="dolby_geq_previous_band">পূৰ্বৱৰ্তী ফ্ৰিকুৱেন্সী বেণ্ড</string>
     <string name="dolby_geq_next_band">পৰৱৰ্তী ফ্ৰিকুৱেন্সী বেণ্ড</string>
     <string name="dolby_geq_band_counter">বেণ্ড %1$d / %2$d</string>

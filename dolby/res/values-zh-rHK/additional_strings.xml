@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">重設目前設定檔</string>
     <string name="dolby_reset_profile_message">將目前設定檔還原為原廠設定？已儲存的等化器預設會保留。</string>
     <string name="dolby_setting_failed">Dolby 無法套用此設定。請再試一次。</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">加強低頻。使用圖形等化器可更仔細調整低音。</string>
     <string name="dolby_volume_summary">減少不同曲目以及安靜或響亮段落之間的響度差異。</string>
     <string name="dolby_speaker_summary">為內置揚聲器加入更寬廣的環繞感。</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">調校：%1$s</string>
     <string name="dolby_geq_band_frequency">頻段 %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">觸碰一個頻段並向上或向下拖動以調整；放開即可套用。</string>
-    <string name="dolby_geq_graph_description">20 段等化器圖。頻率由左至右增加；增益範圍為負 10 至正 10 dB。使用下方的頻段控制作精確調整。</string>
+    <string name="dolby_geq_graph_description">20 段等化器圖。頻率由左至右增加；增益範圍為負 %1$.2f 至正 %2$.2f dB。使用下方的頻段控制作精確調整。</string>
     <string name="dolby_geq_previous_band">上一個頻段</string>
     <string name="dolby_geq_next_band">下一個頻段</string>
     <string name="dolby_geq_band_counter">頻段 %1$d / %2$d</string>

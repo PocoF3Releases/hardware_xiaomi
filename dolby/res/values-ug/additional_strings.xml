@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">نۆۋەتتىكى ئارخىپنى ئەسلىگە قايتۇرۇش</string>
     <string name="dolby_reset_profile_message">نۆۋەتتىكى ئارخىپنى زاۋۇت تەڭشەكلىرىگە قايتۇرامسىز؟ ساقلانغان تەڭشىگۈچ ئالدىن بەلگىلەشلىرى ساقلىنىدۇ.</string>
     <string name="dolby_setting_failed">Dolby بۇ تەڭشەكنى قوللىنالمىدى. قايتا سىناڭ.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">تۆۋەن چاستوتىلارنى گەۋدىلەندۈرۈڭ. باستا تېخىمۇ ئىنچىكە تەڭشەش ئۈچۈن گرافىك تەڭشىگۈچنى ئىشلىتىڭ.</string>
     <string name="dolby_volume_summary">ناخشىلار ۋە جىم ياكى يۇقىرى ئاۋازلىق بۆلەكلەر ئارىسىدىكى ئاۋاز كۈچلۈكلۈك پەرقىنى ئازايتىڭ.</string>
     <string name="dolby_speaker_summary">ئىچىگە ئورنىتىلغان ياڭراتقۇلارغا تېخىمۇ كەڭ ئەتراپ ئاۋاز تۇيغۇسى قوشۇڭ.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">تەڭشەش: %1$s</string>
     <string name="dolby_geq_band_frequency">بەلۋاغ %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">بەلۋاغقا تېگىپ يۇقىرى ياكى تۆۋەنگە سۆرەپ تەڭشەڭ؛ قوللىنىش ئۈچۈن قويۇپ بېرىڭ.</string>
-    <string name="dolby_geq_graph_description">20 بەلۋاغلىق تەڭشىگۈچ گرافىكى. چاستوتا سولدىن ئوڭغا ئۆسىدۇ؛ كۈچەيتىش مىنۇس 10 دىن پلۇس 10 dB غىچە. ئىنچىكە تەڭشەش ئۈچۈن تۆۋەندىكى بەلۋاغ كونتروللىرىنى ئىشلىتىڭ.</string>
+    <string name="dolby_geq_graph_description">20 بەلۋاغلىق تەڭشىگۈچ گرافىكى. چاستوتا سولدىن ئوڭغا ئۆسىدۇ؛ كۈچەيتىش مىنۇس %1$.2f دىن پلۇس %2$.2f dB غىچە. ئىنچىكە تەڭشەش ئۈچۈن تۆۋەندىكى بەلۋاغ كونتروللىرىنى ئىشلىتىڭ.</string>
     <string name="dolby_geq_previous_band">ئالدىنقى چاستوتا بەلۋىغى</string>
     <string name="dolby_geq_next_band">كېيىنكى چاستوتا بەلۋىغى</string>
     <string name="dolby_geq_band_counter">بەلۋاغ %1$d / %2$d</string>

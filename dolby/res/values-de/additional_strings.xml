@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Aktuelles Profil zurücksetzen</string>
     <string name="dolby_reset_profile_message">Aktuelles Profil auf die Werkseinstellungen zurücksetzen? Gespeicherte Equalizer-Voreinstellungen bleiben erhalten.</string>
     <string name="dolby_setting_failed">Dolby konnte diese Einstellung nicht anwenden. Bitte versuchen Sie es erneut.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Niedrige Frequenzen hervorheben. Für feinere Bassanpassungen den grafischen Equalizer verwenden.</string>
     <string name="dolby_volume_summary">Lautstärkeunterschiede zwischen Titeln sowie leisen und lauten Passagen verringern.</string>
     <string name="dolby_speaker_summary">Den integrierten Lautsprechern einen breiteren Surround-Eindruck verleihen.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Abstimmung: %1$s</string>
     <string name="dolby_geq_band_frequency">Band %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Ein Band berühren und zum Anpassen nach oben oder unten ziehen; zum Anwenden loslassen.</string>
-    <string name="dolby_geq_graph_description">Diagramm des 20-Band-Equalizers. Die Frequenz steigt von links nach rechts; die Verstärkung reicht von minus 10 bis plus 10 dB. Für präzise Anpassungen die Bandregler unten verwenden.</string>
+    <string name="dolby_geq_graph_description">Diagramm des 20-Band-Equalizers. Die Frequenz steigt von links nach rechts; die Verstärkung reicht von minus %1$.2f bis plus %2$.2f dB. Für präzise Anpassungen die Bandregler unten verwenden.</string>
     <string name="dolby_geq_previous_band">Vorheriges Frequenzband</string>
     <string name="dolby_geq_next_band">Nächstes Frequenzband</string>
     <string name="dolby_geq_band_counter">Band %1$d von %2$d</string>

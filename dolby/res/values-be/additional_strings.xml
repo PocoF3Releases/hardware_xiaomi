@@ -48,7 +48,7 @@
     <string name="dolby_reset_profile">Скінуць бягучы профіль</string>
     <string name="dolby_reset_profile_message">Аднавіць заводскія налады бягучага профілю? Захаваныя перадусталёўкі эквалайзера будуць пакінуты.</string>
     <string name="dolby_setting_failed">Dolby не ўдалося прымяніць гэту наладу. Паўтарыце спробу.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f dB</string>
+    <string name="dolby_geq_gain_db">%1$+.2f dB</string>
     <string name="dolby_bass_summary">Падкрэсліць нізкія частоты. Для больш дакладнай налады басаў выкарыстоўвайце графічны эквалайзер.</string>
     <string name="dolby_volume_summary">Паменшыць розніцу ў гучнасці паміж трэкамі, а таксама ціхімі і гучнымі фрагментамі.</string>
     <string name="dolby_speaker_summary">Дадаць больш шырокае адчуванне аб’ёмнага гуку ўбудаваным дынамікам.</string>
@@ -59,7 +59,7 @@
     <string name="dolby_geq_profile_heading">Наладка: %1$s</string>
     <string name="dolby_geq_band_frequency">Паласа %1$d · %2$d Hz</string>
     <string name="dolby_geq_graph_hint">Дакраніцеся да паласы і перацягніце ўверх або ўніз; адпусціце, каб прымяніць.</string>
-    <string name="dolby_geq_graph_description">Графік 20-палоснага эквалайзера. Частата павялічваецца злева направа; узмацненне — ад мінус 10 да плюс 10 dB. Для дакладнай налады выкарыстоўвайце элементы кіравання палосамі ніжэй.</string>
+    <string name="dolby_geq_graph_description">Графік 20-палоснага эквалайзера. Частата павялічваецца злева направа; узмацненне — ад мінус %1$.2f да плюс %2$.2f dB. Для дакладнай налады выкарыстоўвайце элементы кіравання палосамі ніжэй.</string>
     <string name="dolby_geq_previous_band">Папярэдняя паласа частот</string>
     <string name="dolby_geq_next_band">Наступная паласа частот</string>
     <string name="dolby_geq_band_counter">Паласа %1$d з %2$d</string>

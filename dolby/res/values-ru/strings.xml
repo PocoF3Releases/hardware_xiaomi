@@ -62,7 +62,7 @@
     <string name="dolby_reset_profile">Сбросить текущий профиль</string>
     <string name="dolby_reset_profile_message">Восстановить заводские настройки текущего профиля? Сохранённые пресеты эквалайзера останутся.</string>
     <string name="dolby_setting_failed">Не удалось применить настройку Dolby. Повторите попытку.</string>
-    <string name="dolby_geq_gain_db">%1$+.1f дБ</string>
+    <string name="dolby_geq_gain_db">%1$+.2f дБ</string>
     <string name="dolby_bass_summary">Усиление низких частот. Для точной настройки басов используйте графический эквалайзер.</string>
     <string name="dolby_volume_summary">Уменьшение разницы в громкости между треками, а также тихими и громкими фрагментами.</string>
     <string name="dolby_speaker_summary">Создание объёмного звучания через встроенные динамики.</string>
@@ -73,7 +73,7 @@
     <string name="dolby_geq_profile_heading">Настройка: %1$s</string>
     <string name="dolby_geq_band_frequency">Полоса %1$d · %2$d Гц</string>
     <string name="dolby_geq_graph_hint">Выберите полосу и перемещайте её вверх или вниз. Отпустите, чтобы применить изменение.</string>
-    <string name="dolby_geq_graph_description">График 20-полосного эквалайзера. Частота возрастает слева направо, усиление — от −10 до +10 дБ. Для точной настройки используйте элементы управления полосой ниже.</string>
+    <string name="dolby_geq_graph_description">График 20-полосного эквалайзера. Частота возрастает слева направо, усиление — от −%1$.2f до +%2$.2f дБ. Для точной настройки используйте элементы управления полосой ниже.</string>
     <string name="dolby_geq_previous_band">Предыдущая полоса частот</string>
     <string name="dolby_geq_next_band">Следующая полоса частот</string>
     <string name="dolby_geq_band_counter">Полоса %1$d из %2$d</string>
