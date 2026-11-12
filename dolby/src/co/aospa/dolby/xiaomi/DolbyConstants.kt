@@ -57,6 +57,8 @@ class DolbyConstants {
         // Clamps of the matching dap_cpdp_*_set functions in the shipped libswdap
         // and the QDSP capi_v2_dap_cpdp module.
         val IEQ_AMOUNT_RANGE = 0..16
+        // Alioth DMS ParameterAdapter and the matching DAP setter both clamp 0..16.
+        val DIALOGUE_AMOUNT_RANGE = 0..16
         // The QDSP clamp is 0..16, but the DAX service keeps values above 9 at 9.
         val REVERB_AMOUNT_RANGE = 0..9
         val VOLUME_AMOUNT_RANGE = 0..10
