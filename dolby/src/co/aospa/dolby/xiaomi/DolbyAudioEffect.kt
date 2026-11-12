@@ -64,19 +64,30 @@ internal class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
                 disableProcessing()
                 return
             }
-            try {
+            enableProcessing { true }
+        }
+
+    /** Enable once, then read back while the owner's live audio policy permits it. */
+    fun enableProcessing(isAllowed: () -> Boolean): Boolean {
+        val acknowledged = try {
+            if (!isAllowed()) false else {
                 setIntParam(DolbyWireCodec.ENABLE, 1)
                 result(setEnabled(true), "enable framework gate")
-                confirmProcessingState(true)
-            } catch (failure: RuntimeException) {
-                try {
-                    disableProcessing()
-                } catch (cleanup: RuntimeException) {
-                    if (cleanup !== failure) failure.addSuppressed(cleanup)
-                }
-                throw failure
+                confirmEnabledState(isAllowed)
             }
+        } catch (failure: RuntimeException) {
+            try {
+                disableProcessing()
+            } catch (cleanup: RuntimeException) {
+                if (cleanup !== failure) failure.addSuppressed(cleanup)
+            }
+            throw failure
         }
+        // Keep policy-abort cleanup outside that catch: a failed shutdown must
+        // propagate once, without issuing another compensating native write.
+        if (!acknowledged) disableProcessing()
+        return acknowledged
+    }
 
     private fun disableProcessing() {
         var failure: RuntimeException? = null
@@ -93,6 +104,25 @@ internal class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
         attempt { setIntParam(DolbyWireCodec.ENABLE, 0) }
         failure?.let { throw it }
         confirmProcessingState(false)
+    }
+
+    private fun confirmEnabledState(isAllowed: () -> Boolean): Boolean {
+        // DMS acknowledges SET before its handler drains preceding profile work.
+        // This finite enable-only budget is app policy, not a vendor constant.
+        // Keep writes single-shot and revisit call/restore policy between reads.
+        val deadline = SystemClock.elapsedRealtime() + ENABLE_CONFIRMATION_TIMEOUT_MS
+        while (true) {
+            if (!isAllowed()) return false
+            val nativeEnabled = dsOn
+            val frameworkEnabled = enabled
+            if (nativeEnabled && frameworkEnabled) return isAllowed()
+            val remaining = deadline - SystemClock.elapsedRealtime()
+            check(remaining > 0L) {
+                "Dolby processing state not confirmed: requested=true, " +
+                    "native=$nativeEnabled, framework=$frameworkEnabled"
+            }
+            SystemClock.sleep(minOf(ENABLE_CONFIRMATION_POLL_MS, remaining))
+        }
     }
 
     private fun confirmProcessingState(expected: Boolean) {
@@ -179,6 +209,8 @@ internal class DolbyAudioEffect(priority: Int, audioSession: Int) : AudioEffect(
 
     companion object {
         private val PROCESSING_READBACK_DELAYS_MS = longArrayOf(5L, 10L, 20L)
+        private const val ENABLE_CONFIRMATION_TIMEOUT_MS = 200L
+        private const val ENABLE_CONFIRMATION_POLL_MS = 10L
         private val EFFECT_TYPE_DAP = UUID.fromString("9d4921da-8225-4f29-aefa-39537a04bcaa")
     }
 }
